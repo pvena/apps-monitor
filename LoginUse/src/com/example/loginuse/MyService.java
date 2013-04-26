@@ -1,22 +1,13 @@
 package com.example.loginuse;
 
-import android.R.integer;
 import android.app.Service;
-import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.drm.DrmStore.Action;
-import android.location.LocationManager;
-import android.net.nsd.NsdManager;
 import android.net.wifi.WifiManager;
-import android.os.BatteryManager;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -46,12 +37,16 @@ public class MyService extends Service {
 			
 		//--------------------------Bateria-----------------------------
 		this.filter.addAction(Intent.ACTION_POWER_CONNECTED);
-		this.filter.addAction(Intent.ACTION_POWER_DISCONNECTED);		
+		this.filter.addAction(Intent.ACTION_POWER_DISCONNECTED);	
+		
 		this.filter.addAction(Intent.ACTION_SHUTDOWN);
+		
+		this.filter.addAction(Intent.ACTION_BOOT_COMPLETED);
 		this.filter.addAction(Intent.ACTION_REBOOT);
+		
 		this.filter.addAction(Intent.ACTION_SCREEN_ON);
 		this.filter.addAction(Intent.ACTION_SCREEN_OFF);
-		this.filter.addAction(Intent.ACTION_BOOT_COMPLETED);		
+				
 		this.filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 		this.filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);				
 		
