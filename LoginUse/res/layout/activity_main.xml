@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <RadioButton
+        android:id="@+id/rbtGps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rbtWifi"
+        android:layout_below="@+id/rbtWifi"
+        android:clickable="false"
+        android:editable="false"
+        android:text="GPS Activado"
+        android:textColor="#CCC" />
+
+    <RadioButton
+        android:id="@+id/rbtBlueT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rbtGps"
+        android:layout_below="@+id/rbtGps"
+        android:clickable="false"
+        android:editable="false"
+        android:text="Bluetooth Activado"
+        android:textColor="#CCC" />
+
+    <RadioButton
+        android:id="@+id/rtbDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rbtBlueT"
+        android:layout_below="@+id/rbtBlueT"
+        android:clickable="false"
+        android:editable="false"
+        android:text="Datos Activados"
+        android:textColor="#CCC" />
+
+    <Button
+        android:id="@+id/btnSuspender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:background="#6f6"
+        android:minHeight="50dp"
+        android:minWidth="64dp"
+        android:text="Suspender"
+        android:textStyle="bold|italic"
+        android:width="120dp" />
+
+    <Button
+        android:id="@+id/btnIniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#6f6"
+        android:minHeight="50dp"
+        android:minWidth="64dp"
+        android:onClick="btnInic_onClick"
+        android:text="Iniciar"
+        android:textStyle="bold|italic"
+        android:width="120dp" />
+
+    <RadioButton
+        android:id="@+id/rbtWifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btnIniciar"
+        android:layout_below="@+id/btnIniciar"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="34dp"
+        android:checked="false"
+        android:clickable="false"
+        android:editable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="Wifi Activada"
+        android:textColor="#CCC" />
+
+</RelativeLayout>
