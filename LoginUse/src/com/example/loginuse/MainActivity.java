@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onClick(View src) {
         switch (src.getId()) {
         case R.id.btnIniciar:
-        		startService(new Intent(this, MyService.class));
+        		startService(new Intent(this,  MyService.class));
         		break;
         case R.id.btnSuspender:            
             	stopService(new Intent(this, MyService.class));

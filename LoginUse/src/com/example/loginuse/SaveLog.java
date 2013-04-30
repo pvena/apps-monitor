@@ -1,23 +1,18 @@
 package com.example.loginuse;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.util.Date;
-
+import java.io.Writer;
 import android.content.Context;
 import android.os.Environment;
-import android.widget.Toast;
 
 public class SaveLog {
 
 		public SaveLog(Context cnt)
 		{
-			String start = DateFormat.getDateTimeInstance().format(new Date()).concat("-").concat("Inic Log");
-			LsLog sl = new LsLog(start, "Inicio");
+			LsLog sl = new LsLog("Inic Log", "Inicio");
 			this.saveData(sl);
 		}		
 		
@@ -25,29 +20,15 @@ public class SaveLog {
 		{
 			File file;
 	        File root = Environment.getExternalStorageDirectory();
-	        FileWriter nmea_writer = null;
 	        try {	        	
 	         	file = new File(root,"LoguinUse.txt");
 	            if(!file.exists()) {	                        
 	              	file.createNewFile();
 	            }
-	            nmea_writer = new FileWriter(file);
-	            nmea_writer.append(log.getLog());
-	            nmea_writer.flush();
-	            nmea_writer.close();				
+	            Writer out = new BufferedWriter(new FileWriter(file, true), 1024);
+	            out.write(log.getLog());
+	            out.close();   
 			}catch(IOException e)
-			{e.printStackTrace();}	
-	        finally 
-            {
-                if (nmea_writer != null) 
-                {
-                    try 
-                    {
-                        nmea_writer.close();
-                    } 
-                    catch (IOException e)
-                    { e.printStackTrace();}
-                }
-            }
-		}		
+			{e.printStackTrace();}        
+		}	
 }

@@ -32,7 +32,7 @@ public class MyService extends Service {
 		this.filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION); ///**********Importante*********
 		
 		//--------------------------Bloototh-----------------------------------		
-		this.filter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);// se conecto a algo!!!!
+		//this.filter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);// se conecto a algo!!!!
 		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
 			
 		//--------------------------Bateria-----------------------------
