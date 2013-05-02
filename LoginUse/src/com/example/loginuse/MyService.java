@@ -32,23 +32,9 @@ public class MyService extends Service {
 		this.filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION); ///**********Importante*********
 		
 		//--------------------------Bloototh-----------------------------------		
-		//this.filter.addAction(BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);// se conecto a algo!!!!
 		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
 			
-		//--------------------------Bateria-----------------------------
-		this.filter.addAction(Intent.ACTION_POWER_CONNECTED);
-		this.filter.addAction(Intent.ACTION_POWER_DISCONNECTED);	
-		
-		this.filter.addAction(Intent.ACTION_SHUTDOWN);
-		
-		this.filter.addAction(Intent.ACTION_BOOT_COMPLETED);
-		this.filter.addAction(Intent.ACTION_REBOOT);
-		
-		this.filter.addAction(Intent.ACTION_SCREEN_ON);
-		this.filter.addAction(Intent.ACTION_SCREEN_OFF);
-				
-		this.filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-		this.filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);				
+			
 		
 		Toast.makeText(this, "My Service Created", Toast.LENGTH_LONG).show();
 	}
@@ -63,7 +49,7 @@ public class MyService extends Service {
 	public void onStart(Intent intent, int startid) {
 		Toast.makeText(this, "My Service Started", Toast.LENGTH_LONG).show();
 		Log.d(TAG, "onStart");
-		registerReceiver(myReceiver, filter);
+		registerReceiver (myReceiver, filter);
 	}
 	
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {   
