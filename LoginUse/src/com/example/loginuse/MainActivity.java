@@ -1,5 +1,7 @@
 package com.example.loginuse;
 
+import com.example.loginuse.Log.SaveLog;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -7,10 +9,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MainActivity extends Activity implements OnClickListener {
 	private Button btn;
+	private EditText edt;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,9 @@ public class MainActivity extends Activity implements OnClickListener {
         
         this.btn = (Button) findViewById(R.id.btnIniciar);
         this.btn.setOnClickListener(this);
+        
+        this.edt = (EditText) findViewById(R.id.edtLog);
+        this.edt.setText(SaveLog.getInstance().getLogFile());
     }
 
     @Override

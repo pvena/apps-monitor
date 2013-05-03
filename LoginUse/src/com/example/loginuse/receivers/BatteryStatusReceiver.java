@@ -1,7 +1,6 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.LsLog;
-import com.example.loginuse.SaveLog;
+import com.example.loginuse.Log.*;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.content.IntentFilter;
 public class BatteryStatusReceiver extends BroadcastReceiver implements IReceiver{
 	
 	private IntentFilter filter;
-	private SaveLog log;
 	
 	public BatteryStatusReceiver(){
 		
@@ -43,7 +41,7 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		 log.saveData(new LsLog(intent.getAction(),"Default"));
+		 SaveLog.getInstance().saveData(new LsLog(intent.getAction(),"Default"));
 	}
 
 }

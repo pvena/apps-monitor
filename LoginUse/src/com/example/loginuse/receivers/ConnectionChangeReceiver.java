@@ -7,14 +7,12 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.loginuse.LsLog;
-import com.example.loginuse.SaveLog;
+import com.example.loginuse.Log.*;
 import com.example.loginuse.util.BatteryStatusUtil;
 
 public class ConnectionChangeReceiver extends BroadcastReceiver implements IReceiver{
 	
 	private IntentFilter filter;
-	private SaveLog log;
 	private static final String  BATTERY_STATUS =  "BATTERY_STATUS: ";
 	
 	public ConnectionChangeReceiver(){
@@ -45,7 +43,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 					+ " " + BatteryStatusUtil.getBatteryStatus(context);
 			
 		}
-		log.saveData(new LsLog(intent.getAction(), info));
+		SaveLog.getInstance().saveData(new LsLog(intent.getAction(), info));
 		
 	}
 

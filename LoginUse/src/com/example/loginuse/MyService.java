@@ -1,5 +1,7 @@
 package com.example.loginuse;
 
+import com.example.loginuse.Log.*;
+
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -14,8 +16,7 @@ import android.widget.Toast;
 public class MyService extends Service {
 	private static final String TAG = "MyService";
 	private IntentFilter filter;
-	private SaveLog log;
-	
+		
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -23,7 +24,6 @@ public class MyService extends Service {
 	
 	@Override
 	public void onCreate() {		
-		this.log = new SaveLog(this);
 		Log.d(TAG, "onCreate");
 		this.filter = new IntentFilter();
 		
@@ -56,7 +56,7 @@ public class MyService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {          
            String action = intent.getAction();
-           log.saveData(new LsLog(action,"Default"));
+           SaveLog.getInstance().saveData(new LsLog(action,"Default"));
            Toast.makeText(context, action, Toast.LENGTH_SHORT).show();
         }
     };

@@ -1,4 +1,4 @@
-package com.example.loginuse;
+package com.example.loginuse.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

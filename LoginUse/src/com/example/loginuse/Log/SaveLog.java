@@ -1,20 +1,27 @@
-package com.example.loginuse;
+package com.example.loginuse.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import android.content.Context;
 import android.os.Environment;
 
 public class SaveLog {
-
-		public SaveLog(Context cnt)
+		private static SaveLog instance;
+	
+		private SaveLog()
 		{
 			LsLog sl = new LsLog("Inic Log", "Inicio");
 			this.saveData(sl);
 		}		
+		
+		public static SaveLog getInstance()
+		{
+			if (SaveLog.instance == null)
+				SaveLog.instance = new SaveLog();
+			return SaveLog.instance;
+		}
 		
 		public void saveData(LsLog log)
 		{
@@ -30,5 +37,10 @@ public class SaveLog {
 	            out.close();   
 			}catch(IOException e)
 			{e.printStackTrace();}        
-		}	
+		}
+		
+		public String getLogFile()
+		{
+			return "Aca iria al contenido del archivo de log....";
+		}
 }
