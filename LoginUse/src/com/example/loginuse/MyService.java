@@ -1,6 +1,8 @@
 package com.example.loginuse;
 
 import com.example.loginuse.Log.*;
+import com.example.loginuse.receivers.BatteryStatusReceiver;
+import com.example.loginuse.receivers.ConnectionChangeReceiver;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -50,6 +52,15 @@ public class MyService extends Service {
 		Toast.makeText(this, "My Service Started", Toast.LENGTH_LONG).show();
 		Log.d(TAG, "onStart");
 		registerReceiver (myReceiver, filter);
+		registerReceivers();
+	}
+	
+	private void registerReceivers(){
+		BatteryStatusReceiver batteryStatusReceiver = new BatteryStatusReceiver();
+		registerReceiver(batteryStatusReceiver, batteryStatusReceiver.getFilter());
+		
+		ConnectionChangeReceiver connectionChangeReceiver = new ConnectionChangeReceiver();
+		registerReceiver(connectionChangeReceiver, connectionChangeReceiver.getFilter());
 	}
 	
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {   

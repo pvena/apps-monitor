@@ -11,21 +11,25 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	private IntentFilter filter;
 	
+	private static final String TAG = "BATTERY_STATS";
+	
 	public BatteryStatusReceiver(){
 		
-		this.filter.addAction(Intent.ACTION_POWER_CONNECTED);
-		this.filter.addAction(Intent.ACTION_POWER_DISCONNECTED);	
+		filter = new IntentFilter();
 		
-		this.filter.addAction(Intent.ACTION_SHUTDOWN);
+		filter.addAction(Intent.ACTION_POWER_CONNECTED);
+		filter.addAction(Intent.ACTION_POWER_DISCONNECTED);	
 		
-		this.filter.addAction(Intent.ACTION_BOOT_COMPLETED);
-		this.filter.addAction(Intent.ACTION_REBOOT);
+		filter.addAction(Intent.ACTION_SHUTDOWN);
 		
-		this.filter.addAction(Intent.ACTION_SCREEN_ON);
-		this.filter.addAction(Intent.ACTION_SCREEN_OFF);
+		filter.addAction(Intent.ACTION_BOOT_COMPLETED);
+		filter.addAction(Intent.ACTION_REBOOT);
+		
+		filter.addAction(Intent.ACTION_SCREEN_ON);
+		filter.addAction(Intent.ACTION_SCREEN_OFF);
 				
-		this.filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-		this.filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+		filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+		filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
 	}
 	
 	@Override
@@ -41,7 +45,7 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		 SaveLog.getInstance().saveData(new LsLog(intent.getAction(),"Default"));
+		 SaveLog.getInstance().saveDataWithBatteryStatus(intent.getAction(), TAG, context);
 	}
 
 }

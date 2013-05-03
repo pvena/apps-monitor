@@ -5,10 +5,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
+import com.example.loginuse.util.BatteryStatusUtil;
+
+import android.content.Context;
 import android.os.Environment;
 
 public class SaveLog {
 		private static SaveLog instance;
+		
+		private static final String  BATTERY_STATUS =  "BATTERY_STATUS: ";
 	
 		private SaveLog()
 		{
@@ -37,6 +43,14 @@ public class SaveLog {
 	            out.close();   
 			}catch(IOException e)
 			{e.printStackTrace();}        
+		}
+		
+		public void saveDataWithBatteryStatus(String message, String type, Context context){
+			String batteryStatus = BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
+					+ " " + BatteryStatusUtil.getBatteryStatus(context);
+			
+			String newMessage = message.concat(batteryStatus);
+			saveData(new LsLog(newMessage, type));
 		}
 		
 		public String getLogFile()

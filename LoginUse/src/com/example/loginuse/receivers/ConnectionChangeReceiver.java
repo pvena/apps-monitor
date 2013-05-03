@@ -7,15 +7,16 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.loginuse.Log.*;
-import com.example.loginuse.util.BatteryStatusUtil;
+import com.example.loginuse.Log.SaveLog;
 
 public class ConnectionChangeReceiver extends BroadcastReceiver implements IReceiver{
 	
 	private IntentFilter filter;
-	private static final String  BATTERY_STATUS =  "BATTERY_STATUS: ";
+	
+	private static final String TAG = "DATA CONNECTION";
 	
 	public ConnectionChangeReceiver(){
+		filter = new IntentFilter();
 		filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
 	}
 
@@ -36,14 +37,12 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 		NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
 		String info;
 		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-			info = "CONNECTED " + BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
-					+ " " + BatteryStatusUtil.getBatteryStatus(context);
+			info = "DATA TRANSMISSION CONNECTED (3G/GSM)";
 		}else {
-			info = "DISCONNECTED " + BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
-					+ " " + BatteryStatusUtil.getBatteryStatus(context);
+			info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
 			
 		}
-		SaveLog.getInstance().saveData(new LsLog(intent.getAction(), info));
+		SaveLog.getInstance().saveDataWithBatteryStatus(info, TAG, context);
 		
 	}
 
