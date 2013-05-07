@@ -18,6 +18,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 	public ConnectionChangeReceiver(){
 		filter = new IntentFilter();
 		filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+	
 	}
 
 	@Override

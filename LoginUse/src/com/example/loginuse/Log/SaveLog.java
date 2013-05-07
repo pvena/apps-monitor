@@ -46,9 +46,7 @@ public class SaveLog {
 		}
 		
 		public void saveDataWithBatteryStatus(String message, String type, Context context){
-			String batteryStatus = BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
-					+ " " + BatteryStatusUtil.getBatteryStatus(context);
-			
+			String batteryStatus = BatteryStatusUtil.getLog(context);			
 			String newMessage = message.concat(batteryStatus);
 			saveData(new LsLog(newMessage, type));
 		}

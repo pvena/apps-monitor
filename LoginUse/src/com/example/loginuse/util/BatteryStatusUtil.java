@@ -60,4 +60,11 @@ public class BatteryStatusUtil {
 		
 		return PERCENTAGE + " " + String.valueOf(batteryPct) +"%";
 	}
+
+	public static String getLog(Context context)
+	{
+		String batteryStatus = BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
+				+ " " + BatteryStatusUtil.getBatteryStatus(context);
+		return batteryStatus;
+	}
 }

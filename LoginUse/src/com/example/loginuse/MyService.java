@@ -3,6 +3,7 @@ package com.example.loginuse;
 import com.example.loginuse.Log.*;
 import com.example.loginuse.receivers.BatteryStatusReceiver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
+import com.example.loginuse.receivers.WifiReceiver;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -29,15 +30,9 @@ public class MyService extends Service {
 		Log.d(TAG, "onCreate");
 		this.filter = new IntentFilter();
 		
-		//-----------------------------WIFI----------------------------------
-		this.filter.addAction(WifiManager.NETWORK_IDS_CHANGED_ACTION);		
-		this.filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION); ///**********Importante*********
-		
 		//--------------------------Bloototh-----------------------------------		
 		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
-			
-			
-		
+				
 		Toast.makeText(this, "My Service Created", Toast.LENGTH_LONG).show();
 	}
 
@@ -61,6 +56,9 @@ public class MyService extends Service {
 		
 		ConnectionChangeReceiver connectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(connectionChangeReceiver, connectionChangeReceiver.getFilter());
+		
+		WifiReceiver wifiReceiver = new WifiReceiver();
+		registerReceiver(wifiReceiver, wifiReceiver.getFilter());
 	}
 	
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {   

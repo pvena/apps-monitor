@@ -17,7 +17,7 @@ public class LsLog {
 	
 	public String getLog()
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("[yyyy-MM-dd]");
+		SimpleDateFormat sdf = new SimpleDateFormat("[yyyy-MM-dd|hh:mm:ss]");
 		return sdf.format(new Date()).concat(this.separator).concat(this.type).concat(this.separator).concat(this.message).concat("\r\n");
 	}
 }
