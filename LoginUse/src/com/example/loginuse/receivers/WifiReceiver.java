@@ -8,12 +8,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
 public class WifiReceiver extends BroadcastReceiver implements IReceiver  {
 	private IntentFilter filter;
-	
-	private static final String TAG = "WIFI_STATS";
 	
 	public WifiReceiver(){
 		
@@ -36,16 +35,18 @@ public class WifiReceiver extends BroadcastReceiver implements IReceiver  {
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),"BATTERY_STAT");
+		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),LogTags.Battery_Tag);
 		SaveLog.getInstance().saveData(l);	
 		if(WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction()))
 		{
-			l = new LsLog("Wifi State: " + intent.getStringExtra(WifiManager.EXTRA_WIFI_STATE), TAG);
+			l = new LsLog("Wifi State: " + intent.getStringExtra(WifiManager.EXTRA_WIFI_STATE), LogTags.WifiState_Tag);
 			SaveLog.getInstance().saveData(l);			
 		}
 		if(WifiManager.NETWORK_IDS_CHANGED_ACTION.equals(intent.getAction()))
 		{
-			l = new LsLog("Wifi Change Ids" , TAG);
+			WifiManager wifiMgr = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+			WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+			l = new LsLog("Wifi Change Ids" + wifiInfo.getSSID(), LogTags.WifiName_Tag);
 			SaveLog.getInstance().saveData(l);
 		}
 	}

@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
+import com.example.loginuse.receivers.LogTags;
 import com.example.loginuse.util.BatteryStatusUtil;
 
 import android.content.Context;
@@ -14,8 +16,6 @@ import android.os.Environment;
 
 public class SaveLog {
 		private static SaveLog instance;
-		
-		private static final String  BATTERY_STATUS =  "BATTERY_STATUS: ";
 	
 		private SaveLog()
 		{
@@ -35,7 +35,7 @@ public class SaveLog {
 			File file;
 	        File root = Environment.getExternalStorageDirectory();
 	        try {	        	
-	         	file = new File(root,"LoguinUse.txt");
+	         	file = new File(root,LogTags.LogFileName);
 	            if(!file.exists()) {	                        
 	              	file.createNewFile();
 	            }
@@ -57,7 +57,7 @@ public class SaveLog {
 			File root = Environment.getExternalStorageDirectory();
 
 			//Get the text file
-			File file = new File(root,"LoguinUse.txt");
+			File file = new File(root,LogTags.LogFileName);
 
 			//Read text from file
 			StringBuilder text = new StringBuilder();

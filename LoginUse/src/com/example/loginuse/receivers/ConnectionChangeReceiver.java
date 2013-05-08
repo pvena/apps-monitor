@@ -13,8 +13,6 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 	
 	private IntentFilter filter;
 	
-	private static final String TAG = "DATA CONNECTION";
-	
 	public ConnectionChangeReceiver(){
 		filter = new IntentFilter();
 		filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
@@ -43,7 +41,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 			info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
 			
 		}
-		SaveLog.getInstance().saveDataWithBatteryStatus(info, TAG, context);
+		SaveLog.getInstance().saveDataWithBatteryStatus(info, LogTags.Connection_Tag, context);
 		
 	}
 

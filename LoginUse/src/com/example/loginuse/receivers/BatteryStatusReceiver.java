@@ -11,8 +11,6 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	private IntentFilter filter;
 	
-	private static final String TAG = "BATTERY_STATS";
-	
 	public BatteryStatusReceiver(){
 		
 		filter = new IntentFilter();
@@ -45,7 +43,7 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		 SaveLog.getInstance().saveDataWithBatteryStatus(intent.getAction(), TAG, context);
+		 SaveLog.getInstance().saveDataWithBatteryStatus(intent.getAction(), LogTags.Battery_Tag, context);
 	}
 
 }
