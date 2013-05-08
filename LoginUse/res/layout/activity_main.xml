@@ -9,50 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <EditText
-        android:id="@+id/edtLog"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/fileText"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnIniciar"
-        android:layout_alignRight="@+id/btnSuspender"
-        android:layout_below="@+id/btnIniciar"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:minHeight="350dp" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/btnIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="20dp"
-        android:background="#6f6"
-        android:minHeight="50dp"
-        android:minWidth="64dp"
-        android:onClick="btnInic_onClick"
-        android:text="Iniciar"
-        android:textStyle="bold|italic"
-        android:width="120dp" />
-
-    <Button
-        android:id="@+id/btnSuspender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btnIniciar"
-        android:layout_alignBottom="@+id/btnIniciar"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:background="#6f6"
-        android:minHeight="50dp"
-        android:minWidth="64dp"
-        android:text="Suspender"
-        android:textStyle="bold|italic"
-        android:width="120dp" />
+        android:scrollHorizontally="true"
+        android:textColorHint="@android:color/white"
+        android:textSize="10sp" />
 
 </RelativeLayout>

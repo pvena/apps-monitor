@@ -10,22 +10,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class MainActivity extends Activity implements OnClickListener {
-	private Button btn;
-	private EditText edt;
-	
+public class MainActivity extends Activity /*implements OnClickListener*/ {
+	//private Button btn;
+		
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        this.btn = (Button) findViewById(R.id.btnIniciar);
-        this.btn.setOnClickListener(this);
-        
-        this.edt = (EditText) findViewById(R.id.edtLog);
-        this.edt.setText(SaveLog.getInstance().getLogFile());
+        TextView helloTxt = (TextView)findViewById(R.id.fileText);
+        helloTxt.setText(SaveLog.getInstance().readLogFile());
+           
+        startService(new Intent(this,  MyService.class));
     }
 
     @Override
@@ -42,16 +41,6 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     protected void onResume() {
             super.onResume();            
-    }  
+    }     
     
-    public void onClick(View src) {
-        switch (src.getId()) {
-        case R.id.btnIniciar:
-        		startService(new Intent(this,  MyService.class));
-        		break;
-        case R.id.btnSuspender:            
-            	stopService(new Intent(this, MyService.class));
-            	break;
-          }      
-    }
 }
