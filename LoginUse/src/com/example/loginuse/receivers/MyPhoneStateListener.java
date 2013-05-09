@@ -11,7 +11,7 @@ import android.telephony.TelephonyManager;
 
 public class MyPhoneStateListener extends PhoneStateListener implements IReceiver{
 	private IntentFilter filter;
-	private TelephonyManager   tel;     
+	private TelephonyManager   tel;   
 	
 	public MyPhoneStateListener(Context context)
 	{
