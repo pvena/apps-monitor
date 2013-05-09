@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
+import com.example.loginuse.Log.LogTags;
 import com.example.loginuse.Log.LsLog;
 import com.example.loginuse.Log.SaveLog;
 import com.example.loginuse.util.BatteryStatusUtil;
@@ -34,21 +36,29 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),LogTags.Battery_Tag);
-		SaveLog.getInstance().saveData(l);	
+		try
+		{
+			LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),LogTags.Battery_Tag);
+			SaveLog.getInstance().saveData(l);	
 		
-		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-		String info;
-		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-			info = "DATA TRANSMISSION CONNECTED (3G/GSM)";
-		}else {
-			info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
-			
+			ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+			String info;
+			if (netInfo != null && netInfo.isConnectedOrConnecting()) 
+			{
+				info = "DATA TRANSMISSION CONNECTED (3G/GSM)";
+			}
+			else 
+			{
+				info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
+			}
+			LsLog log = new LsLog(info,LogTags.Connection_Tag);
+			SaveLog.getInstance().saveData(log);
 		}
-		LsLog log = new LsLog(info,LogTags.Connection_Tag);
-		SaveLog.getInstance().saveData(log);
-		
+		catch(Exception e)
+		{
+			Log.e("ERROR", "CONNECTION-LOG" + e.getMessage());
+		}
 	}
 
 }

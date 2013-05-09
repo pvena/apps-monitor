@@ -7,8 +7,6 @@ import android.os.BatteryManager;
 
 public class BatteryStatusUtil {
 	
-	private static final String BATTERY_STATUS = "BATTERY_STATUS: ";
-	
 	private static final String PERCENTAGE = "PERCENTAGE: ";
 	
 	/**
@@ -33,12 +31,12 @@ public class BatteryStatusUtil {
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
 			if(usbCharge){
-				bStatus = BATTERY_STATUS + "BATTERY_PLUGGED_USB";
+				bStatus = "PLUGGED_USB";
 			}else if(acCharge){
-				bStatus = BATTERY_STATUS + "BATTERY_PLUGGED_AC";
+				bStatus = "PLUGGED_AC";
 			}
 		} else {
-			bStatus = BATTERY_STATUS + "DISCHARGING";
+			bStatus = "DISCHARGING";
 		}
 		
 		return bStatus;
@@ -63,7 +61,7 @@ public class BatteryStatusUtil {
 
 	public static String getLog(Context context)
 	{
-		String batteryStatus = BATTERY_STATUS + BatteryStatusUtil.getBatteryPercentage(context)
+		String batteryStatus = BatteryStatusUtil.getBatteryPercentage(context)
 				+ " " + BatteryStatusUtil.getBatteryStatus(context);
 		return batteryStatus;
 	}

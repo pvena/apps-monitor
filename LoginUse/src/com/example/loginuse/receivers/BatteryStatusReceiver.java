@@ -1,11 +1,13 @@
 package com.example.loginuse.receivers;
 
 import com.example.loginuse.Log.*;
+import com.example.loginuse.util.BatteryStatusUtil;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 public class BatteryStatusReceiver extends BroadcastReceiver implements IReceiver{
 	
@@ -43,7 +45,14 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		 SaveLog.getInstance().saveDataWithBatteryStatus("", LogTags.Battery_Tag, context);
+		try
+		{
+			String batteryStatus = BatteryStatusUtil.getLog(context);			
+			SaveLog.getInstance().saveData(new LsLog(batteryStatus, LogTags.Battery_Tag));
+		}
+		catch(Exception e)
+		{
+			Log.e("ERROR", "BATTERY-LOG" + e.getMessage());
+		}
 	}
-
 }

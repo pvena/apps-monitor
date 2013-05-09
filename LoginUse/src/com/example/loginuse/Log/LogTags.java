@@ -1,4 +1,4 @@
-package com.example.loginuse.receivers;
+package com.example.loginuse.Log;
 
 public class LogTags {
 

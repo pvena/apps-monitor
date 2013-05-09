@@ -1,5 +1,6 @@
 package com.example.loginuse.receivers;
 
+import com.example.loginuse.Log.LogTags;
 import com.example.loginuse.Log.LsLog;
 import com.example.loginuse.Log.SaveLog;
 
@@ -8,10 +9,12 @@ import android.content.IntentFilter;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class MyPhoneStateListener extends PhoneStateListener implements IReceiver{
 	private IntentFilter filter;
-	private TelephonyManager   tel;   
+	private TelephonyManager   tel; 
+	private int value = -1;
 	
 	public MyPhoneStateListener(Context context)
 	{
@@ -35,8 +38,18 @@ public class MyPhoneStateListener extends PhoneStateListener implements IReceive
 	@Override
 	public void onSignalStrengthsChanged(SignalStrength signalStrength)
 	{
-		String signal = String.valueOf(signalStrength.getGsmSignalStrength());
-		LsLog l = new LsLog("Signal State: " + signal, LogTags.Signal_State);
-		SaveLog.getInstance().saveData(l);
+		try
+		{
+			int signal = signalStrength.getGsmSignalStrength();
+			if(Math.abs(signal - this.value) > 15 )
+			{
+				LsLog l = new LsLog("Signal State: " + signal, LogTags.Signal_State);
+				SaveLog.getInstance().saveData(l);
+			}
+		}
+		catch(Exception e)
+		{
+			Log.e("ERROR", "SIGNAL-LOG" + e.getMessage());
+		}
 	}
 }
