@@ -3,6 +3,7 @@ package com.example.loginuse;
 import com.example.loginuse.Log.*;
 import com.example.loginuse.receivers.BatteryStatusReceiver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
+import com.example.loginuse.receivers.MyPhoneStateListener;
 import com.example.loginuse.receivers.WifiReceiver;
 
 import android.app.Service;
@@ -59,6 +60,10 @@ public class MyService extends Service {
 		
 		WifiReceiver wifiReceiver = new WifiReceiver();
 		registerReceiver(wifiReceiver, wifiReceiver.getFilter());
+		
+		MyPhoneStateListener SignalLisener = new MyPhoneStateListener(this.getApplicationContext());
+		registerReceiver(wifiReceiver, SignalLisener.getFilter());
+		
 	}
 	
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {   

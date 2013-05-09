@@ -43,7 +43,7 @@ public class BatteryStatusReceiver extends BroadcastReceiver implements IReceive
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		 SaveLog.getInstance().saveDataWithBatteryStatus(intent.getAction(), LogTags.Battery_Tag, context);
+		 SaveLog.getInstance().saveDataWithBatteryStatus("", LogTags.Battery_Tag, context);
 	}
 
 }

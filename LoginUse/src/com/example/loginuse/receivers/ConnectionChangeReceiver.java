@@ -7,7 +7,9 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.loginuse.Log.LsLog;
 import com.example.loginuse.Log.SaveLog;
+import com.example.loginuse.util.BatteryStatusUtil;
 
 public class ConnectionChangeReceiver extends BroadcastReceiver implements IReceiver{
 	
@@ -32,6 +34,9 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),LogTags.Battery_Tag);
+		SaveLog.getInstance().saveData(l);	
+		
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
 		String info;
@@ -41,7 +46,8 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 			info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
 			
 		}
-		SaveLog.getInstance().saveDataWithBatteryStatus(info, LogTags.Connection_Tag, context);
+		LsLog log = new LsLog(info,LogTags.Connection_Tag);
+		SaveLog.getInstance().saveData(log);
 		
 	}
 

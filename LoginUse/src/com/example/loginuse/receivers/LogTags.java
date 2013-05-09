@@ -9,5 +9,7 @@ public class LogTags {
 	
 	public static String Connection_Tag = "CONNECTION_STATE";
 	
+	public static String Signal_State = "SIGNAL_STATE";
+	
 	public static String LogFileName = "LoguinUse.txt";
 }

@@ -53,16 +53,12 @@ public class SaveLog {
 		}
 		
 		public String readLogFile(){
-
-			File root = Environment.getExternalStorageDirectory();
-
-			//Get the text file
-			File file = new File(root,LogTags.LogFileName);
-
-			//Read text from file
 			StringBuilder text = new StringBuilder();
 
 			try {
+				File root = Environment.getExternalStorageDirectory();
+
+				File file = new File(root,LogTags.LogFileName);
 			    BufferedReader br = new BufferedReader(new FileReader(file));
 			    String line;
 
