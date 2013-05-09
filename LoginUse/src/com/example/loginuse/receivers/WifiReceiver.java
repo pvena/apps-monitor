@@ -39,8 +39,8 @@ public class WifiReceiver extends BroadcastReceiver implements IReceiver  {
 		SaveLog.getInstance().saveData(l);	
 		if(WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction()))
 		{
-			WifiManager wifi = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-			l = new LsLog("Wifi State: " + wifi.getWifiState(), LogTags.WifiState_Tag);
+			WifiManager wifiMgr = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+			l = new LsLog("Wifi State: " + wifiMgr.getWifiState(), LogTags.WifiState_Tag);
 			SaveLog.getInstance().saveData(l);			
 		}
 		if(WifiManager.NETWORK_IDS_CHANGED_ACTION.equals(intent.getAction()))
