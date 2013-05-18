@@ -7,6 +7,8 @@ public class LogTags {
 	
 	public static String Battery_Tag = "BATTERY_STATE";
 	
+	public static String Bluetooth_Tag = "BLUETOOTH_STATE";
+	
 	public static String Connection_Tag = "CONNECTION_STATE";
 	
 	public static String Signal_State = "SIGNAL_STATE";

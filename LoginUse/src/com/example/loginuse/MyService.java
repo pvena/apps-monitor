@@ -2,6 +2,7 @@ package com.example.loginuse;
 
 import com.example.loginuse.Log.*;
 import com.example.loginuse.receivers.BatteryStatusReceiver;
+import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.MyPhoneStateListener;
 import com.example.loginuse.receivers.WifiReceiver;
@@ -32,7 +33,7 @@ public class MyService extends Service {
 		this.filter = new IntentFilter();
 		
 		//--------------------------Bloototh-----------------------------------		
-		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
+		//this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
 				
 		Toast.makeText(this, "My Service Created", Toast.LENGTH_LONG).show();
 	}
@@ -63,6 +64,9 @@ public class MyService extends Service {
 		
 		MyPhoneStateListener SignalLisener = new MyPhoneStateListener(this.getApplicationContext());
 		registerReceiver(wifiReceiver, SignalLisener.getFilter());
+		
+		BluetoothReciver bluetooth = new BluetoothReciver();
+		registerReceiver(bluetooth, bluetooth.getFilter());
 		
 	}
 	
