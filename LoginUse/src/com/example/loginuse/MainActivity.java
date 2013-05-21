@@ -1,12 +1,9 @@
 package com.example.loginuse;
 
-import com.example.loginuse.Log.SaveLog;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import android.widget.TextView;
 
 
 public class MainActivity extends Activity /*implements OnClickListener*/ {
@@ -17,9 +14,6 @@ public class MainActivity extends Activity /*implements OnClickListener*/ {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        TextView helloTxt = (TextView)findViewById(R.id.fileText);
-        helloTxt.setText(SaveLog.getInstance().readLogFile());
-           
         startService(new Intent(this,  MyService.class));
     }
 

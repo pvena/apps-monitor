@@ -1,17 +1,16 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.Log.LogTags;
-import com.example.loginuse.Log.LsLog;
-import com.example.loginuse.Log.SaveLog;
-import com.example.loginuse.util.BatteryStatusUtil;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
 import android.util.Log;
+
+import com.example.loginuse.Log.LogTags;
+import com.example.loginuse.Log.LsLog;
+import com.example.loginuse.Log.SaveLog;
+import com.example.loginuse.util.BatteryStatusUtil;
 
 public class BluetoothReciver extends BroadcastReceiver implements IReceiver {
 	private IntentFilter filter;
@@ -19,8 +18,11 @@ public class BluetoothReciver extends BroadcastReceiver implements IReceiver {
 	public BluetoothReciver(){
 		
 		filter = new IntentFilter();
-		
-		this.filter.addAction(BluetoothDevice.ACTION_FOUND);	
+		this.filter.addAction(BluetoothDevice.ACTION_FOUND);
+		this.filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
+		this.filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+		this.filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
+		this.filter.addAction("android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED");
 	}
 	
 	@Override
