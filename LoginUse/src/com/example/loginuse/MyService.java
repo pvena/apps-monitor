@@ -1,16 +1,10 @@
 package com.example.loginuse;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.loginuse.Log.LsLog;
-import com.example.loginuse.Log.SaveLog;
 import com.example.loginuse.receivers.BatteryStatusReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
@@ -19,7 +13,6 @@ import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service {
 	private static final String TAG = "MyService";
-	private IntentFilter filter;
 		
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -29,25 +22,16 @@ public class MyService extends Service {
 	@Override
 	public void onCreate() {		
 		Log.d(TAG, "onCreate");
-		this.filter = new IntentFilter();
-		
-		//--------------------------Bloototh-----------------------------------		
-		//this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED); //Esta ON o OFF BluetoothAdapter.STATE_OFF o BluetoothAdapter.STATE_ON
-				
-		Toast.makeText(this, "My Service Created", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void onDestroy() {
-		Toast.makeText(this, "My Service Stopped", Toast.LENGTH_LONG).show();
 		Log.d(TAG, "onDestroy");		
 	}
 	
 	@Override
 	public void onStart(Intent intent, int startid) {
-		Toast.makeText(this, "My Service Started", Toast.LENGTH_LONG).show();
 		Log.d(TAG, "onStart");
-		registerReceiver (myReceiver, filter);
 		registerReceivers();
 	}
 	
@@ -68,13 +52,4 @@ public class MyService extends Service {
 		registerReceiver(bluetooth, bluetooth.getFilter());
 		
 	}
-	
-	private BroadcastReceiver myReceiver = new BroadcastReceiver() {   
-        @Override
-        public void onReceive(Context context, Intent intent) {          
-           String action = intent.getAction();
-           SaveLog.getInstance().saveData(new LsLog(action,"Default"));
-           Toast.makeText(context, action, Toast.LENGTH_SHORT).show();
-        }
-    };
 }
