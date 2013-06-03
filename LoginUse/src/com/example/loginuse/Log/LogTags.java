@@ -13,5 +13,7 @@ public class LogTags {
 	
 	public static String Signal_State = "SIGNAL_STATE";
 	
+	public static String Location_Tag = "LOCATION_STATE";
+	
 	public static String LogFileName = "LoguinUse.txt";
 }

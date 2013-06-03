@@ -54,6 +54,8 @@ public class ConnectionChangeReceiver extends BroadcastReceiver implements IRece
 			}
 			LsLog log = new LsLog(info,LogTags.Connection_Tag);
 			SaveLog.getInstance().saveData(log);
+			Intent i = new Intent(PassiveLocationChangedReceiver.CHECK_LOCATION);
+	        context.sendBroadcast(i);
 		}
 		catch(Exception e)
 		{
