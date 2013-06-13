@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
+/**
+ * Get info from current battery status
+ *
+ */
 public class BatteryStatusUtil {
 	
 	private static final String PERCENTAGE = "PERCENTAGE: ";
@@ -59,6 +63,11 @@ public class BatteryStatusUtil {
 		return PERCENTAGE + " " + String.valueOf(batteryPct) +"%";
 	}
 
+	/**
+	 * Return the String to log
+	 * @param context
+	 * @return
+	 */
 	public static String getLog(Context context)
 	{
 		String batteryStatus = BatteryStatusUtil.getBatteryPercentage(context)

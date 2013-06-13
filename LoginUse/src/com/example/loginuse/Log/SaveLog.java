@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
+import com.example.loginuse.util.Constants;
+
 import android.os.Environment;
 
 public class SaveLog {
@@ -30,7 +33,7 @@ public class SaveLog {
 			File file;
 	        File root = Environment.getExternalStorageDirectory();
 	        try {	        	
-	         	file = new File(root,LogTags.LogFileName);
+	         	file = new File(root,Constants.LOG_FILE_NAME);
 	            if(!file.exists()) {	                        
 	              	file.createNewFile();
 	            }
@@ -47,7 +50,7 @@ public class SaveLog {
 			try {
 				File root = Environment.getExternalStorageDirectory();
 
-				File file = new File(root,LogTags.LogFileName);
+				File file = new File(root,Constants.LOG_FILE_NAME);
 			    BufferedReader br = new BufferedReader(new FileReader(file));
 			    String line;
 

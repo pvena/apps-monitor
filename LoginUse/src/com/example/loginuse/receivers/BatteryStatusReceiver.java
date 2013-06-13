@@ -1,54 +1,53 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.Log.*;
-import com.example.loginuse.util.BatteryStatusUtil;
-
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.util.Log;
 
-public class BatteryStatusReceiver extends BroadcastReceiver implements IReceiver{
+import com.example.loginuse.Log.LsLog;
+import com.example.loginuse.Log.SaveLog;
+import com.example.loginuse.util.BatteryStatusUtil;
+import com.example.loginuse.util.Constants;
+
+/**
+ * 
+ * Broadcast receiver used to hear and log battery status changes
+ *
+ */
+public class BatteryStatusReceiver extends GeneralLoggingReceiver{
 	
-	private IntentFilter filter;
-	
+	/**
+	 * Creator
+	 */
 	public BatteryStatusReceiver(){
 		
-		filter = new IntentFilter();
+		super();
 		
-		filter.addAction(Intent.ACTION_POWER_CONNECTED);
-		filter.addAction(Intent.ACTION_POWER_DISCONNECTED);	
+		super.addAction(Intent.ACTION_POWER_CONNECTED);
+		super.addAction(Intent.ACTION_POWER_DISCONNECTED);	
 		
-		filter.addAction(Intent.ACTION_SHUTDOWN);
+		super.addAction(Intent.ACTION_SHUTDOWN);
 		
-		filter.addAction(Intent.ACTION_BOOT_COMPLETED);
-		filter.addAction(Intent.ACTION_REBOOT);
+		super.addAction(Intent.ACTION_BOOT_COMPLETED);
+		super.addAction(Intent.ACTION_REBOOT);
 		
-		filter.addAction(Intent.ACTION_SCREEN_ON);
-		filter.addAction(Intent.ACTION_SCREEN_OFF);
+		super.addAction(Intent.ACTION_SCREEN_ON);
+		super.addAction(Intent.ACTION_SCREEN_OFF);
 				
-		filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-		filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
+		super.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+		super.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
+	 */
 	@Override
-	public IntentFilter getFilter(){
-		return filter;
-	}
-	
-	@Override
-	public void addAction(String action){
-		filter.addAction(action);
-	}
-	
-	
-	@Override
-	public void onReceive(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent) {
 		try
 		{
 			String batteryStatus = BatteryStatusUtil.getLog(context);			
-			SaveLog.getInstance().saveData(new LsLog(batteryStatus, LogTags.Battery_Tag));
+			SaveLog.getInstance().saveData(new LsLog(batteryStatus, Constants.BATTERY_STATE_TAG));
 		}
 		catch(Exception e)
 		{

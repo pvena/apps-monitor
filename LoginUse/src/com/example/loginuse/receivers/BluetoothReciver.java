@@ -1,20 +1,24 @@
 package com.example.loginuse.receivers;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.example.loginuse.Log.LogTags;
 import com.example.loginuse.Log.LsLog;
 import com.example.loginuse.Log.SaveLog;
-import com.example.loginuse.util.BatteryStatusUtil;
+import com.example.loginuse.util.Constants;
 
-public class BluetoothReciver extends BroadcastReceiver implements IReceiver {
-	private IntentFilter filter;
+/**
+ * Broadcast receiver used to hear and log bluetooth status changes
+ *
+ */
+public class BluetoothReciver extends GeneralLoggingReceiver {
 	
+	/**
+	 * Creator
+	 */
 	public BluetoothReciver(){
 		
 		filter = new IntentFilter();
@@ -25,24 +29,14 @@ public class BluetoothReciver extends BroadcastReceiver implements IReceiver {
 		this.filter.addAction("android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED");
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
+	 */
 	@Override
-	public IntentFilter getFilter(){
-		return filter;
-	}
-	
-	@Override
-	public void addAction(String action){
-		filter.addAction(action);
-	}
-	
-	
-	@Override
-	public void onReceive(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),LogTags.Battery_Tag);
-			SaveLog.getInstance().saveData(l);		
-			
 			String action = intent.getAction();
 			String logText = "No Data";
 	        // When discovery finds a device
@@ -55,7 +49,7 @@ public class BluetoothReciver extends BroadcastReceiver implements IReceiver {
 		            logText += "Address: " + device.getAddress();
 		        }
 		    }
-			l = new LsLog(logText, LogTags.Bluetooth_Tag);
+			LsLog l = new LsLog(logText, Constants.BLUETOOTH_STATE_TAG);
 			SaveLog.getInstance().saveData(l);
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }

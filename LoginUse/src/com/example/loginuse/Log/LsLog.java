@@ -15,6 +15,10 @@ public class LsLog {
 		this.separator = "&";
 	}
 	
+	/**
+	 * TODO Mejorar logeo de fechas para saber cuando es am o pm
+	 * @return
+	 */
 	public String getLog()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("[yyyy-MM-dd|hh:mm:ss]");

@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.example.loginuse.receivers.BatteryStatusReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
-import com.example.loginuse.receivers.MyPhoneStateListener;
 import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service {
@@ -35,18 +33,16 @@ public class MyService extends Service {
 		registerReceivers();
 	}
 	
+	/**
+	 * Register receivers
+	 */
 	private void registerReceivers(){
-		BatteryStatusReceiver batteryStatusReceiver = new BatteryStatusReceiver();
-		registerReceiver(batteryStatusReceiver, batteryStatusReceiver.getFilter());
 		
 		ConnectionChangeReceiver connectionChangeReceiver = new ConnectionChangeReceiver();
 		registerReceiver(connectionChangeReceiver, connectionChangeReceiver.getFilter());
 		
 		WifiReceiver wifiReceiver = new WifiReceiver();
 		registerReceiver(wifiReceiver, wifiReceiver.getFilter());
-		
-		MyPhoneStateListener SignalLisener = new MyPhoneStateListener(this.getApplicationContext());
-		registerReceiver(wifiReceiver, SignalLisener.getFilter());
 		
 		BluetoothReciver bluetooth = new BluetoothReciver();
 		registerReceiver(bluetooth, bluetooth.getFilter());
