@@ -50,7 +50,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 */
 	private String getCurrentSsid(Context context) {
 
-		  String ssid = null;
+		  String ssid = "SSID:";
 		  String etWifiList = null;
 		  ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		  NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -58,7 +58,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		    final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
 		    if (connectionInfo != null && !(connectionInfo.getSSID().equals(""))) {
-		        ssid = connectionInfo.getSSID();
+		        ssid += connectionInfo.getSSID();
 		    }
 		    
 		    List<ScanResult> results = wifiManager.getScanResults();
@@ -72,8 +72,10 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    			result.capabilities + ")";
 		    }
 		  }
+		  String data = "";
 		  if(ssid != null)
-			  return ssid;
-		  return etWifiList;
+			  data =  ssid;
+		  data += "List:" + etWifiList;
+		  return data;
 		}
 }
