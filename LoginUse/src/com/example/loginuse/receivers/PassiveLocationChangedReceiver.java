@@ -25,12 +25,30 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver{
 	
 	private LocationManager locationManager;
 	
+	private static Location lastLocation = null; 
+	
 	/**
 	 * Creator
 	 */
 	public PassiveLocationChangedReceiver(){
 	}
 
+	/**
+	 * 
+	 * @param locationNew
+	 * @return
+	 */
+	private boolean isLocationChange(Location locationNew){
+		if(lastLocation != null){
+			float accuracy = lastLocation.getAccuracy();
+			float difference = lastLocation.distanceTo(locationNew);
+			if(difference > accuracy){
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 *  Define a listener that responds to location updates
@@ -39,14 +57,17 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver{
 		public void onLocationChanged(Location location) {
 			// Called when a new location is found by the network location
 			// provider.
-			LsLog log = new LsLog("Latitude:" + location.getLatitude()
-					+ ", Longitude:" + location.getLongitude() 
-					+ ", Altitude:" + location.getAltitude(),
-					Constants.LOCATION_STATE_TAG);
-			SaveLog.getInstance().saveData(log);
-			if(locationManager != null){
-				locationManager.removeUpdates(locationListener);
-				locationManager = null;
+			if(isLocationChange(location)){
+				lastLocation = location;
+				LsLog log = new LsLog("Latitude:" + location.getLatitude()
+						+ ", Longitude:" + location.getLongitude() 
+						+ ", Altitude:" + location.getAltitude(),
+						Constants.LOCATION_STATE_TAG);
+				SaveLog.getInstance().saveData(log);
+				if(locationManager != null){
+					locationManager.removeUpdates(locationListener);
+					locationManager = null;
+				}
 			}
 		}
 		

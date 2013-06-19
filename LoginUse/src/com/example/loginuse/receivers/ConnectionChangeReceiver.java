@@ -36,16 +36,18 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 			ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
 			String info;
-			if (netInfo != null && netInfo.isConnectedOrConnecting()) 
-			{
-				info = "DATA TRANSMISSION CONNECTED (3G/GSM)";
+			if(netInfo.getType() != ConnectivityManager. TYPE_WIFI){
+				if (netInfo != null && netInfo.isConnectedOrConnecting()) 
+				{
+					info = "DATA TRANSMISSION CONNECTED (3G/GSM)";
+				}
+				else 
+				{
+					info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
+				}
+				LsLog log = new LsLog(info,Constants.CONNECTION_STATE_TAG);
+				SaveLog.getInstance().saveData(log);
 			}
-			else 
-			{
-				info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
-			}
-			LsLog log = new LsLog(info,Constants.CONNECTION_STATE_TAG);
-			SaveLog.getInstance().saveData(log);
 		}
 		catch(Exception e)
 		{

@@ -1,5 +1,6 @@
 package com.example.loginuse.receivers;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -23,10 +24,7 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		
 		filter = new IntentFilter();
 		this.filter.addAction(BluetoothDevice.ACTION_FOUND);
-		this.filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-		this.filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
-		this.filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
-		this.filter.addAction("android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED");
+		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
 	}
 	
 	/*
@@ -38,7 +36,7 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		try
 		{
 			String action = intent.getAction();
-			String logText = "No Data";
+			String logText = "";
 	        // When discovery finds a device
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 		        // Get the BluetoothDevice object from the Intent
@@ -48,7 +46,28 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		        	logText += "Name: " + device.getName();
 		            logText += "Address: " + device.getAddress();
 		        }
-		    }
+		    }else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+	            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
+	                                                 BluetoothAdapter.ERROR);
+	            switch (state) {
+	            case BluetoothAdapter.STATE_OFF:
+	            	logText += "Bluetooth off";
+	                break;
+	            case BluetoothAdapter.STATE_TURNING_OFF:
+	            	logText += "Turning Bluetooth off";
+	                break;
+	            case BluetoothAdapter.STATE_ON:
+	            	logText += "Bluetooth on";
+	                break;
+	            case BluetoothAdapter.STATE_TURNING_ON:
+	            	logText += "Turning Bluetooth on";
+	                break;
+	            }
+	        }
+			
+			if(logText.equals("")){
+				logText = "No data";
+			}
 			LsLog l = new LsLog(logText, Constants.BLUETOOTH_STATE_TAG);
 			SaveLog.getInstance().saveData(l);
 		}

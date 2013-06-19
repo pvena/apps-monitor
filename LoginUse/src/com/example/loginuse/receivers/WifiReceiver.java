@@ -1,14 +1,10 @@
 package com.example.loginuse.receivers;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -25,8 +21,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		
 		filter = new IntentFilter();
 		
-		this.filter.addAction(WifiManager.NETWORK_IDS_CHANGED_ACTION);		
-		this.filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);		
+		this.filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
 	}
 	
 	/*
@@ -37,45 +32,29 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			LsLog l = new LsLog(this.getCurrentSsid(context), Constants.WIFI_STATE_TAG);
-			SaveLog.getInstance().saveData(l);
+			NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+			if(networkInfo.getType() == ConnectivityManager. TYPE_WIFI){
+				LsLog l = new LsLog(this.getWifiConnection(context,intent), Constants.WIFI_STATE_TAG);
+				SaveLog.getInstance().saveData(l);
+			}			
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
 	}
 	
-	/**
-	 * Return the current wifi-network ssid
-	 * @param context
-	 * @return String ssid
-	 */
-	private String getCurrentSsid(Context context) {
-
-		  String ssid = "SSID:";
-		  String etWifiList = null;
-		  ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		  NetworkInfo networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		  if (networkInfo.isConnected()) {
-		    final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-		    final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-		    if (connectionInfo != null && !(connectionInfo.getSSID().equals(""))) {
-		        ssid += connectionInfo.getSSID();
+	private String getWifiConnection(Context context, Intent intent)
+	{
+		if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+		    if(networkInfo.isConnected()) {
+		        // Wifi is connected
+		        return "True";
 		    }
-		    
-		    List<ScanResult> results = wifiManager.getScanResults();
-		    int count = 1;
-		    etWifiList = "No Signal";
-		    for (ScanResult result : results) {
-		    	etWifiList += "(" + count++ + ". " + 
-		    			result.SSID + " : " + 
-		    			result.level + "||" +
-		    			result.BSSID + "||" + 
-		    			result.capabilities + ")";
+		    else
+		    {
+		    	return "False";
 		    }
-		  }
-		  String data = "";
-		  if(ssid != null)
-			  data =  ssid;
-		  data += "List:" + etWifiList;
-		  return data;
-		}
+		} 
+		return "No Data";
+	}
+	
 }
