@@ -17,6 +17,8 @@ import com.example.loginuse.util.Constants;
  */
 public class BluetoothReciver extends GeneralLoggingReceiver {
 	
+	private static String lastLog;
+	
 	/**
 	 * Creator
 	 */
@@ -68,8 +70,12 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 			if(logText.equals("")){
 				logText = "No data";
 			}
-			LsLog l = new LsLog(logText, Constants.BLUETOOTH_STATE_TAG);
-			SaveLog.getInstance().saveData(l);
+			if(!logText.equals(lastLog))
+			{
+				LsLog l = new LsLog(logText, Constants.BLUETOOTH_STATE_TAG);			
+				SaveLog.getInstance().saveData(l);
+				lastLog = logText;
+			}
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
 	}

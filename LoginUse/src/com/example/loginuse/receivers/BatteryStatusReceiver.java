@@ -16,6 +16,8 @@ import com.example.loginuse.util.Constants;
  */
 public class BatteryStatusReceiver extends GeneralLoggingReceiver{
 	
+	private static String lastLog;
+	
 	/**
 	 * Creator
 	 */
@@ -46,8 +48,12 @@ public class BatteryStatusReceiver extends GeneralLoggingReceiver{
 	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			String batteryStatus = BatteryStatusUtil.getLog(context);			
-			SaveLog.getInstance().saveData(new LsLog(batteryStatus, Constants.BATTERY_STATE_TAG));
+			String batteryStatus = BatteryStatusUtil.getLog(context);	
+			if (!batteryStatus.equals(lastLog))
+			{
+				SaveLog.getInstance().saveData(new LsLog(batteryStatus, Constants.BATTERY_STATE_TAG));
+				lastLog = batteryStatus;
+			}
 		}
 		catch(Exception e)
 		{

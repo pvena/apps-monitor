@@ -16,6 +16,7 @@ import com.example.loginuse.util.Constants;
  */
 public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	
+	private static String lastLog;
 	/**
 	 * Creator
 	 */
@@ -45,8 +46,12 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 				{
 					info = "DATA TRANSMISION DISCONNECTED (3G/GSM)";
 				}
-				LsLog log = new LsLog(info,Constants.CONNECTION_STATE_TAG);
-				SaveLog.getInstance().saveData(log);
+				if(!info.equals(lastLog))
+				{
+					LsLog log = new LsLog(info,Constants.CONNECTION_STATE_TAG);
+					SaveLog.getInstance().saveData(log);
+					lastLog = info;
+				}
 			}
 		}
 		catch(Exception e)

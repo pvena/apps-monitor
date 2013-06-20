@@ -17,6 +17,8 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	/**
 	 * Creator
 	 */
+	private static String lastLog;
+	
 	public WifiReceiver(){
 		
 		filter = new IntentFilter();
@@ -34,8 +36,13 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		{
 			NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 			if(networkInfo.getType() == ConnectivityManager. TYPE_WIFI){
-				LsLog l = new LsLog(this.getWifiConnection(context,intent), Constants.WIFI_STATE_TAG);
-				SaveLog.getInstance().saveData(l);
+				String newLog = this.getWifiConnection(context,intent);
+				if(!newLog.equals(lastLog))
+				{
+					LsLog l = new LsLog(newLog, Constants.WIFI_STATE_TAG);
+					SaveLog.getInstance().saveData(l);
+					lastLog = newLog;
+				}
 			}			
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
