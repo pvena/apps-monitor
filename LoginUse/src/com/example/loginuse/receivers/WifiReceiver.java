@@ -54,11 +54,11 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 		    if(networkInfo.isConnected()) {
 		        // Wifi is connected
-		        return "True";
+		        return "Enabled";
 		    }
 		    else
 		    {
-		    	return "False";
+		    	return "Disabled";
 		    }
 		} 
 		return "No Data";
