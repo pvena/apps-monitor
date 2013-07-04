@@ -46,11 +46,12 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),Constants.BATTERY_STATE_TAG);
-		if (!l.getLog().equals(lastLogBattery))
-		{			
+		String message = BatteryStatusUtil.getLog(context);		
+		if (!message.equals(lastLogBattery))
+		{
+			LsLog  l = new LsLog(message,Constants.BATTERY_STATE_TAG);
 			SaveLog.getInstance().saveData(l);
-			lastLogBattery = l.getLog();
+			lastLogBattery = message;
 		}
 		logEvent(context, intent);
 		Intent i = new Intent(PassiveLocationChangedReceiver.CHECK_LOCATION);

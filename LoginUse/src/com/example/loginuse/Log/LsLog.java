@@ -14,7 +14,14 @@ public class LsLog {
 		this.type = "[" + t + "]";
 		this.separator = "&";
 	}
-	
+	public String getMessage()
+	{
+		return this.message;
+	}
+	public String getType()
+	{
+		return this.type;
+	}
 	/**
 	 * TODO Mejorar logeo de fechas para saber cuando es am o pm
 	 * @return
