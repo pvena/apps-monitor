@@ -17,6 +17,7 @@ import android.content.IntentFilter;
 public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	
 	protected IntentFilter filter;
+	private static String lastLogBattery;
 	
 	/**
 	 * Creator
@@ -46,7 +47,11 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		LsLog  l = new LsLog(BatteryStatusUtil.getLog(context),Constants.BATTERY_STATE_TAG);
-		SaveLog.getInstance().saveData(l);
+		if (!l.getLog().equals(lastLogBattery))
+		{			
+			SaveLog.getInstance().saveData(l);
+			lastLogBattery = l.getLog();
+		}
 		logEvent(context, intent);
 		Intent i = new Intent(PassiveLocationChangedReceiver.CHECK_LOCATION);
         context.sendBroadcast(i);
