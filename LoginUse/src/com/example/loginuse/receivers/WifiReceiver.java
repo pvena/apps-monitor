@@ -8,8 +8,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.example.loginuse.Log.LsLog;
-import com.example.loginuse.Log.SaveLog;
+import com.example.loginuse.log.LsLog;
+import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
 
 public class WifiReceiver extends GeneralLoggingReceiver  {

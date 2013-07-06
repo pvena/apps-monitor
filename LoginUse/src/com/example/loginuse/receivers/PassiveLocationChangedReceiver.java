@@ -8,8 +8,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import com.example.loginuse.Log.LsLog;
-import com.example.loginuse.Log.SaveLog;
+import com.example.loginuse.log.LsLog;
+import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
 
 /**
