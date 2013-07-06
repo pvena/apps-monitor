@@ -22,7 +22,7 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	 */
 	public ConnectionChangeReceiver(){
 		super();
-		super.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+		super.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 	
 	}
 
@@ -37,7 +37,7 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 			ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
 			String info;
-			if(netInfo.getType() != ConnectivityManager. TYPE_WIFI){
+			if(netInfo.getType() != ConnectivityManager.TYPE_WIFI){
 				if (netInfo != null && netInfo.isConnectedOrConnecting()) 
 				{
 					info = "DATA TRANSMISSION CONNECTED (3G/GSM)";

@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 
 
-public class MainActivity extends Activity /*implements OnClickListener*/ {
-	//private Button btn;
+public class MainActivity extends Activity {
 		
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
