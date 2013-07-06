@@ -46,7 +46,7 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		        // If it is not paired, add it to the scanned list
 		        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
 		        	logText += "Name: " + device.getName();
-		            logText += "Address: " + device.getAddress();
+		            logText += " Address: " + device.getAddress();
 		        }
 		    }else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
 	            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
