@@ -22,13 +22,14 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    @Override
-    protected void onPause() {         
-    		super.onPause();
-    }
-    @Override
-    protected void onResume() {
-            super.onResume();            
-    }     
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	} 
     
 }
