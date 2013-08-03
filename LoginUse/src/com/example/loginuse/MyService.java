@@ -13,6 +13,7 @@ import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service {
 	private static final String TAG = "MyService";
+	public static Boolean State = false;
 	
 	public static final int id = 1234;
 	
@@ -31,25 +32,26 @@ public class MyService extends Service {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onDestroy() {			
 		Log.d(TAG, "onDestroy");
 		unRegisterReceivers();
 		stopForeground(true);
 		//restart the service
 		Intent serviceIntent = new Intent();
 	    serviceIntent.setAction("com.example.loginuse.MyService");
-	    startService(serviceIntent);
-
+	    startService(serviceIntent);	
+	    MyService.State = false;
 	}
 	
 	@Override
-	public void onStart(Intent intent, int startid) {
-		Log.d(TAG, "Starting Service");
+	public void onStart(Intent intent, int startid) {		
+		Log.d(TAG, "onStart");
 		//Initializing receivers
 		connectionChangeReceiver = new ConnectionChangeReceiver();
 		wifiReceiver = new WifiReceiver();
 		bluetooth = new BluetoothReciver();
 		registerReceivers();
+		MyService.State = true;
 	}
 	
 	
@@ -69,6 +71,7 @@ public class MyService extends Service {
 
 		notice.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(id, notice);
+		MyService.State = true;
 		return START_STICKY;
 	}
 
