@@ -13,7 +13,6 @@ import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service {
 	private static final String TAG = "MyService";
-	public static Boolean State = false;
 	
 	public static final int id = 1234;
 	
@@ -32,46 +31,40 @@ public class MyService extends Service {
 	}
 
 	@Override
-	public void onDestroy() {			
+	public void onDestroy() {
 		Log.d(TAG, "onDestroy");
 		unRegisterReceivers();
 		stopForeground(true);
 		//restart the service
 		Intent serviceIntent = new Intent();
 	    serviceIntent.setAction("com.example.loginuse.MyService");
-	    startService(serviceIntent);	
-	    MyService.State = false;
+	    startService(serviceIntent);
+
 	}
 	
+	
 	@Override
-	public void onStart(Intent intent, int startid) {		
-		Log.d(TAG, "onStart");
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.d(TAG, "onStartCommand");
 		//Initializing receivers
 		connectionChangeReceiver = new ConnectionChangeReceiver();
 		wifiReceiver = new WifiReceiver();
 		bluetooth = new BluetoothReciver();
 		registerReceivers();
-		MyService.State = true;
-	}
-	
-	
-	
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+		
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent pendIntent = PendingIntent.getActivity(this, 0, intenta, 0);
 
 		//This constructor is deprecated. Use Notification.Builder instead
-		Notification notice = new Notification(R.drawable.ic_launcher, "Ticker text", System.currentTimeMillis());
+		Notification notice = new Notification(R.drawable.ic_launcher, "Login Use", System.currentTimeMillis());
 
 		//This method is deprecated. Use Notification.Builder instead.
 		notice.setLatestEventInfo(this, "Login Use", "Login use is executing", pendIntent);
 
 		notice.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(id, notice);
-		MyService.State = true;
 		return START_STICKY;
 	}
 

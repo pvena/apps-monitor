@@ -1,5 +1,6 @@
 package com.example.loginuse.log;
 
+import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,9 +24,9 @@ public class LsLog {
 		return this.type;
 	}
 	/**
-	 * TODO Mejorar logeo de fechas para saber cuando es am o pm
 	 * @return
 	 */
+	@SuppressLint("SimpleDateFormat")
 	public String getLog()
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("[yyyy-MM-dd|kk:mm:ss]");
