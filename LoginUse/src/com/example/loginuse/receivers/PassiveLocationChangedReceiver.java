@@ -103,9 +103,9 @@ public class PassiveLocationChangedReceiver extends BroadcastReceiver{
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
 		// Register the listener with the Location Manager to receive
-		// location updates
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0,
-				0, locationListener);
+		// location updates (minTime = 15 minutes, minDistance = 100 meters)
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
+				100, locationListener);
 		
 	}
 }

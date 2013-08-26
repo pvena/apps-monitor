@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -53,8 +54,10 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
 		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 		    if(networkInfo.isConnected()) {
-		        // Wifi is connected
-		        return "Enabled";
+		    	String info = "Enabled ";
+		    	WifiInfo wifiInfo = intent.getParcelableExtra("wifiInfo");
+		    	info += getNetInfo(wifiInfo);
+		        return info;
 		    }
 		    else
 		    {
@@ -62,6 +65,22 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    }
 		} 
 		return "No Data";
+	}
+	
+	/**
+	 * Return a <code>String </code> with
+	 * relevant wifi info
+	 * @param wifiInfo
+	 * @return
+	 */
+	private String getNetInfo(WifiInfo wifiInfo){
+		String netInfo = "Connected to: ";
+		netInfo += "SSID|" + wifiInfo.getSSID();
+		netInfo += " MAC|" + wifiInfo.getMacAddress();
+		netInfo += " IP|" + wifiInfo.getIpAddress();
+		netInfo += " NetID|" + wifiInfo.getNetworkId();
+		netInfo += " BSSID|" + wifiInfo.getBSSID();
+		return netInfo;
 	}
 	
 }
