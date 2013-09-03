@@ -3,10 +3,13 @@ package com.example.loginuse;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
@@ -19,6 +22,8 @@ public class MyService extends Service {
 	private ConnectionChangeReceiver connectionChangeReceiver;
 	private WifiReceiver wifiReceiver;
 	private BluetoothReciver bluetooth;
+	private LocationManager locationManager;
+	private PassiveLocationChangedListener locationListener;
 		
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -34,6 +39,7 @@ public class MyService extends Service {
 	public void onDestroy() {
 		Log.d(TAG, "onDestroy");
 		unRegisterReceivers();
+		locationManager.removeUpdates(locationListener);
 		stopForeground(true);
 		//restart the service
 		Intent serviceIntent = new Intent();
@@ -50,7 +56,11 @@ public class MyService extends Service {
 		connectionChangeReceiver = new ConnectionChangeReceiver();
 		wifiReceiver = new WifiReceiver();
 		bluetooth = new BluetoothReciver();
+		
+		//Register all receivers
 		registerReceivers();
+		//Register for location updates
+		registerForLocationUpdates();
 		
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
@@ -66,6 +76,20 @@ public class MyService extends Service {
 		notice.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(id, notice);
 		return START_STICKY;
+	}
+	
+	/**
+	 * Register a new locationlistener for location updates
+	 */
+	private void registerForLocationUpdates(){
+		locationListener = new PassiveLocationChangedListener();
+		// Acquire a reference to the system Location Manager
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		// Register the listener with the Location Manager to receive
+		// location updates (minTime = 15 minutes, minDistance = 100 meters)
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
+				100, locationListener);
 	}
 
 	/**

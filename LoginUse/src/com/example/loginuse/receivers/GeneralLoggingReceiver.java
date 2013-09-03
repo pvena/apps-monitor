@@ -54,9 +54,6 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 			lastLogBattery = message;
 		}
 		logEvent(context, intent);
-		Intent i = new Intent(PassiveLocationChangedReceiver.CHECK_LOCATION);
-        context.sendBroadcast(i);
-		
 	}
 	
 	/**
