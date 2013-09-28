@@ -11,7 +11,7 @@ import android.os.BatteryManager;
  */
 public class BatteryStatusUtil {
 	
-	private static final String PERCENTAGE = "PERCENTAGE: ";
+	private static final String PERCENTAGE = "PERCENTAGE";
 	
 	/**
 	 * Return the current charge status
@@ -35,12 +35,12 @@ public class BatteryStatusUtil {
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
 			if(usbCharge){
-				bStatus = "PLUGGED_USB";
+				bStatus = "PLUGGED_USB|1";
 			}else if(acCharge){
-				bStatus = "PLUGGED_AC";
+				bStatus = "PLUGGED_AC|1";
 			}
 		} else {
-			bStatus = "DISCHARGING";
+			bStatus = "DISCHARGING|1";
 		}
 		
 		return bStatus;
@@ -60,7 +60,7 @@ public class BatteryStatusUtil {
 
 		float batteryPct = level / (float)scale * 100;
 		
-		return PERCENTAGE + " " + String.valueOf(batteryPct) +"%";
+		return PERCENTAGE + "|" + String.valueOf(batteryPct) +"%";
 	}
 
 	/**
