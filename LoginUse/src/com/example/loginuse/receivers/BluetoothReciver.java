@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
@@ -45,30 +46,31 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		        BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 		        // If it is not paired, add it to the scanned list
 		        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-		        	logText += "Name: " + device.getName();
-		            logText += " Address: " + device.getAddress();
+		        	logText += "Name:" + device.getName() + ";";
+		            logText += " Address:" + device.getAddress();
 		        }
-		    }else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-	            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-	                                                 BluetoothAdapter.ERROR);
-	            switch (state) {
-	            case BluetoothAdapter.STATE_OFF:
-	            	logText += "Bluetooth off";
-	                break;
-	            case BluetoothAdapter.STATE_TURNING_OFF:
-	            	logText += "Turning Bluetooth off";
-	                break;
-	            case BluetoothAdapter.STATE_ON:
-	            	logText += "Bluetooth on";
-	                break;
-	            case BluetoothAdapter.STATE_TURNING_ON:
-	            	logText += "Turning Bluetooth on";
-	                break;
-	            }
-	        }
+		    }
+			else 
+				if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+					int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+					switch (state) {
+					case BluetoothAdapter.STATE_OFF:
+						logText += LogFormat.getLog("State", false);
+						break;
+					case BluetoothAdapter.STATE_TURNING_OFF:
+						logText += LogFormat.getLog("TState", false);
+						break;
+					case BluetoothAdapter.STATE_ON:
+						logText += LogFormat.getLog("State", true);;
+						break;
+					case BluetoothAdapter.STATE_TURNING_ON:
+						logText += LogFormat.getLog("TState", true);
+						break;
+					}
+				}
 			
 			if(logText.equals("")){
-				logText = "No data";
+				logText = "ND";
 			}
 			if(!logText.equals(lastLog))
 			{
@@ -77,6 +79,6 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 				lastLog = logText;
 			}
 		}
-		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
+		catch(Exception e){ Log.e("ERROR", "Bluetooth-LOG"); }
 	}
 }

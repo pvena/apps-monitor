@@ -9,6 +9,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
@@ -54,17 +55,15 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
 		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 		    if(networkInfo.isConnected()) {
-		    	String info = "Enabled ";
 		    	WifiInfo wifiInfo = intent.getParcelableExtra("wifiInfo");
-		    	info += getNetInfo(wifiInfo);
-		        return info;
+		    	return getNetInfo(wifiInfo);
 		    }
 		    else
 		    {
-		    	return "Disabled";
+		    	return LogFormat.getLog("State",false);
 		    }
 		} 
-		return "No Data";
+		return "ND";
 	}
 	
 	/**
@@ -74,12 +73,13 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 * @return
 	 */
 	private String getNetInfo(WifiInfo wifiInfo){
-		String netInfo = "Connected to: ";
-		netInfo += "SSID|" + wifiInfo.getSSID();
-		netInfo += " MAC|" + wifiInfo.getMacAddress();
-		netInfo += " IP|" + wifiInfo.getIpAddress();
-		netInfo += " NetID|" + wifiInfo.getNetworkId();
-		netInfo += " BSSID|" + wifiInfo.getBSSID();
+		String netInfo = "";
+		netInfo += LogFormat.getLog("State", true);
+		netInfo += LogFormat.getLog("SSID", wifiInfo.getSSID());
+		netInfo += LogFormat.getLog("MAC",wifiInfo.getMacAddress());
+		netInfo += LogFormat.getLog("IP",wifiInfo.getIpAddress());
+		netInfo += LogFormat.getLog("NetID",wifiInfo.getNetworkId());
+		netInfo += LogFormat.getLog("BSSID",wifiInfo.getBSSID());
 		return netInfo;
 	}
 	
