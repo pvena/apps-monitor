@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogFormat;
 
 /**
  * Broadcast receiver used to hear and log bluetooth status changes

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogFormat;
 
 /**
  * Class used to listen and save the user location
@@ -15,9 +16,9 @@ import com.example.loginuse.util.Constants;
 public class PassiveLocationChangedListener implements LocationListener{
 	
 	public void onLocationChanged(Location location) {
-		LsLog log = new LsLog("Latitude:" + location.getLatitude()
-				+ ", Longitude:" + location.getLongitude() 
-				+ ", Altitude:" + location.getAltitude(),
+		LsLog log = new LsLog(LogFormat.getLog(Constants.LATITUDE,location.getLatitude())
+							+ LogFormat.getLog(Constants.LONGITUDE,location.getLongitude()) 
+							+ LogFormat.getLog(Constants.ALTITUDE, location.getAltitude()),
 				Constants.LOCATION_STATE_TAG);
 		SaveLog.getInstance().saveData(log);
 	}

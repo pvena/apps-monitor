@@ -1,19 +1,20 @@
 package com.example.loginuse.log;
 
-import android.annotation.SuppressLint;
+//import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogFormat;
 
 public class LsLog {
 	private String message;
 	private String type;
-	private String separator;
-	
+		
 	public LsLog (String mess, String t)
 	{
-		this.message = "[" + mess + "]";
-		this.type = "[" + t + "]";
-		this.separator = "&";
+		this.message = mess;
+		this.type = t;
 	}
 	public String getMessage()
 	{
@@ -26,10 +27,13 @@ public class LsLog {
 	/**
 	 * @return
 	 */
-	@SuppressLint("SimpleDateFormat")
+	//@SuppressLint("SimpleDateFormat")
 	public String getLog()
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("[yyyy-MM-dd|kk:mm:ss]");
-		return sdf.format(new Date()).concat(this.separator).concat(this.type).concat(this.separator).concat(this.message).concat("\r\n");
+		String date =  new SimpleDateFormat(Constants.DATEFORMAT).format(new Date());
+		return   LogFormat.getLogCategories(LogFormat.getCategory(date)
+				.concat(LogFormat.getCategory(this.type))
+				.concat(LogFormat.getCategory(this.message)))
+				.concat("\r\n");
 	}
 }

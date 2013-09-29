@@ -1,5 +1,6 @@
 package com.example.loginuse.util;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -9,10 +10,7 @@ import android.os.BatteryManager;
  * Get info from current battery status
  *
  */
-public class BatteryStatusUtil {
-	
-	private static final String PERCENTAGE = "PERCENTAGE";
-	
+public class BatteryStatusUtil {	
 	/**
 	 * Return the current charge status
 	 * @param context
@@ -35,12 +33,12 @@ public class BatteryStatusUtil {
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
 			if(usbCharge){
-				bStatus = "PLUGGED_USB|1";
+				bStatus = LogFormat.getLog(Constants.PLUGGED_USB,usbCharge);
 			}else if(acCharge){
-				bStatus = "PLUGGED_AC|1";
+				bStatus = LogFormat.getLog(Constants.PLUGGED_AC,acCharge);
 			}
 		} else {
-			bStatus = "DISCHARGING|1";
+			bStatus = LogFormat.getLog(Constants.DISCHARGING,true);
 		}
 		
 		return bStatus;
@@ -60,7 +58,7 @@ public class BatteryStatusUtil {
 
 		float batteryPct = level / (float)scale * 100;
 		
-		return PERCENTAGE + "|" + String.valueOf(batteryPct) +"%";
+		return LogFormat.getLog(Constants.PERCENTAGE,String.valueOf(batteryPct) +"%");
 	}
 
 	/**
@@ -70,8 +68,6 @@ public class BatteryStatusUtil {
 	 */
 	public static String getLog(Context context)
 	{
-		String batteryStatus = BatteryStatusUtil.getBatteryPercentage(context)
-				+ " " + BatteryStatusUtil.getBatteryStatus(context);
-		return batteryStatus;
+		return BatteryStatusUtil.getBatteryPercentage(context) + BatteryStatusUtil.getBatteryStatus(context);		
 	}
 }
