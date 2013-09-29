@@ -16,7 +16,7 @@ import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service {
 	private static final String TAG = "MyService";
-	
+		
 	public static final int id = 1234;
 	
 	private ConnectionChangeReceiver connectionChangeReceiver;
