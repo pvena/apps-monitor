@@ -15,12 +15,19 @@ import com.example.loginuse.util.LogFormat;
  */
 public class PassiveLocationChangedListener implements LocationListener{
 	
+	private static String lastLog; 
+	
 	public void onLocationChanged(Location location) {
-		LsLog log = new LsLog(LogFormat.getLog(Constants.LATITUDE,location.getLatitude())
-							+ LogFormat.getLog(Constants.LONGITUDE,location.getLongitude()) 
-							+ LogFormat.getLog(Constants.ALTITUDE, location.getAltitude()),
-				Constants.LOCATION_STATE_TAG);
-		SaveLog.getInstance().saveData(log);
+		
+		String newLog = LogFormat.getLog(Constants.LATITUDE,location.getLatitude())
+				+ LogFormat.getLog(Constants.LONGITUDE,location.getLongitude()) 
+				+ LogFormat.getLog(Constants.ALTITUDE, location.getAltitude());
+		if(!newLog.equals(lastLog))
+		{
+			LsLog l = new LsLog(newLog, Constants.LOCATION_STATE_TAG);
+			SaveLog.getInstance().saveData(l);
+			lastLog = newLog;
+		}
 	}
 		
 	/*
