@@ -9,10 +9,13 @@ import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.loginuse.listeners.GoogleActivityLisener;
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class MyService extends Service {
 	private static final String TAG = "MyService";
@@ -22,8 +25,9 @@ public class MyService extends Service {
 	private ConnectionChangeReceiver connectionChangeReceiver;
 	private WifiReceiver wifiReceiver;
 	private BluetoothReciver bluetooth;
-	private LocationManager locationManager;
+	private LocationManager locationManager;	
 	private PassiveLocationChangedListener locationListener;
+	private GoogleActivityLisener activityLisener;
 		
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -91,7 +95,19 @@ public class MyService extends Service {
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
 				100, locationListener);
 	}
-
+	
+	/**
+	 * Register a new googleActivityLisener for Adtivity updates
+	 */
+	private void registerActivityLisener()
+	{
+		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		if(ConnectionResult.SUCCESS == resultCode)
+		{
+			
+		}
+	}
+	
 	/**
 	 * Register receivers
 	 */
