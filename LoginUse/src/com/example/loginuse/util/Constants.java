@@ -6,6 +6,8 @@ package com.example.loginuse.util;
  *
  */
 public class Constants {
+	public static String INICIO = "INIC";
+	
 	public static String WIFI_STATE_TAG = "WIFI";
 	
 	public static String BATTERY_STATE_TAG = "BATTERY";

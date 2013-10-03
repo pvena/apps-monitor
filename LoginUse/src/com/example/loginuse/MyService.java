@@ -1,5 +1,6 @@
 package com.example.loginuse;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,7 +10,7 @@ import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.example.loginuse.listeners.GoogleActivityLisener;
+//import com.example.loginuse.listeners.GoogleActivityLisener;
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
@@ -17,7 +18,7 @@ import com.example.loginuse.receivers.WifiReceiver;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-public class MyService extends Service {
+public class MyService extends Service  {
 	private static final String TAG = "MyService";
 		
 	public static final int id = 1234;
@@ -27,7 +28,7 @@ public class MyService extends Service {
 	private BluetoothReciver bluetooth;
 	private LocationManager locationManager;	
 	private PassiveLocationChangedListener locationListener;
-	private GoogleActivityLisener activityLisener;
+	//private GoogleActivityLisener activityLisener;
 		
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -65,7 +66,8 @@ public class MyService extends Service {
 		registerReceivers();
 		//Register for location updates
 		registerForLocationUpdates();
-		
+		//Register for ActivityLisener
+		registerActivityLisener();
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -101,11 +103,11 @@ public class MyService extends Service {
 	 */
 	private void registerActivityLisener()
 	{
-		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		/*int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(new Activity());
 		if(ConnectionResult.SUCCESS == resultCode)
 		{
 			
-		}
+		}*/		
 	}
 	
 	/**

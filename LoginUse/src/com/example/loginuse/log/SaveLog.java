@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogFormat;
 
 import android.os.Environment;
 
@@ -17,7 +18,8 @@ public class SaveLog {
 	
 		private SaveLog()
 		{
-			LsLog sl = new LsLog("Inic Log", "Inicio");
+			String log = LogFormat.getLog("INIC_LOG",true);
+			LsLog sl = new LsLog(log, Constants.INICIO);
 			this.saveData(sl);
 		}		
 		
