@@ -1,6 +1,5 @@
 package com.example.loginuse;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -15,8 +14,6 @@ import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class MyService extends Service  {
 	private static final String TAG = "MyService";
@@ -67,7 +64,7 @@ public class MyService extends Service  {
 		//Register for location updates
 		registerForLocationUpdates();
 		//Register for ActivityLisener
-		registerActivityLisener();
+		//registerActivityLisener();
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -94,8 +91,8 @@ public class MyService extends Service  {
 
 		// Register the listener with the Location Manager to receive
 		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
-				100, locationListener);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0/*900000*/,
+				1, locationListener);
 	}
 	
 	/**
