@@ -5,6 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string><string name="Restart">Restart</string>
     <string name="RestartNote">Press button for restart LoginUse Service with new configurations.</string>
+    <string name="chbEnableGpsLocation">Enable GPS Location</string>
+    <string name="txvIntervalLocation">Location Interval</string>
+    <string name="edtIntervalLocationDefault">9000</string>
     
 
 </resources>

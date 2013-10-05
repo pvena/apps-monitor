@@ -11,25 +11,37 @@
         android:layout_height="43dp" >
 
         <CheckBox
-            android:id="@+id/chB1"
+            android:id="@+id/chbEnableGpsLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="Use GPSLocation" />
+            android:text="@string/chbEnableGpsLocation" />
 
     </TableRow>
 
     <TableRow
-        android:id="@+id/tbr1"
+        android:id="@+id/tbr2"
         android:layout_width="wrap_content"
         android:layout_height="43dp" >
         
-        <CheckBox
-            android:id="@+id/chB2"
+        <TextView
+            android:id="@+id/txvIntervalLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="Opcion 2" />
+            android:text="@string/txvIntervalLocation" />
+       <EditText
+        	android:id="@+id/editText1"
+        	android:layout_width="80dp"
+        	android:layout_height="wrap_content"
+        	android:ems="10"
+        	android:inputType="number" 
+        	android:text="@string/edtIntervalLocationDefault">
+
+        <requestFocus />
+    </EditText>
     </TableRow>
+
+    
 
 </LinearLayout>
