@@ -91,8 +91,8 @@ public class MyService extends Service  {
 
 		// Register the listener with the Location Manager to receive
 		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0/*900000*/,
-				1, locationListener);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
+				200, locationListener);
 	}
 	
 	/**
