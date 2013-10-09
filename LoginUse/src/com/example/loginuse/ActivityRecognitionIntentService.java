@@ -15,6 +15,11 @@ public class ActivityRecognitionIntentService extends IntentService {
 	
 	private static String lastLog;
 	
+	public ActivityRecognitionIntentService() {
+		super("NoName");
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ActivityRecognitionIntentService(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub

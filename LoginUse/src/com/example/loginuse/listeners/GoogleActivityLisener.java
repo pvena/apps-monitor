@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.loginuse.ActivityRecognitionIntentService;
@@ -63,6 +64,7 @@ public class GoogleActivityLisener extends FragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
 		Context mContext = getApplicationContext();
 
 		mInProgress = false;
@@ -73,6 +75,8 @@ public class GoogleActivityLisener extends FragmentActivity implements
 
 		mActivityRecognitionPendingIntent = PendingIntent.getService(mContext,
 				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		this.startUpdates();
 
 	}
 
