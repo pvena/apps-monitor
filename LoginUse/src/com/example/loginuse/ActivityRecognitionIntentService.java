@@ -41,7 +41,8 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 			String activityName = getNameFromType(activityType);
 			
-			String newLog = LogFormat.getLog(Constants.ACTIVITY,activityName);
+			String newLog = LogFormat.getLog(Constants.ACTIVITY,activityName) + 
+							LogFormat.getLog(Constants.CONFIDENCE, confidence);
 				
 			if(!newLog.equals(lastLog))
 			{
@@ -57,18 +58,18 @@ public class ActivityRecognitionIntentService extends IntentService {
 	private String getNameFromType(int activityType) {
 		switch (activityType) {
 		case DetectedActivity.IN_VEHICLE:
-			return "in_vehicle";
+			return "IN_VEHICLE";
 		case DetectedActivity.ON_BICYCLE:
-			return "on_bicycle";
+			return "ON_BICYCLE";
 		case DetectedActivity.ON_FOOT:
-			return "on_foot";
+			return "ON_FOOT";
 		case DetectedActivity.STILL:
-			return "still";
+			return "STILL";
 		case DetectedActivity.UNKNOWN:
-			return "unknown";
+			return "UNKNOWN";
 		case DetectedActivity.TILTING:
-			return "tilting";
+			return "TILTING";
 		}
-		return "unknown";
+		return "UNKNOWN";
 	}
 }

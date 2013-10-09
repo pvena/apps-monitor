@@ -42,7 +42,9 @@ public class Constants {
 	
 	public static String LONGITUDE = "LONG";
 	
-	public static String ACTIVITY = "ACTIVITY";
+	public static String ACTIVITY = "ACT";
+	
+	public static String CONFIDENCE = "CONF";
 	
 	public static String ALTITUDE = "ALT";
 	

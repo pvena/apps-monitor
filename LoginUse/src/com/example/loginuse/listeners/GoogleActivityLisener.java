@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,7 +28,7 @@ public class GoogleActivityLisener extends FragmentActivity implements
 
 	// Constants that define the activity detection interval
 	public static final int MILLISECONDS_PER_SECOND = 1000;
-	public static final int DETECTION_INTERVAL_SECONDS = 20;
+	public static final int DETECTION_INTERVAL_SECONDS = 60;
 	public static final int DETECTION_INTERVAL_MILLISECONDS = MILLISECONDS_PER_SECOND
 			* DETECTION_INTERVAL_SECONDS;
 	private boolean mInProgress;
@@ -81,14 +82,9 @@ public class GoogleActivityLisener extends FragmentActivity implements
 	}
 
 	public void startUpdates() {
-		if (!servicesConnected()) {
-			return;
-		}
-		if (!mInProgress) {
+		if (servicesConnected() && !mInProgress) {
 			mInProgress = true;
 			mActivityRecognitionClient.connect();
-		} else {
-
 		}
 	}
 
@@ -102,6 +98,14 @@ public class GoogleActivityLisener extends FragmentActivity implements
 			}
 		}
 	}
+	
+	private void showErrorDialog(Dialog error){
+		if (error != null) {
+			ErrorDialogFragment errorFragment = new ErrorDialogFragment();
+			errorFragment.setDialog(error);
+			errorFragment.show(getSupportFragmentManager(),"Activity Recognition");
+		}
+	}
 
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
@@ -109,22 +113,11 @@ public class GoogleActivityLisener extends FragmentActivity implements
 				.isGooglePlayServicesAvailable(this);
 		// If Google Play services is available
 		if (ConnectionResult.SUCCESS == resultCode) {
-			Toast toast = Toast.makeText(this, "GooglePlayAvailable", 2000);
-			toast.setGravity(Gravity.TOP, -30, 50);
-			toast.show();
-			return true;
 			// Google Play services was not available for some reason
+			return true;			
 		} else {
 			// Get the error dialog from Google Play services
-			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-					resultCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
-			if (errorDialog != null) {
-				ErrorDialogFragment errorFragment = new ErrorDialogFragment();
-				errorFragment.setDialog(errorDialog);
-				errorFragment.show(getSupportFragmentManager(),
-						"Activity Recognition");
-			}
+			this.showErrorDialog(GooglePlayServicesUtil.getErrorDialog(resultCode,this,CONNECTION_FAILURE_RESOLUTION_REQUEST));
 			return false;
 		}
 	}
@@ -141,14 +134,8 @@ public class GoogleActivityLisener extends FragmentActivity implements
 			}
 		} else {
 			int errorCode = connectionResult.getErrorCode();
-			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-					errorCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
-			if (errorDialog != null) {
-				ErrorDialogFragment errorFragment = new ErrorDialogFragment();
-				errorFragment.setDialog(errorDialog);
-				errorFragment.show(getSupportFragmentManager(),
-						"Activity Recognition");
-			}
+			this.showErrorDialog(GooglePlayServicesUtil.getErrorDialog(
+					errorCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST));
 		}
 	}
 
