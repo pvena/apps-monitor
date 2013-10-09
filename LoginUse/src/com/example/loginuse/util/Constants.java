@@ -18,6 +18,8 @@ public class Constants {
 	
 	public static String LOCATION_STATE_TAG = "LOCATION";
 	
+	public static String CURRENTACTIVITY = "ACTIVITY";
+	
 	public static String LOG_FILE_NAME = "LoguinUse.txt";
 	
 	public static String SEP = "::";
@@ -39,6 +41,8 @@ public class Constants {
 	public static String LATITUDE = "LAT";
 	
 	public static String LONGITUDE = "LONG";
+	
+	public static String ACTIVITY = "ACTIVITY";
 	
 	public static String ALTITUDE = "ALT";
 	

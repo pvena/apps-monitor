@@ -1,7 +1,7 @@
 package com.example.loginuse;
 
 import android.app.Activity;
-import android.os.Bundle; 
+import android.os.Bundle;
 
 public class ConfigActivity  extends Activity{
 	@Override

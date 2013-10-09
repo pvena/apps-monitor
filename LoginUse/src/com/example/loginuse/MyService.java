@@ -9,11 +9,11 @@ import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
-//import com.example.loginuse.listeners.GoogleActivityLisener;
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
+//import com.example.loginuse.listeners.GoogleActivityLisener;
 
 public class MyService extends Service  {
 	private static final String TAG = "MyService";
@@ -64,7 +64,7 @@ public class MyService extends Service  {
 		//Register for location updates
 		registerForLocationUpdates();
 		//Register for ActivityLisener
-		//registerActivityLisener();
+		registerActivityLisener();
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -96,15 +96,12 @@ public class MyService extends Service  {
 	}
 	
 	/**
-	 * Register a new googleActivityLisener for Adtivity updates
+	 * Register a new googleActivityLisener for Activity updates
 	 */
-	private void registerActivityLisener()
-	{
-		/*int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(new Activity());
-		if(ConnectionResult.SUCCESS == resultCode)
-		{
-			
-		}*/		
+	private void registerActivityLisener() {
+		Intent googleActivity = new Intent("googleActivity.intent.action.Launch");
+		googleActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(googleActivity);
 	}
 	
 	/**
