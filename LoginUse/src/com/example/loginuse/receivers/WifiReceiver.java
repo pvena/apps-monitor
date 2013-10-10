@@ -74,7 +74,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 */
 	private String getNetInfo(WifiInfo wifiInfo){
 		String netInfo = "";
-		netInfo += LogFormat.getLog("State", true);
+		netInfo += LogFormat.getLog("STATE", true);
 		netInfo += LogFormat.getLog("SSID", wifiInfo.getSSID());
 		netInfo += LogFormat.getLog("MAC",wifiInfo.getMacAddress());
 		netInfo += LogFormat.getLog("IP",wifiInfo.getIpAddress());

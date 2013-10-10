@@ -46,8 +46,8 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		        BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 		        // If it is not paired, add it to the scanned list
 		        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-		        	logText += "Name:" + device.getName() + ";";
-		            logText += " Address:" + device.getAddress();
+		        	logText += LogFormat.getLog("NAME",device.getName());
+		            logText += LogFormat.getLog("ADDRESS",device.getAddress());
 		        }
 		    }
 			else 
@@ -55,22 +55,22 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 					int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 					switch (state) {
 					case BluetoothAdapter.STATE_OFF:
-						logText += LogFormat.getLog("State", false);
+						logText += LogFormat.getLog("STATE", false);
 						break;
 					case BluetoothAdapter.STATE_TURNING_OFF:
-						logText += LogFormat.getLog("TState", false);
+						logText += LogFormat.getLog("TSTATE", false);
 						break;
 					case BluetoothAdapter.STATE_ON:
-						logText += LogFormat.getLog("State", true);;
+						logText += LogFormat.getLog("STATE", true);;
 						break;
 					case BluetoothAdapter.STATE_TURNING_ON:
-						logText += LogFormat.getLog("TState", true);
+						logText += LogFormat.getLog("TSTATE", true);
 						break;
 					}
 				}
 			
 			if(logText.equals("")){
-				logText = "ND";
+				logText = LogFormat.getLog("INFO","ND");
 			}
 			if(!logText.equals(lastLog))
 			{
