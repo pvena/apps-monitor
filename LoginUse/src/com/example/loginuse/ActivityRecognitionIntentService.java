@@ -2,7 +2,6 @@ package com.example.loginuse;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.util.Log;
 
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
@@ -41,10 +40,9 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 			String activityName = getNameFromType(activityType);
 			
-			String newLog = LogFormat.getLog(Constants.ACTIVITY,activityName) + 
-							LogFormat.getLog(Constants.CONFIDENCE, confidence);
+			String newLog = LogFormat.getLog(Constants.ACTIVITY,activityName);
 				
-			if(!newLog.equals(lastLog))
+			if(!newLog.equals(lastLog) && confidence > LogConfiguration.getInstance().getActivityMinConfidence())
 			{
 				LsLog l = new LsLog(newLog, Constants.CURRENTACTIVITY);
 				SaveLog.getInstance().saveData(l);

@@ -10,12 +10,18 @@
         android:layout_width="wrap_content"
         android:layout_height="43dp" >
 
+        <TextView
+            android:id="@+id/txvEnabledGpsLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/txvEnabledGpsLocation" />
+        
         <CheckBox
             android:id="@+id/chbEnableGpsLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="@string/chbEnableGpsLocation" />
+            android:textColor="@android:color/white" />
 
     </TableRow>
 
@@ -31,12 +37,35 @@
             android:textColor="@android:color/white"
             android:text="@string/txvIntervalLocation" />
        <EditText
-        	android:id="@+id/editText1"
+        	android:id="@+id/txtIntervalLocation"
         	android:layout_width="80dp"
         	android:layout_height="wrap_content"
         	android:ems="10"
         	android:inputType="number" 
         	android:text="@string/edtIntervalLocationDefault">
+
+        <requestFocus />
+    </EditText>
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/tbr3"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp" >
+        
+        <TextView
+            android:id="@+id/txvActivityConfidence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/txvActivityConfidence" />
+       <EditText
+        	android:id="@+id/txtActivityConfidence"
+        	android:layout_width="80dp"
+        	android:layout_height="wrap_content"
+        	android:ems="10"
+        	android:inputType="number" 
+        	android:text="@string/edtActivityConfidenceDefault">
 
         <requestFocus />
     </EditText>

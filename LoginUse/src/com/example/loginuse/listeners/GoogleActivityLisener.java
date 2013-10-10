@@ -6,15 +6,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.loginuse.ActivityRecognitionIntentService;
+import com.example.loginuse.LogConfiguration;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
@@ -26,18 +22,11 @@ public class GoogleActivityLisener extends FragmentActivity implements
 
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
-	// Constants that define the activity detection interval
-	public static final int MILLISECONDS_PER_SECOND = 1000;
-	public static final int DETECTION_INTERVAL_SECONDS = 60;
-	public static final int DETECTION_INTERVAL_MILLISECONDS = MILLISECONDS_PER_SECOND
-			* DETECTION_INTERVAL_SECONDS;
 	private boolean mInProgress;
 
 	public enum REQUEST_TYPE {
 		START, STOP
 	}
-
-	private REQUEST_TYPE mRequestType;
 
 	private PendingIntent mActivityRecognitionPendingIntent;
 	// Store the current activity recognition client
@@ -141,6 +130,9 @@ public class GoogleActivityLisener extends FragmentActivity implements
 
 	@Override
 	public void onConnected(Bundle dataBundle) {
+		int DETECTION_INTERVAL_MILLISECONDS = LogConfiguration.getInstance().getActivityMilisecondsPerSecond() * 
+												LogConfiguration.getInstance().getActivityDetactionIntervalSeconds();
+		
 		mActivityRecognitionClient.requestActivityUpdates(
 				DETECTION_INTERVAL_MILLISECONDS,
 				mActivityRecognitionPendingIntent);

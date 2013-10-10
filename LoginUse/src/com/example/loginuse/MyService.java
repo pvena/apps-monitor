@@ -91,8 +91,13 @@ public class MyService extends Service  {
 
 		// Register the listener with the Location Manager to receive
 		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 900000,
-				200, locationListener);
+		
+		String locationType= (LogConfiguration.getInstance().getLocationGPSEnabled())?
+					LocationManager.GPS_PROVIDER :
+					LocationManager.NETWORK_PROVIDER;
+		
+		locationManager.requestLocationUpdates(locationType, LogConfiguration.getInstance().getLocationInterval(),
+				LogConfiguration.getInstance().getLocationMinDistance(), locationListener);
 	}
 	
 	/**
