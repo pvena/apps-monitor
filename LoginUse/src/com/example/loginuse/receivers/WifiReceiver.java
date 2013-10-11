@@ -60,7 +60,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    }
 		    else
 		    {
-		    	return LogFormat.getLog("State",false);
+		    	return LogFormat.getLog("STATE",false);
 		    }
 		} 
 		return "ND";
