@@ -14,6 +14,7 @@ import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
 //import com.example.loginuse.listeners.GoogleActivityLisener;
+import com.example.loginuse.util.LogConfiguration;
 
 public class MyService extends Service  {
 	private static final String TAG = "MyService";
@@ -125,6 +126,5 @@ public class MyService extends Service  {
 		unregisterReceiver(connectionChangeReceiver);
 		unregisterReceiver(wifiReceiver);
 		unregisterReceiver(bluetooth);
-		
 	}
 }

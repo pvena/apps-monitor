@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import com.example.loginuse.ActivityRecognitionIntentService;
-import com.example.loginuse.LogConfiguration;
+import com.example.loginuse.util.LogConfiguration;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
@@ -67,7 +67,7 @@ public class GoogleActivityLisener extends FragmentActivity implements
 				0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		
 		this.startUpdates();
-
+		this.finish();
 	}
 
 	public void startUpdates() {

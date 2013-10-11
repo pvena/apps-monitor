@@ -8,19 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.example.loginuse.util.Constants;
-import com.example.loginuse.util.LogFormat;
+import com.example.loginuse.util.LogConstants;
 
 import android.os.Environment;
 
 public class SaveLog {
 		private static SaveLog instance;
 	
-		private SaveLog()
-		{
-			String log = LogFormat.getLog("INIC_LOG",true);
-			LsLog sl = new LsLog(log, Constants.INICIO);
-			this.saveData(sl);
+		private SaveLog(){
 		}		
 		
 		public static SaveLog getInstance()
@@ -35,7 +30,10 @@ public class SaveLog {
 			File file;
 	        File root = Environment.getExternalStorageDirectory();
 	        try {	        	
-	         	file = new File(root,Constants.LOG_FILE_NAME);
+	        	File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
+	        	// have the object build the directory structure, if needed.
+	        	directory.mkdirs();
+	         	file = new File(directory,LogConstants.LOG_FILE_NAME);
 	            if(!file.exists()) {	                        
 	              	file.createNewFile();
 	            }
@@ -52,7 +50,7 @@ public class SaveLog {
 			try {
 				File root = Environment.getExternalStorageDirectory();
 
-				File file = new File(root,Constants.LOG_FILE_NAME);
+				File file = new File(root,LogConstants.LOG_FILE_NAME);
 			    BufferedReader br = new BufferedReader(new FileReader(file));
 			    String line;
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
 import com.example.loginuse.util.LogFormat;
 
 /**
@@ -19,12 +19,12 @@ public class PassiveLocationChangedListener implements LocationListener{
 	
 	public void onLocationChanged(Location location) {
 		
-		String newLog = LogFormat.getLog(Constants.LATITUDE,location.getLatitude())
-				+ LogFormat.getLog(Constants.LONGITUDE,location.getLongitude()) 
-				+ LogFormat.getLog(Constants.ALTITUDE, location.getAltitude());
+		String newLog = LogFormat.getLog(LogConstants.LATITUDE,location.getLatitude())
+				+ LogFormat.getLog(LogConstants.LONGITUDE,location.getLongitude()) 
+				+ LogFormat.getLog(LogConstants.ALTITUDE, location.getAltitude());
 		if(!newLog.equals(lastLog))
 		{
-			LsLog l = new LsLog(newLog, Constants.LOCATION_STATE_TAG);
+			LsLog l = new LsLog(newLog, LogConstants.LOCATION_STATE_TAG);
 			SaveLog.getInstance().saveData(l);
 			lastLog = newLog;
 		}

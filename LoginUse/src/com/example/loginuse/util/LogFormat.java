@@ -4,27 +4,27 @@ public class LogFormat {
 	
 	public static String getLog(String property,String value)
 	{
-		return property + Constants.SEP  + value + Constants.PSEP;
+		return property + LogConstants.SEP  + value + LogConstants.PSEP;
 	}
 	public static String getLog(String property,int value)
 	{
-		return property + Constants.SEP + value + Constants.PSEP;
+		return property + LogConstants.SEP + value + LogConstants.PSEP;
 	}
 	public static String getLog(String property,double value)
 	{
-		return property + Constants.SEP + value + Constants.PSEP;
+		return property + LogConstants.SEP + value + LogConstants.PSEP;
 	}
 	public static String getLog(String property,boolean value)
 	{
-		return property + Constants.SEP + ((value)?"1":"0") + Constants.PSEP;
+		return property + LogConstants.SEP + ((value)?"1":"0") + LogConstants.PSEP;
 	}	
 	public static String getCategory(String value)
 	{
-		return Constants.CATSEP1 + value + Constants.CATSEP2 + Constants.CATSEP;
+		return LogConstants.CATSEP1 + value + LogConstants.CATSEP2 + LogConstants.CATSEP;
 	}
 	public static String getLogCategories(String value)	
 	{
-		String exc = Constants.PSEP + Constants.CATSEP2 + Constants.CATSEP; 
-		return value.replace(exc, Constants.CATSEP2);
+		String exc = LogConstants.PSEP + LogConstants.CATSEP2 + LogConstants.CATSEP; 
+		return value.replace(exc, LogConstants.CATSEP2);
 	}
 }

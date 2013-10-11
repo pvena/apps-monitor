@@ -33,12 +33,12 @@ public class BatteryStatusUtil {
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
 			if(usbCharge){
-				bStatus = LogFormat.getLog(Constants.PLUGGED_USB,usbCharge);
+				bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,usbCharge);
 			}else if(acCharge){
-				bStatus = LogFormat.getLog(Constants.PLUGGED_AC,acCharge);
+				bStatus = LogFormat.getLog(LogConstants.PLUGGED_AC,acCharge);
 			}
 		} else {
-			bStatus = LogFormat.getLog(Constants.DISCHARGING,true);
+			bStatus = LogFormat.getLog(LogConstants.DISCHARGING,true);
 		}
 		
 		return bStatus;
@@ -58,7 +58,7 @@ public class BatteryStatusUtil {
 
 		float batteryPct = level / (float)scale * 100;
 		
-		return LogFormat.getLog(Constants.PERCENTAGE,String.valueOf(batteryPct) +"%");
+		return LogFormat.getLog(LogConstants.PERCENTAGE,String.valueOf(batteryPct) +"%");
 	}
 
 	/**

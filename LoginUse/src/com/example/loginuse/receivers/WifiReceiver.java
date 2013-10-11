@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
 import com.example.loginuse.util.LogFormat;
 
 public class WifiReceiver extends GeneralLoggingReceiver  {
@@ -41,7 +41,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 				String newLog = this.getWifiConnection(context,intent);
 				if(!newLog.equals(lastLog))
 				{
-					LsLog l = new LsLog(newLog, Constants.WIFI_STATE_TAG);
+					LsLog l = new LsLog(newLog, LogConstants.WIFI_STATE_TAG);
 					SaveLog.getInstance().saveData(l);
 					lastLog = newLog;
 				}

@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
 import com.example.loginuse.util.LogFormat;
 
 /**
@@ -74,7 +74,7 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 			}
 			if(!logText.equals(lastLog))
 			{
-				LsLog l = new LsLog(logText, Constants.BLUETOOTH_STATE_TAG);			
+				LsLog l = new LsLog(logText, LogConstants.BLUETOOTH_STATE_TAG);			
 				SaveLog.getInstance().saveData(l);
 				lastLog = logText;
 			}

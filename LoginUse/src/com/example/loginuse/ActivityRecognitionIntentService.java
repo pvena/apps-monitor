@@ -5,7 +5,8 @@ import android.content.Intent;
 
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
+import com.example.loginuse.util.LogConfiguration;
 import com.example.loginuse.util.LogFormat;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
@@ -38,13 +39,13 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 			int activityType = mostProbableActivity.getType();
 
-			String activityName = getNameFromType(activityType);
+			String activityName = this.getCurrentActionInfo(activityType);
 			
-			String newLog = LogFormat.getLog(Constants.ACTIVITY,activityName);
+			String newLog = LogFormat.getLog(LogConstants.ACTIVITY,activityName);
 				
 			if(!newLog.equals(lastLog) && confidence > LogConfiguration.getInstance().getActivityMinConfidence())
 			{
-				LsLog l = new LsLog(newLog, Constants.CURRENTACTIVITY);
+				LsLog l = new LsLog(newLog, LogConstants.CURRENTACTIVITY);
 				SaveLog.getInstance().saveData(l);
 				lastLog = newLog;
 			}
@@ -53,7 +54,7 @@ public class ActivityRecognitionIntentService extends IntentService {
 		}
 	}
 
-	private String getNameFromType(int activityType) {
+	private String getCurrentActionInfo(int activityType) {
 		switch (activityType) {
 		case DetectedActivity.IN_VEHICLE:
 			return "IN_VEHICLE";
@@ -64,9 +65,9 @@ public class ActivityRecognitionIntentService extends IntentService {
 		case DetectedActivity.STILL:
 			return "STILL";
 		case DetectedActivity.UNKNOWN:
-			return "UNKNOWN";
+			return "STILL";//"UNKNOWN";
 		case DetectedActivity.TILTING:
-			return "TILTING";
+			return "STILL";//"TILTING";
 		}
 		return "UNKNOWN";
 	}

@@ -1,5 +1,7 @@
 package com.example.loginuse;
 
+import com.example.loginuse.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 

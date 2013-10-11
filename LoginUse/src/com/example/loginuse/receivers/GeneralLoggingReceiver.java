@@ -3,7 +3,7 @@ package com.example.loginuse.receivers;
 import com.example.loginuse.log.LsLog;
 import com.example.loginuse.log.SaveLog;
 import com.example.loginuse.util.BatteryStatusUtil;
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -49,7 +49,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		String message = BatteryStatusUtil.getLog(context);		
 		if (!message.equals(lastLogBattery))
 		{
-			LsLog  l = new LsLog(message,Constants.BATTERY_STATE_TAG);
+			LsLog  l = new LsLog(message,LogConstants.BATTERY_STATE_TAG);
 			SaveLog.getInstance().saveData(l);
 			lastLogBattery = message;
 		}

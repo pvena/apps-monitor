@@ -4,7 +4,7 @@ package com.example.loginuse.log;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.example.loginuse.util.Constants;
+import com.example.loginuse.util.LogConstants;
 import com.example.loginuse.util.LogFormat;
 
 public class LsLog {
@@ -30,7 +30,7 @@ public class LsLog {
 	//@SuppressLint("SimpleDateFormat")
 	public String getLog()
 	{
-		String date =  new SimpleDateFormat(Constants.DATEFORMAT).format(new Date());
+		String date =  new SimpleDateFormat(LogConstants.DATEFORMAT).format(new Date());
 		return   LogFormat.getLogCategories(LogFormat.getCategory(date)
 				.concat(LogFormat.getCategory(this.type))
 				.concat(LogFormat.getCategory(this.message)))
