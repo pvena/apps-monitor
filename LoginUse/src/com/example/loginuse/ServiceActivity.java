@@ -17,7 +17,6 @@ public class ServiceActivity extends Activity {
         
         Button btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(this.onClick_btn);
-
     }
 
     @Override
