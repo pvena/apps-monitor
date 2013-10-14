@@ -55,6 +55,7 @@ public class MyService extends Service  {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG, "onStartCommand");
+		LogConfiguration.deserializeConfig();
 		//Initializing receivers
 		connectionChangeReceiver = new ConnectionChangeReceiver();
 		wifiReceiver = new WifiReceiver();

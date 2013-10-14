@@ -1,5 +1,7 @@
 package com.example.loginuse;
 
+import com.example.loginuse.util.LogConfiguration;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ public class ServiceActivity extends Activity {
 	    }
 	};
 	public void btnOnClick(){
+		LogConfiguration.serializeConfig();
 		startService(new Intent(this,  MyService.class));	
 	}
 }

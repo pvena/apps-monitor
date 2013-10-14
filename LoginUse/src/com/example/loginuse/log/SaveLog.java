@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-
 import com.example.loginuse.util.LogConstants;
 
 import android.os.Environment;
@@ -41,7 +40,7 @@ public class SaveLog {
 	            out.write(log.getLog());
 	            out.close();   
 			}catch(IOException e)
-			{e.printStackTrace();}        
+			{e.printStackTrace();}
 		}
 		
 		public String readLogFile(){
