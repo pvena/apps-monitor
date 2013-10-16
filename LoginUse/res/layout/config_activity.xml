@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    android:orientation="vertical"
-    android:background="@android:color/black">
+    android:layout_height="fill_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical" >
 
     <TableRow
         android:id="@+id/tbr1"
@@ -14,63 +14,68 @@
             android:id="@+id/txvEnabledGpsLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="@string/txvEnabledGpsLocation" />
-        
+            android:text="@string/txvEnabledGpsLocation"
+            android:textColor="@android:color/white" />
+
         <CheckBox
             android:id="@+id/chbEnableGpsLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white" />
-
     </TableRow>
 
     <TableRow
         android:id="@+id/tbr2"
         android:layout_width="wrap_content"
         android:layout_height="43dp" >
-        
+
         <TextView
             android:id="@+id/txvIntervalLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="@string/txvIntervalLocation" />
-       <EditText
-        	android:id="@+id/txtIntervalLocation"
-        	android:layout_width="80dp"
-        	android:layout_height="wrap_content"
-        	android:ems="10"
-        	android:inputType="number" 
-        	android:text="@string/edtIntervalLocationDefault">
+            android:text="@string/txvIntervalLocation"
+            android:textColor="@android:color/white" />
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/txtIntervalLocation"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/edtIntervalLocationDefault" >
+
+            <requestFocus />
+        </EditText>
     </TableRow>
-    
+
     <TableRow
         android:id="@+id/tbr3"
         android:layout_width="wrap_content"
         android:layout_height="43dp" >
-        
+
         <TextView
             android:id="@+id/txvActivityConfidence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="@string/txvActivityConfidence" />
-       <EditText
-        	android:id="@+id/txtActivityConfidence"
-        	android:layout_width="80dp"
-        	android:layout_height="wrap_content"
-        	android:ems="10"
-        	android:inputType="number" 
-        	android:text="@string/edtActivityConfidenceDefault">
+            android:text="@string/txvActivityConfidence"
+            android:textColor="@android:color/white" />
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/txtActivityConfidence"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/edtActivityConfidenceDefault" >
+
+            <requestFocus />
+        </EditText>
     </TableRow>
 
-    
+    <Button
+        android:id="@+id/sendLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sendLogButton" />
 
 </LinearLayout>

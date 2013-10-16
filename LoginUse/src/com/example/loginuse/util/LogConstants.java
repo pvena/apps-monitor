@@ -26,6 +26,8 @@ public class LogConstants {
 	
 	public static String LOG_FOLDER_NAME = "/Login Use";
 	
+	public static String ZIP_LOG_FILE_NAME = "/loguinUse.zip";
+	
 	public static String LOG_CONFIG_FILE = "/LoguinUse.config";
 	
 	public static String SEP = "::";

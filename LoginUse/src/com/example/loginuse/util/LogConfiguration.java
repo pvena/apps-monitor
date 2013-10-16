@@ -13,6 +13,8 @@ import android.util.Log;
 
 public class LogConfiguration implements Serializable{
 	
+	private static final long serialVersionUID = 8299491274998148302L;
+
 	private static LogConfiguration instance;
 	
 	private boolean GPSEnabled = false;
