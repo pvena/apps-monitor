@@ -112,12 +112,12 @@ public class LogConfiguration implements Serializable{
 	    	File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
         	directory.mkdirs();
          	file = new File(directory,LogConstants.LOG_CONFIG_FILE);
-         	
-         	FileInputStream fileinputStrean = new FileInputStream(file);         	
-	        ObjectInputStream in = new ObjectInputStream(fileinputStrean);
-	        LogConfiguration.instance = (LogConfiguration)in.readObject();
-	        in.close();
-	        
+         	if(file.exists()){
+         		FileInputStream fileinputStrean = new FileInputStream(file);         	
+         		ObjectInputStream in = new ObjectInputStream(fileinputStrean);
+         		LogConfiguration.instance = (LogConfiguration)in.readObject();
+         		in.close();
+         	}
 	      } catch(ClassNotFoundException cnfe) {
 	        Log.e("deserializeObject", "class not found error", cnfe);
 
