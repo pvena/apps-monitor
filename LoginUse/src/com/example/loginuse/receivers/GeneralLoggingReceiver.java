@@ -1,9 +1,9 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.log.LsLog;
-import com.example.loginuse.log.SaveLog;
+import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.log.LogLine;
+import com.example.loginuse.log.LogSave;
 import com.example.loginuse.util.BatteryStatusUtil;
-import com.example.loginuse.util.LogConstants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -49,8 +49,8 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		String message = BatteryStatusUtil.getLog(context);		
 		if (!message.equals(lastLogBattery))
 		{
-			LsLog  l = new LsLog(message,LogConstants.BATTERY_STATE_TAG);
-			SaveLog.getInstance().saveData(l);
+			LogLine  l = new LogLine(message,LogConstants.BATTERY_STATE_TAG);
+			LogSave.getInstance().saveData(l);
 			lastLogBattery = message;
 		}
 		logEvent(context, intent);

@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 import com.example.loginuse.R;
+import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.util.Compress;
-import com.example.loginuse.util.LogConstants;
 
 import android.app.Activity;
 import android.os.Bundle;

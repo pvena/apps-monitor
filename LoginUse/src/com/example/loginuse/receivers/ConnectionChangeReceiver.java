@@ -6,10 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.example.loginuse.log.LsLog;
-import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.LogConstants;
-import com.example.loginuse.util.LogFormat;
+import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.log.LogFormat;
+import com.example.loginuse.log.LogLine;
+import com.example.loginuse.log.LogSave;
 
 /**
  * Broadcast receiver used to hear and log connection state changes
@@ -45,8 +45,8 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 			info = LogFormat.getLog(LogConstants.STATE, enable);//DATA TRANSMISSION CONNECTED (3G/GSM)
 			
 			if(!info.equals(lastLog)){
-				LsLog log = new LsLog(info,LogConstants.CONNECTION_STATE_TAG);
-				SaveLog.getInstance().saveData(log);
+				LogLine log = new LogLine(info,LogConstants.CONNECTION_STATE_TAG);
+				LogSave.getInstance().saveData(log);
 				lastLog = info;
 			}
 		}

@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.example.loginuse.log.LsLog;
-import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.LogConstants;
-import com.example.loginuse.util.LogFormat;
+import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.log.LogFormat;
+import com.example.loginuse.log.LogLine;
+import com.example.loginuse.log.LogSave;
 
 /**
  * Broadcast receiver used to hear and log bluetooth status changes
@@ -74,8 +74,8 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 			}
 			if(!logText.equals(lastLog))
 			{
-				LsLog l = new LsLog(logText, LogConstants.BLUETOOTH_STATE_TAG);			
-				SaveLog.getInstance().saveData(l);
+				LogLine l = new LogLine(logText, LogConstants.BLUETOOTH_STATE_TAG);			
+				LogSave.getInstance().saveData(l);
 				lastLog = logText;
 			}
 		}

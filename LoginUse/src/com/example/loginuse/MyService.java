@@ -10,11 +10,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
+import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
 //import com.example.loginuse.listeners.GoogleActivityLisener;
-import com.example.loginuse.util.LogConfiguration;
 
 public class MyService extends Service  {
 	private static final String TAG = "MyService";
@@ -35,6 +35,7 @@ public class MyService extends Service  {
 	
 	@Override
 	public void onCreate() {		
+		LogConfiguration.getInstance().setContext(this);
 		Log.d(TAG, "onCreate");
 	}
 
@@ -55,7 +56,7 @@ public class MyService extends Service  {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG, "onStartCommand");
-		LogConfiguration.deserializeConfig();
+		
 		//Initializing receivers
 		connectionChangeReceiver = new ConnectionChangeReceiver();
 		wifiReceiver = new WifiReceiver();
@@ -73,7 +74,7 @@ public class MyService extends Service  {
 		PendingIntent pendIntent = PendingIntent.getActivity(this, 0, intenta, 0);
 
 		//This constructor is deprecated. Use Notification.Builder instead
-		Notification notice = new Notification(R.drawable.ic_launcher, "Login Use", System.currentTimeMillis());
+		Notification notice = new Notification(R.drawable.ic_launcher1, "Login Use", System.currentTimeMillis());
 
 		//This method is deprecated. Use Notification.Builder instead.
 		notice.setLatestEventInfo(this, "Login Use", "Login use is executing", pendIntent);
@@ -93,13 +94,15 @@ public class MyService extends Service  {
 
 		// Register the listener with the Location Manager to receive
 		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-		
-		String locationType= (LogConfiguration.getInstance().getLocationGPSEnabled())?
+
+		String locationType= (LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGPSENABLED, false))?
 					LocationManager.GPS_PROVIDER :
 					LocationManager.NETWORK_PROVIDER;
 		
-		locationManager.requestLocationUpdates(locationType, LogConfiguration.getInstance().getLocationInterval(),
-				LogConfiguration.getInstance().getLocationMinDistance(), locationListener);
+		locationManager.requestLocationUpdates(locationType, 
+				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL, 900000),
+				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE, 200), 
+				locationListener);
 	}
 	
 	/**

@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPost;/*
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.FileBody;*/
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 
@@ -46,11 +46,11 @@ public class UploadFileTask extends AsyncTask<String, Void, String> {
 			HttpPost httppost = new HttpPost("http://192.168.1.100:80/nanoupload/upload.php");
 			File newFile = new File(file[0]);
 
-			MultipartEntity multipartEntity = new MultipartEntity(
+			/*MultipartEntity multipartEntity = new MultipartEntity(
 					HttpMultipartMode.BROWSER_COMPATIBLE);
-			multipartEntity.addPart("archivo", new FileBody(newFile));
+			multipartEntity.addPart("archivo", new FileBody(newFile));*/
 
-			httppost.setEntity(multipartEntity);
+			//httppost.setEntity(multipartEntity);
 			result = httpclient.execute(httppost, new FileUploadResponseHandler());
 
 		} catch (Exception e) {

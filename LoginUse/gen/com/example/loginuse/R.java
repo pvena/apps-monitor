@@ -181,25 +181,27 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_light=0x7f020017;
         public static final int ic_config=0x7f020018;
         public static final int ic_launcher=0x7f020019;
-        public static final int ic_login=0x7f02001a;
-        public static final int ic_plusone_medium_off_client=0x7f02001b;
-        public static final int ic_plusone_small_off_client=0x7f02001c;
-        public static final int ic_plusone_standard_off_client=0x7f02001d;
-        public static final int ic_plusone_tall_off_client=0x7f02001e;
+        public static final int ic_launcher1=0x7f02001a;
+        public static final int ic_login=0x7f02001b;
+        public static final int ic_plusone_medium_off_client=0x7f02001c;
+        public static final int ic_plusone_small_off_client=0x7f02001d;
+        public static final int ic_plusone_standard_off_client=0x7f02001e;
+        public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
-        public static final int action_settings=0x7f050010;
-        public static final int btn=0x7f05000e;
+        public static final int action_settings=0x7f050011;
+        public static final int btn=0x7f05000f;
         public static final int chbEnableGpsLocation=0x7f050007;
         public static final int hybrid=0x7f050004;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
+        public static final int sendLog=0x7f05000e;
         public static final int tbr1=0x7f050005;
         public static final int tbr2=0x7f050008;
         public static final int tbr3=0x7f05000b;
         public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05000f;
+        public static final int textView1=0x7f050010;
         public static final int txtActivityConfidence=0x7f05000d;
         public static final int txtIntervalLocation=0x7f05000a;
         public static final int txvActivityConfidence=0x7f05000c;
@@ -312,6 +314,7 @@ containing a value of this type.
         public static final int edtActivityConfidenceDefault=0x7f060022;
         public static final int edtIntervalLocationDefault=0x7f060020;
         public static final int hello_world=0x7f06001b;
+        public static final int sendLogButton=0x7f060023;
         public static final int txvActivityConfidence=0x7f060021;
         public static final int txvEnabledGpsLocation=0x7f06001e;
         public static final int txvIntervalLocation=0x7f06001f;

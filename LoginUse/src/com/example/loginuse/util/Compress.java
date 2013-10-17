@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.example.loginuse.log.LogConstants;
+
 import android.os.Environment;
 import android.util.Log;
 

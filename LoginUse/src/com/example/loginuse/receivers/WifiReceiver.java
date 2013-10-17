@@ -9,10 +9,10 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.example.loginuse.log.LsLog;
-import com.example.loginuse.log.SaveLog;
-import com.example.loginuse.util.LogConstants;
-import com.example.loginuse.util.LogFormat;
+import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.log.LogFormat;
+import com.example.loginuse.log.LogLine;
+import com.example.loginuse.log.LogSave;
 
 public class WifiReceiver extends GeneralLoggingReceiver  {
 	
@@ -41,8 +41,8 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 				String newLog = this.getWifiConnection(context,intent);
 				if(!newLog.equals(lastLog))
 				{
-					LsLog l = new LsLog(newLog, LogConstants.WIFI_STATE_TAG);
-					SaveLog.getInstance().saveData(l);
+					LogLine l = new LogLine(newLog, LogConstants.WIFI_STATE_TAG);
+					LogSave.getInstance().saveData(l);
 					lastLog = newLog;
 				}
 			}			

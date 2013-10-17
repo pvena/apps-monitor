@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import com.example.loginuse.ActivityRecognitionIntentService;
-import com.example.loginuse.util.LogConfiguration;
+import com.example.loginuse.log.LogConfiguration;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
@@ -130,8 +130,8 @@ public class GoogleActivityLisener extends FragmentActivity implements
 
 	@Override
 	public void onConnected(Bundle dataBundle) {
-		int DETECTION_INTERVAL_MILLISECONDS = LogConfiguration.getInstance().getActivityMilisecondsPerSecond() * 
-												LogConfiguration.getInstance().getActivityDetactionIntervalSeconds();
+		int DETECTION_INTERVAL_MILLISECONDS = 	LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMILISECONDSPERSSECOND, 1000) * 
+												LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYDETACTIONINTERVALSECONDS, 60);
 		
 		mActivityRecognitionClient.requestActivityUpdates(
 				DETECTION_INTERVAL_MILLISECONDS,
