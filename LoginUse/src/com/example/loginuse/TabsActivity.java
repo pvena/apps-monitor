@@ -17,6 +17,7 @@ public class TabsActivity extends TabActivity{
         TabHost tabHost = getTabHost();
          
         TabSpec service = tabHost.newTabSpec("Service");
+        
         // setting Title and Icon for the Tab
         service.setIndicator("Service", getResources().getDrawable(R.drawable.ic_login));
         Intent ServiceIntent = new Intent(this, ServiceActivity.class);
@@ -29,6 +30,7 @@ public class TabsActivity extends TabActivity{
          
         // Adding all TabSpec to TabHost
         tabHost.addTab(service);
-        tabHost.addTab(config);         
-    }
+        tabHost.addTab(config);  
+        
+   }
 }

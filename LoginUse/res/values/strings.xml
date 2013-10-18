@@ -12,5 +12,8 @@
     <string name="txvActivityConfidence">Activity Confidence Percent</string>
     <string name="edtActivityConfidenceDefault">80</string>
     <string name="sendLogButton">Send Log</string>
+    <string name="LocationTitle">Location Preferences</string>
+    <string name="CurrentActivityTitle">Current Activity Preferences</string>
+    <string name="SendInfoTitle">Send Information Log</string>
 
 </resources>

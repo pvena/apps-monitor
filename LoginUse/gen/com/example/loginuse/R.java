@@ -129,6 +129,7 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f01000d;
     }
     public static final class color {
+        public static final int backgroundTitle=0x7f04000a;
         public static final int common_action_bar_splitter=0x7f040009;
         /**  Sign-in Button Colors 
          */
@@ -141,8 +142,8 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f040006;
         public static final int common_signin_btn_light_text_focused=0x7f040007;
         public static final int common_signin_btn_light_text_pressed=0x7f040005;
-        public static final int common_signin_btn_text_dark=0x7f04000a;
-        public static final int common_signin_btn_text_light=0x7f04000b;
+        public static final int common_signin_btn_text_dark=0x7f04000b;
+        public static final int common_signin_btn_text_light=0x7f04000c;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -189,24 +190,24 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
+        public static final int CurrentActivityTitle=0x7f05000a;
+        public static final int SendInformationTitle=0x7f05000d;
         public static final int action_settings=0x7f050011;
         public static final int btn=0x7f05000f;
         public static final int chbEnableGpsLocation=0x7f050007;
         public static final int hybrid=0x7f050004;
+        public static final int locationTitle=0x7f050005;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
         public static final int sendLog=0x7f05000e;
-        public static final int tbr1=0x7f050005;
-        public static final int tbr2=0x7f050008;
-        public static final int tbr3=0x7f05000b;
         public static final int terrain=0x7f050003;
         public static final int textView1=0x7f050010;
-        public static final int txtActivityConfidence=0x7f05000d;
-        public static final int txtIntervalLocation=0x7f05000a;
-        public static final int txvActivityConfidence=0x7f05000c;
+        public static final int txtActivityConfidence=0x7f05000c;
+        public static final int txtIntervalLocation=0x7f050009;
+        public static final int txvActivityConfidence=0x7f05000b;
         public static final int txvEnabledGpsLocation=0x7f050006;
-        public static final int txvIntervalLocation=0x7f050009;
+        public static final int txvIntervalLocation=0x7f050008;
     }
     public static final class layout {
         public static final int config_activity=0x7f030000;
@@ -217,8 +218,11 @@ containing a value of this type.
         public static final int main=0x7f090000;
     }
     public static final class string {
+        public static final int CurrentActivityTitle=0x7f060025;
+        public static final int LocationTitle=0x7f060024;
         public static final int Restart=0x7f06001c;
         public static final int RestartNote=0x7f06001d;
+        public static final int SendInfoTitle=0x7f060026;
         public static final int action_settings=0x7f06001a;
         public static final int app_name=0x7f060019;
         /**   Title for notification shown when GooglePlayServices needs to be
