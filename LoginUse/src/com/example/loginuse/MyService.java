@@ -3,14 +3,13 @@ package com.example.loginuse;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.log.LogConfiguration;
+import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
@@ -23,9 +22,9 @@ public class MyService extends Service  {
 	
 	private ConnectionChangeReceiver connectionChangeReceiver;
 	private WifiReceiver wifiReceiver;
-	private BluetoothReciver bluetooth;
-	private LocationManager locationManager;	
+	private BluetoothReciver bluetooth;	
 	private PassiveLocationChangedListener locationListener;
+	private ActivityReceiver activityReceiver;
 	//private GoogleActivityLisener activityLisener;
 		
 	@Override
@@ -42,8 +41,9 @@ public class MyService extends Service  {
 	@Override
 	public void onDestroy() {
 		Log.d(TAG, "onDestroy");
+		
 		unRegisterReceivers();
-		locationManager.removeUpdates(locationListener);
+		
 		stopForeground(true);
 		//restart the service
 		Intent serviceIntent = new Intent();
@@ -58,16 +58,16 @@ public class MyService extends Service  {
 		Log.d(TAG, "onStartCommand");
 		
 		//Initializing receivers
-		connectionChangeReceiver = new ConnectionChangeReceiver();
-		wifiReceiver = new WifiReceiver();
-		bluetooth = new BluetoothReciver();
+		this.connectionChangeReceiver = new ConnectionChangeReceiver();
+		this.wifiReceiver = new WifiReceiver();
+		this.bluetooth = new BluetoothReciver();
+		this.locationListener = new PassiveLocationChangedListener();
+		this.activityReceiver = new ActivityReceiver();
 		
 		//Register all receivers
 		registerReceivers();
-		//Register for location updates
-		registerForLocationUpdates();
-		//Register for ActivityLisener
-		registerActivityLisener();
+		
+		
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, MyService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -85,50 +85,24 @@ public class MyService extends Service  {
 	}
 	
 	/**
-	 * Register a new locationlistener for location updates
-	 */
-	private void registerForLocationUpdates(){
-		locationListener = new PassiveLocationChangedListener();
-		// Acquire a reference to the system Location Manager
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		// Register the listener with the Location Manager to receive
-		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-
-		String locationType= (LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGPSENABLED, false))?
-					LocationManager.GPS_PROVIDER :
-					LocationManager.NETWORK_PROVIDER;
-		
-		locationManager.requestLocationUpdates(locationType, 
-				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL, 900000),
-				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE, 200), 
-				locationListener);
-	}
-	
-	/**
-	 * Register a new googleActivityLisener for Activity updates
-	 */
-	private void registerActivityLisener() {
-		Intent googleActivity = new Intent("googleActivity.intent.action.Launch");
-		googleActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(googleActivity);
-	}
-	
-	/**
 	 * Register receivers
 	 */
 	private void registerReceivers(){
-		registerReceiver(connectionChangeReceiver, connectionChangeReceiver.getFilter());
-		registerReceiver(wifiReceiver, wifiReceiver.getFilter());
-		registerReceiver(bluetooth, bluetooth.getFilter());
+		this.connectionChangeReceiver.initialize();
+		this.bluetooth.initialize();
+		this.wifiReceiver.initialize();
+		this.locationListener.initialize();
+		this.activityReceiver.initialize();
 	}
 	
 	/**
 	 * Unregister receivers
 	 */
 	private void unRegisterReceivers(){
-		unregisterReceiver(connectionChangeReceiver);
-		unregisterReceiver(wifiReceiver);
-		unregisterReceiver(bluetooth);
+		this.connectionChangeReceiver.finalize();
+		this.bluetooth.finalize();
+		this.wifiReceiver.finalize();
+		this.locationListener.finalize();		
+		this.activityReceiver.finalize();
 	}
 }

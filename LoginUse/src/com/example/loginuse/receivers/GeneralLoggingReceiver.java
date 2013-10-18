@@ -62,6 +62,8 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	 * @param intent
 	 */
 	public abstract void logEvent(Context context, Intent intent);
+	public abstract void initialize();
+	public abstract void finalize();
 	
 	
 }

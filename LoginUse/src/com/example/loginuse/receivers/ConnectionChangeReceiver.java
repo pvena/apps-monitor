@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
@@ -27,6 +28,16 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	
 	}
 
+	@Override
+	public void initialize() {
+		LogConfiguration.getInstance().getContext().registerReceiver(this, this.filter);
+	}
+
+	@Override
+	public void finalize() {
+		LogConfiguration.getInstance().getContext().unregisterReceiver(this);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)

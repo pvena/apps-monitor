@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
@@ -28,6 +29,16 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		filter = new IntentFilter();
 		this.filter.addAction(BluetoothDevice.ACTION_FOUND);
 		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+	}
+	
+	@Override
+	public void initialize() {
+		LogConfiguration.getInstance().getContext().registerReceiver(this, this.filter);
+	}
+
+	@Override
+	public void finalize() {
+		LogConfiguration.getInstance().getContext().unregisterReceiver(this);
 	}
 	
 	/*

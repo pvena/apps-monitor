@@ -9,6 +9,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
@@ -26,6 +27,16 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		filter = new IntentFilter();
 		
 		this.filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+	}
+	
+	@Override
+	public void initialize() {
+		LogConfiguration.getInstance().getContext().registerReceiver(this, this.filter);
+	}
+
+	@Override
+	public void finalize() {
+		LogConfiguration.getInstance().getContext().unregisterReceiver(this);
 	}
 	
 	/*

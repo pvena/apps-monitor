@@ -34,6 +34,9 @@ public class LogConfiguration {
 	public void setContext(Context c){
 		this.context = c;
 	}
+	public Context getContext(){
+		return this.context;
+	}	
 	
 	public int getProperty(String key,int defValue){
 		if(this.context != null)
