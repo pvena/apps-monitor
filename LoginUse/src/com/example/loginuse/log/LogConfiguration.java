@@ -2,6 +2,7 @@ package com.example.loginuse.log;
 
 import java.util.Date;
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 
@@ -55,13 +56,19 @@ public class LogConfiguration {
 	}
 	
 	public void setProperty(String key,int value){
-		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putInt(key, value);
+		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit(); 
+		ed.putInt(key, value);
+		ed.commit();
 	}
 	public void setProperty(String key,String value){
-		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putString(key, value);
+		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
+		ed.putString(key, value);
+		ed.commit();
 	}
 	public void setProperty(String key,boolean value){
-		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(key, value);
+		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
+		ed.putBoolean(key, value);
+		ed.commit();
 	}
 	
 	public String getFileLogName(){
