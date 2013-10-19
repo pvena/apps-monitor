@@ -1,5 +1,10 @@
 package com.example.loginuse.log;
 
+import com.example.loginuse.R;
+
+import android.widget.CheckBox;
+import android.widget.TextView;
+
 
 public class LogFormat {
 	
@@ -27,6 +32,12 @@ public class LogFormat {
 	{
 		String exc = LogConstants.PSEP + LogConstants.CATSEP2 + LogConstants.CATSEP; 
 		return value.replace(exc, LogConstants.CATSEP2);
+	}
+	public static int getTextViewInt(TextView tv){
+		return Integer.parseInt(tv.getText().toString());
+	}
+	public static boolean getCheckBoxBoolean(CheckBox cbx){
+		return cbx.isChecked();
 	}
 	
 }

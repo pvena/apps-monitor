@@ -15,5 +15,8 @@
     <string name="LocationTitle">Location Preferences</string>
     <string name="CurrentActivityTitle">Current Activity Preferences</string>
     <string name="SendInfoTitle">Send Information Log</string>
+    <string name="txvMinDistanceLocation">Location Min Distance</string>
+    <string name="edtMinDistanceLocationDefault">200</string>
+    <string name="btnSaveConfiguration">Save Configuration</string>
 
 </resources>

@@ -54,6 +54,16 @@ public class LogConfiguration {
 		return defValue;
 	}
 	
+	public void setProperty(String key,int value){
+		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putInt(key, value);
+	}
+	public void setProperty(String key,String value){
+		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putString(key, value);
+	}
+	public void setProperty(String key,boolean value){
+		PreferenceManager.getDefaultSharedPreferences(this.context).edit().putBoolean(key, value);
+	}
+	
 	public String getFileLogName(){
 		String date = DateFormat.format(LogConstants.FILEDATEFORMAT, new Date()).toString();
         String fileName = LogConstants.LOG_FILE_NAME.replace("@", date); 

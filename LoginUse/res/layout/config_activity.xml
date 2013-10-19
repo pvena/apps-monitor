@@ -72,6 +72,35 @@
 
     </RelativeLayout>
 
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+    
+    <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:padding="6dip" >
+        <TextView
+            android:id="@+id/txvMinDistanceLocation"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+            android:text="@string/txvMinDistanceLocation"
+            android:textColor="@android:color/primary_text_dark" />
+
+        <EditText
+            android:id="@+id/txtMinDistanceLocation"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@+id/txvMinDistanceLocation"
+            android:layout_alignTop="@+id/txvMinDistanceLocation"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/edtMinDistanceLocationDefault"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+    
      <TextView
         android:id="@+id/CurrentActivityTitle"
         android:layout_width="fill_parent"
@@ -125,5 +154,12 @@
         	android:layout_height="wrap_content"
         	android:layout_gravity="center"
         	android:text="@string/sendLogButton" />
-	</RelativeLayout>>
+	</RelativeLayout>
+	
+   <Button
+     	android:id="@+id/saveConfiguration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/btnSaveConfiguration" />
 </LinearLayout>
