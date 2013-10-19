@@ -1,7 +1,5 @@
 package com.example.loginuse.log;
 
-import com.example.loginuse.R;
-
 import android.widget.CheckBox;
 import android.widget.TextView;
 

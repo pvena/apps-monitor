@@ -29,8 +29,23 @@ public class ConfigActivity  extends Activity{
         sendLog = (Button)findViewById(R.id.sendLog);
         sendLog.setOnClickListener(sendLogOnClickListener);
         saveConfig = (Button)findViewById(R.id.saveConfiguration);
-        saveConfig.setOnClickListener(saveConfigOnClickListener);
+        saveConfig.setOnClickListener(saveConfigOnClickListener);		
+        
+        this.inicConfig();
     }
+	
+	private void inicConfig(){
+		boolean gpsEnabled = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGPSENABLED,false);				
+		String locInterval = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL,9000));
+		String locMinDist = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE,200));
+		String actConfiddence = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,80));
+		
+		((CheckBox)findViewById(R.id.chbEnableGpsLocation)).setChecked(gpsEnabled);
+		((TextView)findViewById(R.id.txtIntervalLocation)).setText(locInterval);
+		((TextView)findViewById(R.id.txtMinDistanceLocation)).setText(locMinDist);
+		((TextView)findViewById(R.id.txtActivityConfidence)).setText(actConfiddence);
+		
+	}
 	
 	Button.OnClickListener sendLogOnClickListener = new Button.OnClickListener() {
 		
@@ -79,7 +94,6 @@ public class ConfigActivity  extends Activity{
 			try {
 				
 				boolean gpsEnabled = LogFormat.getCheckBoxBoolean((CheckBox)findViewById(R.id.chbEnableGpsLocation));				
-				
 				int locInterval = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtIntervalLocation));
 				int locMinDist = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtMinDistanceLocation));
 				int actConfiddence = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtActivityConfidence));
