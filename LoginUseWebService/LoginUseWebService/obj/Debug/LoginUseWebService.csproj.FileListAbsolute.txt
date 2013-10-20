@@ -1,5 +1,0 @@
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebService\bin\LoginUseWebService.dll
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebService\bin\LoginUseWebService.pdb
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebService\obj\Debug\ResolveAssemblyReference.cache
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebService\obj\Debug\LoginUseWebService.dll
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebService\obj\Debug\LoginUseWebService.pdb

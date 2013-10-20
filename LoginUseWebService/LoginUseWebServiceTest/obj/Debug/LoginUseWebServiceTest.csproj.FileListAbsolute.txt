@@ -1,9 +1,0 @@
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\bin\Debug\LoginUseWebServiceTest.exe.config
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\ResolveAssemblyReference.cache
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\LoginUseWebServiceTest.frmTest.resources
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\LoginUseWebServiceTest.Properties.Resources.resources
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\LoginUseWebServiceTest.csproj.GenerateResource.Cache
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\bin\Debug\LoginUseWebServiceTest.exe
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\bin\Debug\LoginUseWebServiceTest.pdb
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\LoginUseWebServiceTest.exe
-D:\Programación\Tesis Ingenieria Sistemas\LoginUseWebService\LoginUseWebServiceTest\obj\Debug\LoginUseWebServiceTest.pdb
