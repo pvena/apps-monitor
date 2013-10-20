@@ -144,6 +144,29 @@
        	android:textStyle="bold" 
        	android:text="@string/SendInfoTitle"/>
    
+  
+        <TextView
+            android:id="@+id/txvWebServiceURL"
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+            android:text="@string/txvWebServiceURL"
+            android:textColor="@android:color/primary_text_dark" />
+
+        <EditText
+            android:id="@+id/txtWebServiceURL"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:textSize="14sp"
+            android:inputType="textUri"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/edtWebServiceURL" />   
+   
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+        
    <RelativeLayout 
     android:layout_width="fill_parent"
     android:layout_height="50dp"
@@ -156,6 +179,11 @@
         	android:text="@string/sendLogButton" />
 	</RelativeLayout>
 	
+   <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
+   
    <Button
      	android:id="@+id/saveConfiguration"
         android:layout_width="wrap_content"

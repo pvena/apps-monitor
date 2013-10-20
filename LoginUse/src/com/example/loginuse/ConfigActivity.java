@@ -8,7 +8,6 @@ import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,11 +38,14 @@ public class ConfigActivity  extends Activity{
 		String locInterval = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL,9000));
 		String locMinDist = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE,200));
 		String actConfiddence = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,80));
+		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://.../loginuse.asmx");
 		
 		((CheckBox)findViewById(R.id.chbEnableGpsLocation)).setChecked(gpsEnabled);
 		((TextView)findViewById(R.id.txtIntervalLocation)).setText(locInterval);
 		((TextView)findViewById(R.id.txtMinDistanceLocation)).setText(locMinDist);
 		((TextView)findViewById(R.id.txtActivityConfidence)).setText(actConfiddence);
+		((TextView)findViewById(R.id.txtWebServiceURL)).setText(webServiceURL);
+		
 		
 	}
 	
@@ -97,11 +99,13 @@ public class ConfigActivity  extends Activity{
 				int locInterval = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtIntervalLocation));
 				int locMinDist = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtMinDistanceLocation));
 				int actConfiddence = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtActivityConfidence));
+				String webServiceURL = ((TextView)findViewById(R.id.txtWebServiceURL)).getText().toString();
 				
 				LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGPSENABLED,gpsEnabled);
 				LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONINTERVAL,locInterval);
 				LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONMINDISTANCE,locMinDist);
 				LogConfiguration.getInstance().setProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,actConfiddence);
+				LogConfiguration.getInstance().setProperty(LogConfiguration.WebServiceURL,webServiceURL);
 				
 			} catch (Exception ex) {
 				ex.printStackTrace();

@@ -192,25 +192,27 @@ containing a value of this type.
     public static final class id {
         public static final int CurrentActivityTitle=0x7f05000c;
         public static final int SendInformationTitle=0x7f05000f;
-        public static final int action_settings=0x7f050014;
-        public static final int btn=0x7f050012;
+        public static final int action_settings=0x7f050016;
+        public static final int btn=0x7f050014;
         public static final int chbEnableGpsLocation=0x7f050007;
         public static final int hybrid=0x7f050004;
         public static final int locationTitle=0x7f050005;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
-        public static final int saveConfiguration=0x7f050011;
-        public static final int sendLog=0x7f050010;
+        public static final int saveConfiguration=0x7f050013;
+        public static final int sendLog=0x7f050012;
         public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f050013;
+        public static final int textView1=0x7f050015;
         public static final int txtActivityConfidence=0x7f05000e;
         public static final int txtIntervalLocation=0x7f050009;
         public static final int txtMinDistanceLocation=0x7f05000b;
+        public static final int txtWebServiceURL=0x7f050011;
         public static final int txvActivityConfidence=0x7f05000d;
         public static final int txvEnabledGpsLocation=0x7f050006;
         public static final int txvIntervalLocation=0x7f050008;
         public static final int txvMinDistanceLocation=0x7f05000a;
+        public static final int txvWebServiceURL=0x7f050010;
     }
     public static final class layout {
         public static final int config_activity=0x7f030000;
@@ -322,12 +324,14 @@ containing a value of this type.
         public static final int edtActivityConfidenceDefault=0x7f060022;
         public static final int edtIntervalLocationDefault=0x7f060020;
         public static final int edtMinDistanceLocationDefault=0x7f060028;
+        public static final int edtWebServiceURL=0x7f06002a;
         public static final int hello_world=0x7f06001b;
         public static final int sendLogButton=0x7f060023;
         public static final int txvActivityConfidence=0x7f060021;
         public static final int txvEnabledGpsLocation=0x7f06001e;
         public static final int txvIntervalLocation=0x7f06001f;
         public static final int txvMinDistanceLocation=0x7f060027;
+        public static final int txvWebServiceURL=0x7f06002b;
     }
     public static final class style {
         /** 

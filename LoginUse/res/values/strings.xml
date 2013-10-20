@@ -18,5 +18,7 @@
     <string name="txvMinDistanceLocation">Location Min Distance</string>
     <string name="edtMinDistanceLocationDefault">200</string>
     <string name="btnSaveConfiguration">Save Configuration</string>
+    <string name="edtWebServiceURL">http://.../loginuse.asmx</string>
+    <string name="txvWebServiceURL">URL WebService Upload Files</string>
 
 </resources>

@@ -11,6 +11,7 @@ public class LogConfiguration {
 	private static LogConfiguration instance;
 	private Context context;
 
+	public static String WebServiceURL = "WEBSERVICEURL";
 	
 	public static String LOCATIONGPSENABLED = "LOCATIONGPSENABLED"; //false
 	public static String LOCATIONINTERVAL = "LOCATIONINTERVAL"; //900000
