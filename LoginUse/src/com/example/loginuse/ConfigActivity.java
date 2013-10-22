@@ -8,7 +8,7 @@ import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
-import com.example.loginuse.util.UploadFileTask;
+import com.example.loginuse.util.SoapFileTask;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -78,12 +78,19 @@ public class ConfigActivity  extends Activity{
 		@Override
 		public void onClick(View arg0) {
 			try {
-				/**
-				 * TODO borrar el archivo luego de enviar
-				 */
 				Compress compress = new Compress(listFiles(LogConstants.LOG_FOLDER_NAME), LogConstants.ZIP_LOG_FILE_NAME);
 				compress.zip();
-				new UploadFileTask(ConfigActivity.this).execute("/storage/sdcard0/LoginUse/" + LogConstants.ZIP_LOG_FILE_NAME);
+				
+				File root = Environment.getExternalStorageDirectory();
+				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
+				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
+				
+				SoapFileTask sft = new SoapFileTask();
+				//LogFormat.fileToArray(file)
+				sft.Execute(new byte[5], "PruebaPablo.zip");
+				
+				//TODO descomentar cuando tengamos el server corriendo
+				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

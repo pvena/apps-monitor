@@ -23,14 +23,14 @@ namespace LoginUseWebService
     {
         
         [WebMethod]
-        public string UploadFile(byte[] f, string fileName)
+        public string UploadFile(byte[] bytes, string fileName)
         {
             try
             {
                 string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + fileName;
                 if (ServiceManager.getInstance().isExtensionOk(Path.GetExtension(filePath)))
                 {
-                    MemoryStream ms = new MemoryStream(f);
+                    MemoryStream ms = new MemoryStream(bytes);
                     FileStream fs = new FileStream(filePath, FileMode.Create);
 
                     ms.WriteTo(fs);
@@ -48,6 +48,12 @@ namespace LoginUseWebService
             {               
                 return ex.Message.ToString();
             }
+        }
+        [WebMethod]
+        public string test(int bytes, string fileName)
+        {
+            int d = bytes;
+            return "OK";
         }
     }
 }

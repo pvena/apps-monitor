@@ -1,5 +1,13 @@
 package com.example.loginuse.log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -38,4 +46,21 @@ public class LogFormat {
 		return cbx.isChecked();
 	}
 	
+	public static String fileToArray(File file) throws IOException {
+        byte[] data = new byte[3000];
+        FileInputStream fin = null;
+        StringBuffer sb = new StringBuffer();
+        try {
+            fin = new FileInputStream(file);
+            while(fin.read(data) >= 0) {
+               sb.append(Base64.encode(data,Base64.DEFAULT));
+           }
+            return sb.toString();
+        } catch (Exception e) {
+            // TODO: handle exception
+        } finally{
+            fin.close();
+        }
+        return null;
+    }	
 }
