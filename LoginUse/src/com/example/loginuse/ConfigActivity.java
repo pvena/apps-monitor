@@ -8,6 +8,8 @@ import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
+import com.example.loginuse.util.UploadFileTask;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
@@ -81,8 +83,7 @@ public class ConfigActivity  extends Activity{
 				 */
 				Compress compress = new Compress(listFiles(LogConstants.LOG_FOLDER_NAME), LogConstants.ZIP_LOG_FILE_NAME);
 				compress.zip();
-				//TODO descomentar cuando tengamos el server corriendo
-				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
+				new UploadFileTask(ConfigActivity.this).execute("/storage/sdcard0/LoginUse/" + LogConstants.ZIP_LOG_FILE_NAME);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
