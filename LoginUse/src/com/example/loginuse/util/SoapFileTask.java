@@ -1,26 +1,16 @@
 package com.example.loginuse.util;
 
-import java.io.ByteArrayOutputStream;
-
 import org.ksoap2.SoapEnvelope; 
-import org.ksoap2.serialization.MarshalBase64;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-//import org.ksoap2.transport.AndroidHttpTransport;
 import org.ksoap2.transport.HttpTransportSE;
-
-import android.net.http.AndroidHttpClient;
-
 import com.example.loginuse.log.LogConfiguration;
 
 public class SoapFileTask {
 
 	public final String SOAP_ACTION = "http://tempuri.org/UploadFile";
-
 	public  final String OPERATION_NAME = "UploadFile"; 
-
-	public  final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";
-	
+	public  final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";	
 	private String SOAP_ADDRESS = "";
 	
 	public SoapFileTask() 

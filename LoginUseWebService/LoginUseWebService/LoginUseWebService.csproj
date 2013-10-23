@@ -82,11 +82,10 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50803</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>50011</DevelopmentServerPort>
+          <DevelopmentServerVPath>/LoginUseWevService</DevelopmentServerVPath>
+          <IISUrl>http://localhost/LoginUseWebService</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
