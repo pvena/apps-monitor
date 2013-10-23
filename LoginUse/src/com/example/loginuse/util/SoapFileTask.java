@@ -29,6 +29,7 @@ public class SoapFileTask {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(request);
+		envelope.implicitTypes = true;
 					
 		HttpTransportSE httpTransport = new HttpTransportSE(this.SOAP_ADDRESS,10000);
 		httpTransport.debug = true;

@@ -46,21 +46,21 @@ public class LogFormat {
 		return cbx.isChecked();
 	}
 	
-	public static String fileToArray(File file) throws IOException {
-        byte[] data = new byte[3000];
-        FileInputStream fin = null;
-        StringBuffer sb = new StringBuffer();
+	public static byte[] fileToArray(File file) throws IOException {
+        // Open file
+        RandomAccessFile f = new RandomAccessFile(file, "r");
         try {
-            fin = new FileInputStream(file);
-            while(fin.read(data) >= 0) {
-               sb.append(Base64.encode(data,Base64.DEFAULT));
-           }
-            return sb.toString();
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally{
-            fin.close();
+            // Get and check length
+            long longlength = f.length();
+            int length = (int) longlength;
+            if (length != longlength)
+                throw new IOException("File size >= 2 GB");
+            // Read file and return data
+            byte[] data = new byte[length];
+            f.readFully(data);
+            return data;
+        } finally {
+            f.close();
         }
-        return null;
-    }	
+    }
 }

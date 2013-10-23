@@ -12,7 +12,7 @@ public class LogConfiguration {
 	private Context context;
 
 	public static String WebServiceURL = "WEBSERVICEURL";
-	public static String WebServiceName = "/LoginUse.asmx";
+	public static String WebServiceName = "/LoginUse?wsdl";
 	public static String WebServiceMethod = "UploadFile";
 	
 	public static String LOCATIONGPSENABLED = "LOCATIONGPSENABLED"; //false

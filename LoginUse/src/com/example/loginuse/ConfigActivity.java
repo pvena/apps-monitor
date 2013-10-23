@@ -86,8 +86,8 @@ public class ConfigActivity  extends Activity{
 				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
 				
 				SoapFileTask sft = new SoapFileTask();
-				//LogFormat.fileToArray(file)
-				sft.Execute(new byte[5], "PruebaPablo.zip");
+				
+				sft.Execute(LogFormat.fileToArray(file), "PruebaPablo.zip");
 				
 				//TODO descomentar cuando tengamos el server corriendo
 				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
