@@ -28,7 +28,7 @@ namespace LoginUseWebService
             try
             {
                 string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + fileName;
-                if (ServiceManager.getInstance().isExtensionOk(Path.GetExtension(filePath)))
+                /*if (ServiceManager.getInstance().isExtensionOk(Path.GetExtension(filePath)))
                 {
                     MemoryStream ms = new MemoryStream(bytes);
                     FileStream fs = new FileStream(filePath, FileMode.Create);
@@ -42,7 +42,12 @@ namespace LoginUseWebService
                     return "File Upload Successful.";
                 }
                 else
-                    return "Web Services not support this type of file.";
+                    return "Web Services not support this type of file.";*/
+
+                BinaryWriter binWriter = new BinaryWriter(File.Open(filePath, FileMode.CreateNew, FileAccess.ReadWrite));
+                binWriter.Write(bytes);
+                binWriter.Close();
+                return "OK";
             }
             catch (Exception ex)
             {               
