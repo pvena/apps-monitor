@@ -2,14 +2,12 @@ package com.example.loginuse;
 
 import java.io.File;
 import java.io.FilenameFilter;
-
 import com.example.loginuse.R;
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
 import com.example.loginuse.util.SoapFileTask;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
@@ -85,9 +83,7 @@ public class ConfigActivity  extends Activity{
 				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
 				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
 				
-				SoapFileTask sft = new SoapFileTask();
-				
-				sft.Execute(LogFormat.fileToArray(file), "PruebaPablo.zip");
+				new SoapFileTask(file,"Prueba.Zip").execute();			
 				
 				//TODO descomentar cuando tengamos el server corriendo
 				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);

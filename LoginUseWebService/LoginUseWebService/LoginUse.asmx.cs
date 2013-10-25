@@ -18,7 +18,7 @@ namespace LoginUseWebService
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
-
+    [System.Web.Script.Services.ScriptService]
     public class LoginUse : System.Web.Services.WebService
     {
         
