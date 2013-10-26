@@ -1,10 +1,13 @@
 package com.example.loginuse.log;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+
+import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -43,44 +46,14 @@ public class LogFormat {
 		return cbx.isChecked();
 	}
 	
-	public static byte[] fileToArray(File file) throws IOException {
-        // Open file
-        RandomAccessFile f = new RandomAccessFile(file, "r");
-        try {
-            // Get and check length
-            long longlength = f.length();
-            int length = (int) longlength;
-            if (length != longlength)
-                throw new IOException("File size >= 2 GB");
-            // Read file and return data
-            byte[] data = new byte[length];
-            f.readFully(data);
-            return data;
-        } finally {
-            f.close();
-        }
-    }
-	
-	public static byte[] getFileToBytes(File file) throws IOException {
-        InputStream is = new FileInputStream(file);
-        long length = file.length();
-
-        if (length > Integer.MAX_VALUE) {
-            // File is too large
-        }
-        byte[] bytes = new byte[(int)length];
-
-        int offset = 0;
-        int numRead = 0;
-        while (offset < bytes.length
-               && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
-            offset += numRead;
-        }
-
-        if (offset < bytes.length) {
-            throw new IOException("Could not completely read file "+file.getName());
-        }
-        is.close();
-        return bytes;
+	public static String getFileToBase64Encode(File file) throws IOException {
+		int size = (int) file.length();
+	    byte[] bytes = new byte[size];
+	    try {
+	        BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+	        buf.read(bytes, 0, bytes.length);
+	        buf.close();
+	    } catch (IOException e) {}
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 }

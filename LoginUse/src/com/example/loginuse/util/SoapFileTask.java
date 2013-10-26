@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.ksoap2.SoapEnvelope; 
 import org.ksoap2.serialization.MarshalBase64;
+import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
@@ -38,19 +39,24 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 		{
 			SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
 		
-			request.addProperty("bytes", LogFormat.getFileToBytes(this.file));
+			request.addProperty("bytes", LogFormat.getFileToBase64Encode(this.file));
 			request.addProperty("fileName", this.fileName);
-
+			
+			PropertyInfo pi = new PropertyInfo();
+			pi.setName("Data");
+			pi.setValue(LogFormat.getFileToBase64Encode(this.file));
+			pi.setType(String.class);
+			
+			pi = new PropertyInfo();
+			pi.setName("UserName");
+			pi.setValue("Pablo");
+			pi.setType(String.class);
+			
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			new MarshalBase64().register(envelope); 
-			envelope.bodyOut = request;
 			envelope.dotNet = true;	 
-			//envelope.encodingStyle = SoapSerializationEnvelope.XSD;			       
-	        envelope.setOutputSoapObject(request);	        		
+			envelope.setOutputSoapObject(request);	        		
 			
 	        HttpTransportSE httpTransport = new HttpTransportSE(this.SOAP_ADDRESS);
-			httpTransport.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"utf-8\"?>");		
-			httpTransport.debug = true;
 			
 				
 			httpTransport.call(SOAP_ACTION, envelope);

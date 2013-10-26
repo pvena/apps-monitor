@@ -23,42 +23,20 @@ namespace LoginUseWebService
     {
         
         [WebMethod]
-        public string UploadFile(byte[] bytes, string fileName)
+        public string UploadFile(string data, string username)
         {
             try
             {
-                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + fileName;
-                /*if (ServiceManager.getInstance().isExtensionOk(Path.GetExtension(filePath)))
-                {
-                    MemoryStream ms = new MemoryStream(bytes);
-                    FileStream fs = new FileStream(filePath, FileMode.Create);
+                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + username + ".zip";
 
-                    ms.WriteTo(fs);
+                File.WriteAllBytes(filePath, Convert.FromBase64String(data));
 
-                    ms.Close();
-                    fs.Close();
-                    fs.Dispose();
-
-                    return "File Upload Successful.";
-                }
-                else
-                    return "Web Services not support this type of file.";*/
-
-                BinaryWriter binWriter = new BinaryWriter(File.Open(filePath, FileMode.CreateNew, FileAccess.ReadWrite));
-                binWriter.Write(bytes);
-                binWriter.Close();
                 return "OK";
             }
             catch (Exception ex)
             {               
                 return ex.Message.ToString();
             }
-        }
-        [WebMethod]
-        public string test(int bytes, string fileName)
-        {
-            int d = bytes;
-            return "OK";
         }
     }
 }

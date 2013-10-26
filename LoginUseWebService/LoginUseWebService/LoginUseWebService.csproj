@@ -84,8 +84,10 @@
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>50011</DevelopmentServerPort>
-          <DevelopmentServerVPath>/LoginUseWevService</DevelopmentServerVPath>
+          <DevelopmentServerVPath>/LoginUseWebService</DevelopmentServerVPath>
           <IISUrl>http://localhost/LoginUseWebService</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/LoginUseWebService</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
