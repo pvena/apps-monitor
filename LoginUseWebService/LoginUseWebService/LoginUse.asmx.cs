@@ -26,9 +26,11 @@ namespace LoginUseWebService
         {            
             try
             {
-                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + userName + ".zip";
+                string date = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/");
+                filePath += date + "_" + userName + ".zip";
 
-               File.WriteAllBytes(filePath, Convert.FromBase64String(data));
+                File.WriteAllBytes(filePath, Convert.FromBase64String(data));
 
                 return "OK";
             }
