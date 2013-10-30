@@ -15,9 +15,9 @@ import com.example.loginuse.log.LogFormat;
 
 public class SoapFileTask extends AsyncTask<Void, Void, String>{
 
-	public final String SOAP_ACTION = "http://tempuri.org/UploadFile";
+	public final String SOAP_ACTION = "http://tesis.org/UploadFile";
 	public  final String OPERATION_NAME = "UploadFile"; 
-	public  final String WSDL_TARGET_NAMESPACE = "http://tempuri.org/";	
+	public  final String WSDL_TARGET_NAMESPACE = "http://tesis.org/";
 	private String SOAP_ADDRESS = "";
 	
 	private File file;
@@ -43,14 +43,16 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 			request.addProperty("fileName", this.fileName);
 			
 			PropertyInfo pi = new PropertyInfo();
-			pi.setName("Data");
+			pi.setName("data");
 			pi.setValue(LogFormat.getFileToBase64Encode(this.file));
 			pi.setType(String.class);
+			request.addProperty(pi);
 			
 			pi = new PropertyInfo();
-			pi.setName("UserName");
+			pi.setName("userName");
 			pi.setValue("Pablo");
 			pi.setType(String.class);
+			request.addProperty(pi);
 			
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;	 
@@ -60,13 +62,16 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 			
 				
 			httpTransport.call(SOAP_ACTION, envelope);
+			
+			SoapObject bodyIn = (SoapObject) envelope.bodyIn;
+			
 			response = envelope.getResponse();
 		}
 		catch (Exception exception)
 		{
-			response=exception.toString();
+			return "Fail.";
 		}
-		return response.toString();
+		return "OK";
 	}
 	
 	@Override

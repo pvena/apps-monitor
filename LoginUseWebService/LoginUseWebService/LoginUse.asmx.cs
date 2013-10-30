@@ -15,27 +15,26 @@ namespace LoginUseWebService
     /// <summary>
     /// Summary description for Service1
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://tesis.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
-    [System.Web.Script.Services.ScriptService]
     public class LoginUse : System.Web.Services.WebService
     {
         
         [WebMethod]
-        public string UploadFile(string data, string username)
-        {
+        public string UploadFile(string data, string userName)
+        {            
             try
             {
-                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + username + ".zip";
+                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + userName + ".zip";
 
-                File.WriteAllBytes(filePath, Convert.FromBase64String(data));
+               File.WriteAllBytes(filePath, Convert.FromBase64String(data));
 
                 return "OK";
             }
             catch (Exception ex)
-            {               
-                return ex.Message.ToString();
+            {          
+                return "Error: " + ex.Message.ToString();
             }
         }
     }
