@@ -39,12 +39,14 @@ public class ConfigActivity  extends Activity{
 		String locMinDist = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE,200));
 		String actConfiddence = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,80));
 		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://.../loginuse.asmx");
+		String phoneId = LogConfiguration.getInstance().getPhoneId();
 		
 		((CheckBox)findViewById(R.id.chbEnableGpsLocation)).setChecked(gpsEnabled);
 		((TextView)findViewById(R.id.txtIntervalLocation)).setText(locInterval);
 		((TextView)findViewById(R.id.txtMinDistanceLocation)).setText(locMinDist);
 		((TextView)findViewById(R.id.txtActivityConfidence)).setText(actConfiddence);
 		((TextView)findViewById(R.id.txtWebServiceURL)).setText(webServiceURL);
+		((TextView)findViewById(R.id.txvPhoneIdValue)).setText(phoneId);
 		
 		
 	}

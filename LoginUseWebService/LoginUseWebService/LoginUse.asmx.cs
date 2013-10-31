@@ -22,15 +22,15 @@ namespace LoginUseWebService
     {
         
         [WebMethod]
-        public string UploadFile(string data, string userName)
+        public string UploadFile(string data, string phoneId)
         {            
             try
             {
-                string date = DateTime.Now.ToString("yyyyMMddHHmmss");
-                string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/");
-                filePath += date + "_" + userName + ".zip";
+                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + @"/" + phoneId + @"/";
+                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".zip";
 
-                File.WriteAllBytes(filePath, Convert.FromBase64String(data));
+                ServiceManager.getInstance().createFolder(folderPath);
+                ServiceManager.getInstance().saveFile(filePath, data);
 
                 return "OK";
             }

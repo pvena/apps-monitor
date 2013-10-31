@@ -20,5 +20,6 @@
     <string name="btnSaveConfiguration">Save Configuration</string>
     <string name="edtWebServiceURL">http://</string>
     <string name="txvWebServiceURL">URL WebService Upload Files</string>
+    <string name="txvPhoneId">Phone Id:</string>
 
 </resources>

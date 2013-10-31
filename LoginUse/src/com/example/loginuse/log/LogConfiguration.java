@@ -4,6 +4,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.provider.Settings.Secure;
 import android.text.format.DateFormat;
 
 public class LogConfiguration {
@@ -83,5 +84,14 @@ public class LogConfiguration {
 		String date = DateFormat.format(LogConstants.FILEDATEFORMAT, d).toString();
         String fileName = LogConstants.LOG_FILE_NAME.replace("@", date); 
         return fileName;
+	}
+	
+	public String getAndroidVersion()
+	{
+		return android.os.Build.VERSION.RELEASE;
+	}
+	
+	public String getPhoneId(){
+		return  Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
 	}
 }
