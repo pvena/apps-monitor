@@ -29,8 +29,8 @@ namespace LoginUseWebService
                 string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + @"/" + phoneId + @"/";
                 string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".zip";
 
-                ServiceManager.getInstance().createFolder(folderPath);
-                ServiceManager.getInstance().saveFile(filePath, data);
+                LogServiceManager.getInstance().createFolder(folderPath);
+                LogServiceManager.getInstance().saveFile(filePath, data);
 
                 return "OK";
             }
