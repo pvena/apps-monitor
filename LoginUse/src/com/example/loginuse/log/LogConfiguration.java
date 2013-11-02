@@ -3,6 +3,7 @@ package com.example.loginuse.log;
 import java.util.Date;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.text.format.DateFormat;
@@ -93,5 +94,16 @@ public class LogConfiguration {
 	
 	public String getPhoneId(){
 		return  Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+	}
+	
+	public String getDeviceName() {
+		  String manufacturer = Build.MANUFACTURER;
+		  String model = Build.MODEL;
+		  if (model.startsWith(manufacturer)) {
+		    return model;
+		  } 
+		  else {
+		    return manufacturer + " " + model;
+		  }
 	}
 }

@@ -22,6 +22,7 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 	
 	private File file;
 	private String fileName;
+	private String result;
 	
 	public SoapFileTask(File file,String fileName) 
 	{ 
@@ -61,16 +62,19 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 				
 			httpTransport.call(SOAP_ACTION, envelope);
 			
-			SoapObject bodyIn = (SoapObject) envelope.bodyIn;			
+			//SoapObject bodyIn = (SoapObject) envelope.bodyIn;			
 		}
 		catch (Exception exception)
-		{			
+		{		
+			this.result = "Send Fail.";
 			return "Fail.";
 		}
+		this.result = "Send OK.";
 		return "OK";
 	}
 	
 	@Override
-    protected void onPostExecute(String result) {        
+    protected void onPostExecute(String result) { 
+			Toast.makeText(LogConfiguration.getInstance().getContext(), this.result, Toast.LENGTH_SHORT).show();
     }
 }
