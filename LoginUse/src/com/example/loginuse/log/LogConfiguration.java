@@ -13,6 +13,8 @@ public class LogConfiguration {
 	private static LogConfiguration instance;
 	private Context context;
 
+	public static String UserName = "USERNAME";
+	
 	public static String WebServiceURL = "WEBSERVICEURL";
 	public static String WebServiceName = "/LoginUse.asmx";
 	public static String WebServiceMethod = "UploadFile";

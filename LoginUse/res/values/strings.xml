@@ -21,5 +21,7 @@
     <string name="edtWebServiceURL">http://</string>
     <string name="txvWebServiceURL">URL WebService Upload Files</string>
     <string name="txvPhoneId">Phone Id:</string>
+    <string name="txvUserName">User Name</string>
+    <string name="btnRegister">Register</string>
 
 </resources>

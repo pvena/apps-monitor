@@ -14,7 +14,7 @@ namespace LoginUseWebService
         private string transNombre;
         private bool conectado;        
 
-        private InterfaseDB()
+        public InterfaseDB()
         {            
             this.conectado = false;
         }       
@@ -24,47 +24,28 @@ namespace LoginUseWebService
         {
             string cs = "Data Source=" + servidor + ";Initial Catalog=" + nombreDB;
             cs += ";uid=" + userId + ";Password=" + pass;
-            cs += ";Integrated Security=False";
+            cs += ";Integrated Security=False";            
             return cs;
         }
-        private string getConnectionAttach(string servidor, string nombreDB, string archivo)
+        public void connect(string servidor,string nombreDB,string userId,string pass)
         {
-            string cs = "Server=" + servidor + ";AttachDbFilename=" + archivo;
-            cs += ";Database=" + nombreDB;
-            cs += ";Integrated Security=True";
-            return cs;
-        }
-        public void connect(string servidor,string nombreDB,string userId,string pass,string archivo,bool local)
-        {
-            try
-            {
-                string conect = null;
-                if (!local)
-                    conect = this.getConnectionString(servidor,nombreDB,userId,pass);
-                else
-                    conect = this.getConnectionAttach(servidor, nombreDB, archivo);
-                this.coneccion = new SqlConnection(conect);
-                this.conectado = false;
-                this.coneccion.Open();   
-            }
-            catch (Exception){ }            
+            string conect = this.getConnectionString(servidor, nombreDB,userId,pass);
+            this.coneccion = new SqlConnection(conect);
+            this.conectado = false;
+            this.coneccion.Open();
+            this.conectado = (this.coneccion.State == ConnectionState.Open);            
         }
         public void disconect()
         {
-            try
+            lock (this.coneccion)
             {
-                lock (this.coneccion)
+                if (this.conectado)
                 {
-                    if (this.conectado)
-                    {
-                        this.coneccion.Close();
-                        this.coneccion.Dispose();
-                        this.conectado = false;
-                    }
+                    this.coneccion.Close();
+                    this.coneccion.Dispose();
+                    this.conectado = false;
                 }
             }
-            catch (SqlException)
-            { }
         }
         public bool isConected()
         {
@@ -156,14 +137,13 @@ namespace LoginUseWebService
             }
         }
         public int executeInsert(SqlCommand cmd)
-        {
+        {            
             lock (this.coneccion)
             {
                 cmd.Connection = this.coneccion;
                 cmd.Transaction = this.transaccion;
                 int res = -1;
-                try { res = Convert.ToInt32(this.getRow(cmd)["id"].ToString()); }
-                catch (Exception e) {}
+                res = Convert.ToInt32(this.getRow(cmd)["id"].ToString());                
                 return res;
             }
         }

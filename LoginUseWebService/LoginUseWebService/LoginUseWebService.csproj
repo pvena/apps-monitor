@@ -65,6 +65,8 @@
     <Compile Include="Clases\ZipManager\IZipLog.cs" />
     <Compile Include="Clases\DBLayer\InterfeseDB.cs" />
     <Compile Include="Clases\LogManagers\LogConstants.cs" />
+    <Compile Include="Clases\DBLayer\DBManager.cs" />
+    <Compile Include="Clases\DBLayer\DBConfigManager.cs" />
     <Compile Include="LoginUse.asmx.cs">
       <DependentUpon>LoginUse.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -73,6 +75,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clases\LogManagers\LogServiceManager.cs" />
     <Compile Include="Clases\ZipManager\ZipManager.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

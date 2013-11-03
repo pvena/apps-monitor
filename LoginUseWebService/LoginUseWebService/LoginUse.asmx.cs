@@ -39,5 +39,19 @@ namespace LoginUseWebService
                 return "Error: " + ex.Message.ToString();
             }
         }
+
+        [WebMethod]
+        public string RegisterUser(string phoneId,string name,string version,string phoneModel)
+        {
+            try 
+            {
+                DBManager mDB = new DBManager();                
+                return mDB.saveUser(phoneId, name, version, phoneModel);
+            }
+            catch(Exception ex)
+            {
+                return "Problem."; 
+            }
+        }
     }
 }

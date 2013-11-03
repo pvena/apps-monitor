@@ -8,6 +8,8 @@ import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
 import com.example.loginuse.util.SoapFileTask;
+import com.example.loginuse.util.SoapRegisterTask;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +22,7 @@ public class ConfigActivity  extends Activity{
 	
 	private Button sendLog;
 	private Button saveConfig;
+	private Button registerUser;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,8 @@ public class ConfigActivity  extends Activity{
         sendLog.setOnClickListener(sendLogOnClickListener);
         saveConfig = (Button)findViewById(R.id.saveConfiguration);
         saveConfig.setOnClickListener(saveConfigOnClickListener);		
-        
+        registerUser = (Button)findViewById(R.id.btnRegister);
+        registerUser.setOnClickListener(userNameRegisterClickLisener);
         this.inicConfig();
     }
 	
@@ -40,6 +44,7 @@ public class ConfigActivity  extends Activity{
 		String actConfiddence = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,80));
 		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://.../loginuse.asmx");
 		String phoneId = LogConfiguration.getInstance().getPhoneId();
+		String userName = LogConfiguration.getInstance().getProperty(LogConfiguration.UserName, "");
 		
 		((CheckBox)findViewById(R.id.chbEnableGpsLocation)).setChecked(gpsEnabled);
 		((TextView)findViewById(R.id.txtIntervalLocation)).setText(locInterval);
@@ -47,7 +52,7 @@ public class ConfigActivity  extends Activity{
 		((TextView)findViewById(R.id.txtActivityConfidence)).setText(actConfiddence);
 		((TextView)findViewById(R.id.txtWebServiceURL)).setText(webServiceURL);
 		((TextView)findViewById(R.id.txvPhoneIdValue)).setText(phoneId);
-		
+		((TextView)findViewById(R.id.txtUserName)).setText(userName);
 		
 	}
 	
@@ -112,6 +117,21 @@ public class ConfigActivity  extends Activity{
 				LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONMINDISTANCE,locMinDist);
 				LogConfiguration.getInstance().setProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,actConfiddence);
 				LogConfiguration.getInstance().setProperty(LogConfiguration.WebServiceURL,webServiceURL);
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	};
+	
+	Button.OnClickListener userNameRegisterClickLisener = new Button.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			try {			
+				String userName = ((TextView)findViewById(R.id.txtUserName)).getText().toString();				
+				LogConfiguration.getInstance().setProperty(LogConfiguration.UserName, userName);
+				
+				new SoapRegisterTask(userName).execute();
 				
 			} catch (Exception ex) {
 				ex.printStackTrace();
