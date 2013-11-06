@@ -42,7 +42,7 @@ namespace LoginUseWebService
         /// Descomprime los Archivos recividos y los guarda en la base de datos.
         /// </summary>
         /// <param name="root">Carpeta Raiz para el usuario</param>
-        private void starProcess(string folderPath, string filePath)
+        private void starProcess(string phoneId, string folderPath, string filePath)
         {
             string folderProcess = folderPath + @"/process";
             this.createFolder(folderProcess);
@@ -52,12 +52,12 @@ namespace LoginUseWebService
             zManager.descomprimirDir(filePath, null, folderProcess, log);
 
             LogParserManager lParser = new LogParserManager();
-            lParser.execute(folderProcess);
+            lParser.execute(phoneId,filePath,null);
         }
 
-        public void executeProces(string folderPath, string filePath)
+        public void executeProces(string phoneId,string folderPath, string filePath)
         {
-            Thread tr = new Thread(delegate() { starProcess(folderPath, filePath); });
+            Thread tr = new Thread(delegate() { starProcess(phoneId,folderPath, filePath); });
             tr.Start();
         }
     }
