@@ -138,10 +138,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:50803/loginuse.asmx">
+    <WebReferenceUrl Include="http://localhost:50011/LoginUseWebService/LoginUse.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\LoginUseService\</RelPath>
-      <UpdateFromURL>http://localhost:50803/loginuse.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:50011/LoginUseWebService/LoginUse.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

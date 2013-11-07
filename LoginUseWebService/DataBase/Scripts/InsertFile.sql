@@ -3,7 +3,6 @@ if(exists (select * from sys.objects where type like 'p' and
 	drop procedure insertFile
 go 
 create procedure insertFile
-@idFile int,
 @phoneId nvarchar(20),
 @name nvarchar(50),
 @process bit,
@@ -19,11 +18,9 @@ select @idUser = idUser from [user] where phoneId = @phoneId
 if(isnull(@idUser,'') <> '' )
 begin 
 	if(	not exists(select 1 from [file] 
-					where	idFile = @idFile or 
-							(	idUser = @iduser and
-								[name] = @name and
-								isZip = @isZip
-							)))
+					where	idUser = @iduser and
+							[name] = @name and
+							isZip = @isZip))
 	begin
 		insert into [file](idUser,[name],[process],isZip,[size])
 		values(@idUser,@name,@process,@isZip,@size)

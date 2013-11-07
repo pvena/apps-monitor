@@ -37,16 +37,14 @@ namespace LoginUseWebService
         }
 
 
-
         /// <summary>
         /// Descomprime los Archivos recividos y los guarda en la base de datos.
         /// </summary>
         /// <param name="root">Carpeta Raiz para el usuario</param>
-        private void starProcess(string phoneId, string folderPath, string filePath)
+        private void starProcess(string phoneId, string filePath)
         {
-            string folderProcess = folderPath + @"/process";
-            this.createFolder(folderProcess);
-
+            string folderProcess = Path.GetDirectoryName(filePath);
+            
             ZipLog log = new ZipLog();
             ZipManager zManager = new ZipManager();
             zManager.descomprimirDir(filePath, null, folderProcess, log);
@@ -55,9 +53,9 @@ namespace LoginUseWebService
             lParser.execute(phoneId,filePath,null);
         }
 
-        public void executeProces(string phoneId,string folderPath, string filePath)
+        public void executeProcess(string phoneId, string filePath)
         {
-            Thread tr = new Thread(delegate() { starProcess(phoneId,folderPath, filePath); });
+            Thread tr = new Thread(delegate() { starProcess(phoneId, filePath); });
             tr.Start();
         }
     }

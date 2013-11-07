@@ -26,10 +26,12 @@ namespace LoginUseWebServiceTest.LoginUseService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="LoginUseSoap", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="LoginUseSoap", Namespace="http://tesis.org/")]
     public partial class LoginUse : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback UploadFileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RegisterUserOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -73,33 +75,71 @@ namespace LoginUseWebServiceTest.LoginUseService {
         public event UploadFileCompletedEventHandler UploadFileCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UploadFile", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string UploadFile([System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")] byte[] f, string fileName) {
+        public event RegisterUserCompletedEventHandler RegisterUserCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/UploadFile", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string UploadFile(string data, string phoneId) {
             object[] results = this.Invoke("UploadFile", new object[] {
-                        f,
-                        fileName});
+                        data,
+                        phoneId});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void UploadFileAsync(byte[] f, string fileName) {
-            this.UploadFileAsync(f, fileName, null);
+        public void UploadFileAsync(string data, string phoneId) {
+            this.UploadFileAsync(data, phoneId, null);
         }
         
         /// <remarks/>
-        public void UploadFileAsync(byte[] f, string fileName, object userState) {
+        public void UploadFileAsync(string data, string phoneId, object userState) {
             if ((this.UploadFileOperationCompleted == null)) {
                 this.UploadFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUploadFileOperationCompleted);
             }
             this.InvokeAsync("UploadFile", new object[] {
-                        f,
-                        fileName}, this.UploadFileOperationCompleted, userState);
+                        data,
+                        phoneId}, this.UploadFileOperationCompleted, userState);
         }
         
         private void OnUploadFileOperationCompleted(object arg) {
             if ((this.UploadFileCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.UploadFileCompleted(this, new UploadFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/RegisterUser", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string RegisterUser(string phoneId, string name, string version, string phoneModel) {
+            object[] results = this.Invoke("RegisterUser", new object[] {
+                        phoneId,
+                        name,
+                        version,
+                        phoneModel});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RegisterUserAsync(string phoneId, string name, string version, string phoneModel) {
+            this.RegisterUserAsync(phoneId, name, version, phoneModel, null);
+        }
+        
+        /// <remarks/>
+        public void RegisterUserAsync(string phoneId, string name, string version, string phoneModel, object userState) {
+            if ((this.RegisterUserOperationCompleted == null)) {
+                this.RegisterUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRegisterUserOperationCompleted);
+            }
+            this.InvokeAsync("RegisterUser", new object[] {
+                        phoneId,
+                        name,
+                        version,
+                        phoneModel}, this.RegisterUserOperationCompleted, userState);
+        }
+        
+        private void OnRegisterUserOperationCompleted(object arg) {
+            if ((this.RegisterUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RegisterUserCompleted(this, new RegisterUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -135,6 +175,32 @@ namespace LoginUseWebServiceTest.LoginUseService {
         private object[] results;
         
         internal UploadFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void RegisterUserCompletedEventHandler(object sender, RegisterUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegisterUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal RegisterUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

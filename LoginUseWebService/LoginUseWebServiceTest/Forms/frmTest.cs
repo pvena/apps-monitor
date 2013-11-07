@@ -44,14 +44,16 @@ namespace LoginUseWebServiceTest
                 long numBytes = fInfo.Length;
                 double dLen = Convert.ToDouble(fInfo.Length / 1000000);
  
-                if (dLen < 4)
+                if (dLen < 4 && this.txtPhoneId.Text.Length > 0)
                 {
                     FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fStream); 
                     byte[] data = br.ReadBytes((int)numBytes);
                     br.Close();
 
-                    string sTmp = srv.UploadFile(data, strFile);
+                    string data64 = Convert.ToBase64String(data);
+
+                    string sTmp = srv.UploadFile(data64, this.txtPhoneId.Text);
                     fStream.Close();
                     fStream.Dispose();
 
@@ -59,8 +61,10 @@ namespace LoginUseWebServiceTest
                 }
                 else
                 {
-                    // Display message if the file was too large to upload
-                    this.lblResult.Text = "The file selected exceeds the size limit for uploads.";
+                    if(dLen >= 4)
+                        this.lblResult.Text = "The file selected exceeds the size limit for uploads.";
+                    else
+                        this.lblResult.Text = "Cargar un Valor en el campo PhoneId.";
                 }
             }
             catch (Exception ex)

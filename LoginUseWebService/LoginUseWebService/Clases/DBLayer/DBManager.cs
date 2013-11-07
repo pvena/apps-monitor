@@ -60,12 +60,13 @@ namespace LoginUseWebService
                 return "Fail.";
             }
         }
-        public string saveLog(DateTime dt, string type, string property, string value)
+        public string saveLog(string fileName, DateTime dt, string type, string property, string value)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("InsertLog");
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@file", fileName);
                 cmd.Parameters.AddWithValue("@date", dt);
                 cmd.Parameters.AddWithValue("@type", type);
                 cmd.Parameters.AddWithValue("@property", property);

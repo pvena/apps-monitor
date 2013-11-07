@@ -8,63 +8,71 @@ namespace LoginUseWebService
 {
     public class LogParserManager
     {
-        private void processProperty(string property, string type, DateTime dt,DBManager dbm) 
+        private void processProperty(string property,string fileName, string type, DateTime dt,DBManager dbm) 
         {
             string[] pValue = property.Split(LogConstants.SEP.ToCharArray());
 
             string prop = pValue[0];
-            string value = pValue[1];
+            string value = pValue[pValue.Length-1];
 
-            dbm.saveLog(dt, type, prop, value);
+            dbm.saveLog(fileName, dt, type, prop, value);
         }
-        
-        private void processProperties(string properties,string type,DateTime dt,DBManager dbm) 
+
+        private void processProperties(string properties, string fileName, string type, DateTime dt, DBManager dbm) 
         {
             string[] values = properties.Split(LogConstants.PSEP.ToCharArray());
             for (int i = 0; i < values.Length; i++)
             {
-                this.processProperty(values[i],type,dt,dbm);
+                this.processProperty(values[i], fileName ,type, dt, dbm);
             }
         }
 
-        private DateTime getDatetime(string dTime)
+        private DateTime getDatetime(string date, string dTime)
         {
-            string[] time = dTime.Substring(1, dTime.Length - 1).Split(':');
+            string[] time = dTime.Substring(1, dTime.Length - 2).Split(':');
 
-            int year = Convert.ToInt16(dTime.Substring(0, 3));
-            int month = Convert.ToInt16(dTime.Substring(3, 5));
-            int day = Convert.ToInt16(dTime.Substring(5, 7));
+            int year = Convert.ToInt16(date.Substring(0, 4));
+            int month = Convert.ToInt16(date.Substring(4, 2));
+            int day = Convert.ToInt16(date.Substring(6, 2));
             int hh = Convert.ToInt16(time[0]);
             int mm = Convert.ToInt16(time[1]);
             int ss = Convert.ToInt16(time[2]);
 
             return new DateTime(year, month, day, hh, mm, ss); 
         }
-        private void processLine(string line,string date,DBManager dbm)
+        private void processLine(string line,string fileName, string date,DBManager dbm)
         {
             string[] parts = line.Split(LogConstants.CATSEP.ToCharArray());
 
-            DateTime dTime = this.getDatetime(parts[0]);            
-            string type = parts[1].Substring(1, parts[1].Length - 1);
+            DateTime dTime = this.getDatetime(date, parts[0]);            
+            string type = parts[1].Substring(1, parts[1].Length - 2);
 
             for (int i = 2; i < parts.Length; i++)
             {
-                parts[i] = parts[i].Substring(1, parts[i].Length - 1);
-                this.processProperty(parts[i],type,dTime,dbm);
+                parts[i] = parts[i].Substring(1, parts[i].Length - 2);
+                this.processProperties(parts[i], fileName, type, dTime, dbm);
             }
         }
 
-        private void processFile(string path,DBManager dbm) 
+        private void processFile(string phoneId, string path, DBManager dbm) 
         {
-            string date = Path.GetFileNameWithoutExtension(path).Substring(0, 7);
-            
+            dbm.saveFile(phoneId, Path.GetFileName(path), false, false, new FileInfo(path).Length);
+
+            string date = Path.GetFileNameWithoutExtension(path).Substring(0, 8);
+            string fileName = Path.GetFileName(path);
+
             StreamReader sr = new StreamReader(path);
 
             string line = null;
             while (!sr.EndOfStream)
             {
-                this.processLine(sr.ReadLine(),date,dbm);
+                this.processLine(sr.ReadLine(),fileName,date,dbm);
             }
+            
+            sr.Close();
+            dbm.saveFile(phoneId, Path.GetFileName(path), true, false, new FileInfo(path).Length);
+
+            File.Delete(path);
         }
 
         public void execute(string phoneId,string zipPath,string pass) 
@@ -86,9 +94,7 @@ namespace LoginUseWebService
 
                     for (int i = 0; (i < files.Length) && (res == "OK."); i++)
                     {
-                        this.processFile(files[i], dbM);
-                        File.Delete(files[i]);
-                        dbM.saveFile(phoneId, Path.GetFileName(files[i]), true, false, new FileInfo(files[i]).Length);
+                        this.processFile(phoneId, files[i], dbM);                        
                     }
 
                     if (res == "OK.")

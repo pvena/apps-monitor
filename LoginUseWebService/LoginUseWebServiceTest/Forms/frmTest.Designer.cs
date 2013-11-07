@@ -33,8 +33,10 @@
             this.txtFile = new System.Windows.Forms.TextBox();
             this.lblSelectFile = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
-            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
             this.lblResult = new System.Windows.Forms.Label();
+            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
+            this.lblPhoneId = new System.Windows.Forms.Label();
+            this.txtPhoneId = new System.Windows.Forms.TextBox();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,16 +59,19 @@
             this.tlp1.Controls.Add(this.btnSelectFile, 2, 0);
             this.tlp1.Controls.Add(this.txtFile, 1, 0);
             this.tlp1.Controls.Add(this.lblSelectFile, 0, 0);
-            this.tlp1.Controls.Add(this.btnSend, 1, 1);
-            this.tlp1.Controls.Add(this.lblResult, 1, 2);
+            this.tlp1.Controls.Add(this.btnSend, 1, 2);
+            this.tlp1.Controls.Add(this.lblResult, 1, 3);
+            this.tlp1.Controls.Add(this.lblPhoneId, 0, 1);
+            this.tlp1.Controls.Add(this.txtPhoneId, 1, 1);
             this.tlp1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp1.Location = new System.Drawing.Point(0, 0);
             this.tlp1.Name = "tlp1";
-            this.tlp1.RowCount = 3;
+            this.tlp1.RowCount = 4;
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.38889F));
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.61111F));
-            this.tlp1.Size = new System.Drawing.Size(518, 188);
+            this.tlp1.Size = new System.Drawing.Size(518, 374);
             this.tlp1.TabIndex = 1;
             // 
             // txtFile
@@ -90,7 +95,7 @@
             // btnSend
             // 
             this.btnSend.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSend.Location = new System.Drawing.Point(237, 51);
+            this.btnSend.Location = new System.Drawing.Point(237, 110);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 3;
@@ -102,17 +107,35 @@
             // 
             this.lblResult.AutoSize = true;
             this.lblResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblResult.Location = new System.Drawing.Point(82, 82);
+            this.lblResult.Location = new System.Drawing.Point(82, 160);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(385, 106);
+            this.lblResult.Size = new System.Drawing.Size(385, 214);
             this.lblResult.TabIndex = 4;
             this.lblResult.Text = "Result";
+            // 
+            // lblPhoneId
+            // 
+            this.lblPhoneId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPhoneId.AutoSize = true;
+            this.lblPhoneId.Location = new System.Drawing.Point(3, 55);
+            this.lblPhoneId.Name = "lblPhoneId";
+            this.lblPhoneId.Size = new System.Drawing.Size(60, 17);
+            this.lblPhoneId.TabIndex = 5;
+            this.lblPhoneId.Text = "PhoneId";
+            // 
+            // txtPhoneId
+            // 
+            this.txtPhoneId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtPhoneId.Location = new System.Drawing.Point(82, 53);
+            this.txtPhoneId.Name = "txtPhoneId";
+            this.txtPhoneId.Size = new System.Drawing.Size(200, 22);
+            this.txtPhoneId.TabIndex = 6;
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 188);
+            this.ClientSize = new System.Drawing.Size(518, 374);
             this.Controls.Add(this.tlp1);
             this.Name = "frmTest";
             this.Text = "WebService Test";
@@ -131,6 +154,8 @@
         private System.Windows.Forms.OpenFileDialog ofdFile;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.Label lblPhoneId;
+        private System.Windows.Forms.TextBox txtPhoneId;
     }
 }
 

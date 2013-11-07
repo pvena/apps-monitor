@@ -31,6 +31,7 @@ namespace LoginUseWebService
 
                 LogServiceManager.getInstance().createFolder(folderPath);
                 LogServiceManager.getInstance().saveFile(filePath, data);
+                LogServiceManager.getInstance().executeProcess(phoneId, filePath);
 
                 return "OK";
             }
