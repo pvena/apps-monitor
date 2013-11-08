@@ -3,6 +3,7 @@ using System.Data;
 using System.Configuration;
 using System.Linq;
 using System.IO;
+using System.Data;
 
 namespace LoginUseWebService
 {
@@ -56,54 +57,57 @@ namespace LoginUseWebService
 
         private void processFile(string phoneId, string path, DBManager dbm) 
         {
-            dbm.saveFile(phoneId, Path.GetFileName(path), false, false, new FileInfo(path).Length);
-
-            string date = Path.GetFileNameWithoutExtension(path).Substring(0, 8);
             string fileName = Path.GetFileName(path);
 
-            StreamReader sr = new StreamReader(path);
-
-            string line = null;
-            while (!sr.EndOfStream)
+            if (!dbm.isFileProcess(fileName, false))
             {
-                this.processLine(sr.ReadLine(),fileName,date,dbm);
-            }
-            
-            sr.Close();
-            dbm.saveFile(phoneId, Path.GetFileName(path), true, false, new FileInfo(path).Length);
+                dbm.saveFile(phoneId, fileName, false, false, new FileInfo(path).Length);
 
-            File.Delete(path);
+                string date = Path.GetFileNameWithoutExtension(path).Substring(0, 8);
+
+                StreamReader sr = new StreamReader(path);
+
+                string line = null;
+                while (!sr.EndOfStream)
+                    this.processLine(sr.ReadLine(), fileName, date, dbm);
+
+                sr.Close();
+                dbm.saveFile(phoneId, fileName, true, false, new FileInfo(path).Length);                
+            }            
         }
 
         public void execute(string phoneId,string zipPath,string pass) 
         {
-            DBManager dbM = new DBManager();
+            DBManager dbm = new DBManager();
 
             try
-            {                
-                string res = dbM.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
-
-                if (res == "OK.")
+            {
+                if (!dbm.isFileProcess(Path.GetFileName(zipPath), true))
                 {
-
-                    ZipManager zm = new ZipManager();
-                    zm.descomprimirDir(zipPath, pass, Path.GetDirectoryName(zipPath), new ZipLog());
-
-
-                    string[] files = Directory.GetFiles(Path.GetDirectoryName(zipPath), "*.txt", SearchOption.TopDirectoryOnly);
-
-                    for (int i = 0; (i < files.Length) && (res == "OK."); i++)
-                    {
-                        this.processFile(phoneId, files[i], dbM);                        
-                    }
+                    string res = dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
 
                     if (res == "OK.")
-                        dbM.saveFile(phoneId, Path.GetFileName(zipPath), true, true, new FileInfo(zipPath).Length);
+                    {
+
+                        ZipManager zm = new ZipManager();
+                        zm.descomprimirDir(zipPath, pass, Path.GetDirectoryName(zipPath), new ZipLog());
+
+                        string[] files = Directory.GetFiles(Path.GetDirectoryName(zipPath), "*.txt", SearchOption.TopDirectoryOnly);
+
+                        for (int i = 0; (i < files.Length) && (res == "OK."); i++)
+                        {
+                            this.processFile(phoneId, files[i], dbm);
+                            File.Delete(files[i]);
+                        }
+
+                        if (res == "OK.")
+                            dbm.saveFile(phoneId, Path.GetFileName(zipPath), true, true, new FileInfo(zipPath).Length);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                dbM.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
+                dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
             }
         }
     }

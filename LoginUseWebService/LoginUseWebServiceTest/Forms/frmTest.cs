@@ -24,7 +24,6 @@ namespace LoginUseWebServiceTest
             if (this.ofdFile.ShowDialog() == DialogResult.OK)
             {                
                 this.txtFile.Text = this.ofdFile.FileName;
-                this.lblResult.Text = "";
             }
         }
 
@@ -57,20 +56,19 @@ namespace LoginUseWebServiceTest
                     fStream.Close();
                     fStream.Dispose();
 
-                    this.lblResult.Text = sTmp;
                 }
                 else
                 {
                     if(dLen >= 4)
-                        this.lblResult.Text = "The file selected exceeds the size limit for uploads.";
+                        MessageBox.Show("The file selected exceeds the size limit for uploads.");
                     else
-                        this.lblResult.Text = "Cargar un Valor en el campo PhoneId.";
+                        MessageBox.Show("Cargar un Valor en el campo PhoneId.");
                 }
             }
             catch (Exception ex)
             {
                 // display an error message to the user
-                this.lblResult.Text = ex.Message.ToString();
+                MessageBox.Show(ex.Message.ToString());
             }
         }
     }

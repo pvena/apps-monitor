@@ -33,7 +33,7 @@ begin
 		set	[process] = @process,
 			[size] = @size,
 			isZip = @isZip
-		where idUser= @idUser and [name] = @name and isZip = @isZip 
+		where idUser = @idUser and [name] like @name and isZip = @isZip 
 			
 		select idFile as id	from [file] where idUser= @idUser and [name] = @name and isZip = @isZip 
 	end
