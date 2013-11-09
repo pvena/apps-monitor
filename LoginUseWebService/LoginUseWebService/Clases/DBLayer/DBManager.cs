@@ -100,7 +100,60 @@ namespace LoginUseWebService
                 return null;
             }
         }
-
+        public DataTable getUsers(string names)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getUser");
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (names != null)
+                    cmd.Parameters.AddWithValue("@names", names);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable getType(string names)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getType");
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (names != null)
+                    cmd.Parameters.AddWithValue("@names", names);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable getProperties(string names)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getProperty");
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (names != null)
+                    cmd.Parameters.AddWithValue("@names", names);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public DataTable getCsvData(int idUser,DateTime from, DateTime to)
         {

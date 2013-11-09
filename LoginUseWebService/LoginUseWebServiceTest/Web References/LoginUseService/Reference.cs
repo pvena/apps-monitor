@@ -33,6 +33,14 @@ namespace LoginUseWebServiceTest.LoginUseService {
         
         private System.Threading.SendOrPostCallback RegisterUserOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getUsersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getPhoneIdsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getTypesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getPropertiesOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -76,6 +84,18 @@ namespace LoginUseWebServiceTest.LoginUseService {
         
         /// <remarks/>
         public event RegisterUserCompletedEventHandler RegisterUserCompleted;
+        
+        /// <remarks/>
+        public event getUsersCompletedEventHandler getUsersCompleted;
+        
+        /// <remarks/>
+        public event getPhoneIdsCompletedEventHandler getPhoneIdsCompleted;
+        
+        /// <remarks/>
+        public event getTypesCompletedEventHandler getTypesCompleted;
+        
+        /// <remarks/>
+        public event getPropertiesCompletedEventHandler getPropertiesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/UploadFile", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -140,6 +160,122 @@ namespace LoginUseWebServiceTest.LoginUseService {
             if ((this.RegisterUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.RegisterUserCompleted(this, new RegisterUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getUsers", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string[] getUsers(string names) {
+            object[] results = this.Invoke("getUsers", new object[] {
+                        names});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getUsersAsync(string names) {
+            this.getUsersAsync(names, null);
+        }
+        
+        /// <remarks/>
+        public void getUsersAsync(string names, object userState) {
+            if ((this.getUsersOperationCompleted == null)) {
+                this.getUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetUsersOperationCompleted);
+            }
+            this.InvokeAsync("getUsers", new object[] {
+                        names}, this.getUsersOperationCompleted, userState);
+        }
+        
+        private void OngetUsersOperationCompleted(object arg) {
+            if ((this.getUsersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getUsersCompleted(this, new getUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getPhoneIds", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string[] getPhoneIds(string names) {
+            object[] results = this.Invoke("getPhoneIds", new object[] {
+                        names});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPhoneIdsAsync(string names) {
+            this.getPhoneIdsAsync(names, null);
+        }
+        
+        /// <remarks/>
+        public void getPhoneIdsAsync(string names, object userState) {
+            if ((this.getPhoneIdsOperationCompleted == null)) {
+                this.getPhoneIdsOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPhoneIdsOperationCompleted);
+            }
+            this.InvokeAsync("getPhoneIds", new object[] {
+                        names}, this.getPhoneIdsOperationCompleted, userState);
+        }
+        
+        private void OngetPhoneIdsOperationCompleted(object arg) {
+            if ((this.getPhoneIdsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPhoneIdsCompleted(this, new getPhoneIdsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getTypes", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string[] getTypes(string names) {
+            object[] results = this.Invoke("getTypes", new object[] {
+                        names});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getTypesAsync(string names) {
+            this.getTypesAsync(names, null);
+        }
+        
+        /// <remarks/>
+        public void getTypesAsync(string names, object userState) {
+            if ((this.getTypesOperationCompleted == null)) {
+                this.getTypesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetTypesOperationCompleted);
+            }
+            this.InvokeAsync("getTypes", new object[] {
+                        names}, this.getTypesOperationCompleted, userState);
+        }
+        
+        private void OngetTypesOperationCompleted(object arg) {
+            if ((this.getTypesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getTypesCompleted(this, new getTypesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getProperties", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string[] getProperties(string names) {
+            object[] results = this.Invoke("getProperties", new object[] {
+                        names});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPropertiesAsync(string names) {
+            this.getPropertiesAsync(names, null);
+        }
+        
+        /// <remarks/>
+        public void getPropertiesAsync(string names, object userState) {
+            if ((this.getPropertiesOperationCompleted == null)) {
+                this.getPropertiesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPropertiesOperationCompleted);
+            }
+            this.InvokeAsync("getProperties", new object[] {
+                        names}, this.getPropertiesOperationCompleted, userState);
+        }
+        
+        private void OngetPropertiesOperationCompleted(object arg) {
+            if ((this.getPropertiesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPropertiesCompleted(this, new getPropertiesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -210,6 +346,110 @@ namespace LoginUseWebServiceTest.LoginUseService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getUsersCompletedEventHandler(object sender, getUsersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getPhoneIdsCompletedEventHandler(object sender, getPhoneIdsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPhoneIdsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPhoneIdsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getTypesCompletedEventHandler(object sender, getTypesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getTypesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getTypesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getPropertiesCompletedEventHandler(object sender, getPropertiesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPropertiesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPropertiesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
             }
         }
     }

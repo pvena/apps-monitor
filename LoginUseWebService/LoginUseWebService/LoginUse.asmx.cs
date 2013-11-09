@@ -54,5 +54,57 @@ namespace LoginUseWebService
                 return "Problem."; 
             }
         }
+
+        [WebMethod]
+        public string[] getUsers(string names)
+        {
+            try
+            {
+                return LogServiceManager.getInstance().getUsers(names);
+            }
+            catch (Exception ex)
+            {
+                return new string[0];
+            }
+        }
+
+        [WebMethod]
+        public string[] getPhoneIds(string names)
+        {
+            try
+            {
+                return LogServiceManager.getInstance().getPhoneIds(names);
+            }
+            catch (Exception ex)
+            {
+                return new string[0];
+            }
+        }
+        
+        [WebMethod]
+        public string[] getTypes(string names)
+        {
+            try
+            {
+                return LogServiceManager.getInstance().getTypes(names);
+            }
+            catch (Exception ex)
+            {
+                return new string[0];
+            }
+        }
+
+        [WebMethod]
+        public string[] getProperties(string names)
+        {
+            try
+            {
+                return LogServiceManager.getInstance().getProperties(names);
+            }
+            catch (Exception ex)
+            {
+                return new string[0];
+            }
+        }
     }
 }

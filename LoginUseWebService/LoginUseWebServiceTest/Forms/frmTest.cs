@@ -12,11 +12,12 @@ namespace LoginUseWebServiceTest
 {
     public partial class frmTest : Form
     {
-        private byte[] data;
-
         public frmTest()
         {
             InitializeComponent();
+            this.inicTypes();
+            this.inicProperties();
+            this.inicUsers();
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -31,6 +32,7 @@ namespace LoginUseWebServiceTest
         {
             this.UploadFile(this.ofdFile.FileName);
         }
+
         private void UploadFile(string filename)
         {
             try
@@ -43,7 +45,7 @@ namespace LoginUseWebServiceTest
                 long numBytes = fInfo.Length;
                 double dLen = Convert.ToDouble(fInfo.Length / 1000000);
  
-                if (dLen < 4 && this.txtPhoneId.Text.Length > 0)
+                if (dLen < 4 && this.cbxPhones.Text.Length > 0)
                 {
                     FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fStream); 
@@ -52,7 +54,7 @@ namespace LoginUseWebServiceTest
 
                     string data64 = Convert.ToBase64String(data);
 
-                    string sTmp = srv.UploadFile(data64, this.txtPhoneId.Text);
+                    string sTmp = srv.UploadFile(data64, this.cbxPhones.Text);
                     fStream.Close();
                     fStream.Dispose();
 
@@ -70,6 +72,49 @@ namespace LoginUseWebServiceTest
                 // display an error message to the user
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void inicTypes()
+        {
+            try
+            {
+                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+
+                string[] types = srv.getTypes(null);
+
+                for (int i = 0; i < types.Length; i++)
+                    this.chbTypes.Items.Add(types[i], true);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void inicProperties()
+        {
+            try
+            {
+                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+
+                string[] properties = srv.getProperties(null);
+
+                for (int i = 0; i < properties.Length; i++)
+                    this.chbProperties.Items.Add(properties[i], true);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void inicUsers()
+        {
+            try
+            {
+                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+
+                string[] users = srv.getUsers(null);
+                this.cbxUser.DataSource = users;
+
+                string[] phoneIds = srv.getPhoneIds(null);
+                this.cbxPhones.DataSource = phoneIds;
+            }
+            catch (Exception ex) { }
         }
     }
 }
