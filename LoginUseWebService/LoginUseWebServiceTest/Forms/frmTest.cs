@@ -93,17 +93,8 @@ namespace LoginUseWebServiceTest
         private void find()
         {
             string phoneId = this.cbxPhones.Text;
-
-            string typeNames = "";
-            foreach (object o in this.chbTypes.Items)
-                typeNames += o.ToString() + ";";
-            typeNames = typeNames.Substring(0, typeNames.Length - 1);
-
-            string propNames = "";
-            foreach (object o in this.chbProperties.Items)
-                propNames += o.ToString() + ";";
-            propNames = propNames.Substring(0, propNames.Length - 1);
-
+            string typeNames = this.getCheckValues(this.chbTypes,";");
+            string propNames = this.getCheckValues(this.chbProperties, ";");
             DateTime from = this.dtpFrom.Value;
             DateTime to = this.dtpTo.Value;
 
@@ -164,6 +155,12 @@ namespace LoginUseWebServiceTest
             catch (Exception ex) { }
         }
 
-        
+        private string getCheckValues(CheckedListBox chb, string sep)
+        {
+            string values = "";
+            foreach (object o in chb.Items)
+                values += o.ToString() + sep;
+            return values.Substring(0, values.Length - 1);
+        }
     }
 }

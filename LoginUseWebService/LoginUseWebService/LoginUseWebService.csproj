@@ -61,25 +61,26 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clases\ZipManager\ZipLog.cs" />
-    <Compile Include="Clases\ZipManager\IZipLog.cs" />
-    <Compile Include="Clases\DBLayer\InterfeseDB.cs" />
-    <Compile Include="Clases\LogManagers\LogConstants.cs" />
-    <Compile Include="Clases\DBLayer\DBManager.cs" />
-    <Compile Include="Clases\DBLayer\DBConfigManager.cs" />
+    <Compile Include="Class\DBLayer\DBConfigManager.cs" />
+    <Compile Include="Class\DBLayer\DBManager.cs" />
+    <Compile Include="Class\DBLayer\InterfeseDB.cs" />
+    <Compile Include="Class\LocationManager\LocationManager.cs" />
     <Compile Include="LoginUse.asmx.cs">
       <DependentUpon>LoginUse.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Clases\LogManagers\LogParserManager.cs" />
+    <Compile Include="Class\LogManagers\LogConstants.cs" />
+    <Compile Include="Class\LogManagers\LogParserManager.cs" />
+    <Compile Include="Class\LogManagers\LogServiceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Clases\LogManagers\LogServiceManager.cs" />
-    <Compile Include="Clases\ZipManager\ZipManager.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Class\ZipManager\IZipLog.cs" />
+    <Compile Include="Class\ZipManager\ZipLog.cs" />
+    <Compile Include="Class\ZipManager\ZipManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">

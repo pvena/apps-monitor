@@ -108,6 +108,20 @@ namespace LoginUseWebService
         }
 
         [WebMethod]
+        public double getPointDistance(decimal lat1,decimal long1,decimal lat2,decimal long2)
+        {
+            try
+            {
+                LocationManager lm = new LocationManager();
+                return lm.GetDistance(long1, lat1, long2, lat2);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        [WebMethod]
         public string getCSVData(string phoneId,DateTime from, DateTime to, string typeNames, string propNames)
         {
             try
@@ -137,5 +151,7 @@ namespace LoginUseWebService
                 return "";
             }
         }
+
+
     }
 }
