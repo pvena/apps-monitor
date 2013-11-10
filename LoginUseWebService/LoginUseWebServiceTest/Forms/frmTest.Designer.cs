@@ -47,14 +47,16 @@
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.btnFind = new System.Windows.Forms.Button();
             this.lblSend = new System.Windows.Forms.Label();
-            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
             this.cbxPhones = new System.Windows.Forms.ComboBox();
+            this.ofdFile = new System.Windows.Forms.OpenFileDialog();
+            this.sfdFile = new System.Windows.Forms.SaveFileDialog();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(791, 23);
+            this.btnSelectFile.Location = new System.Drawing.Point(791, 63);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(42, 38);
             this.btnSelectFile.TabIndex = 0;
@@ -68,29 +70,31 @@
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlp1.Controls.Add(this.btnSelectFile, 2, 1);
-            this.tlp1.Controls.Add(this.txtFile, 1, 1);
-            this.tlp1.Controls.Add(this.lblSelectFile, 0, 1);
-            this.tlp1.Controls.Add(this.btnSend, 1, 3);
-            this.tlp1.Controls.Add(this.lblPhoneId, 0, 2);
-            this.tlp1.Controls.Add(this.lblCSV, 1, 4);
-            this.tlp1.Controls.Add(this.lblUser, 0, 5);
-            this.tlp1.Controls.Add(this.lblType, 0, 6);
-            this.tlp1.Controls.Add(this.lblProperty, 0, 7);
-            this.tlp1.Controls.Add(this.lblFrom, 0, 8);
-            this.tlp1.Controls.Add(this.cbxUser, 1, 5);
-            this.tlp1.Controls.Add(this.chbTypes, 1, 6);
-            this.tlp1.Controls.Add(this.chbProperties, 1, 7);
-            this.tlp1.Controls.Add(this.dtpFrom, 1, 8);
-            this.tlp1.Controls.Add(this.lblTo, 0, 9);
-            this.tlp1.Controls.Add(this.dtpTo, 1, 9);
-            this.tlp1.Controls.Add(this.btnFind, 1, 10);
-            this.tlp1.Controls.Add(this.lblSend, 1, 0);
-            this.tlp1.Controls.Add(this.cbxPhones, 1, 2);
+            this.tlp1.Controls.Add(this.btnSelectFile, 2, 2);
+            this.tlp1.Controls.Add(this.txtFile, 1, 2);
+            this.tlp1.Controls.Add(this.lblSelectFile, 0, 2);
+            this.tlp1.Controls.Add(this.btnSend, 1, 4);
+            this.tlp1.Controls.Add(this.lblPhoneId, 0, 3);
+            this.tlp1.Controls.Add(this.lblCSV, 1, 5);
+            this.tlp1.Controls.Add(this.lblUser, 0, 6);
+            this.tlp1.Controls.Add(this.lblType, 0, 7);
+            this.tlp1.Controls.Add(this.lblProperty, 0, 8);
+            this.tlp1.Controls.Add(this.lblFrom, 0, 9);
+            this.tlp1.Controls.Add(this.cbxUser, 1, 6);
+            this.tlp1.Controls.Add(this.chbTypes, 1, 7);
+            this.tlp1.Controls.Add(this.chbProperties, 1, 8);
+            this.tlp1.Controls.Add(this.dtpFrom, 1, 9);
+            this.tlp1.Controls.Add(this.lblTo, 0, 10);
+            this.tlp1.Controls.Add(this.dtpTo, 1, 10);
+            this.tlp1.Controls.Add(this.btnFind, 1, 11);
+            this.tlp1.Controls.Add(this.lblSend, 1, 1);
+            this.tlp1.Controls.Add(this.cbxPhones, 1, 3);
+            this.tlp1.Controls.Add(this.btnRefresh, 1, 0);
             this.tlp1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp1.Location = new System.Drawing.Point(0, 0);
             this.tlp1.Name = "tlp1";
-            this.tlp1.RowCount = 12;
+            this.tlp1.RowCount = 13;
+            this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -103,13 +107,13 @@
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlp1.Size = new System.Drawing.Size(836, 458);
+            this.tlp1.Size = new System.Drawing.Size(836, 483);
             this.tlp1.TabIndex = 1;
             // 
             // txtFile
             // 
             this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFile.Location = new System.Drawing.Point(82, 31);
+            this.txtFile.Location = new System.Drawing.Point(82, 71);
             this.txtFile.Name = "txtFile";
             this.txtFile.Size = new System.Drawing.Size(703, 22);
             this.txtFile.TabIndex = 1;
@@ -118,7 +122,7 @@
             // 
             this.lblSelectFile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSelectFile.AutoSize = true;
-            this.lblSelectFile.Location = new System.Drawing.Point(3, 33);
+            this.lblSelectFile.Location = new System.Drawing.Point(3, 73);
             this.lblSelectFile.Name = "lblSelectFile";
             this.lblSelectFile.Size = new System.Drawing.Size(73, 17);
             this.lblSelectFile.TabIndex = 2;
@@ -127,7 +131,7 @@
             // btnSend
             // 
             this.btnSend.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSend.Location = new System.Drawing.Point(396, 98);
+            this.btnSend.Location = new System.Drawing.Point(396, 137);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 3;
@@ -139,7 +143,7 @@
             // 
             this.lblPhoneId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhoneId.AutoSize = true;
-            this.lblPhoneId.Location = new System.Drawing.Point(3, 71);
+            this.lblPhoneId.Location = new System.Drawing.Point(3, 110);
             this.lblPhoneId.Name = "lblPhoneId";
             this.lblPhoneId.Size = new System.Drawing.Size(60, 17);
             this.lblPhoneId.TabIndex = 5;
@@ -150,7 +154,7 @@
             this.lblCSV.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblCSV.AutoSize = true;
             this.lblCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCSV.Location = new System.Drawing.Point(376, 124);
+            this.lblCSV.Location = new System.Drawing.Point(376, 163);
             this.lblCSV.Name = "lblCSV";
             this.lblCSV.Size = new System.Drawing.Size(115, 18);
             this.lblCSV.TabIndex = 7;
@@ -160,7 +164,7 @@
             // 
             this.lblUser.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(3, 148);
+            this.lblUser.Location = new System.Drawing.Point(3, 187);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(38, 17);
             this.lblUser.TabIndex = 8;
@@ -170,7 +174,7 @@
             // 
             this.lblType.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(3, 208);
+            this.lblType.Location = new System.Drawing.Point(3, 244);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(40, 17);
             this.lblType.TabIndex = 9;
@@ -180,7 +184,7 @@
             // 
             this.lblProperty.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblProperty.AutoSize = true;
-            this.lblProperty.Location = new System.Drawing.Point(3, 298);
+            this.lblProperty.Location = new System.Drawing.Point(3, 327);
             this.lblProperty.Name = "lblProperty";
             this.lblProperty.Size = new System.Drawing.Size(62, 17);
             this.lblProperty.TabIndex = 10;
@@ -190,7 +194,7 @@
             // 
             this.lblFrom.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(3, 357);
+            this.lblFrom.Location = new System.Drawing.Point(3, 382);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(40, 17);
             this.lblFrom.TabIndex = 12;
@@ -199,7 +203,7 @@
             // cbxUser
             // 
             this.cbxUser.FormattingEnabled = true;
-            this.cbxUser.Location = new System.Drawing.Point(82, 145);
+            this.cbxUser.Location = new System.Drawing.Point(82, 184);
             this.cbxUser.Name = "cbxUser";
             this.cbxUser.Size = new System.Drawing.Size(439, 24);
             this.cbxUser.TabIndex = 13;
@@ -208,7 +212,7 @@
             // 
             this.chbTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chbTypes.FormattingEnabled = true;
-            this.chbTypes.Location = new System.Drawing.Point(82, 175);
+            this.chbTypes.Location = new System.Drawing.Point(82, 214);
             this.chbTypes.MultiColumn = true;
             this.chbTypes.Name = "chbTypes";
             this.chbTypes.Size = new System.Drawing.Size(703, 72);
@@ -218,7 +222,7 @@
             // 
             this.chbProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chbProperties.FormattingEnabled = true;
-            this.chbProperties.Location = new System.Drawing.Point(82, 265);
+            this.chbProperties.Location = new System.Drawing.Point(82, 297);
             this.chbProperties.MultiColumn = true;
             this.chbProperties.Name = "chbProperties";
             this.chbProperties.Size = new System.Drawing.Size(703, 72);
@@ -226,16 +230,18 @@
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Location = new System.Drawing.Point(82, 355);
+            this.dtpFrom.CustomFormat = "yyyy/MM/dd hh:mm:ss";
+            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFrom.Location = new System.Drawing.Point(82, 380);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(200, 22);
+            this.dtpFrom.Size = new System.Drawing.Size(187, 22);
             this.dtpFrom.TabIndex = 16;
             // 
             // lblTo
             // 
             this.lblTo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblTo.AutoSize = true;
-            this.lblTo.Location = new System.Drawing.Point(3, 385);
+            this.lblTo.Location = new System.Drawing.Point(3, 410);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(25, 17);
             this.lblTo.TabIndex = 11;
@@ -243,27 +249,30 @@
             // 
             // dtpTo
             // 
-            this.dtpTo.Location = new System.Drawing.Point(82, 383);
+            this.dtpTo.CustomFormat = "yyyy/MM/dd hh:mm:ss";
+            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTo.Location = new System.Drawing.Point(82, 408);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(200, 22);
+            this.dtpTo.Size = new System.Drawing.Size(187, 22);
             this.dtpTo.TabIndex = 17;
             // 
             // btnFind
             // 
             this.btnFind.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnFind.Location = new System.Drawing.Point(396, 411);
+            this.btnFind.Location = new System.Drawing.Point(396, 436);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(75, 23);
             this.btnFind.TabIndex = 18;
             this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // lblSend
             // 
             this.lblSend.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSend.AutoSize = true;
             this.lblSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSend.Location = new System.Drawing.Point(356, 1);
+            this.lblSend.Location = new System.Drawing.Point(356, 41);
             this.lblSend.Name = "lblSend";
             this.lblSend.Size = new System.Drawing.Size(155, 18);
             this.lblSend.TabIndex = 19;
@@ -272,16 +281,31 @@
             // cbxPhones
             // 
             this.cbxPhones.FormattingEnabled = true;
-            this.cbxPhones.Location = new System.Drawing.Point(82, 67);
+            this.cbxPhones.Location = new System.Drawing.Point(82, 107);
             this.cbxPhones.Name = "cbxPhones";
             this.cbxPhones.Size = new System.Drawing.Size(216, 24);
             this.cbxPhones.TabIndex = 20;
+            // 
+            // sfdFile
+            // 
+            this.sfdFile.FileName = "csvLogData.zip";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRefresh.Location = new System.Drawing.Point(270, 8);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(326, 23);
+            this.btnRefresh.TabIndex = 21;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 458);
+            this.ClientSize = new System.Drawing.Size(836, 483);
             this.Controls.Add(this.tlp1);
             this.Name = "frmTest";
             this.Text = "WebService Test";
@@ -314,6 +338,8 @@
         private System.Windows.Forms.Label lblCSV;
         private System.Windows.Forms.Label lblSend;
         private System.Windows.Forms.ComboBox cbxPhones;
+        private System.Windows.Forms.SaveFileDialog sfdFile;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 

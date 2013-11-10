@@ -155,15 +155,19 @@ namespace LoginUseWebService
             }
         }
 
-        public DataTable getCsvData(int idUser,DateTime from, DateTime to)
+        public DataTable getCsvData(string phoneId,DateTime from, DateTime to,string typeNames,string propNames)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("getCSVData");
                 cmd.CommandType = CommandType.StoredProcedure;                
-                cmd.Parameters.AddWithValue("@idUser", idUser);
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);                
                 cmd.Parameters.AddWithValue("@from", from);
                 cmd.Parameters.AddWithValue("@to", to);
+                if(typeNames != null)
+                    cmd.Parameters.AddWithValue("@typeNames", typeNames);
+                if (propNames != null)
+                    cmd.Parameters.AddWithValue("@propNames", propNames);
                 this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
                 DataTable dt = this.iDB.getTable(cmd);
                 this.iDB.disconect();

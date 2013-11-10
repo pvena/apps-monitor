@@ -106,5 +106,36 @@ namespace LoginUseWebService
                 return new string[0];
             }
         }
+
+        [WebMethod]
+        public string getCSVData(string phoneId,DateTime from, DateTime to, string typeNames, string propNames)
+        {
+            try
+            {
+                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + @"/" + phoneId + @"_CSV/";
+                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".csv";
+                string fileZip = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId;
+
+                LogServiceManager.getInstance().createFolder(folderPath);
+                if (LogServiceManager.getInstance().createCSVFile(phoneId, from, to, typeNames, propNames, filePath))
+                {
+                    ZipManager zm = new ZipManager();
+                    zm.comprimirDir(ref fileZip, null, folderPath, new string[] { "*.csv" }, new ZipLog());
+
+                    FileStream file = new FileStream(fileZip, FileMode.Open);
+                    byte[] buffer = new byte[file.Length];
+                    file.Read(buffer, 0, (int)file.Length);
+                    file.Close();
+                    File.Delete(filePath);
+                    File.Delete(fileZip);
+                    return Convert.ToBase64String(buffer);
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
     }
 }

@@ -20,6 +20,8 @@ namespace LoginUseWebServiceTest
             this.inicUsers();
         }
 
+        #region -----------------------Btns Events-------------------------
+
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             if (this.ofdFile.ShowDialog() == DialogResult.OK)
@@ -32,6 +34,20 @@ namespace LoginUseWebServiceTest
         {
             this.UploadFile(this.ofdFile.FileName);
         }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            this.find();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.inicTypes();
+            this.inicProperties();
+            this.inicUsers();
+        }
+
+        #endregion
 
         private void UploadFile(string filename)
         {
@@ -72,6 +88,37 @@ namespace LoginUseWebServiceTest
                 // display an error message to the user
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void find()
+        {
+            string phoneId = this.cbxPhones.Text;
+
+            string typeNames = "";
+            foreach (object o in this.chbTypes.Items)
+                typeNames += o.ToString() + ";";
+            typeNames = typeNames.Substring(0, typeNames.Length - 1);
+
+            string propNames = "";
+            foreach (object o in this.chbProperties.Items)
+                propNames += o.ToString() + ";";
+            propNames = propNames.Substring(0, propNames.Length - 1);
+
+            DateTime from = this.dtpFrom.Value;
+            DateTime to = this.dtpTo.Value;
+
+            LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+
+            string base64Data = srv.getCSVData(phoneId, from, to, typeNames, propNames);
+
+            if (base64Data != null && base64Data.Length > 0)
+                if (this.sfdFile.ShowDialog() == DialogResult.OK)
+                    File.WriteAllBytes(this.sfdFile.FileName, Convert.FromBase64String(base64Data));
+                else
+                    MessageBox.Show("File not saved.");
+            else
+                MessageBox.Show("Response Problem.");            
+
         }
 
         private void inicTypes()
@@ -116,5 +163,7 @@ namespace LoginUseWebServiceTest
             }
             catch (Exception ex) { }
         }
+
+        
     }
 }

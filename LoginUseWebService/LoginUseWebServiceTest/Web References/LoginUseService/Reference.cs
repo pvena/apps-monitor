@@ -41,6 +41,8 @@ namespace LoginUseWebServiceTest.LoginUseService {
         
         private System.Threading.SendOrPostCallback getPropertiesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getCSVDataOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -96,6 +98,9 @@ namespace LoginUseWebServiceTest.LoginUseService {
         
         /// <remarks/>
         public event getPropertiesCompletedEventHandler getPropertiesCompleted;
+        
+        /// <remarks/>
+        public event getCSVDataCompletedEventHandler getCSVDataCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/UploadFile", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -280,6 +285,43 @@ namespace LoginUseWebServiceTest.LoginUseService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getCSVData", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string getCSVData(string phoneId, System.DateTime from, System.DateTime to, string typeNames, string propNames) {
+            object[] results = this.Invoke("getCSVData", new object[] {
+                        phoneId,
+                        from,
+                        to,
+                        typeNames,
+                        propNames});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getCSVDataAsync(string phoneId, System.DateTime from, System.DateTime to, string typeNames, string propNames) {
+            this.getCSVDataAsync(phoneId, from, to, typeNames, propNames, null);
+        }
+        
+        /// <remarks/>
+        public void getCSVDataAsync(string phoneId, System.DateTime from, System.DateTime to, string typeNames, string propNames, object userState) {
+            if ((this.getCSVDataOperationCompleted == null)) {
+                this.getCSVDataOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetCSVDataOperationCompleted);
+            }
+            this.InvokeAsync("getCSVData", new object[] {
+                        phoneId,
+                        from,
+                        to,
+                        typeNames,
+                        propNames}, this.getCSVDataOperationCompleted, userState);
+        }
+        
+        private void OngetCSVDataOperationCompleted(object arg) {
+            if ((this.getCSVDataCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getCSVDataCompleted(this, new getCSVDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -450,6 +492,32 @@ namespace LoginUseWebServiceTest.LoginUseService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getCSVDataCompletedEventHandler(object sender, getCSVDataCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getCSVDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getCSVDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

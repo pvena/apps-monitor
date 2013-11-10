@@ -127,12 +127,54 @@ namespace LoginUseWebService
                 int i = 0;
                 foreach (DataRow r in dt.Rows)
                 {
-                    properties[i] = (string)r["Name"];
+                    properties[i] = (string)r["FullName"];
                     i++;
                 }
                 return properties;
             }
             return new string[0];
+        }
+
+        public bool createCSVFile(string phoneId,DateTime from, DateTime to, string typeNames, string propNames,string path)
+        {
+            try
+            {
+                DBManager dbm = new DBManager();
+                DataTable data = dbm.getCsvData(phoneId, from, to, typeNames, propNames);
+
+                string[] propertyes = propNames.Split(';');
+                Dictionary<string, string> values = new Dictionary<string, string>();
+
+                string line = "year;month;day,time;minute;second;isWeekDay;quarter;" + propNames;
+
+                for (int i = 0; i < propertyes.Length; i++)
+                    values.Add(propertyes[i], "Default");
+                
+                StreamWriter file = new StreamWriter(path, true);
+                file.WriteLine(line);
+
+                foreach (DataRow r in data.Rows)
+                {
+                    line = ((DateTime)r["date"]).ToString("yyyy;");
+                    line += ((DateTime)r["date"]).ToString("MM;");
+                    line += ((DateTime)r["date"]).ToString("dd;");
+                    line += ((DateTime)r["date"]).ToString("hh;");
+                    line += ((DateTime)r["date"]).ToString("mm;");
+                    line += ((DateTime)r["date"]).ToString("ss;");
+                    line += ((((DateTime)r["date"]).DayOfWeek == DayOfWeek.Sunday) || (((DateTime)r["date"]).DayOfWeek == DayOfWeek.Saturday))?"0;":"1;";
+                    line += ((DateTime)r["date"]).Minute / 15;
+                    values[(string)r["FullName"]] = (string)r["PropValue"];
+                    for (int i = 0; i < propertyes.Length; i++)
+                        line += ";" + (string)values[propertyes[i]];
+                    file.WriteLine(line);
+                }
+                file.Flush();
+                file.Close();
+
+                return true;
+            }
+            catch (Exception ex) 
+            { return false; }
         }
 
 
