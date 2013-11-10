@@ -142,6 +142,27 @@ namespace LoginUseWebService
 
         #endregion 
 
+        
+        private void processDate(DateTime date, Dictionary<string, string> values)
+        {
+            values["year"] = date.ToString("yyyy");
+            values["month"] = date.ToString("MM");
+            values["day"] = date.ToString("dd");
+            values["hour"] = date.ToString("hh");
+            values["minute"] = date.ToString("mm");
+            values["second"] = date.ToString("ss");
+            values["isWeekDay"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
+            values["quarter"] = (date.Minute / 15).ToString();
+        }
+
+        private Dictionary<string, string> inicPropValues(string[] properties)
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            for (int i = 0; i < properties.Length; i++)
+                values.Add(properties[i], "");
+            return values;
+        }
+
         public bool createCSVFile(string phoneId,DateTime from, DateTime to, string typeNames, string propNames,string path)
         {
             try
@@ -149,13 +170,10 @@ namespace LoginUseWebService
                 DBManager dbm = new DBManager();
                 DataTable data = dbm.getCsvData(phoneId, from, to, typeNames, propNames);
 
-                string[] propertyes = propNames.Split(';');
-                Dictionary<string, string> values = new Dictionary<string, string>();
+                string line = "year;month;day;hour;minute;second;isWeekDay;quarter;" + propNames;
 
-                string line = "year;month;day,time;minute;second;isWeekDay;quarter;" + propNames;
-
-                for (int i = 0; i < propertyes.Length; i++)
-                    values.Add(propertyes[i], "Default");
+                string[] properties = line.Split(';');
+                Dictionary<string, string> values = this.inicPropValues(properties);
                 
                 StreamWriter file = new StreamWriter(path, true);
                 file.WriteLine(line);
@@ -164,21 +182,15 @@ namespace LoginUseWebService
 
                 foreach (DataRow r in data.Rows)
                 {
-                    values[(string)r["FullName"]] = (string)r["PropValue"];
+                    values[(string)r["FullName"]] = (string)r["PropValue"];                    
                     if (((DateTime)r["date"]) != aux)
                     {
                         aux = ((DateTime)r["date"]);
-                        line = ((DateTime)r["date"]).ToString("yyyy;");
-                        line += ((DateTime)r["date"]).ToString("MM;");
-                        line += ((DateTime)r["date"]).ToString("dd;");
-                        line += ((DateTime)r["date"]).ToString("hh;");
-                        line += ((DateTime)r["date"]).ToString("mm;");
-                        line += ((DateTime)r["date"]).ToString("ss;");
-                        line += ((((DateTime)r["date"]).DayOfWeek == DayOfWeek.Sunday) || (((DateTime)r["date"]).DayOfWeek == DayOfWeek.Saturday)) ? "0;" : "1;";
-                        line += ((DateTime)r["date"]).Minute / 15;
-                        for (int i = 0; i < propertyes.Length; i++)
-                            line += ";" + (string)values[propertyes[i]];
-                        file.WriteLine(line);
+                        this.processDate((DateTime)r["date"], values);
+                        line = "";
+                        for (int i = 0; i < properties.Length; i++)
+                            line += (string)values[properties[i]] + ";";
+                        file.WriteLine(line.Substring(0,line.Length-1));
                     }
                 }
                 file.Flush();

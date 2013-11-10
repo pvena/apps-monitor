@@ -59,6 +59,8 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
 		        	logText += LogFormat.getLog("NAME",device.getName());
 		            logText += LogFormat.getLog("ADDRESS",device.getAddress());
+		            logText += LogFormat.getLog("STATE", true);
+		            logText += LogFormat.getLog("TSTATE", false);
 		        }
 		    }
 			else 
@@ -72,12 +74,15 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 						logText += LogFormat.getLog("TSTATE", false);
 						break;
 					case BluetoothAdapter.STATE_ON:
-						logText += LogFormat.getLog("STATE", true);;
+						logText += LogFormat.getLog("STATE", true);
 						break;
 					case BluetoothAdapter.STATE_TURNING_ON:
 						logText += LogFormat.getLog("TSTATE", true);
 						break;
 					}
+					logText += LogFormat.getLog("NAME","-");
+		            logText += LogFormat.getLog("ADDRESS","-");
+		            
 				}
 			
 			if(logText.equals("")){
