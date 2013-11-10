@@ -155,6 +155,22 @@ namespace LoginUseWebService
             values["quarter"] = (date.Minute / 15).ToString();
         }
 
+        private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
+        {
+            string type = propName.Split('-')[0];
+            string name = propName.Split('-')[1];
+            List<string> keys = new List<string>(values.Keys);
+            if ((type == "WIFI") && (name == "STATE") && (value == "0"))
+                foreach (string key in keys)
+                    if (key.Contains(type))
+                        values[key] = "-";
+            if ((type == "BLUETOOTH") && (name == "STATE") && (value == "0"))
+                foreach (string key in keys)
+                    if (key.Contains(type) && !key.Contains("STATE"))
+                        values[key] = "-";
+            values[propName] = value;
+        }
+
         private Dictionary<string, string> inicPropValues(string[] properties)
         {
             Dictionary<string, string> values = new Dictionary<string, string>();
@@ -182,7 +198,7 @@ namespace LoginUseWebService
 
                 foreach (DataRow r in data.Rows)
                 {
-                    values[(string)r["FullName"]] = (string)r["PropValue"];                    
+                    this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);
                     if (((DateTime)r["date"]) != aux)
                     {
                         aux = ((DateTime)r["date"]);
