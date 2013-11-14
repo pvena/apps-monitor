@@ -27,10 +27,16 @@ public class TabsActivity extends TabActivity{
         config.setIndicator("Config.", getResources().getDrawable(R.drawable.ic_config));
         Intent songsIntent = new Intent(this, ConfigActivity.class);
         config.setContent(songsIntent);
+        
+        TabSpec map = tabHost.newTabSpec("Map");        
+        map.setIndicator("Map.", getResources().getDrawable(R.drawable.ic_map));
+        Intent mapIntent = new Intent(this, MapActivity.class);
+        map.setContent(mapIntent);
          
         // Adding all TabSpec to TabHost
         tabHost.addTab(service);
-        tabHost.addTab(config);  
+        tabHost.addTab(config); 
+        tabHost.addTab(map);
         
    }
 }
