@@ -9,6 +9,21 @@ namespace LoginUseWebService
 {
     public class LogParserManager
     {
+        private DateTime getDatetime(string date, string dTime)
+        {
+            string[] time = dTime.Substring(1, dTime.Length - 2).Split(':');
+
+            int year = Convert.ToInt16(date.Substring(0, 4));
+            int month = Convert.ToInt16(date.Substring(4, 2));
+            int day = Convert.ToInt16(date.Substring(6, 2));
+            int hh = Convert.ToInt16(time[0]);
+            int mm = Convert.ToInt16(time[1]);
+            int ss = Convert.ToInt16(time[2]);
+
+            return new DateTime(year, month, day, hh, mm, ss);
+        }
+        
+        
         private void processProperty(string property,string fileName, string type, DateTime dt,DBManager dbm) 
         {
             string[] pValue = property.Split(LogConstants.SEP.ToCharArray());
@@ -27,20 +42,7 @@ namespace LoginUseWebService
                 this.processProperty(values[i], fileName ,type, dt, dbm);
             }
         }
-
-        private DateTime getDatetime(string date, string dTime)
-        {
-            string[] time = dTime.Substring(1, dTime.Length - 2).Split(':');
-
-            int year = Convert.ToInt16(date.Substring(0, 4));
-            int month = Convert.ToInt16(date.Substring(4, 2));
-            int day = Convert.ToInt16(date.Substring(6, 2));
-            int hh = Convert.ToInt16(time[0]);
-            int mm = Convert.ToInt16(time[1]);
-            int ss = Convert.ToInt16(time[2]);
-
-            return new DateTime(year, month, day, hh, mm, ss); 
-        }
+        
         private void processLine(string line,string fileName, string date,DBManager dbm)
         {
             string[] parts = line.Split(LogConstants.CATSEP.ToCharArray());

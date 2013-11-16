@@ -65,6 +65,8 @@
     <Compile Include="Class\DBLayer\DBManager.cs" />
     <Compile Include="Class\DBLayer\InterfeseDB.cs" />
     <Compile Include="Class\LocationManager\LocationManager.cs" />
+    <Compile Include="Class\LocationManager\LocationGroup.cs" />
+    <Compile Include="Class\LocationManager\Location.cs" />
     <Compile Include="LoginUse.asmx.cs">
       <DependentUpon>LoginUse.asmx</DependentUpon>
       <SubType>Component</SubType>

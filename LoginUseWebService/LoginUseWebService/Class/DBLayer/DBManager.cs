@@ -81,6 +81,32 @@ namespace LoginUseWebService
                 return "Fail.";
             }
         }
+        public string saveLocationGroup(string phoneId, LocationGroup lg)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("InsertLocationGroup");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);                
+                cmd.Parameters.AddWithValue("@name", lg.Name);
+                cmd.Parameters.AddWithValue("@latitud", lg.Latitud);
+                cmd.Parameters.AddWithValue("@longitud", lg.Longitud);
+                cmd.Parameters.AddWithValue("@count", lg.Count);
+                if (lg.Id != int.MinValue)
+                    cmd.Parameters.AddWithValue("@idLocationGroup", lg.Id);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                int id = this.iDB.executeInsert(cmd);
+                this.iDB.disconect();
+                if (id > 0)
+                    return "OK.";
+                else
+                    return "Fail.";
+            }
+            catch (Exception ex)
+            {
+                return "Fail.";
+            }
+        }
 
         public DataTable getFile(string fileName, bool isZip)
         {
@@ -144,6 +170,40 @@ namespace LoginUseWebService
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (names != null)
                     cmd.Parameters.AddWithValue("@names", names);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable getLocationGroups(string phoneId)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getLocationGroup");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable getLocations(string phoneId)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getLocation");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
                 this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
                 DataTable dt = this.iDB.getTable(cmd);
                 this.iDB.disconect();

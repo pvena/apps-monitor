@@ -184,27 +184,29 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020019;
         public static final int ic_launcher1=0x7f02001a;
         public static final int ic_login=0x7f02001b;
-        public static final int ic_plusone_medium_off_client=0x7f02001c;
-        public static final int ic_plusone_small_off_client=0x7f02001d;
-        public static final int ic_plusone_standard_off_client=0x7f02001e;
-        public static final int ic_plusone_tall_off_client=0x7f02001f;
+        public static final int ic_map=0x7f02001c;
+        public static final int ic_plusone_medium_off_client=0x7f02001d;
+        public static final int ic_plusone_small_off_client=0x7f02001e;
+        public static final int ic_plusone_standard_off_client=0x7f02001f;
+        public static final int ic_plusone_tall_off_client=0x7f020020;
     }
     public static final class id {
         public static final int CurrentActivityTitle=0x7f05000c;
         public static final int SendInformationTitle=0x7f05000f;
-        public static final int action_settings=0x7f05001b;
-        public static final int btn=0x7f050019;
+        public static final int action_settings=0x7f05001c;
+        public static final int btn=0x7f05001a;
         public static final int btnRegister=0x7f050015;
         public static final int chbEnableGpsLocation=0x7f050007;
         public static final int hybrid=0x7f050004;
         public static final int locationTitle=0x7f050005;
+        public static final int map=0x7f050019;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
         public static final int saveConfiguration=0x7f050018;
         public static final int sendLog=0x7f050017;
         public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05001a;
+        public static final int textView1=0x7f05001b;
         public static final int txtActivityConfidence=0x7f05000e;
         public static final int txtIntervalLocation=0x7f050009;
         public static final int txtMinDistanceLocation=0x7f05000b;
@@ -221,8 +223,9 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int config_activity=0x7f030000;
-        public static final int service_activity=0x7f030001;
-        public static final int tab_activity=0x7f030002;
+        public static final int map_activity=0x7f030001;
+        public static final int service_activity=0x7f030002;
+        public static final int tab_activity=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f090000;
