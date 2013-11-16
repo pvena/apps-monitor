@@ -11,8 +11,8 @@ declare @idUser int
 
 select @idUser = idUser from [user] where phoneId = @phoneId
 
-select 
+select top 10
 	* 
 from locationGroup 
 where idUser = @idUser
-order by [name]
+order by [count] desc

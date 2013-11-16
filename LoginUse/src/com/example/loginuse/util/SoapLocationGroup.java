@@ -1,30 +1,27 @@
 package com.example.loginuse.util;
 
-import java.io.File;
-
-import org.ksoap2.SoapEnvelope; 
+import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogFormat;
 
-public class SoapFileTask extends AsyncTask<Void, Void, String>{
+public class SoapLocationGroup extends AsyncTask<Void, Void, String>{
 
-	public final String SOAP_ACTION = "http://tesis.org/UploadFile";
-	public  final String OPERATION_NAME = "UploadFile"; 
+	public final String SOAP_ACTION = "http://tesis.org/getLocationGroups";
+	public  final String OPERATION_NAME = "getLocationGroups"; 
 	public  final String WSDL_TARGET_NAMESPACE = "http://tesis.org/";
 	private String SOAP_ADDRESS = "";
 	
-	private File file;
 	private String result;
 	
-	public SoapFileTask(File file) 
+	public SoapLocationGroup() 
 	{ 
-		this.file = file;
 		this.SOAP_ADDRESS = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "") + LogConfiguration.WebServiceName;
 	}
 	
@@ -33,9 +30,8 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 	{
 		try
 		{
-			SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
+			SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);			
 			
-			request.addProperty("data", LogFormat.getFileToBase64Encode(this.file));
 			request.addProperty("phoneId", LogConfiguration.getInstance().getPhoneId());
 			
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -45,14 +41,18 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 	        HttpTransportSE httpTransport = new HttpTransportSE(this.SOAP_ADDRESS);
 			
 				
-			httpTransport.call(SOAP_ACTION, envelope);			
+			httpTransport.call(SOAP_ACTION, envelope);
+			
+			SoapObject bodyIn = (SoapObject) envelope.bodyIn;
+			
+			LogFormat.setLocationGroups(bodyIn.getPropertyAsString(0));						
 		}
 		catch (Exception exception)
 		{		
-			this.result = "Send Fail.";
+			this.result = "Refresh Locations Fail.";
 			return "Fail.";
 		}
-		this.result = "Send OK.";
+		this.result = "Refresh Locations OK.";
 		return "OK";
 	}
 	

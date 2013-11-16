@@ -2,13 +2,19 @@ package com.example.loginuse;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 import com.example.loginuse.R;
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
 import com.example.loginuse.util.SoapFileTask;
+import com.example.loginuse.util.SoapLocationGroup;
 import com.example.loginuse.util.SoapRegisterTask;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,6 +29,7 @@ public class ConfigActivity  extends Activity{
 	private Button sendLog;
 	private Button saveConfig;
 	private Button registerUser;
+	private Button refreshLocationGroups;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,8 @@ public class ConfigActivity  extends Activity{
         saveConfig.setOnClickListener(saveConfigOnClickListener);		
         registerUser = (Button)findViewById(R.id.btnRegister);
         registerUser.setOnClickListener(userNameRegisterClickLisener);
+        refreshLocationGroups = (Button)findViewById(R.id.refreshLocationGroups);
+        refreshLocationGroups.setOnClickListener(refreshLocationGroupClickLisener);
         this.inicConfig();
     }
 	
@@ -42,7 +51,7 @@ public class ConfigActivity  extends Activity{
 		String locInterval = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL,9000));
 		String locMinDist = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE,200));
 		String actConfiddence = String.valueOf(LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE,80));
-		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://.../loginuse.asmx");
+		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://201.235.94.231:8080");
 		String phoneId = LogConfiguration.getInstance().getPhoneId();
 		String userName = LogConfiguration.getInstance().getProperty(LogConfiguration.UserName, "");
 		
@@ -90,7 +99,7 @@ public class ConfigActivity  extends Activity{
 				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
 				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
 				
-				new SoapFileTask(file,"Prueba.Zip").execute();			
+				new SoapFileTask(file).execute();			
 				
 				//TODO descomentar cuando tengamos el server corriendo
 				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
@@ -104,7 +113,22 @@ public class ConfigActivity  extends Activity{
 	Button.OnClickListener saveConfigOnClickListener = new Button.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			try {
+			/*try
+			{
+				Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
+				Enumeration<String> enumKey = groups.keys();
+				while(enumKey.hasMoreElements()) {
+				    String key = enumKey.nextElement();
+				    LatLng val = groups.get(key);
+				    
+				}
+			}
+			catch(Exception e)
+			{
+				String s = e.getMessage();
+			}*/
+			
+			try {	
 				
 				boolean gpsEnabled = LogFormat.getCheckBoxBoolean((CheckBox)findViewById(R.id.chbEnableGpsLocation));				
 				int locInterval = LogFormat.getTextViewInt((TextView)findViewById(R.id.txtIntervalLocation));
@@ -132,6 +156,18 @@ public class ConfigActivity  extends Activity{
 				LogConfiguration.getInstance().setProperty(LogConfiguration.UserName, userName);
 				
 				new SoapRegisterTask(userName).execute();
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	};
+	
+	Button.OnClickListener refreshLocationGroupClickLisener = new Button.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			try {				
+				new SoapLocationGroup().execute();
 				
 			} catch (Exception ex) {
 				ex.printStackTrace();

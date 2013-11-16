@@ -241,7 +241,7 @@
     	    android:layout_height="wrap_content"
     	    android:layout_alignParentRight="true"
     	    android:layout_centerVertical="true"
-    	    android:text="@string/sendLogButton" />
+    	    android:text="@string/sendLogButton" />   		
    		
    		<Button
      		android:id="@+id/saveConfiguration"
@@ -250,4 +250,18 @@
         	android:layout_gravity="center"
         	android:text="@string/btnSaveConfiguration" />
    	</RelativeLayout>	
+   	
+    <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:padding="6dip" >
+   		
+        <Button
+    	    android:id="@+id/refreshLocationGroups"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"    	    
+    	    android:layout_centerVertical="true"
+    	    android:text="@string/refreshLocationGroups" />
+   		
+   	</RelativeLayout>
 </LinearLayout>

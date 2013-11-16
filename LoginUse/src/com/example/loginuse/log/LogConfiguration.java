@@ -22,6 +22,10 @@ public class LogConfiguration {
 	public static String LOCATIONGPSENABLED = "LOCATIONGPSENABLED"; //false
 	public static String LOCATIONINTERVAL = "LOCATIONINTERVAL"; //900000
 	public static String LOCATIONMINDISTANCE = "LOCATIONMINDISTANCE"; //200
+	public static String LOCATIONGROUPCOUNT = "LOCATIONGROUPCOUNT";
+	public static String LOCATIONGROUPBASE = "LOCATIONGROUPBASE_";
+	public static String LONGITUD = "LONGITUD_";
+	public static String LATITUD = "LATITUD_";
 	
 	public static String ACTIVITYMINCCONFIDENCE = "ACTIVITYMINCCONFIDENCE"; //80
 	public static String ACTIVITYMILISECONDSPERSSECOND = "ACTIVITYMILISECONDSPERSSECOND"; //1000
@@ -61,6 +65,11 @@ public class LogConfiguration {
 			return PreferenceManager.getDefaultSharedPreferences(this.context).getBoolean(key, defValue);
 		return defValue;
 	}
+	public float getProperty(String key,float defValue){
+		if(this.context != null)
+			return PreferenceManager.getDefaultSharedPreferences(this.context).getFloat(key, defValue);
+		return defValue;
+	}
 	
 	public void setProperty(String key,int value){
 		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit(); 
@@ -75,6 +84,11 @@ public class LogConfiguration {
 	public void setProperty(String key,boolean value){
 		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
 		ed.putBoolean(key, value);
+		ed.commit();
+	}
+	public void setProperty(String key,float value){
+		Editor ed = PreferenceManager.getDefaultSharedPreferences(this.context).edit();
+		ed.putFloat(key, value);
 		ed.commit();
 	}
 	

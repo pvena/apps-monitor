@@ -1,6 +1,9 @@
 package com.example.loginuse;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import com.example.loginuse.log.LogFormat;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -14,26 +17,25 @@ public class MapActivity extends FragmentActivity  {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_activity);
-
+        setContentView(R.layout.map_activity);                
+        
         // Get a handle to the Map Fragment
         GoogleMap map = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
 
-        LatLng casaDePolo = new LatLng(-37.323997,-59.129154);
-        LatLng casaDePablo = new LatLng(-37.327657,-59.134357);
-
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(casaDePolo, 13));
-
-        map.addMarker(new MarkerOptions()
-                .title("Casa de Polo")
-                .snippet("Aca vive el Polo.")
-                .position(casaDePolo));
+        LatLng group = null;
+        String key = null;
         
-        map.addMarker(new MarkerOptions()
-        .title("Casa de Pablo")
-        .snippet("Aca vive el Pablo.")
-        .position(casaDePablo));
+        Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
+		Enumeration<String> enumKey = groups.keys();
+		
+		while(enumKey.hasMoreElements()) {
+		    key = enumKey.nextElement();
+		    group = groups.get(key);
+		    map.addMarker(new MarkerOptions().title(key).snippet(key + "snippet").position(group));
+		}        
+        
+        map.setMyLocationEnabled(true);
+       
     }
 }

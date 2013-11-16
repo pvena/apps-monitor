@@ -63,7 +63,7 @@ namespace LoginUseWebService
                     for (int i = 0; (i < groups.Count) && !find; i++)
                     {
                         LocationGroup lg = groups[i];
-                        if (this.GetDistance(lg.Longitud, lg.Latitud, l.Longitud, l.Latitud) < 400)
+                        if (this.GetDistance(lg.Longitud, lg.Latitud, l.Longitud, l.Latitud) < 200)
                         {
                             find = true;
                             lg.Latitud = ((lg.Latitud * lg.Count) + l.Latitud) / (lg.Count + 1);

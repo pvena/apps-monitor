@@ -4,9 +4,12 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Hashtable;
+
 import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import com.google.android.gms.maps.model.LatLng;
 
 
 public class LogFormat {
@@ -53,4 +56,27 @@ public class LogFormat {
 	    } catch (IOException e) {}
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
+	
+	public static void setLocationGroups(String LocationData){
+		String[] data = LocationData.split("&");
+		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 3);
+		for(int i=0;i<(data.length/3);i+=3 ){
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPBASE + i/3  , data[i]);
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LATITUD + i/3  , Float.valueOf(data[i+1]));
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/3 , Float.valueOf(data[i+2]));
+		}
+	}
+	
+	public static Hashtable<String, LatLng> getLocationGroup(){
+		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPCOUNT, 0);
+		Hashtable<String, LatLng> groups = new Hashtable<String, LatLng>();
+		for(int i=0; i < count ; i++){
+			String name = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group");
+			double latitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LATITUD + i, 0.0f);
+			double longitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LONGITUD + i, 0.0f);
+			LatLng latLong = new LatLng(latitud, longitud);
+			groups.put(name, latLong);
+		}
+		return groups;
+	}
 }

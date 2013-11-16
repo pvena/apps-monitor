@@ -152,6 +152,17 @@ namespace LoginUseWebService
             }
         }
 
-
+        [WebMethod]
+        public string getLocationGroups(string phoneId)
+        {
+            try
+            {                
+                return LogServiceManager.getInstance().createLocationGroupData(phoneId);
+            }
+            catch (Exception ex)
+            { 
+                return "Fail"; 
+            }
+        }
     }
 }

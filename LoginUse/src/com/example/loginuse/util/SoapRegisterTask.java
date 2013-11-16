@@ -1,7 +1,6 @@
 package com.example.loginuse.util;
 
 import org.ksoap2.SoapEnvelope; 
-import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
@@ -34,29 +33,10 @@ public class SoapRegisterTask extends AsyncTask<Void, Void, String>{
 		{
 			SoapObject request = new SoapObject(WSDL_TARGET_NAMESPACE,OPERATION_NAME);
 		
-			PropertyInfo pi = new PropertyInfo();
-			pi.setName("name");
-			pi.setValue(this.userName);
-			pi.setType(String.class);
-			request.addProperty(pi);
-			
-			pi = new PropertyInfo();
-			pi.setName("phoneId");
-			pi.setValue(LogConfiguration.getInstance().getPhoneId());
-			pi.setType(String.class);
-			request.addProperty(pi);
-			
-			pi = new PropertyInfo();
-			pi.setName("version");
-			pi.setValue(LogConfiguration.getInstance().getAndroidVersion());
-			pi.setType(String.class);
-			request.addProperty(pi);
-			
-			pi = new PropertyInfo();
-			pi.setName("phoneModel");
-			pi.setValue(LogConfiguration.getInstance().getDeviceName());
-			pi.setType(String.class);
-			request.addProperty(pi);
+			request.addProperty("name", this.userName);
+			request.addProperty("phoneId", LogConfiguration.getInstance().getPhoneId());
+			request.addProperty("version", LogConfiguration.getInstance().getAndroidVersion());
+			request.addProperty("phoneModel", LogConfiguration.getInstance().getDeviceName());
 			
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;	 

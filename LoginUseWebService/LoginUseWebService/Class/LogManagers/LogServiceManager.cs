@@ -141,9 +141,18 @@ namespace LoginUseWebService
             { return false; }
         }
 
-        public string createLocationGroupData()
+        public string createLocationGroupData(string phoneId)
         {
-            return "&&";
+            DBManager dbm = new DBManager();
+            DataTable dt = dbm.getLocationGroups(phoneId);            
+            if (dt != null)
+            {
+                string data = "";
+                foreach (DataRow r in dt.Rows)
+                    data += r["name"] + "&" + r["latitud"] + "&" + r["longitud"] + "&";
+                return data.Substring(0,data.Length-1);
+            }
+            return "";
         }
         #endregion
         
