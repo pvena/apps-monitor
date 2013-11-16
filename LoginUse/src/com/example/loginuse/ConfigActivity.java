@@ -2,10 +2,6 @@ package com.example.loginuse;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
-
 import com.example.loginuse.R;
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
@@ -14,7 +10,6 @@ import com.example.loginuse.util.Compress;
 import com.example.loginuse.util.SoapFileTask;
 import com.example.loginuse.util.SoapLocationGroup;
 import com.example.loginuse.util.SoapRegisterTask;
-import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -112,22 +107,7 @@ public class ConfigActivity  extends Activity{
 	
 	Button.OnClickListener saveConfigOnClickListener = new Button.OnClickListener() {
 		@Override
-		public void onClick(View v) {
-			/*try
-			{
-				Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
-				Enumeration<String> enumKey = groups.keys();
-				while(enumKey.hasMoreElements()) {
-				    String key = enumKey.nextElement();
-				    LatLng val = groups.get(key);
-				    
-				}
-			}
-			catch(Exception e)
-			{
-				String s = e.getMessage();
-			}*/
-			
+		public void onClick(View v) {			
 			try {	
 				
 				boolean gpsEnabled = LogFormat.getCheckBoxBoolean((CheckBox)findViewById(R.id.chbEnableGpsLocation));				

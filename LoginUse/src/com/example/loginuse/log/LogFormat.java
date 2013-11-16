@@ -60,7 +60,7 @@ public class LogFormat {
 	public static void setLocationGroups(String LocationData){
 		String[] data = LocationData.split("&");
 		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 3);
-		for(int i=0;i<(data.length/3);i+=3 ){
+		for(int i=0;i<(data.length);i+=3 ){
 			LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPBASE + i/3  , data[i]);
 			LogConfiguration.getInstance().setProperty(LogConfiguration.LATITUD + i/3  , Float.valueOf(data[i+1]));
 			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/3 , Float.valueOf(data[i+2]));
@@ -71,7 +71,7 @@ public class LogFormat {
 		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPCOUNT, 0);
 		Hashtable<String, LatLng> groups = new Hashtable<String, LatLng>();
 		for(int i=0; i < count ; i++){
-			String name = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group");
+			String name = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group" + i);
 			double latitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LATITUD + i, 0.0f);
 			double longitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LONGITUD + i, 0.0f);
 			LatLng latLong = new LatLng(latitud, longitud);
