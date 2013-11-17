@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -26,9 +27,10 @@ public class Compress {
 
 	private String[] _files;
 	private String _zipFile;
+	private String _lastZip;
 
-	public Compress(String[] files, String zipFile) {
-		_files = files;
+	public Compress(String dir, String zipFile) {
+		_files = this.listFiles(dir);
 		_zipFile = zipFile;
 	}
 
@@ -55,7 +57,7 @@ public class Compress {
 
 			byte data[] = new byte[BUFFER];
 
-			for (int i = 0; i < _files.length; i++) {
+			for (int i = 0; i < _files.length-1; i++) {
 				String fileName = directory.getAbsolutePath()+"/"+_files[i];
 				Log.v("Compress", "Adding: " + fileName);
 				FileInputStream fi = new FileInputStream(fileName);
@@ -70,10 +72,56 @@ public class Compress {
 			}
 
 			out.close();
+			_lastZip = file.getAbsolutePath();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
+	
+	private String[] listFiles(String dir) {
+		File root = Environment.getExternalStorageDirectory();
+		
+		File directory = new File(root, dir);
 
+		if (!directory.isDirectory()) {
+			return null;
+		}
+		// create a FilenameFilter and override its accept-method
+		FilenameFilter filefilter = new FilenameFilter() {
+
+			public boolean accept(File dir, String name) {				
+				return name.endsWith(".txt");
+			}
+		};
+
+		return directory.list(filefilter);
+	}
+	
+	public void deleteListFiles()
+	{     	
+		for (int i = 0; i < _files.length-1; i++) {
+			this.deleteSingleFile(_files[i]);
+		}
+	}
+	public void deleteLastZipFile()
+	{
+		this.deleteSingleFile(_lastZip);
+	}
+	private void deleteSingleFile(String path)
+	{
+		try		
+		{		
+			File root = Environment.getExternalStorageDirectory();
+			File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
+	    	// have the object build the directory structure, if needed.
+	    	directory.mkdirs();    
+         	File file = new File(directory.getAbsolutePath() + "/" + path);
+         	file.delete();
+		}
+		catch(Exception ex)
+		{
+			Log.v("Compress", "Deleting File: " + path);
+		}
+	}
 }

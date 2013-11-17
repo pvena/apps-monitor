@@ -7,6 +7,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.loginuse.log.LogConfiguration;
@@ -21,10 +22,12 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 	
 	private File file;
 	private String result;
+	private Compress compress;
 	
-	public SoapFileTask(File file) 
+	public SoapFileTask(File file,Compress compress) 
 	{ 
 		this.file = file;
+		this.compress = compress;
 		this.SOAP_ADDRESS = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "") + LogConfiguration.WebServiceName;
 	}
 	
@@ -42,18 +45,24 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 			envelope.dotNet = true;	 
 			envelope.setOutputSoapObject(request);	        		
 			
-	        HttpTransportSE httpTransport = new HttpTransportSE(this.SOAP_ADDRESS);
-			
+	        HttpTransportSE httpTransport = new HttpTransportSE(this.SOAP_ADDRESS);			
 				
 			httpTransport.call(SOAP_ACTION, envelope);			
+			
+			SoapObject bodyIn = (SoapObject) envelope.bodyIn;			
+			
+			this.result = "Response " + bodyIn.getPropertyAsString(0);
+			
+			if(this.result.equals("Response OK"))			
+				this.compress.deleteListFiles();
+			else
+				this.compress.deleteLastZipFile();
 		}
-		catch (Exception exception)
-		{		
-			this.result = "Send Fail.";
-			return "Fail.";
-		}
-		this.result = "Send OK.";
-		return "OK";
+		catch (Exception ex)
+		{
+			Log.v("Send File", ex.getMessage());
+		}	
+		return this.result;
 	}
 	
 	@Override

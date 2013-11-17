@@ -1,7 +1,6 @@
 package com.example.loginuse;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import com.example.loginuse.R;
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
@@ -61,40 +60,18 @@ public class ConfigActivity  extends Activity{
 	}
 	
 	Button.OnClickListener sendLogOnClickListener = new Button.OnClickListener() {
-		
-		private String[] listFiles(String dir) {
-			File root = Environment.getExternalStorageDirectory();
-			
-			File directory = new File(root, dir);
-
-			if (!directory.isDirectory()) {
-				System.out.println("No directory provided");
-				return null;
-			}
-
-			// create a FilenameFilter and override its accept-method
-			FilenameFilter filefilter = new FilenameFilter() {
-
-				public boolean accept(File dir, String name) {
-					// if the file extension is .txt return true, else false
-					return name.endsWith(".txt");
-				}
-			};
-
-			return directory.list(filefilter);
-		}
 
 		@Override
 		public void onClick(View arg0) {
 			try {
-				Compress compress = new Compress(listFiles(LogConstants.LOG_FOLDER_NAME), LogConstants.ZIP_LOG_FILE_NAME);
+				Compress compress = new Compress(LogConstants.LOG_FOLDER_NAME, LogConstants.ZIP_LOG_FILE_NAME);
 				compress.zip();
 				
 				File root = Environment.getExternalStorageDirectory();
 				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
 				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
 				
-				new SoapFileTask(file).execute();			
+				new SoapFileTask(file,compress).execute();			
 				
 				//TODO descomentar cuando tengamos el server corriendo
 				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
