@@ -71,7 +71,7 @@ public class ConfigActivity  extends Activity{
 				if(compress.compressOK()){
 					File root = Environment.getExternalStorageDirectory();
 					File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
-					File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
+					File file = new File(directory,LogConfiguration.getInstance().getCurrentDayZip());
 				
 					new SoapFileTask(file,compress).execute();
 				}
