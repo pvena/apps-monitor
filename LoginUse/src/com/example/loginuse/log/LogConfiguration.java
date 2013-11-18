@@ -104,7 +104,9 @@ public class LogConfiguration {
 	}
 	
 	public String getCurrentDayZip(){
-		return LogFormat.getCurrentDate() + LogConstants.LOG_FILE_NAME;
+		String date = DateFormat.format(LogConstants.FILEDATEFORMAT, new Date()).toString();
+        String fileName = LogConstants.ZIP_LOG_FILE_NAME.replace("@", date); 
+        return fileName;
 	}
 	
 	public String getAndroidVersion()
