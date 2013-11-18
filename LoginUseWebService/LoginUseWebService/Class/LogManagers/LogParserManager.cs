@@ -61,7 +61,7 @@ namespace LoginUseWebService
         {
             string fileName = Path.GetFileName(path);
 
-            if (!dbm.isFileProcess(fileName, false))
+            if (!dbm.isFileProcess(phoneId, fileName, false))
             {
                 dbm.saveFile(phoneId, fileName, false, false, new FileInfo(path).Length);
 
@@ -84,7 +84,7 @@ namespace LoginUseWebService
 
             try
             {
-                if (!dbm.isFileProcess(Path.GetFileName(zipPath), true))
+                if (!dbm.isFileProcess(phoneId,Path.GetFileName(zipPath), true))
                 {
                     string res = dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
 

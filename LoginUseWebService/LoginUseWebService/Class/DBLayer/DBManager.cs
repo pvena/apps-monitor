@@ -108,12 +108,13 @@ namespace LoginUseWebService
             }
         }
 
-        public DataTable getFile(string fileName, bool isZip)
+        public DataTable getFile(string phoneId, string fileName, bool isZip)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("getFile");
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
                 cmd.Parameters.AddWithValue("@name", fileName);
                 cmd.Parameters.AddWithValue("@isZip", isZip);
                 this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
@@ -241,9 +242,9 @@ namespace LoginUseWebService
         #endregion
 
 
-        public bool isFileProcess(string name, bool isZip)
+        public bool isFileProcess(string phoneId, string name, bool isZip)
         {
-            DataTable dt = this.getFile(name, isZip);
+            DataTable dt = this.getFile(phoneId,name, isZip);
 
             if  ((dt.Rows.Count == 0) || ((dt.Rows.Count > 0) && !(bool)dt.Rows[0]["Process"]))                
                 return false;
