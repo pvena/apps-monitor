@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ConfigActivity  extends Activity{
 	
@@ -64,15 +65,18 @@ public class ConfigActivity  extends Activity{
 		@Override
 		public void onClick(View arg0) {
 			try {
-				Compress compress = new Compress(LogConstants.LOG_FOLDER_NAME, LogConstants.ZIP_LOG_FILE_NAME);
+				
+				Compress compress = new Compress(LogConstants.LOG_FOLDER_NAME, LogConfiguration.getInstance().getCurrentDayZip());
 				compress.zip();
+				if(compress.compressOK()){
+					File root = Environment.getExternalStorageDirectory();
+					File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
+					File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
 				
-				File root = Environment.getExternalStorageDirectory();
-				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
-				File file = new File(directory,LogConstants.ZIP_LOG_FILE_NAME);
-				
-				new SoapFileTask(file,compress).execute();			
-				
+					new SoapFileTask(file,compress).execute();
+				}
+				else
+					Toast.makeText(LogConfiguration.getInstance().getContext(), "No Files for send", Toast.LENGTH_SHORT).show();
 				//TODO descomentar cuando tengamos el server corriendo
 				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
 			} catch (Exception ex) {

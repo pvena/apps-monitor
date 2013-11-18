@@ -4,8 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Hashtable;
 
+import android.text.format.DateFormat;
 import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -14,6 +16,9 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class LogFormat {
 	
+	public static String getCurrentDate(){
+		return DateFormat.format("yyyyMMdd", new Date()).toString();
+	}
 	public static String getLog(String property,String value)
 	{
 		return property + LogConstants.SEP  + value + LogConstants.PSEP;

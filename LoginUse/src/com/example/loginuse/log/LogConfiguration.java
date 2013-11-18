@@ -103,6 +103,10 @@ public class LogConfiguration {
         return fileName;
 	}
 	
+	public String getCurrentDayZip(){
+		return LogFormat.getCurrentDate() + LogConstants.LOG_FILE_NAME;
+	}
+	
 	public String getAndroidVersion()
 	{
 		return android.os.Build.VERSION.RELEASE;
