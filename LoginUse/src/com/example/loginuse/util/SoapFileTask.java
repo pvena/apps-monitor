@@ -61,12 +61,18 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 		catch (Exception ex)
 		{
 			Log.v("Send File", ex.getMessage());
-		}	
+		}
 		return this.result;
 	}
 	
 	@Override
-    protected void onPostExecute(String result) { 
+    protected void onPostExecute(String result) {
+		if(this.result != null && !this.result.equals(""))
 			Toast.makeText(LogConfiguration.getInstance().getContext(), this.result, Toast.LENGTH_SHORT).show();
+		else
+		{
+			String error = "Problem to Send File.";
+			Toast.makeText(LogConfiguration.getInstance().getContext(), error, Toast.LENGTH_SHORT).show();
+		}
     }
 }

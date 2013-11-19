@@ -45,19 +45,26 @@ public class SoapLocationGroup extends AsyncTask<Void, Void, String>{
 			
 			SoapObject bodyIn = (SoapObject) envelope.bodyIn;
 			
-			LogFormat.setLocationGroups(bodyIn.getPropertyAsString(0));						
+			LogFormat.setLocationGroups(bodyIn.getPropertyAsString(0));
+			
+			this.result = "Refresh Locations OK.";
 		}
 		catch (Exception exception)
-		{		
-			this.result = "Refresh Locations Fail.";
+		{			
 			return "Fail.";
-		}
-		this.result = "Refresh Locations OK.";
-		return "OK";
+		}		
+		return this.result;
 	}
 	
 	@Override
     protected void onPostExecute(String result) { 
+		if(this.result != null && !this.result.equals(""))
 			Toast.makeText(LogConfiguration.getInstance().getContext(), this.result, Toast.LENGTH_SHORT).show();
+		else
+		{
+			String error = "Problem to Refresh Locations.";
+			Toast.makeText(LogConfiguration.getInstance().getContext(), error, Toast.LENGTH_SHORT).show();
+		}
+			
     }
 }

@@ -4,135 +4,6 @@
     android:layout_height="fill_parent"
     android:background="@android:color/black"
     android:orientation="vertical" >
-    
-    <TextView
-        android:id="@+id/locationTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:background="#777777"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" 
-        android:text="@string/LocationTitle"/>
-    
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-        <TextView
-            android:id="@+id/txvEnabledGpsLocation"
-            android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
-        	android:layout_alignParentRight="true"
-        	android:ellipsize="middle"
-        	android:singleLine="true"
-            android:text="@string/txvEnabledGpsLocation"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <CheckBox
-            android:id="@+id/chbEnableGpsLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentBottom="true"
-        	android:layout_alignParentTop="true"
-        	android:layout_marginRight="6dip"
-            android:layout_alignRight="@+id/txvEnabledGpsLocation"
-            android:textColor="@android:color/white" />
-
-    </RelativeLayout>
-	
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-    
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-        <TextView
-            android:id="@+id/txvIntervalLocation"
-            android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
-            android:text="@string/txvIntervalLocation"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <EditText
-            android:id="@+id/txtIntervalLocation"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:textSize="14sp"
-            android:layout_alignRight="@+id/txvIntervalLocation"
-            android:ems="10"
-            android:inputType="number"
-            android:text="@string/edtIntervalLocationDefault" >
-
-            <requestFocus />
-        </EditText>
-
-    </RelativeLayout>
-
-    <View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-    
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-        <TextView
-            android:id="@+id/txvMinDistanceLocation"
-            android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
-            android:text="@string/txvMinDistanceLocation"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <EditText
-            android:id="@+id/txtMinDistanceLocation"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_alignRight="@+id/txvMinDistanceLocation"
-            android:layout_alignTop="@+id/txvMinDistanceLocation"
-            android:ems="10"
-            android:inputType="number"
-            android:text="@string/edtMinDistanceLocationDefault"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
-    
-     <TextView
-        android:id="@+id/CurrentActivityTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:background="#777777"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" 
-        android:text="@string/CurrentActivityTitle"/>
-    
-   <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-        <TextView
-            android:id="@+id/txvActivityConfidence"
-            android:layout_width="fill_parent"
-        	android:layout_height="fill_parent"
-            android:text="@string/txvActivityConfidence"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <EditText
-            android:id="@+id/txtActivityConfidence"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:textSize="14sp"
-            android:layout_alignRight="@+id/txvActivityConfidence"
-            android:ems="10"
-            android:inputType="number"
-            android:text="@string/edtActivityConfidenceDefault" />
-
-   </RelativeLayout>
 
    <TextView
        	android:id="@+id/SendInformationTitle"
@@ -142,126 +13,98 @@
        	android:background="#777777"
        	android:textColor="@android:color/white"
        	android:textStyle="bold" 
-       	android:text="@string/SendInfoTitle"/>  		
-    
-   		<RelativeLayout 
-    		android:layout_width="fill_parent"
-    		android:layout_height="30dp"
-    		android:padding="6dip" >
+       	android:text="@string/lblConfiguration"/>  		
    				
-   				<TextView
-            		android:id="@+id/txvPhoneId"
-            		android:layout_width="fill_parent"
-        			android:layout_height="30dp"
-            		android:text="@string/txvPhoneId"
-            		android:textColor="@android:color/primary_text_dark" />
-   		
-   				<TextView
-            		android:id="@+id/txvPhoneIdValue"
-            		android:layout_width="200dp"
-        			android:layout_height="30dp"
-        			android:gravity="right"
-        			android:layout_alignRight="@+id/txvPhoneId"        			
-            		android:textColor="@android:color/primary_text_dark" />
-   		</RelativeLayout>		
-   		
-   		<View
-    		android:layout_width="fill_parent"
-    		android:layout_height="1dp"
-    		android:background="@android:color/darker_gray"/>
-  
-        <TextView
-            android:id="@+id/txvWebServiceURL"
-            android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-            android:text="@string/txvWebServiceURL"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <EditText
-            android:id="@+id/txtWebServiceURL"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:textSize="14sp"
-            android:inputType="textUri"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/edtWebServiceURL" />   
-   
-    <View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-        
-   <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-
-       	 <TextView
-            android:id="@+id/txvUserName"
-            android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-            android:text="@string/txvUserName"
-            android:textColor="@android:color/primary_text_dark" /> 
-       	 
-    	<Button
-    	    android:id="@+id/btnRegister"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_alignParentRight="true"
-    	    android:layout_centerVertical="true"
-    	    android:text="@string/btnRegister" />
-
-    	<EditText
-    	    android:id="@+id/txtUserName"
-    	    android:layout_width="150dp"
-    	    android:layout_height="40dp"
-    	    android:layout_alignLeft="@+id/txvUserName"
-    	    android:layout_alignTop="@+id/txvUserName"
-    	    android:layout_marginLeft="76dp"
-    	    android:ems="10"
-    	    android:inputType="text"
-    	    android:textSize="14sp" />
-
-	</RelativeLayout>
-	
+   <TextView
+      	android:id="@+id/txvPhoneId"
+       	android:layout_width="fill_parent"
+       	android:layout_height="30dp"
+        android:text="@string/txvPhoneId"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/primary_text_dark" />
+   <TextView
+       	android:id="@+id/txvPhoneIdValue"
+        android:layout_width="200dp"
+      	android:layout_height="30dp"
+       	android:gravity="right"
+       	android:layout_alignRight="@+id/txvPhoneId"        			
+        android:textColor="@android:color/primary_text_dark" />   		
    <View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-   
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-    	
-   		<Button
-    	    android:id="@+id/sendLog"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_alignParentRight="true"
-    	    android:layout_centerVertical="true"
-    	    android:text="@string/sendLogButton" />   		
-   		
-   		<Button
-     		android:id="@+id/saveConfiguration"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_gravity="center"
-        	android:text="@string/btnSaveConfiguration" />
-   	</RelativeLayout>	
-   	
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:padding="6dip" >
-   		
-        <Button
-    	    android:id="@+id/refreshLocationGroups"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"    	    
-    	    android:layout_centerVertical="true"
-    	    android:text="@string/refreshLocationGroups" />
-   		
-   	</RelativeLayout>
+   		android:layout_width="fill_parent"
+   		android:layout_height="1dp"
+   		android:background="@android:color/darker_gray"/>
+   <TextView
+        android:id="@+id/txvWebServiceURL"
+        android:layout_width="fill_parent"
+      	android:layout_height="wrap_content"
+      	android:gravity="center_horizontal"
+        android:text="@string/txvWebServiceURL"
+        android:textColor="@android:color/primary_text_dark" />
+   <EditText
+        android:id="@+id/txtWebServiceURL"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:textSize="14sp"
+        android:inputType="textUri"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/edtWebServiceURL" />   
+   <View
+    	android:layout_width="fill_parent"
+    	android:layout_height="1dp"
+    	android:background="@android:color/darker_gray"/>
+   <TextView
+        android:id="@+id/txvUserName"
+        android:layout_width="fill_parent"
+       	android:layout_height="wrap_content"
+       	android:gravity="center_horizontal"
+        android:text="@string/txvUserName"
+        android:textColor="@android:color/primary_text_dark" />
+   <EditText
+        android:id="@+id/txtUserName"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="14sp" />	
+   <View
+    	android:layout_width="fill_parent"
+    	android:layout_height="1dp"
+    	android:background="@android:color/darker_gray"/>   
+   <Button
+   	   android:id="@+id/saveConfiguration"
+      	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+       android:layout_centerVertical="true"
+        android:text="@string/btnSaveConfiguration" />   
+   <Button
+       android:id="@+id/btnRegister"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_centerVertical="true"
+       android:text="@string/btnRegister" />	
+   <Button
+       android:id="@+id/sendLog"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_centerVertical="true"
+       android:text="@string/sendLogButton" />     		
+   <Button
+   	    android:id="@+id/refreshLocationGroups"
+   	    android:layout_width="fill_parent"
+   	    android:layout_height="wrap_content"    	    
+   	    android:layout_centerVertical="true"
+   	    android:text="@string/refreshLocationGroups" />
+   <Button
+        android:id="@+id/btnRestarSerice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/RestartService" />
 </LinearLayout>

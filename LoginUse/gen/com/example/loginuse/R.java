@@ -181,62 +181,45 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_dark=0x7f020016;
         public static final int common_signin_btn_text_pressed_light=0x7f020017;
         public static final int ic_config=0x7f020018;
-        public static final int ic_launcher=0x7f020019;
-        public static final int ic_launcher1=0x7f02001a;
-        public static final int ic_login=0x7f02001b;
-        public static final int ic_map=0x7f02001c;
-        public static final int ic_plusone_medium_off_client=0x7f02001d;
-        public static final int ic_plusone_small_off_client=0x7f02001e;
-        public static final int ic_plusone_standard_off_client=0x7f02001f;
-        public static final int ic_plusone_tall_off_client=0x7f020020;
+        public static final int ic_launcher1=0x7f020019;
+        public static final int ic_login=0x7f02001a;
+        public static final int ic_map=0x7f02001b;
+        public static final int ic_plusone_medium_off_client=0x7f02001c;
+        public static final int ic_plusone_small_off_client=0x7f02001d;
+        public static final int ic_plusone_standard_off_client=0x7f02001e;
+        public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
-        public static final int CurrentActivityTitle=0x7f05000c;
-        public static final int SendInformationTitle=0x7f05000f;
-        public static final int action_settings=0x7f05001d;
-        public static final int btn=0x7f05001b;
-        public static final int btnRegister=0x7f050015;
-        public static final int chbEnableGpsLocation=0x7f050007;
+        public static final int SendInformationTitle=0x7f050005;
+        public static final int action_settings=0x7f050012;
+        public static final int btnRegister=0x7f05000d;
+        public static final int btnRestarSerice=0x7f050010;
         public static final int hybrid=0x7f050004;
-        public static final int locationTitle=0x7f050005;
-        public static final int map=0x7f05001a;
+        public static final int map=0x7f050011;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int refreshLocationGroups=0x7f050019;
+        public static final int refreshLocationGroups=0x7f05000f;
         public static final int satellite=0x7f050002;
-        public static final int saveConfiguration=0x7f050018;
-        public static final int sendLog=0x7f050017;
+        public static final int saveConfiguration=0x7f05000c;
+        public static final int sendLog=0x7f05000e;
         public static final int terrain=0x7f050003;
-        public static final int textView1=0x7f05001c;
-        public static final int txtActivityConfidence=0x7f05000e;
-        public static final int txtIntervalLocation=0x7f050009;
-        public static final int txtMinDistanceLocation=0x7f05000b;
-        public static final int txtUserName=0x7f050016;
-        public static final int txtWebServiceURL=0x7f050013;
-        public static final int txvActivityConfidence=0x7f05000d;
-        public static final int txvEnabledGpsLocation=0x7f050006;
-        public static final int txvIntervalLocation=0x7f050008;
-        public static final int txvMinDistanceLocation=0x7f05000a;
-        public static final int txvPhoneId=0x7f050010;
-        public static final int txvPhoneIdValue=0x7f050011;
-        public static final int txvUserName=0x7f050014;
-        public static final int txvWebServiceURL=0x7f050012;
+        public static final int txtUserName=0x7f05000b;
+        public static final int txtWebServiceURL=0x7f050009;
+        public static final int txvPhoneId=0x7f050006;
+        public static final int txvPhoneIdValue=0x7f050007;
+        public static final int txvUserName=0x7f05000a;
+        public static final int txvWebServiceURL=0x7f050008;
     }
     public static final class layout {
         public static final int config_activity=0x7f030000;
         public static final int map_activity=0x7f030001;
-        public static final int service_activity=0x7f030002;
-        public static final int tab_activity=0x7f030003;
+        public static final int tab_activity=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f090000;
     }
     public static final class string {
-        public static final int CurrentActivityTitle=0x7f060025;
-        public static final int LocationTitle=0x7f060024;
-        public static final int Restart=0x7f06001c;
-        public static final int RestartNote=0x7f06001d;
-        public static final int SendInfoTitle=0x7f060026;
+        public static final int RestartService=0x7f06001c;
         public static final int action_settings=0x7f06001a;
         public static final int app_name=0x7f060019;
         /**   Title for notification shown when GooglePlayServices needs to be
@@ -262,8 +245,8 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060013;
-        public static final int btnRegister=0x7f06002e;
-        public static final int btnSaveConfiguration=0x7f060029;
+        public static final int btnRegister=0x7f060024;
+        public static final int btnSaveConfiguration=0x7f06001f;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -331,20 +314,14 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060012;
-        public static final int edtActivityConfidenceDefault=0x7f060022;
-        public static final int edtIntervalLocationDefault=0x7f060020;
-        public static final int edtMinDistanceLocationDefault=0x7f060028;
-        public static final int edtWebServiceURL=0x7f06002a;
+        public static final int edtWebServiceURL=0x7f060020;
         public static final int hello_world=0x7f06001b;
-        public static final int refreshLocationGroups=0x7f06002f;
-        public static final int sendLogButton=0x7f060023;
-        public static final int txvActivityConfidence=0x7f060021;
-        public static final int txvEnabledGpsLocation=0x7f06001e;
-        public static final int txvIntervalLocation=0x7f06001f;
-        public static final int txvMinDistanceLocation=0x7f060027;
-        public static final int txvPhoneId=0x7f06002c;
-        public static final int txvUserName=0x7f06002d;
-        public static final int txvWebServiceURL=0x7f06002b;
+        public static final int lblConfiguration=0x7f06001e;
+        public static final int refreshLocationGroups=0x7f060025;
+        public static final int sendLogButton=0x7f06001d;
+        public static final int txvPhoneId=0x7f060022;
+        public static final int txvUserName=0x7f060023;
+        public static final int txvWebServiceURL=0x7f060021;
     }
     public static final class style {
         /** 

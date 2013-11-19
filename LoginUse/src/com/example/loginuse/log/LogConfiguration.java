@@ -115,7 +115,9 @@ public class LogConfiguration {
 	}
 	
 	public String getPhoneId(){
-		return  Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+		if(this.context != null)
+			return  Secure.getString(this.context.getContentResolver(), Secure.ANDROID_ID);
+		return "-";
 	}
 	
 	public String getDeviceName() {

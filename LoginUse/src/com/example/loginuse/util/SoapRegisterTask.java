@@ -50,8 +50,7 @@ public class SoapRegisterTask extends AsyncTask<Void, Void, String>{
 		
 			this.result = "Register " + bodyIn.getPropertyAsString(0);
 		}
-		catch (Exception exception)		{		
-			
+		catch (Exception exception){			
 			return "Fail.";
 		}		
 		return "OK";
@@ -59,7 +58,13 @@ public class SoapRegisterTask extends AsyncTask<Void, Void, String>{
 	
 	@Override
     protected void onPostExecute(String result) { 
+		if(this.result != null && !this.result.equals(""))
 			Toast.makeText(LogConfiguration.getInstance().getContext(), this.result, Toast.LENGTH_SHORT).show();
+		else
+		{
+			String error = "Problem to Register.";
+			Toast.makeText(LogConfiguration.getInstance().getContext(), error, Toast.LENGTH_SHORT).show();
+		}
     }
 }
 

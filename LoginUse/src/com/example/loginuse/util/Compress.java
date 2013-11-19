@@ -9,6 +9,7 @@ import java.io.FilenameFilter;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
 
 import android.os.Environment;
@@ -61,10 +62,12 @@ public class Compress {
 
 				byte data[] = new byte[BUFFER];
 
-				for (int i = 0; i < _files.length-1; i++) {
-					String fileName = directory.getAbsolutePath()+"/"+_files[i];
-					Log.v("Compress", "Adding: " + fileName);
-					FileInputStream fi = new FileInputStream(fileName);
+				for (int i = 0; i < _files.length; i++) {
+					if(!LogConfiguration.getInstance().getFileLogName().contains(_files[i]))
+					{
+						String fileName = directory.getAbsolutePath()+"/"+_files[i];
+						Log.v("Compress", "Adding: " + fileName);
+						FileInputStream fi = new FileInputStream(fileName);
 						origin = new BufferedInputStream(fi, BUFFER);
 						ZipEntry entry = new ZipEntry(fileName.substring(fileName.lastIndexOf("/") + 1));
 						out.putNextEntry(entry);
@@ -73,6 +76,7 @@ public class Compress {
 							out.write(data, 0, count);
 						}
 						origin.close();
+					}
 				}
 
 				out.close();
@@ -107,7 +111,7 @@ public class Compress {
 	
 	public void deleteListFiles()
 	{     	
-		for (int i = 0; i < _files.length-1; i++) {
+		for (int i = 0; i < _files.length; i++) {
 			this.deleteSingleFile(_files[i]);
 		}
 	}
@@ -118,13 +122,16 @@ public class Compress {
 	private void deleteSingleFile(String path)
 	{
 		try		
-		{		
-			File root = Environment.getExternalStorageDirectory();
-			File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
-	    	// have the object build the directory structure, if needed.
-	    	directory.mkdirs();    
-         	File file = new File(directory.getAbsolutePath() + "/" + path);
-         	file.delete();
+		{	
+			if(!LogConfiguration.getInstance().getFileLogName().contains(path))
+			{
+				File root = Environment.getExternalStorageDirectory();
+				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
+	    		// have the object build the directory structure, if needed.
+	    		directory.mkdirs();    
+         		File file = new File(directory.getAbsolutePath() + "/" + path);
+         		file.delete();
+			}
 		}
 		catch(Exception ex)
 		{

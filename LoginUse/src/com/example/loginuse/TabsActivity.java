@@ -16,13 +16,6 @@ public class TabsActivity extends TabActivity{
          
         TabHost tabHost = getTabHost();
          
-        TabSpec service = tabHost.newTabSpec("Service");
-        
-        // setting Title and Icon for the Tab
-        service.setIndicator("Service", getResources().getDrawable(R.drawable.ic_login));
-        Intent ServiceIntent = new Intent(this, ServiceActivity.class);
-        service.setContent(ServiceIntent);
-         
         TabSpec config = tabHost.newTabSpec("Config.");        
         config.setIndicator("Config.", getResources().getDrawable(R.drawable.ic_config));
         Intent songsIntent = new Intent(this, ConfigActivity.class);
@@ -31,10 +24,8 @@ public class TabsActivity extends TabActivity{
         TabSpec map = tabHost.newTabSpec("Map");        
         map.setIndicator("Map.", getResources().getDrawable(R.drawable.ic_map));
         Intent mapIntent = new Intent(this, MapActivity.class);
-        map.setContent(mapIntent);
+        map.setContent(mapIntent);	
          
-        // Adding all TabSpec to TabHost
-        tabHost.addTab(service);
         tabHost.addTab(config); 
         tabHost.addTab(map);
         
