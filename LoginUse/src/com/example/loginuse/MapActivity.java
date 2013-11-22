@@ -2,13 +2,13 @@ package com.example.loginuse;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-
 import com.example.loginuse.log.LogFormat;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -25,6 +25,8 @@ public class MapActivity extends FragmentActivity  {
 
         LatLng group = null;
         String key = null;
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         
         Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
 		Enumeration<String> enumKey = groups.keys();
@@ -32,10 +34,18 @@ public class MapActivity extends FragmentActivity  {
 		while(enumKey.hasMoreElements()) {
 		    key = enumKey.nextElement();
 		    group = groups.get(key);
-		    map.addMarker(new MarkerOptions().title(key).snippet(key + "snippet").position(group));
-		}        
-        
-        map.setMyLocationEnabled(true);
-       
+		    MarkerOptions mOp = new MarkerOptions().title(key).snippet(key + "snippet").position(group); 
+		    map.addMarker(mOp);
+		    builder = builder.include(new LatLng(group.latitude, group.longitude));
+		}    
+		try
+		{
+			LatLngBounds bound = builder.build();
+			map.moveCamera(CameraUpdateFactory.newLatLngBounds(bound, 20));
+		}
+		catch(Exception ex){
+			
+		}
+		map.setMyLocationEnabled(true);		
     }
 }
