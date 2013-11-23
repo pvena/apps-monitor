@@ -20,28 +20,24 @@ public class MapActivity extends FragmentActivity  {
         setContentView(R.layout.map_activity);                
         
         // Get a handle to the Map Fragment
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map)).getMap();
+        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();       
 
-        LatLng group = null;
-        String key = null;
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();        
         Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
 		Enumeration<String> enumKey = groups.keys();
 		
+		LatLng group = null;
+	    String key = null;
 		while(enumKey.hasMoreElements()) {
 		    key = enumKey.nextElement();
 		    group = groups.get(key);
 		    MarkerOptions mOp = new MarkerOptions().title(key).snippet(key + "snippet").position(group); 
 		    map.addMarker(mOp);
-		    builder = builder.include(new LatLng(group.latitude, group.longitude));
+		    builder.include(new LatLng(group.latitude, group.longitude));
 		}    
 		try
-		{
-			LatLngBounds bound = builder.build();
-			map.moveCamera(CameraUpdateFactory.newLatLngBounds(bound, 20));
+		{		
+			map.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
 		}
 		catch(Exception ex){
 			
