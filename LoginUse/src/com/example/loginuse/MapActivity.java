@@ -20,8 +20,8 @@ public class MapActivity extends FragmentActivity  {
         setContentView(R.layout.map_activity);                
         
         // Get a handle to the Map Fragment
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();       
-
+        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();      
+        
         LatLngBounds.Builder builder = new LatLngBounds.Builder();        
         Hashtable<String,LatLng> groups = LogFormat.getLocationGroup();
 		Enumeration<String> enumKey = groups.keys();
@@ -36,12 +36,10 @@ public class MapActivity extends FragmentActivity  {
 		    builder.include(new LatLng(group.latitude, group.longitude));
 		}    
 		try
-		{		
-			map.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+		{	
+			map.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 80, 120, 0));
 		}
-		catch(Exception ex){
-			
-		}
-		map.setMyLocationEnabled(true);		
+		catch(Exception ex){			
+		}	
     }
 }
