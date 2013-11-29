@@ -1,4 +1,4 @@
-package com.example.loginuse.util;
+package com.example.loginuse.soap;
 
 import org.ksoap2.SoapEnvelope; 
 import org.ksoap2.serialization.SoapObject;

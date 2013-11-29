@@ -4,10 +4,10 @@ import java.io.File;
 import com.example.loginuse.R;
 import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.soap.SoapFileTask;
+import com.example.loginuse.soap.SoapLocationGroup;
+import com.example.loginuse.soap.SoapRegisterTask;
 import com.example.loginuse.util.Compress;
-import com.example.loginuse.util.SoapFileTask;
-import com.example.loginuse.util.SoapLocationGroup;
-import com.example.loginuse.util.SoapRegisterTask;
 
 import android.app.Activity;
 import android.content.Intent;
