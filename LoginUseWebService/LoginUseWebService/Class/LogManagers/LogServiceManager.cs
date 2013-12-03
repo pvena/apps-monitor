@@ -35,6 +35,13 @@ namespace LoginUseWebService
             values["isWeekDay"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
             values["quarter"] = (date.Minute / 15).ToString();
         }
+        private void processLocation(List<LocationGroup> locationGroups,Dictionary<string, string> values,LocationManager lm)
+        {
+            decimal lat = 0;
+            decimal lng = 0;
+            if (decimal.TryParse(values["LOCATION-LAT"], out lat) && decimal.TryParse(values["LOCATION-LONG"], out lng))
+                values["LocationGroup"] = lm.getContainGroup(locationGroups, lat, lng).Name;
+        }
 
         private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
         {
@@ -107,9 +114,11 @@ namespace LoginUseWebService
             try
             {
                 DBManager dbm = new DBManager();
+                LocationManager lm = new LocationManager();
+                List<LocationGroup> locationGroups = lm.getLocationGroups(phoneId, dbm);
                 DataTable data = dbm.getCsvData(phoneId, from, to, typeNames, propNames);
 
-                string line = "year;month;day;hour;minute;second;isWeekDay;quarter;" + propNames;
+                string line = "year;month;day;hour;minute;second;isWeekDay;quarter;LocationGroup;" + propNames;
 
                 string[] properties = line.Split(';');
                 Dictionary<string, string> values = this.inicPropValues(properties);
@@ -126,6 +135,7 @@ namespace LoginUseWebService
                     {
                         aux = ((DateTime)r["date"]);
                         this.processDate((DateTime)r["date"], values);
+                        this.processLocation(locationGroups,values,lm);
                         line = "";
                         for (int i = 0; i < properties.Length; i++)
                             line += (string)values[properties[i]] + ";";

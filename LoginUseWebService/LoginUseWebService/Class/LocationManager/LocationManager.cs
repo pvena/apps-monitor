@@ -8,6 +8,8 @@ namespace LoginUseWebService
 {
     public class LocationManager
     {
+        public float minDistance = 200;
+
         public double GetDistance(decimal long1InDegrees, decimal lat1InDegrees, decimal long2InDegrees, decimal lat2InDegrees)
         {
             double lats = (double)(lat1InDegrees - lat2InDegrees);
@@ -20,7 +22,7 @@ namespace LoginUseWebService
             return distInMeters;
         }
 
-        private List<LocationGroup> getLocationGroups(string phoneId, DBManager dbm)
+        public List<LocationGroup> getLocationGroups(string phoneId, DBManager dbm)
         {
             DataTable dt = dbm.getLocationGroups(phoneId);
             List<LocationGroup> list = new List<LocationGroup>();
@@ -35,6 +37,18 @@ namespace LoginUseWebService
                 list.Add(lg);
             }
             return list;
+        }
+        public LocationGroup getContainGroup(List<LocationGroup> lGroups, decimal lat, decimal lng)
+        {
+            foreach (LocationGroup lg in lGroups)
+                    if (this.GetDistance(lat, lng, lg.Latitud, lg.Longitud) < this.minDistance)
+                        return lg;
+            LocationGroup res = new LocationGroup();
+            res.Name = "Any";
+            res.Latitud = lat;
+            res.Longitud = lng;
+            res.Count = 1;
+            return res;
         }
         private List<Location> getLocations(string phoneId, DBManager dbm)
         {
@@ -63,7 +77,7 @@ namespace LoginUseWebService
                     for (int i = 0; (i < groups.Count) && !find; i++)
                     {
                         LocationGroup lg = groups[i];
-                        if (this.GetDistance(lg.Longitud, lg.Latitud, l.Longitud, l.Latitud) < 200)
+                        if (this.GetDistance(lg.Longitud, lg.Latitud, l.Longitud, l.Latitud) < this.minDistance)
                         {
                             find = true;
                             lg.Latitud = ((lg.Latitud * lg.Count) + l.Latitud) / (lg.Count + 1);
