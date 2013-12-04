@@ -126,7 +126,7 @@ namespace LoginUseWebService
         {
             try
             {
-                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + @"/" + phoneId + @"_CSV/";
+                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + phoneId + @"_CSV\";
                 string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".csv";
                 string fileZip = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId;
 

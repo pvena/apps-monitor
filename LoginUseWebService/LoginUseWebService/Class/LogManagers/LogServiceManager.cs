@@ -22,26 +22,7 @@ namespace LoginUseWebService
             if (LogServiceManager.instance == null)
                 LogServiceManager.instance = new LogServiceManager();
             return LogServiceManager.instance;
-        }
-
-        private void processDate(DateTime date, Dictionary<string, string> values)
-        {
-            values["year"] = date.ToString("yyyy");
-            values["month"] = date.ToString("MM");
-            values["day"] = date.ToString("dd");
-            values["hour"] = date.ToString("hh");
-            values["minute"] = date.ToString("mm");
-            values["second"] = date.ToString("ss");
-            values["isWeekDay"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
-            values["quarter"] = (date.Minute / 15).ToString();
-        }
-        private void processLocation(List<LocationGroup> locationGroups,Dictionary<string, string> values,LocationManager lm)
-        {
-            decimal lat = 0;
-            decimal lng = 0;
-            if (decimal.TryParse(values["LOCATION-LAT"], out lat) && decimal.TryParse(values["LOCATION-LONG"], out lng))
-                values["LocationGroup"] = lm.getContainGroup(locationGroups, lat, lng).Name;
-        }
+        }        
 
         private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
         {
@@ -109,6 +90,38 @@ namespace LoginUseWebService
         #endregion
 
         #region ------------Process Data Out----------------
+        private DateTime preProcessDate(Dictionary<string, string> values,DateTime date, DateTime lDate,out bool change)
+        {
+            change = (date != lDate);
+            if (change)
+            {                 
+                values["year"] = date.ToString("yyyy");
+                values["month"] = date.ToString("MM");
+                values["day"] = date.ToString("dd");
+                values["hour"] = date.ToString("hh");
+                values["minute"] = date.ToString("mm");
+                values["second"] = date.ToString("ss");
+                values["isWeekDay"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
+                values["quarter"] = (date.Minute / 15).ToString();                
+            }
+            return date;
+        }
+        private string[] preProcessLocationGroup(List<LocationGroup> locationGroups, Dictionary<string, string> values, string[] location, LocationManager lm)
+        {
+            decimal lat = 0;
+            decimal lng = 0;
+            if (    (values["LOCATION-LAT"].Length > 0) && 
+                    (values["LOCATION-LONG"].Length > 0) &&
+                    (location[0] != values["LOCATION-LAT"]) && 
+                    (location[1] != values["LOCATION-LONG"]) )
+            {
+                
+                if (decimal.TryParse(values["LOCATION-LAT"], out lat) && decimal.TryParse(values["LOCATION-LONG"], out lng))
+                    values["LocationGroup"] = lm.getContainGroup(locationGroups, lat, lng).Name;
+                return new string[] { values["LOCATION-LAT"], values["LOCATION-LONG"] };
+            }
+            return location;
+        }
         public bool createCSVFile(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)
         {
             try
@@ -126,16 +139,18 @@ namespace LoginUseWebService
                 StreamWriter file = new StreamWriter(path, true);
                 file.WriteLine(line);
 
-                DateTime aux = DateTime.Now;
+                DateTime date = DateTime.Now;
+                string[] location = new string[] { "", "" }; 
+                bool change= false;
 
                 foreach (DataRow r in data.Rows)
                 {
                     this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);
-                    if (((DateTime)r["date"]) != aux)
+                    date = this.preProcessDate(values, (DateTime)r["date"], date,out change);
+                    location = this.preProcessLocationGroup(locationGroups, values, location, lm);         
+           
+                    if (change)
                     {
-                        aux = ((DateTime)r["date"]);
-                        this.processDate((DateTime)r["date"], values);
-                        this.processLocation(locationGroups,values,lm);
                         line = "";
                         for (int i = 0; i < properties.Length; i++)
                             line += (string)values[properties[i]] + ";";
