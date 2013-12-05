@@ -9,8 +9,8 @@ import java.io.FilenameFilter;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.example.loginuse.log.LogConfiguration;
-import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.Configuration.LogConstants;
 
 import android.os.Environment;
 import android.util.Log;

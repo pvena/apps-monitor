@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import com.example.loginuse.ActivityRecognitionIntentService;
-import com.example.loginuse.log.LogConfiguration;
+import com.example.loginuse.Configuration.LogConfiguration;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;

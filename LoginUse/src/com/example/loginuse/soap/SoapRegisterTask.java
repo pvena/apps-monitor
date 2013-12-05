@@ -7,7 +7,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.example.loginuse.log.LogConfiguration;
+import com.example.loginuse.Configuration.LogConfiguration;
 
 
 public class SoapRegisterTask extends AsyncTask<Void, Void, String>{

@@ -2,8 +2,8 @@ package com.example.loginuse;
 
 import java.io.File;
 import com.example.loginuse.R;
-import com.example.loginuse.log.LogConfiguration;
-import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.soap.SoapFileTask;
 import com.example.loginuse.soap.SoapLocationGroup;
 import com.example.loginuse.soap.SoapRegisterTask;

@@ -7,6 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+
+import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.Configuration.LogConstants;
+
 import android.os.Environment;
 
 public class LogSave {

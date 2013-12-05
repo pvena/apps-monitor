@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
-import com.example.loginuse.log.LogConfiguration;
 import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;

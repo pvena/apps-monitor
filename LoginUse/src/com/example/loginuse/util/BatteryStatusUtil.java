@@ -1,7 +1,7 @@
 package com.example.loginuse.util;
 
 
-import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 
 import android.content.Context;

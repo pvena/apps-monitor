@@ -11,6 +11,9 @@ import android.text.format.DateFormat;
 import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.Configuration.LogConstants;
 import com.google.android.gms.maps.model.LatLng;
 
 

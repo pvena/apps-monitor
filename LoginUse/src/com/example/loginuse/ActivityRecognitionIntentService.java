@@ -3,8 +3,8 @@ package com.example.loginuse;
 import android.app.IntentService;
 import android.content.Intent;
 
-import com.example.loginuse.log.LogConfiguration;
-import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;

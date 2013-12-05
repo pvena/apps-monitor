@@ -1,18 +1,27 @@
-package com.example.loginuse.log;
+package com.example.loginuse.command;
 
 import java.util.Hashtable;
 
-import com.example.loginuse.command.command;
-
-
+import com.example.loginuse.command.LogCommand;
 
 public class LogCommandManager {
-	private command[] commands;
+	private LogCommand[] commands;
 	private Hashtable<String, String> lastLogState; 
 	
-	public LogCommandManager(){
+	private static LogCommandManager instance;
+	
+	private LogCommandManager(){
 		this.lastLogState = new Hashtable<String, String>();
-		this.commands = new command[0];
+		this.commands = new LogCommand[0];
+	}
+	
+	public static LogCommandManager getInstance()
+	{			
+		if(LogCommandManager.instance != null){			
+			return LogCommandManager.instance;
+		}
+		LogCommandManager.instance = new LogCommandManager();
+		return LogCommandManager.instance;
 	}
 	
 	public void newState(String key,String value){

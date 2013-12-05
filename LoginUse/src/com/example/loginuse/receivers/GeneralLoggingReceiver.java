@@ -1,6 +1,6 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.log.LogConstants;
+import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 import com.example.loginuse.util.BatteryStatusUtil;

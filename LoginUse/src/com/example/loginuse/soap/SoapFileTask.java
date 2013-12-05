@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.loginuse.log.LogConfiguration;
+import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.util.Compress;
 
