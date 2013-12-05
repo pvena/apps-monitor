@@ -1,6 +1,7 @@
 package com.example.loginuse.receivers;
 
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 import com.example.loginuse.util.BatteryStatusUtil;
@@ -54,6 +55,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 			lastLogBattery = message;
 		}
 		logEvent(context, intent);
+		LogCommandManager.getInstance().executeCommands();
 	}
 	
 	/**

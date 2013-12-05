@@ -40,6 +40,24 @@ public class LogConstants {
 	
 	public static String PLUGGED_AC = "PLGAC";
 	
+	public static String SSID = "SSID";
+	
+	public static String MAC = "MAC";
+	
+	public static String IP = "IP";
+	
+	public static String NetID = "NetID";
+	
+	public static String BSSID = "BSSID";
+	
+	public static String INFO = "INFO";
+	
+	public static String NAME = "NAME";
+	
+	public static String ADDRESS = "ADDRESS";
+	
+	public static String TSTATE = "TSTATE";
+	
 	public static String DISCHARGING = "DISCH";
 	
 	public static String DATEFORMAT = "kk:mm:ss";

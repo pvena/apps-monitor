@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
@@ -85,20 +86,33 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 */
 	private String getNetInfo(WifiInfo wifiInfo,boolean state){
 		String netInfo = "";
-		netInfo += LogFormat.getLog("STATE", state);
+		netInfo += LogFormat.getLog(LogConstants.STATE, state);
+		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-", LogFormat.getValue(state));
 		if(state){
-			netInfo += LogFormat.getLog("SSID", wifiInfo.getSSID());
-			netInfo += LogFormat.getLog("MAC",wifiInfo.getMacAddress());
-			netInfo += LogFormat.getLog("IP",wifiInfo.getIpAddress());
-			netInfo += LogFormat.getLog("NetID",wifiInfo.getNetworkId());
-			netInfo += LogFormat.getLog("BSSID",wifiInfo.getBSSID());
+			netInfo += LogFormat.getLog(LogConstants.SSID, wifiInfo.getSSID());
+			netInfo += LogFormat.getLog(LogConstants.MAC,wifiInfo.getMacAddress());
+			netInfo += LogFormat.getLog(LogConstants.IP,wifiInfo.getIpAddress());
+			netInfo += LogFormat.getLog(LogConstants.NetID,wifiInfo.getNetworkId());
+			netInfo += LogFormat.getLog(LogConstants.BSSID,wifiInfo.getBSSID());
+			
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.SSID, LogFormat.getValue(wifiInfo.getSSID()));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.MAC, LogFormat.getValue(wifiInfo.getMacAddress()));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IP, LogFormat.getValue(wifiInfo.getIpAddress()));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.NetID, LogFormat.getValue(wifiInfo.getNetworkId()));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.BSSID, LogFormat.getValue(wifiInfo.getBSSID()));
 		}
 		else {
-			netInfo += LogFormat.getLog("SSID", "-");
-			netInfo += LogFormat.getLog("MAC","-");
-			netInfo += LogFormat.getLog("IP","-");
-			netInfo += LogFormat.getLog("NetID","-");
-			netInfo += LogFormat.getLog("BSSID","-");
+			netInfo += LogFormat.getLog(LogConstants.SSID, "-");
+			netInfo += LogFormat.getLog(LogConstants.MAC,"-");
+			netInfo += LogFormat.getLog(LogConstants.IP,"-");
+			netInfo += LogFormat.getLog(LogConstants.NetID,"-");
+			netInfo += LogFormat.getLog(LogConstants.BSSID,"-");
+			
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.SSID, LogFormat.getValue("-"));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.MAC, LogFormat.getValue("-"));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IP, LogFormat.getValue("-"));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.NetID, LogFormat.getValue("-"));
+			LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.BSSID, LogFormat.getValue("-"));
 		}
 			
 		return netInfo;

@@ -53,6 +53,21 @@ public class LogFormat {
 	public static boolean getCheckBoxBoolean(CheckBox cbx){
 		return cbx.isChecked();
 	}
+	public static String getValue(Date value ){
+		return DateFormat.format(LogConstants.DATEFORMAT, value).toString();
+	}
+	public static String getValue(int value){
+		return String.valueOf(value);
+	}
+	public static String getValue(double value){
+		return String.valueOf(value);
+	}
+	public static String getValue(boolean value){
+		return ((value)?"1":"0");
+	}
+	public static String getValue(String value){
+		return value;
+	}
 	
 	public static String getFileToBase64Encode(File file) throws IOException {
 		int size = (int) file.length();

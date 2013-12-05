@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
@@ -54,6 +55,7 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 								netInfo.isConnectedOrConnecting());
 			
 			info = LogFormat.getLog(LogConstants.STATE, enable);//DATA TRANSMISSION CONNECTED (3G/GSM)
+			LogCommandManager.getInstance().newState(LogConstants.CONNECTION_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(enable));
 			
 			if(!info.equals(lastLog)){
 				LogLine log = new LogLine(info,LogConstants.CONNECTION_STATE_TAG);

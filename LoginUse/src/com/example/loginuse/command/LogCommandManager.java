@@ -25,8 +25,7 @@ public class LogCommandManager {
 	}
 	
 	public void newState(String key,String value){
-		this.lastLogState.put(key, value);
-		this.executeCommands();
+		this.lastLogState.put(key, value);		
 	}
 	
 	public void executeCommands(){

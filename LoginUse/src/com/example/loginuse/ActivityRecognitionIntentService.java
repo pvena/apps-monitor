@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
@@ -42,6 +43,8 @@ public class ActivityRecognitionIntentService extends IntentService {
 			String activityName = this.getCurrentActionInfo(activityType);
 			
 			String newLog = LogFormat.getLog(LogConstants.ACTIVITY,activityName);
+			
+			LogCommandManager.getInstance().newState(LogConstants.CURRENTACTIVITY + "-" + LogConstants.ACTIVITY , LogFormat.getValue(activityName));
 				
 			if(!newLog.equals(lastLog) && confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
 			{
