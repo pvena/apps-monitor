@@ -118,6 +118,8 @@ namespace LoginUseWebServiceTest
             {
                 LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
 
+                this.chbTypes.Items.Clear();
+
                 string[] types = srv.getTypes(null);
 
                 for (int i = 0; i < types.Length; i++)
@@ -131,6 +133,8 @@ namespace LoginUseWebServiceTest
             try
             {
                 LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+
+                this.chbProperties.Items.Clear();
 
                 string[] properties = srv.getProperties(null);
 

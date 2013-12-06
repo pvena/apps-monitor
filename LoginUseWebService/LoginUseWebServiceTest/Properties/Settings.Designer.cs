@@ -26,7 +26,7 @@ namespace LoginUseWebServiceTest.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:50011/LoginUseWebService/LoginUse.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://201.235.94.231:8080/LoginUse.asmx")]
         public string LoginUseWebServiceTest_LoginUseService_LoginUse {
             get {
                 return ((string)(this["LoginUseWebServiceTest_LoginUseService_LoginUse"]));
