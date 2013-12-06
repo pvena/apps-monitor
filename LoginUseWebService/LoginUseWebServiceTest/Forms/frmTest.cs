@@ -98,7 +98,7 @@ namespace LoginUseWebServiceTest
             DateTime from = this.dtpFrom.Value;
             DateTime to = this.dtpTo.Value;
 
-            LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+            LoginUseService.LoginUse srv = new LoginUseService.LoginUse();            
 
             string base64Data = srv.getCSVData(phoneId, from, to, typeNames, propNames);
 

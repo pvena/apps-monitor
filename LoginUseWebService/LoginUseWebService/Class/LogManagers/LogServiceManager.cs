@@ -22,31 +22,7 @@ namespace LoginUseWebService
             if (LogServiceManager.instance == null)
                 LogServiceManager.instance = new LogServiceManager();
             return LogServiceManager.instance;
-        }        
-
-        private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
-        {
-            string type = propName.Split('-')[0];
-            string name = propName.Split('-')[1];
-            List<string> keys = new List<string>(values.Keys);
-            if ((type == "WIFI") && (name == "STATE") && (value == "0"))
-                foreach (string key in keys)
-                    if (key.Contains(type))
-                        values[key] = "-";
-            if ((type == "BLUETOOTH") && (name == "STATE") && (value == "0"))
-                foreach (string key in keys)
-                    if (key.Contains(type) && !key.Contains("STATE"))
-                        values[key] = "-";
-            values[propName] = value;
-        }
-
-        private Dictionary<string, string> inicPropValues(string[] properties)
-        {
-            Dictionary<string, string> values = new Dictionary<string, string>();
-            for (int i = 0; i < properties.Length; i++)
-                values.Add(properties[i], "");
-            return values;
-        }
+        } 
 
         #region ----------------Directory-------------------
 
@@ -60,6 +36,27 @@ namespace LoginUseWebService
         {
             File.WriteAllBytes(path, Convert.FromBase64String(base64Data));
             return true;
+        }
+
+        public string getBase64File(string fileZip,string folderPath, string filePath) 
+        {
+            try
+            {
+                ZipManager zm = new ZipManager();
+                zm.comprimirDir(ref fileZip, null, folderPath, new string[] { "*.csv" }, new ZipLog());
+
+                FileStream file = new FileStream(fileZip, FileMode.Open);
+                byte[] buffer = new byte[file.Length];
+                file.Read(buffer, 0, (int)file.Length);
+                file.Close();
+                File.Delete(filePath);
+                File.Delete(fileZip);
+                return Convert.ToBase64String(buffer);
+            }
+            catch (Exception ex) 
+            {
+                return "";
+            }
         }
 
         #endregion
@@ -89,83 +86,15 @@ namespace LoginUseWebService
 
         #endregion
 
-        #region ------------Process Data Out----------------
-        private DateTime preProcessDate(Dictionary<string, string> values,DateTime date, DateTime lDate,out bool change)
+        #region ------------ProcessCSV Data Out----------------
+        public bool executeProcessCSV(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)
         {
-            change = (date != lDate);
-            if (change)
-            {                 
-                values["year"] = date.ToString("yyyy");
-                values["month"] = date.ToString("MM");
-                values["day"] = date.ToString("dd");
-                values["hour"] = date.ToString("hh");
-                values["minute"] = date.ToString("mm");
-                values["second"] = date.ToString("ss");
-                values["isWeekDay"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
-                values["quarter"] = (date.Minute / 15).ToString();                
-            }
-            return date;
+            LogCSVManager csvManager = new LogCSVManager();
+            return csvManager.execute(phoneId, from, to, typeNames, propNames, path);
         }
-        private string[] preProcessLocationGroup(List<LocationGroup> locationGroups, Dictionary<string, string> values, string[] location, LocationManager lm)
-        {
-            decimal lat = 0;
-            decimal lng = 0;
-            if (    (values["LOCATION-LAT"].Length > 0) && 
-                    (values["LOCATION-LONG"].Length > 0) &&
-                    (location[0] != values["LOCATION-LAT"]) && 
-                    (location[1] != values["LOCATION-LONG"]) )
-            {
-                
-                if (decimal.TryParse(values["LOCATION-LAT"], out lat) && decimal.TryParse(values["LOCATION-LONG"], out lng))
-                    values["LocationGroup"] = lm.getContainGroup(locationGroups, lat, lng).Name;
-                return new string[] { values["LOCATION-LAT"], values["LOCATION-LONG"] };
-            }
-            return location;
-        }
-        public bool createCSVFile(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)
-        {
-            try
-            {
-                DBManager dbm = new DBManager();
-                LocationManager lm = new LocationManager();
-                List<LocationGroup> locationGroups = lm.getLocationGroups(phoneId, dbm);
-                DataTable data = dbm.getCsvData(phoneId, from, to, typeNames, propNames);
+        #endregion
 
-                string line = "year;month;day;hour;minute;second;isWeekDay;quarter;LocationGroup;" + propNames;
-
-                string[] properties = line.Split(';');
-                Dictionary<string, string> values = this.inicPropValues(properties);
-
-                StreamWriter file = new StreamWriter(path, true);
-                file.WriteLine(line);
-
-                DateTime date = DateTime.Now;
-                string[] location = new string[] { "", "" }; 
-                bool change= false;
-
-                foreach (DataRow r in data.Rows)
-                {
-                    this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);
-                    date = this.preProcessDate(values, (DateTime)r["date"], date,out change);
-                    location = this.preProcessLocationGroup(locationGroups, values, location, lm);         
-           
-                    if (change)
-                    {
-                        line = "";
-                        for (int i = 0; i < properties.Length; i++)
-                            line += (string)values[properties[i]] + ";";
-                        file.WriteLine(line.Substring(0, line.Length - 1));
-                    }
-                }
-                file.Flush();
-                file.Close();
-
-                return true;
-            }
-            catch (Exception ex)
-            { return false; }
-        }
-
+        #region ---------ProcessGroups Data Out----------------
         public string createLocationGroupData(string phoneId)
         {
             DBManager dbm = new DBManager();
