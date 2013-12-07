@@ -12,8 +12,8 @@ import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
+import com.example.loginuse.receivers.GpsChangeReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
-//import com.example.loginuse.listeners.GoogleActivityLisener;
 
 public class MyService extends Service  {
 	private static final String TAG = "MyService";
@@ -25,8 +25,8 @@ public class MyService extends Service  {
 	private BluetoothReciver bluetooth;	
 	private PassiveLocationChangedListener locationListener;
 	private ActivityReceiver activityReceiver;
-	//private GoogleActivityLisener activityLisener;
-		
+	private GpsChangeReceiver gpsChangeReceiver;
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -63,6 +63,7 @@ public class MyService extends Service  {
 		this.bluetooth = new BluetoothReciver();
 		this.locationListener = new PassiveLocationChangedListener();
 		this.activityReceiver = new ActivityReceiver();
+		this.gpsChangeReceiver = new GpsChangeReceiver();
 		
 		//Register all receivers
 		registerReceivers();
@@ -93,6 +94,7 @@ public class MyService extends Service  {
 		this.wifiReceiver.initialize();
 		this.locationListener.initialize();
 		this.activityReceiver.initialize();
+		this.gpsChangeReceiver.initialize();
 	}
 	
 	/**
@@ -104,5 +106,6 @@ public class MyService extends Service  {
 		this.wifiReceiver.finalize();
 		this.locationListener.finalize();		
 		this.activityReceiver.finalize();
+		this.gpsChangeReceiver.finalize();
 	}
 }
