@@ -2,6 +2,7 @@ package com.example.loginuse.util;
 
 
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogFormat;
 
 import android.content.Context;
@@ -19,7 +20,7 @@ public class BatteryStatusUtil {
 	 * @param context
 	 * @return
 	 */
-	public static String getBatteryStatus(Context context){
+	private static String getBatteryStatus(Context context){
 		String bStatus = "";
 		
 		IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -35,13 +36,22 @@ public class BatteryStatusUtil {
 			boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
-			if(usbCharge){
-				bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,usbCharge);
-			}else if(acCharge){
-				bStatus = LogFormat.getLog(LogConstants.PLUGGED_AC,acCharge);
-			}
+			bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,usbCharge);
+			bStatus += LogFormat.getLog(LogConstants.PLUGGED_AC,acCharge);
+			bStatus += LogFormat.getLog(LogConstants.DISCHARGING,false);
+			
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_USB, LogFormat.getValue(usbCharge));
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_AC, LogFormat.getValue(usbCharge));
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, LogFormat.getValue(false));
+			
 		} else {
+			bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,false);
+			bStatus += LogFormat.getLog(LogConstants.PLUGGED_AC,false);
 			bStatus = LogFormat.getLog(LogConstants.DISCHARGING,true);
+			
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_USB, LogFormat.getValue(false));
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_AC, LogFormat.getValue(false));
+			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, LogFormat.getValue(true));
 		}
 		
 		return bStatus;
@@ -52,7 +62,7 @@ public class BatteryStatusUtil {
 	 * @param context
 	 * @return
 	 */
-	public static String getBatteryPercentage(Context context){
+	private static String getBatteryPercentage(Context context){
 		IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent batteryStatus = context.getApplicationContext().registerReceiver(null, ifilter);
 		
