@@ -13,6 +13,7 @@ import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.GpsChangeReceiver;
+import com.example.loginuse.receivers.RingerReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
 
 public class MyService extends Service  {
@@ -26,6 +27,7 @@ public class MyService extends Service  {
 	private PassiveLocationChangedListener locationListener;
 	private ActivityReceiver activityReceiver;
 	private GpsChangeReceiver gpsChangeReceiver;
+	private RingerReceiver ringerReceiver;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -64,6 +66,7 @@ public class MyService extends Service  {
 		this.locationListener = new PassiveLocationChangedListener();
 		this.activityReceiver = new ActivityReceiver();
 		this.gpsChangeReceiver = new GpsChangeReceiver();
+		this.ringerReceiver = new RingerReceiver();
 		
 		//Register all receivers
 		registerReceivers();
@@ -95,6 +98,7 @@ public class MyService extends Service  {
 		this.locationListener.initialize();
 		this.activityReceiver.initialize();
 		this.gpsChangeReceiver.initialize();
+		this.ringerReceiver.initialize();
 	}
 	
 	/**
@@ -107,5 +111,6 @@ public class MyService extends Service  {
 		this.locationListener.finalize();		
 		this.activityReceiver.finalize();
 		this.gpsChangeReceiver.finalize();
+		this.ringerReceiver.finalize();
 	}
 }

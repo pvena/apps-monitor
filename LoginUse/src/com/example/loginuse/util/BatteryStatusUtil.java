@@ -36,7 +36,7 @@ public class BatteryStatusUtil {
 			boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
 			boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 			
-			bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,usbCharge);
+			bStatus += LogFormat.getLog(LogConstants.PLUGGED_USB,usbCharge);
 			bStatus += LogFormat.getLog(LogConstants.PLUGGED_AC,acCharge);
 			bStatus += LogFormat.getLog(LogConstants.DISCHARGING,false);
 			
@@ -45,9 +45,9 @@ public class BatteryStatusUtil {
 			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, LogFormat.getValue(false));
 			
 		} else {
-			bStatus = LogFormat.getLog(LogConstants.PLUGGED_USB,false);
+			bStatus += LogFormat.getLog(LogConstants.PLUGGED_USB,false);
 			bStatus += LogFormat.getLog(LogConstants.PLUGGED_AC,false);
-			bStatus = LogFormat.getLog(LogConstants.DISCHARGING,true);
+			bStatus += LogFormat.getLog(LogConstants.DISCHARGING,true);
 			
 			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_USB, LogFormat.getValue(false));
 			LogCommandManager.getInstance().newState(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_AC, LogFormat.getValue(false));

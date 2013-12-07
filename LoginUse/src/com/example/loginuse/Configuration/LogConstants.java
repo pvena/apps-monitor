@@ -20,6 +20,8 @@ public class LogConstants {
 	
 	public static String GPS_STATE_TAG = "GPS";
 	
+	public static String RINGER_STATE_TAG = "RINGER";
+	
 	public static String CURRENTACTIVITY = "ACTIVITY";
 	
 	public static String LOG_FILE_NAME = "/@LoguinUse.txt";
@@ -61,6 +63,8 @@ public class LogConstants {
 	public static String DISCHARGING = "DISCH";
 	
 	public static String DATEFORMAT = "kk:mm:ss";
+	
+	public static String MODE = "MODE";
 	
 	public static String FILEDATEFORMAT = "yyyyMMdd";
 	
