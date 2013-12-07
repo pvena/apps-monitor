@@ -42,8 +42,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	}
 
 	/**
-	 * Log the incoming events and call PassiveLocationChangedReceiver 
-	 * trying to find and save the user location
+	 * Log the incoming events 
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {

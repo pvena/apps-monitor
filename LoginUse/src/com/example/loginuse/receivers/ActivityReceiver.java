@@ -10,7 +10,6 @@ public class ActivityReceiver extends GeneralLoggingReceiver {
 
 	@Override
 	public void logEvent(Context context, Intent intent) {
-		// TODO Auto-generated method stub
 		
 	}
 
