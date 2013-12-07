@@ -13,6 +13,7 @@ import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.GpsChangeReceiver;
+import com.example.loginuse.receivers.HeadsetPlugReceiver;
 import com.example.loginuse.receivers.RingerReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
 
@@ -28,6 +29,7 @@ public class MyService extends Service  {
 	private ActivityReceiver activityReceiver;
 	private GpsChangeReceiver gpsChangeReceiver;
 	private RingerReceiver ringerReceiver;
+	private HeadsetPlugReceiver headsetPlugReceiver;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -67,6 +69,7 @@ public class MyService extends Service  {
 		this.activityReceiver = new ActivityReceiver();
 		this.gpsChangeReceiver = new GpsChangeReceiver();
 		this.ringerReceiver = new RingerReceiver();
+		this.headsetPlugReceiver = new HeadsetPlugReceiver();
 		
 		//Register all receivers
 		registerReceivers();
@@ -99,6 +102,7 @@ public class MyService extends Service  {
 		this.activityReceiver.initialize();
 		this.gpsChangeReceiver.initialize();
 		this.ringerReceiver.initialize();
+		this.headsetPlugReceiver.initialize();
 	}
 	
 	/**
@@ -112,5 +116,6 @@ public class MyService extends Service  {
 		this.activityReceiver.finalize();
 		this.gpsChangeReceiver.finalize();
 		this.ringerReceiver.finalize();
+		this.headsetPlugReceiver.finalize();
 	}
 }

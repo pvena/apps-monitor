@@ -22,6 +22,8 @@ public class LogConstants {
 	
 	public static String RINGER_STATE_TAG = "RINGER";
 	
+	public static String HEADSET_STATE_TAG = "HEADSET";
+	
 	public static String CURRENTACTIVITY = "ACTIVITY";
 	
 	public static String LOG_FILE_NAME = "/@LoguinUse.txt";
