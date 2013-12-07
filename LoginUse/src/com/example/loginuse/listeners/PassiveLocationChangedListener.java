@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.example.loginuse.Configuration.LogConfiguration;
 import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
@@ -24,10 +25,15 @@ public class PassiveLocationChangedListener extends GeneralLoggingReceiver imple
 	private LocationManager locationManager;
 	
 	public void onLocationChanged(Location location) {
+				
+		String newLog = LogFormat.getLog(LogConstants.LATITUDE,location.getLatitude());
+		newLog += LogFormat.getLog(LogConstants.LONGITUDE,location.getLongitude()); 
+		newLog += LogFormat.getLog(LogConstants.ALTITUDE, location.getAltitude());
 		
-		String newLog = LogFormat.getLog(LogConstants.LATITUDE,location.getLatitude())
-				+ LogFormat.getLog(LogConstants.LONGITUDE,location.getLongitude()) 
-				+ LogFormat.getLog(LogConstants.ALTITUDE, location.getAltitude());
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LATITUDE, LogFormat.getValue(location.getLatitude()));
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LONGITUDE, LogFormat.getValue(location.getLongitude()));
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.ALTITUDE, LogFormat.getValue(location.getAltitude()));
+		
 		if(!newLog.equals(lastLog))
 		{
 			LogLine l = new LogLine(newLog, LogConstants.LOCATION_STATE_TAG);
