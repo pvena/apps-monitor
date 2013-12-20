@@ -3,8 +3,6 @@ package com.example.loginuse.listeners;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.example.loginuse.Configuration.LogConfiguration;
@@ -19,56 +17,23 @@ import com.example.loginuse.receivers.GeneralLoggingReceiver;
  * Class used to listen and save the user location
  *
  */
-public class PassiveLocationChangedListener extends GeneralLoggingReceiver implements LocationListener{
+public class PassiveLocationChangedListener extends GeneralLoggingReceiver implements FusedLocationListener.LocationListener{
 	
 	private static String lastLog; 
-	private LocationManager locationManager;
 	
-	public void onLocationChanged(Location location) {
-				
-		String newLog = LogFormat.getLog(LogConstants.LATITUDE,location.getLatitude());
-		newLog += LogFormat.getLog(LogConstants.LONGITUDE,location.getLongitude()); 
-		newLog += LogFormat.getLog(LogConstants.ALTITUDE, location.getAltitude());
-		
-		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LATITUDE, LogFormat.getValue(location.getLatitude()));
-		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LONGITUDE, LogFormat.getValue(location.getLongitude()));
-		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.ALTITUDE, LogFormat.getValue(location.getAltitude()));
-		
-		if(!newLog.equals(lastLog))
-		{
-			LogLine l = new LogLine(newLog, LogConstants.LOCATION_STATE_TAG);
-			LogSave.getInstance().saveData(l);
-			lastLog = newLog;
-		}
-	}
-		
-	@Override
-	public void logEvent(Context context, Intent intent) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	private FusedLocationListener locationListener;
+	
 	@Override
 	public void initialize() {
 		
-		locationManager = (LocationManager)LogConfiguration.getInstance().getContext().getSystemService(Context.LOCATION_SERVICE);
+		locationListener = FusedLocationListener.getInstance(LogConfiguration.getInstance().getContext(), this);             
 
-		// Register the listener with the Location Manager to receive
-		// location updates (minTime = 15 minutes, minDistance = 100 meters)
-
-		String locationType= (LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGPSENABLED, false))?
-					LocationManager.GPS_PROVIDER :
-					LocationManager.NETWORK_PROVIDER;
-		
-		locationManager.requestLocationUpdates(locationType, 
-				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONINTERVAL, 900000),
-				LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONMINDISTANCE, 200), 
-				this);
+	    locationListener.start();
 	}
 
 	@Override
 	public void finalize() {
-		locationManager.removeUpdates(this);
+		locationListener.stop();
 	}
 	
 	/*
@@ -92,5 +57,26 @@ public class PassiveLocationChangedListener extends GeneralLoggingReceiver imple
 	public void onProviderDisabled(String provider) {
 	}
 
+	@Override
+	public void onReceiveLocation(Location location) {
+		String newLog = LogFormat.getLog(LogConstants.LATITUDE,location.getLatitude());
+		newLog += LogFormat.getLog(LogConstants.LONGITUDE,location.getLongitude()); 
+		newLog += LogFormat.getLog(LogConstants.ALTITUDE, location.getAltitude());
+		
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LATITUDE, LogFormat.getValue(location.getLatitude()));
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LONGITUDE, LogFormat.getValue(location.getLongitude()));
+		LogCommandManager.getInstance().newState(LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.ALTITUDE, LogFormat.getValue(location.getAltitude()));
+		
+		if(!newLog.equals(lastLog)){
+			LogLine l = new LogLine(newLog, LogConstants.LOCATION_STATE_TAG);
+			LogSave.getInstance().saveData(l);
+			lastLog = newLog;
+		}
+	}
+	
+	@Override
+	public void logEvent(Context context, Intent intent) {
+		
+	}
 	
 }
