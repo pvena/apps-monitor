@@ -82,7 +82,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	private String getNetInfo(WifiInfo wifiInfo,boolean state,boolean connected){
 		String netInfo = "";
 		netInfo += LogFormat.getLog(LogConstants.STATE, state);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-", LogFormat.getValue(state));
+		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(state));
 		
 		String SSID = (connected)?LogFormat.getValue(wifiInfo.getSSID()):"-";
 		String MacAddress = (connected)?LogFormat.getValue(wifiInfo.getMacAddress()):"-";

@@ -5,9 +5,10 @@ import java.util.Hashtable;
 
 public abstract class LogCommand {
 	
-	private Hashtable<String, String> rules;
+	protected Hashtable<String, String> rules;
 	
 	public abstract boolean execute();
+	public abstract boolean internalCondition();
 
 	public LogCommand(){
 		this.rules = new Hashtable<String, String>();

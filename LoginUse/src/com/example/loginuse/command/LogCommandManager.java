@@ -12,7 +12,8 @@ public class LogCommandManager {
 	
 	private LogCommandManager(){
 		this.lastLogState = new Hashtable<String, String>();
-		this.commands = new LogCommand[0];
+		this.commands = new LogCommand[1];
+		this.commands[0] = new CommandSynchronize();
 	}
 	
 	public static LogCommandManager getInstance()
@@ -34,4 +35,9 @@ public class LogCommandManager {
 				this.commands[i].execute();
 	}
 	
+	public String getValue(String key){
+		if(this.lastLogState.containsKey(key))
+			return this.lastLogState.get(key);
+		return "NULL";
+	}
 }

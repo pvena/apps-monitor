@@ -54,8 +54,10 @@ public class SoapFileTask extends AsyncTask<Void, Void, String>{
 			
 			this.result = "Response " + bodyIn.getPropertyAsString(0);
 			
-			if(this.result.equals("Response OK"))			
+			if(this.result.equals("Response OK")){			
 				this.compress.deleteListFiles();
+				LogConfiguration.LASTSYNCHRONIZEFILE = LogFormat.getCurrentDate();
+			}
 			else
 				this.compress.deleteLastZipFile();
 		}
