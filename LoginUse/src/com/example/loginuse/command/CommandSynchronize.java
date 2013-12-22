@@ -13,25 +13,17 @@ import com.example.loginuse.util.Compress;
 public class CommandSynchronize extends LogCommand {
 	
 	public void CommandSynchonize(){
-		this.rules.put(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, "1");		
+		
 	}
 	
 	@Override
-	public boolean internalCondition(){
-		String pluggedAc = LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_AC;
-		String pluggedUsb = LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.PLUGGED_USB;
-		String ipLogKey = LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IP;			
-		
-		boolean sentToday = (LogConfiguration.LASTSYNCHRONIZEFILE == LogFormat.getCurrentDate());
-		boolean internetAccess = (LogCommandManager.getInstance().getValue(ipLogKey) != "-");			
-		boolean isCharging =	(LogCommandManager.getInstance().getValue(pluggedAc) == "1") || 
-								(LogCommandManager.getInstance().getValue(pluggedUsb) == "1");
-		
-		return (internetAccess && isCharging && !sentToday);
+	public boolean internalCondition(){		
+		boolean sentToday = (LogConfiguration.LASTSYNCHRONIZEFILE == LogFormat.getCurrentDate());		
+		return sentToday;
 	}
 	
 	@Override
-	public boolean execute(){
+	public boolean internalExecute(){
 		try {			
 			if(	this.internalCondition() ){			
 			

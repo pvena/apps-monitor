@@ -1,27 +1,39 @@
 package com.example.loginuse.command;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
-
 public abstract class LogCommand {
 	
-	protected Hashtable<String, String> rules;
+	private int executeCount = 0;
+	private int okCount = 0;
 	
-	public abstract boolean execute();
+	protected int minPercent = 90;
+	protected int minExecuteCount = 20;
+	
+ 	public abstract boolean internalExecute();
 	public abstract boolean internalCondition();
 
-	public LogCommand(){
-		this.rules = new Hashtable<String, String>();
+	public LogCommand(){}
+	
+	public boolean execute(){
+		if(this.internalCondition() && this.userAcept())
+			return this.internalExecute();
+		return false;
 	}
 	
-	public boolean canExecute(Hashtable<String, String> state){
-		Enumeration<String> keys= this.rules.keys();
-		String key = null;
-		while (keys.hasMoreElements()){
-			key = keys.nextElement();
-			if(!this.rules.get(key).equals(state.get(key)))
-				return false;
-		}			
-		return true;
-	}	
+	private boolean userAcept(){		
+		if((this.executeCount > this.minExecuteCount) && (100 * this.okCount / this.executeCount > this.minPercent))
+			return true;
+		else{			
+			this.executeCount++;
+			// Preguntar al usuario si acepta el comando y en caso de ok entonces okCount++.
+			return true;
+		}
+	}
+	
+	public void setExecuteCount(int count){
+		this.executeCount = count;
+	}
+	
+	public void setOkCount(int count){
+		this.okCount = count;
+	}
 }

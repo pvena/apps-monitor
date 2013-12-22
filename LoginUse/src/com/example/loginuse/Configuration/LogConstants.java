@@ -30,6 +30,8 @@ public class LogConstants {
 	
 	public static String LOG_FOLDER_NAME = "/LoginUse";
 	
+	public static String LOG_SENT_FOLDER_NAME = "/LoginUse/Sent";
+	
 	public static String ZIP_LOG_FILE_NAME = "/@loguinUse.zip";
 	
 	public static String LOG_CONFIG_FILE = "/LoguinUse.config";
@@ -50,9 +52,7 @@ public class LogConstants {
 	
 	public static String IP = "IP";
 	
-	public static String NetID = "NetID";
-	
-	public static String BSSID = "BSSID";
+	public static String IACCESS = "IACCESS";
 	
 	public static String INFO = "INFO";
 	

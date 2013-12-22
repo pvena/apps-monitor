@@ -31,7 +31,7 @@ public class Compress {
 	private String _lastZip;
 
 	public Compress(String dir, String zipFile) {
-		_files = this.listFiles(dir);
+		_files = this.listTxtFiles(dir);
 		_zipFile = zipFile;
 	}
 
@@ -90,7 +90,7 @@ public class Compress {
 			_lastZip = null;
 	}
 	
-	private String[] listFiles(String dir) {
+	private String[] listTxtFiles(String dir) {
 		File root = Environment.getExternalStorageDirectory();
 		
 		File directory = new File(root, dir);
@@ -103,6 +103,25 @@ public class Compress {
 
 			public boolean accept(File dir, String name) {				
 				return name.endsWith(".txt");
+			}
+		};
+
+		return directory.list(filefilter);
+	}
+	
+	private String[] listZipFiles(String dir) {
+		File root = Environment.getExternalStorageDirectory();
+		
+		File directory = new File(root, dir);
+
+		if (!directory.isDirectory()) {
+			return null;
+		}
+		// create a FilenameFilter and override its accept-method
+		FilenameFilter filefilter = new FilenameFilter() {
+
+			public boolean accept(File dir, String name) {				
+				return name.endsWith(".zip");
 			}
 		};
 

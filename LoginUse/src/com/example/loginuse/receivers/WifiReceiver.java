@@ -87,20 +87,17 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		String SSID = (connected)?LogFormat.getValue(wifiInfo.getSSID()):"-";
 		String MacAddress = (connected)?LogFormat.getValue(wifiInfo.getMacAddress()):"-";
 		String IpAddress = (connected)? LogFormat.getValue(wifiInfo.getIpAddress()):"-";
-		String NetworkId = (connected)?LogFormat.getValue(wifiInfo.getNetworkId()):"-";
-		String BSSID = (connected)?LogFormat.getValue(wifiInfo.getBSSID()):"-";
+		String IAccess = LogFormat.getValue(connected);
 		
 		netInfo += LogFormat.getLog(LogConstants.SSID, SSID);
 		netInfo += LogFormat.getLog(LogConstants.MAC,MacAddress);
 		netInfo += LogFormat.getLog(LogConstants.IP,IpAddress);
-		netInfo += LogFormat.getLog(LogConstants.NetID,NetworkId);
-		netInfo += LogFormat.getLog(LogConstants.BSSID,BSSID);
+		netInfo += LogFormat.getLog(LogConstants.IACCESS,IAccess);
 			
 		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.SSID,SSID);
 		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.MAC, MacAddress);
 		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IP, IpAddress);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.NetID,NetworkId);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.BSSID, BSSID);		
+		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IACCESS,IAccess);
 			
 		return netInfo;
 	}

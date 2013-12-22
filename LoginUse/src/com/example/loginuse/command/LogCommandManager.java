@@ -1,19 +1,22 @@
 package com.example.loginuse.command;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
+import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.command.LogCommand;
 
 public class LogCommandManager {
-	private LogCommand[] commands;
+	private Hashtable<String, LogCommand> commands;
 	private Hashtable<String, String> lastLogState; 
+	private ArrayList<LogCommandRule> rules;
 	
 	private static LogCommandManager instance;
 	
 	private LogCommandManager(){
 		this.lastLogState = new Hashtable<String, String>();
-		this.commands = new LogCommand[1];
-		this.commands[0] = new CommandSynchronize();
+		this.buildRules();
+		this.buildCommands();
 	}
 	
 	public static LogCommandManager getInstance()
@@ -25,14 +28,44 @@ public class LogCommandManager {
 		return LogCommandManager.instance;
 	}
 	
+	/*	 
+	 * Create default rules for the App.
+	 */
+	private void buildRules(){
+		this.rules = new ArrayList<LogCommandRule>();
+		
+		LogCommandRule rule = new LogCommandRule("Synch");
+		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, "1");
+		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IACCESS, "1");
+		rule.addCondition(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, "0");		
+	}	
+	/*	 
+	 * Create all LogCommands in Command HashTable
+	 */
+	private void buildCommands(){
+		this.commands = new Hashtable<String, LogCommand>();		
+		this.commands.put("Synch", new CommandSynchronize());
+	}
+	
+	public void addLogCommandRule(LogCommandRule rule){
+		if(rule != null)
+			this.rules.add(rule);
+	}
+	
 	public void newState(String key,String value){
 		this.lastLogState.put(key, value);		
 	}
 	
 	public void executeCommands(){
-		for(int i=0; i< this.commands.length ; i++)
-			if(this.commands[i].canExecute(this.lastLogState))
-				this.commands[i].execute();
+		String commandKey = "";
+		LogCommandRule rule = null;
+		for(int i=0; i< this.rules.size() ; i++){
+			rule = this.rules.get(i);
+			commandKey = rule.getCommendKey();			
+			if(this.commands.containsKey(commandKey) && rule.validate()){			
+				this.commands.get(commandKey).execute();
+			}
+		}
 	}
 	
 	public String getValue(String key){
