@@ -3,8 +3,8 @@ package com.example.loginuse.command;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.command.LogCommand;
+import com.example.loginuse.configuration.LogConstants;
 
 public class LogCommandManager {
 	private Hashtable<String, LogCommand> commands;
@@ -34,7 +34,7 @@ public class LogCommandManager {
 	private void buildRules(){
 		this.rules = new ArrayList<LogCommandRule>();
 		
-		LogCommandRule rule = new LogCommandRule("Synch");
+		LogCommandRule rule = new LogCommandRule("SynchLogFile");
 		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, "1");
 		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IACCESS, "1");
 		rule.addCondition(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, "0");		
@@ -44,12 +44,18 @@ public class LogCommandManager {
 	 */
 	private void buildCommands(){
 		this.commands = new Hashtable<String, LogCommand>();		
-		this.commands.put("Synch", new CommandSynchronize());
+		this.commands.put("SynchLogFile", new CommandSynchronize());
 	}
 	
 	public void addLogCommandRule(LogCommandRule rule){
 		if(rule != null)
 			this.rules.add(rule);
+	}
+	
+	public LogCommand getCommand(String key){
+		if(this.commands.containsKey(key))
+			return this.commands.get(key);
+		return null;
 	}
 	
 	public void newState(String key,String value){

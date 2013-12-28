@@ -1,4 +1,4 @@
-package com.example.loginuse.Configuration;
+package com.example.loginuse.configuration;
 
 import java.util.Date;
 import android.content.Context;

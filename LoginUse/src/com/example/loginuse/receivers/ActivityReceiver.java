@@ -1,7 +1,7 @@
 package com.example.loginuse.receivers;
 
 
-import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConfiguration;
 
 import android.content.Context;
 import android.content.Intent;

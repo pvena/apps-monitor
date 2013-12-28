@@ -3,7 +3,7 @@ package com.example.loginuse.log;
 //import android.annotation.SuppressLint;
 import java.util.Date;
 
-import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.configuration.LogConstants;
 
 import android.text.format.DateFormat;
 

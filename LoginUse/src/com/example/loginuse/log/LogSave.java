@@ -8,8 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.example.loginuse.Configuration.LogConfiguration;
-import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConstants;
 
 import android.os.Environment;
 

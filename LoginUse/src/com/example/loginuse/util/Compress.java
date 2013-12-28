@@ -9,8 +9,8 @@ import java.io.FilenameFilter;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.example.loginuse.Configuration.LogConfiguration;
-import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConstants;
 
 import android.os.Environment;
 import android.util.Log;
@@ -27,6 +27,7 @@ public class Compress {
 	private static final int BUFFER = 2048;
 
 	private String[] _files;
+	private String _dirTxt;
 	private String _zipFile;
 	private String _lastZip;
 
@@ -45,14 +46,13 @@ public class Compress {
 		if(_files != null && _files.length > 0){
 		try {
 				File root = Environment.getExternalStorageDirectory();
-				File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
-				// have the object build the directory structure, if needed.
-				directory.mkdirs();
-         		File file = new File(directory,_zipFile);
+				File directoryZip = new File(root,LogConstants.LOG_SENT_FOLDER_NAME);
+				directoryZip.mkdirs();
+				
+         		File file = new File(directoryZip,_zipFile);
          		if(!file.exists()) {	                        
               		file.createNewFile();
-            	}
-			
+            	}		
 			
 				BufferedInputStream origin = null;
 				FileOutputStream dest = new FileOutputStream(file.getAbsolutePath());
@@ -65,7 +65,7 @@ public class Compress {
 				for (int i = 0; i < _files.length; i++) {
 					if(!LogConfiguration.getInstance().getFileLogName().contains(_files[i]))
 					{
-						String fileName = directory.getAbsolutePath()+"/"+_files[i];
+						String fileName = this._dirTxt + "/" + _files[i];
 						Log.v("Compress", "Adding: " + fileName);
 						FileInputStream fi = new FileInputStream(fileName);
 						origin = new BufferedInputStream(fi, BUFFER);
@@ -91,10 +91,11 @@ public class Compress {
 	}
 	
 	private String[] listTxtFiles(String dir) {
-		File root = Environment.getExternalStorageDirectory();
-		
+		File root = Environment.getExternalStorageDirectory();		
 		File directory = new File(root, dir);
-
+		
+		this._dirTxt = directory.getAbsolutePath();		
+		
 		if (!directory.isDirectory()) {
 			return null;
 		}
@@ -103,25 +104,6 @@ public class Compress {
 
 			public boolean accept(File dir, String name) {				
 				return name.endsWith(".txt");
-			}
-		};
-
-		return directory.list(filefilter);
-	}
-	
-	private String[] listZipFiles(String dir) {
-		File root = Environment.getExternalStorageDirectory();
-		
-		File directory = new File(root, dir);
-
-		if (!directory.isDirectory()) {
-			return null;
-		}
-		// create a FilenameFilter and override its accept-method
-		FilenameFilter filefilter = new FilenameFilter() {
-
-			public boolean accept(File dir, String name) {				
-				return name.endsWith(".zip");
 			}
 		};
 

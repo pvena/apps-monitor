@@ -1,18 +1,15 @@
 package com.example.loginuse;
 
-import java.io.File;
 import com.example.loginuse.R;
-import com.example.loginuse.Configuration.LogConfiguration;
-import com.example.loginuse.Configuration.LogConstants;
-import com.example.loginuse.soap.SoapFileTask;
+import com.example.loginuse.command.LogCommand;
+import com.example.loginuse.command.LogCommandManager;
+import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.soap.SoapLocationGroup;
 import com.example.loginuse.soap.SoapRegisterTask;
-import com.example.loginuse.util.Compress;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -93,19 +90,11 @@ public class ConfigActivity  extends Activity{
 		public void onClick(View arg0) {
 			try {
 				
-				Compress compress = new Compress(LogConstants.LOG_FOLDER_NAME, LogConfiguration.getInstance().getCurrentDayZip());
-				compress.zip();
-				if(compress.compressOK()){
-					File root = Environment.getExternalStorageDirectory();
-					File directory = new File(root,LogConstants.LOG_FOLDER_NAME);
-					File file = new File(directory,LogConfiguration.getInstance().getCurrentDayZip());
+				LogCommand synch = LogCommandManager.getInstance().getCommand("SynchLogFile");
+				if(synch != null)
+					if(!synch.execute())
+						Toast.makeText(LogConfiguration.getInstance().getContext(), "No Files for send", Toast.LENGTH_SHORT).show();
 				
-					new SoapFileTask(file,compress).execute();
-				}
-				else
-					Toast.makeText(LogConfiguration.getInstance().getContext(), "No Files for send", Toast.LENGTH_SHORT).show();
-				//TODO descomentar cuando tengamos el server corriendo
-				//new UploadFileTask(ServiceActivity.this).execute(LogConstants.ZIP_LOG_FILE_NAME);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

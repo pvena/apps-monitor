@@ -12,8 +12,8 @@ import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.loginuse.Configuration.LogConfiguration;
-import com.example.loginuse.Configuration.LogConstants;
+import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConstants;
 import com.google.android.gms.maps.model.LatLng;
 
 

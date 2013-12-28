@@ -1,8 +1,8 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.Configuration.LogConfiguration;
-import com.example.loginuse.Configuration.LogConstants;
 import com.example.loginuse.command.LogCommandManager;
+import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;

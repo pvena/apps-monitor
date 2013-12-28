@@ -1,4 +1,4 @@
-package com.example.loginuse.Configuration;
+package com.example.loginuse.configuration;
 
 /**
  * Constants
@@ -6,7 +6,20 @@ package com.example.loginuse.Configuration;
  *
  */
 public class LogConstants {
-	public static String INICIO = "INIC";
+	
+	/*======================Files and Folders=========================*/
+	
+	public static String LOG_FILE_NAME = "/@LoguinUse.txt";
+	
+	public static String ZIP_LOG_FILE_NAME = "/@loguinUse.zip";
+	
+	public static String LOG_FOLDER_NAME = "/LoginUse";
+	
+	public static String LOG_SENT_FOLDER_NAME = "/LoginUse/Sent";	
+	
+	public static String LOG_RECEIVE_FOLDER_NAME = "/LoginUse/Receive";
+	
+	/*======================Logs types===============================*/
 	
 	public static String WIFI_STATE_TAG = "WIFI";
 	
@@ -24,21 +37,9 @@ public class LogConstants {
 	
 	public static String HEADSET_STATE_TAG = "HEADSET";
 	
-	public static String CURRENTACTIVITY = "ACTIVITY";
+	public static String CURRENTACTIVITY = "ACTIVITY";	
 	
-	public static String LOG_FILE_NAME = "/@LoguinUse.txt";
-	
-	public static String LOG_FOLDER_NAME = "/LoginUse";
-	
-	public static String LOG_SENT_FOLDER_NAME = "/LoginUse/Sent";
-	
-	public static String ZIP_LOG_FILE_NAME = "/@loguinUse.zip";
-	
-	public static String LOG_CONFIG_FILE = "/LoguinUse.config";
-	
-	public static String SEP = "::";
-	
-	public static String PSEP = "|";
+	/*=====================Logs properties===========================*/
 	
 	public static String PERCENTAGE = "PCT";
 	
@@ -54,8 +55,6 @@ public class LogConstants {
 	
 	public static String IACCESS = "IACCESS";
 	
-	public static String INFO = "INFO";
-	
 	public static String NAME = "NAME";
 	
 	public static String ADDRESS = "ADDRESS";
@@ -64,11 +63,7 @@ public class LogConstants {
 	
 	public static String DISCHARGING = "DISCH";
 	
-	public static String DATEFORMAT = "kk:mm:ss";
-	
 	public static String MODE = "MODE";
-	
-	public static String FILEDATEFORMAT = "yyyyMMdd";
 	
 	public static String STATE = "STATE";
 	
@@ -82,9 +77,19 @@ public class LogConstants {
 	
 	public static String ALTITUDE = "ALT";
 	
+	/*===================Date Format==========================*/
+	public static String DATEFORMAT = "kk:mm:ss";
+	
+	public static String FILEDATEFORMAT = "yyyyMMdd";	
+	
+	/*===================Log file Format=============================*/
 	public static String CATSEP1 = "[";
 	
 	public static String CATSEP2 = "]";
 	
 	public static String CATSEP = "&"; 	
+	
+	public static String SEP = "::";
+	
+	public static String PSEP = "|";
 }

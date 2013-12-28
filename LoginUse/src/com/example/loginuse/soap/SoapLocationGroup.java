@@ -8,7 +8,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.example.loginuse.Configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.log.LogFormat;
 
 public class SoapLocationGroup extends AsyncTask<Void, Void, String>{
