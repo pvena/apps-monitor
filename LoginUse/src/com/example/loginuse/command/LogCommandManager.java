@@ -45,6 +45,12 @@ public class LogCommandManager {
 	private void buildCommands(){
 		this.commands = new Hashtable<String, LogCommand>();		
 		this.commands.put("SynchLogFile", new CommandSynchronize());
+		this.commands.put("WifiEnabled", new LogCommandWifiEnabled());
+		this.commands.put("WifiDisabled", new LogCommandWifiDisabled());
+		this.commands.put("BlueToothEnabled", new LogCommandBlueToothEnabled());
+		this.commands.put("BlueToothDisabled", new LogCommandBlueToothDisabled());
+		this.commands.put("ConnectionEnabled", new LogCommandConnectionEnabled());
+		this.commands.put("ConnectionDisabled", new LogCommandConnectionDisabled());
 	}
 	
 	public void addLogCommandRule(LogCommandRule rule){
