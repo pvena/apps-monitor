@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.google.android.gms.maps.model.LatLng;
 
 
 public class LogFormat {
@@ -82,23 +81,25 @@ public class LogFormat {
 	
 	public static void setLocationGroups(String LocationData){
 		String[] data = LocationData.split("&");
-		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 3);
-		for(int i=0;i<(data.length);i+=3 ){
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPBASE + i/3  , data[i]);
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LATITUD + i/3  , Float.valueOf(data[i+1]));
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/3 , Float.valueOf(data[i+2]));
+		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 4);
+		for(int i=0;i<(data.length);i+=4 ){
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPBASE + i/4  , data[i]);
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LATITUD + i/4  , Float.valueOf(data[i+1]));
+			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/4 , Float.valueOf(data[i+2]));
+			LogConfiguration.getInstance().setProperty(LogConfiguration.COUNT + i/4 , Integer.valueOf(data[i+3]));
 		}
 	}
 	
-	public static Hashtable<String, LatLng> getLocationGroup(){
+	public static Hashtable<String, LogLocationGroup> getLocationGroup(){
 		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPCOUNT, 0);
-		Hashtable<String, LatLng> groups = new Hashtable<String, LatLng>();
+		Hashtable<String, LogLocationGroup> groups = new Hashtable<String, LogLocationGroup>();
 		for(int i=0; i < count ; i++){
-			String name = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group" + i);
-			double latitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LATITUD + i, 0.0f);
-			double longitud = LogConfiguration.getInstance().getProperty(LogConfiguration.LONGITUD + i, 0.0f);
-			LatLng latLong = new LatLng(latitud, longitud);
-			groups.put(name, latLong);
+			LogLocationGroup lg = new LogLocationGroup();
+			lg.setName(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group" + i));
+			lg.setLatitud(LogConfiguration.getInstance().getProperty(LogConfiguration.LATITUD + i, 0.0f));
+			lg.setLongitud(LogConfiguration.getInstance().getProperty(LogConfiguration.LONGITUD + i, 0.0f));
+			lg.setCount(LogConfiguration.getInstance().getProperty(LogConfiguration.COUNT + i, 0));			
+			groups.put(lg.getName(), lg);
 		}
 		return groups;
 	}

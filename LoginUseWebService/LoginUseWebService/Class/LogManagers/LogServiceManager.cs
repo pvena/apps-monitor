@@ -103,7 +103,7 @@ namespace LoginUseWebService
             {
                 string data = "";
                 foreach (DataRow r in dt.Rows)
-                    data += r["name"] + "&" + r["latitud"] + "&" + r["longitud"] + "&";
+                    data += r["name"] + "&" + r["latitud"] + "&" + r["longitud"] + "&" + r["count"] + "&";
                 return data.Substring(0,data.Length-1);
             }
             return "";

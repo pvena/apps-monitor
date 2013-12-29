@@ -26,6 +26,7 @@ public class LogConfiguration {
 	public static String LOCATIONGROUPBASE = "LOCATIONGROUPBASE_";
 	public static String LONGITUD = "LONGITUD_";
 	public static String LATITUD = "LATITUD_";
+	public static String COUNT = "COUNT_";
 	
 	public static String ACTIVITYMINCCONFIDENCE = "ACTIVITYMINCCONFIDENCE"; //80
 	public static String ACTIVITYMILISECONDSPERSSECOND = "ACTIVITYMILISECONDSPERSSECOND"; //1000
