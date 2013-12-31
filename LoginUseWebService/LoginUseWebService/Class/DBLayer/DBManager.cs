@@ -215,6 +215,23 @@ namespace LoginUseWebService
                 return null;
             }
         }
+        public DataTable getRules(string phoneId)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getRules");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                DataTable dt = this.iDB.getTable(cmd);
+                this.iDB.disconect();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public DataTable getCsvData(string phoneId,DateTime from, DateTime to,string typeNames,string propNames)
         {

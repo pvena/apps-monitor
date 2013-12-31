@@ -109,6 +109,22 @@ namespace LoginUseWebService
             return "";
         }
         #endregion
+
+        #region ---------ProcessGroups Data Out----------------
+        public string createRulesData(string phoneId)
+        {
+            DBManager dbm = new DBManager();
+            DataTable dt = dbm.getRules(phoneId);
+            if (dt != null)
+            {
+                string data = "";
+                foreach (DataRow r in dt.Rows)
+                    data += r["commandKey"] + "&" + r["key"] + "&" + r["value"] + "&";
+                return data.Substring(0, data.Length - 1);
+            }
+            return "";
+        }
+        #endregion
         
         #region -----------Get Data Base Info---------------
 
