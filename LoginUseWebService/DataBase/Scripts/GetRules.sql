@@ -25,5 +25,5 @@ inner join [property] p on
 	pv.idProperty = p.idProperty
 inner join [type] t on
 	p.idType = t.idType
-where r.idUser = @idUser
+where r.idUser = @idUser or forAll = 1
 order by r.idRule

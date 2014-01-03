@@ -317,8 +317,8 @@ containing a value of this type.
         public static final int edtWebServiceURL=0x7f060020;
         public static final int hello_world=0x7f06001b;
         public static final int lblConfiguration=0x7f06001e;
-        public static final int refreshLocationGroups=0x7f060025;
         public static final int sendLogButton=0x7f06001d;
+        public static final int synchronizeInfo=0x7f060025;
         public static final int txvPhoneId=0x7f060022;
         public static final int txvUserName=0x7f060023;
         public static final int txvWebServiceURL=0x7f060021;

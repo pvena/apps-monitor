@@ -62,19 +62,27 @@ namespace LoginUseWebService
             string fileName = Path.GetFileName(path);
 
             if (!dbm.isFileProcess(phoneId, fileName, false))
-            {
+            {                
                 dbm.saveFile(phoneId, fileName, false, false, new FileInfo(path).Length);
 
-                string date = Path.GetFileNameWithoutExtension(path).Substring(0, 8);
+                try
+                {
+                    dbm.beginTransaction(phoneId + fileName);
+                    string date = Path.GetFileNameWithoutExtension(path).Substring(0, 8);
 
-                StreamReader sr = new StreamReader(path);
+                    StreamReader sr = new StreamReader(path);
+                                        
+                    while (!sr.EndOfStream)
+                        this.processLine(sr.ReadLine(), fileName, date, dbm);
 
-                string line = null;
-                while (!sr.EndOfStream)
-                    this.processLine(sr.ReadLine(), fileName, date, dbm);
-
-                sr.Close();
-                dbm.saveFile(phoneId, fileName, true, false, new FileInfo(path).Length);                
+                    sr.Close();
+                    dbm.saveFile(phoneId, fileName, true, false, new FileInfo(path).Length);
+                    dbm.endTransaction(phoneId + fileName,true);
+                }
+                catch (Exception ex)
+                {                    
+                    dbm.endTransaction(phoneId + fileName, false);
+                }
             }            
         }
 
@@ -83,7 +91,7 @@ namespace LoginUseWebService
             DBManager dbm = new DBManager();
 
             try
-            {
+            {                
                 if (!dbm.isFileProcess(phoneId,Path.GetFileName(zipPath), true))
                 {
                     string res = dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);

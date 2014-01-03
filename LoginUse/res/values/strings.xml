@@ -13,6 +13,6 @@
     <string name="txvPhoneId">Phone Id:</string>
     <string name="txvUserName">User Name</string>
     <string name="btnRegister">Register</string>
-    <string name="refreshLocationGroups">Refresh Location Groups</string>
+    <string name="synchronizeInfo">Synchronize Info</string>
 
 </resources>

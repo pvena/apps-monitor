@@ -1,8 +1,8 @@
 <publishData>
   <publishTarget publishUrl="https://localhost:8080/">
-    <file relUrl="bin/LoginUseWebService.dll" publishTime="12/31/2013 17:11:46" />
+    <file relUrl="bin/LoginUseWebService.dll" publishTime="01/02/2014 21:37:56" />
     <file relUrl="LoginUse.asmx" publishTime="10/19/2013 12:52:56" />
-    <file relUrl="bin/LoginUseWebService.pdb" publishTime="12/31/2013 17:11:46" />
+    <file relUrl="bin/LoginUseWebService.pdb" publishTime="01/02/2014 21:37:56" />
     <file relUrl="bin/ICSharpCode.SharpZipLib.dll" publishTime="05/25/2010 12:55:20" />
     <file relUrl="Web.config" publishTime="11/02/2013 22:47:04" />
   </publishTarget>

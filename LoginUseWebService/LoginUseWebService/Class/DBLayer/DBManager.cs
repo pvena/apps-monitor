@@ -12,8 +12,17 @@ namespace LoginUseWebService
 
         public DBManager()
         {
-            this.iDB = new InterfaseDB();
-        }        
+            this.iDB = new InterfaseDB();          
+        }
+
+        public void beginTransaction(string name) 
+        {
+            this.iDB.newTransaction(name);
+        }
+        public void endTransaction(string name,bool result)
+        {
+            this.iDB.endTransaction(name, result);
+        }
 
         #region -------------Transacciones--------------         
         public string saveUser(string phoneId,string name,string version, string phoneModel)

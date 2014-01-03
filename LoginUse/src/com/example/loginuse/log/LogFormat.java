@@ -12,6 +12,7 @@ import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.loginuse.command.LogCommandRule;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 
@@ -79,7 +80,26 @@ public class LogFormat {
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 	
-	public static void setLocationGroups(String LocationData){
+	public static void setInfoReceived(String info)
+	{
+		String[] infoData = info.split("\\|");
+		String type = "";
+		String data = "";
+		String[] split;
+		for(int i=0;i<(infoData.length);i++ ){
+			split = infoData[i].split(":"); 
+			type = split[0];
+			data = split[1];
+			if (type.equals("LocationGroups")){
+				LogFormat.setLocationGroups(data);
+			}
+			if (type.equals("Rules")){
+				LogFormat.setRules(data);
+			}	
+		}
+	}
+	
+	private static void setLocationGroups(String LocationData){
 		String[] data = LocationData.split("&");
 		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 4);
 		for(int i=0;i<(data.length);i+=4 ){
@@ -103,4 +123,40 @@ public class LogFormat {
 		}
 		return groups;
 	}
+	
+	private static void setRules(String RulesData){
+		String[] data = RulesData.split("&");
+		LogConfiguration.getInstance().setProperty(LogConfiguration.RULECOUNT, data.length / 4);
+		for(int i=0;i<(data.length);i+=4){
+			LogConfiguration.getInstance().setProperty(LogConfiguration.IDRULE + i/4  , data[i]);
+			LogConfiguration.getInstance().setProperty(LogConfiguration.COMMANDKEY + i/4  , data[i+1]);
+			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYKEY + i/4 , data[i+2]);
+			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYVALUE + i/4 , data[i+3]);
+		}
+	}	
+	
+	public static Hashtable<String,LogCommandRule> getRules(){
+		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.RULECOUNT, 0);
+		Hashtable<String, LogCommandRule> rules = new Hashtable<String, LogCommandRule>();
+		String id = "";
+		String commandKey = "";
+		String prop = "";
+		String val = "";
+		LogCommandRule rule = null;
+		for(int i=0; i < count ; i++){
+			id = LogConfiguration.getInstance().getProperty(LogConfiguration.IDRULE + i, "-1");
+			commandKey = LogConfiguration.getInstance().getProperty(LogConfiguration.COMMANDKEY + i, "Command" + i);
+			prop = LogConfiguration.getInstance().getProperty(LogConfiguration.PROPERTYKEY + i, "-");
+			val = LogConfiguration.getInstance().getProperty(LogConfiguration.PROPERTYVALUE + i, "-");			
+ 			if(rules.containsKey(id)){
+				rule = rules.get(id);
+			}
+			else{
+				rule = new LogCommandRule(commandKey);
+				rules.put(id, rule);
+			}
+			rule.addCondition(prop, val);
+		}
+		return rules;
+	} 
 }

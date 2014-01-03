@@ -145,11 +145,13 @@ namespace LoginUseWebService
         }
 
         [WebMethod]
-        public string getLocationGroups(string phoneId)
+        public string getSynchInfo(string phoneId)
         {
             try
             {                
-                return LogServiceManager.getInstance().createLocationGroupData(phoneId);
+                string data = LogServiceManager.getInstance().createLocationGroupData(phoneId) + "|";
+                data += LogServiceManager.getInstance().createRulesData(phoneId);
+                return data;
             }
             catch (Exception ex)
             { 

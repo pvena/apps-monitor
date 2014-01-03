@@ -1,10 +1,11 @@
 package com.example.loginuse.command;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommand;
-import com.example.loginuse.configuration.LogConstants;
+import com.example.loginuse.log.LogFormat;
 
 public class LogCommandManager {
 	private Hashtable<String, LogCommand> commands;
@@ -34,17 +35,21 @@ public class LogCommandManager {
 	private void buildRules(){
 		this.rules = new ArrayList<LogCommandRule>();
 		
-		LogCommandRule rule = new LogCommandRule("SynchLogFile");
-		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, "1");
-		rule.addCondition(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IACCESS, "1");
-		rule.addCondition(LogConstants.BATTERY_STATE_TAG + "-" + LogConstants.DISCHARGING, "0");		
+		LogCommandRule rule = null;		
+		
+		Hashtable<String,LogCommandRule> rules = LogFormat.getRules();
+		Enumeration<String> enumKey = rules.keys();
+		while(enumKey.hasMoreElements()) {		    
+		    rule = rules.get(enumKey.nextElement());
+		    this.rules.add(rule);
+		}
 	}	
 	/*	 
 	 * Create all LogCommands in Command HashTable
 	 */
 	private void buildCommands(){
 		this.commands = new Hashtable<String, LogCommand>();		
-		this.commands.put("SynchLogFile", new CommandSynchronize());
+		this.commands.put("SynchLogFile", new LogCommandSynchronize());
 		this.commands.put("WifiEnabled", new LogCommandWifiEnabled());
 		this.commands.put("WifiDisabled", new LogCommandWifiDisabled());
 		this.commands.put("BlueToothEnabled", new LogCommandBlueToothEnabled());

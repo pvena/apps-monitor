@@ -28,6 +28,12 @@ public class LogConfiguration {
 	public static String LATITUD = "LATITUD_";
 	public static String COUNT = "COUNT_";
 	
+	public static String RULECOUNT = "RULECOUNT";
+	public static String IDRULE = "IDRULE_";
+	public static String COMMANDKEY = "COMMANDKEY_";
+	public static String PROPERTYKEY = "PROPERTYKEY_";
+	public static String PROPERTYVALUE = "PROPERTYVALUE_";
+	
 	public static String ACTIVITYMINCCONFIDENCE = "ACTIVITYMINCCONFIDENCE"; //80
 	public static String ACTIVITYMILISECONDSPERSSECOND = "ACTIVITYMILISECONDSPERSSECOND"; //1000
 	public static String ACTIVITYDETACTIONINTERVALSECONDS = "ACTIVITYDETACTIONINTERVALSECONDS"; //60

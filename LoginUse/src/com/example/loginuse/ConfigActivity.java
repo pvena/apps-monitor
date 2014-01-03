@@ -4,7 +4,7 @@ import com.example.loginuse.R;
 import com.example.loginuse.command.LogCommand;
 import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
-import com.example.loginuse.soap.SoapLocationGroup;
+import com.example.loginuse.soap.SoapSynchronizeInfoReceived;
 import com.example.loginuse.soap.SoapRegisterTask;
 
 import android.app.Activity;
@@ -115,7 +115,7 @@ public class ConfigActivity  extends Activity{
 		@Override
 		public void onClick(View v) {
 			try {				
-				new SoapLocationGroup().execute();
+				new SoapSynchronizeInfoReceived().execute();
 				
 			} catch (Exception ex) {
 				ex.printStackTrace();

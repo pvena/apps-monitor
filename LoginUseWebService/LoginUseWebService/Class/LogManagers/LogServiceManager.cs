@@ -101,25 +101,25 @@ namespace LoginUseWebService
             DataTable dt = dbm.getLocationGroups(phoneId);            
             if (dt != null)
             {
-                string data = "";
-                foreach (DataRow r in dt.Rows)
-                    data += r["name"] + "&" + r["latitud"] + "&" + r["longitud"] + "&" + r["count"] + "&";
+                string data = "LocationGroups:";
+                foreach (DataRow r in dt.Rows)                
+                    data += r["name"] + "&" + r["latitud"] + "&" + r["longitud"] + "&" + r["count"] + "&";                
                 return data.Substring(0,data.Length-1);
             }
             return "";
         }
         #endregion
 
-        #region ---------ProcessGroups Data Out----------------
+        #region ---------ProcessRules Data Out----------------
         public string createRulesData(string phoneId)
         {
             DBManager dbm = new DBManager();
             DataTable dt = dbm.getRules(phoneId);
             if (dt != null)
             {
-                string data = "";
-                foreach (DataRow r in dt.Rows)
-                    data += r["commandKey"] + "&" + r["key"] + "&" + r["value"] + "&";
+                string data = "Rules:";
+                foreach (DataRow r in dt.Rows)                
+                    data += r["idRule"] + "&" + r["commandKey"] + "&" + r["key"] + "&" + r["value"] + "&";                
                 return data.Substring(0, data.Length - 1);
             }
             return "";
