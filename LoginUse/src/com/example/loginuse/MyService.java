@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.listeners.PassiveLocationChangedListener;
 import com.example.loginuse.receivers.ActivityReceiver;
+import com.example.loginuse.receivers.BatteryPowerReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
 import com.example.loginuse.receivers.GpsChangeReceiver;
@@ -30,6 +31,7 @@ public class MyService extends Service  {
 	private GpsChangeReceiver gpsChangeReceiver;
 	private RingerReceiver ringerReceiver;
 	private HeadsetPlugReceiver headsetPlugReceiver;
+	private BatteryPowerReceiver batteryPowerReceiver;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -70,6 +72,7 @@ public class MyService extends Service  {
 		this.gpsChangeReceiver = new GpsChangeReceiver();
 		this.ringerReceiver = new RingerReceiver();
 		this.headsetPlugReceiver = new HeadsetPlugReceiver();
+		this.batteryPowerReceiver = new BatteryPowerReceiver();
 		
 		//Register all receivers
 		registerReceivers();
@@ -103,6 +106,7 @@ public class MyService extends Service  {
 		this.gpsChangeReceiver.initialize();
 		this.ringerReceiver.initialize();
 		this.headsetPlugReceiver.initialize();
+		this.batteryPowerReceiver.initialize();
 	}
 	
 	/**
@@ -117,5 +121,6 @@ public class MyService extends Service  {
 		this.gpsChangeReceiver.finalize();
 		this.ringerReceiver.finalize();
 		this.headsetPlugReceiver.finalize();
+		this.batteryPowerReceiver.finalize();
 	}
 }

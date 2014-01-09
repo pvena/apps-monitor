@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     
+    <uses-permission android:name="android.intent.action.ACTION_POWER_CONNECTED" />   
+    <uses-permission android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+    
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     
