@@ -37,7 +37,9 @@ public class LogConstants {
 	
 	public static String HEADSET_STATE_TAG = "HEADSET";
 	
-	public static String CURRENTACTIVITY = "ACTIVITY";	
+	public static String CURRENTACTIVITY_TAG = "ACTIVITY";	
+	
+	public static String CURRENTDATE_TAG = "DATE";
 	
 	/*=====================Logs properties===========================*/
 	
@@ -76,6 +78,15 @@ public class LogConstants {
 	public static String CONFIDENCE = "CONF";
 	
 	public static String ALTITUDE = "ALT";
+	
+	public static String HOUR = "HOUR";
+	
+	public static String MINUTE = "MINUTE";
+	
+	public static String ISWEEKDAY = "ISWEEKDAY";
+	
+	public static String QUARTER = "QUARTER";
+	
 	
 	/*===================Date Format==========================*/
 	public static String DATEFORMAT = "kk:mm:ss";

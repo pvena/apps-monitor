@@ -1,7 +1,10 @@
 package com.example.loginuse.receivers;
 
+import java.util.Calendar;
+
 import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConstants;
+import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 import com.example.loginuse.util.BatteryStatusUtil;
@@ -41,11 +44,12 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		filter.addAction(action);
 	}
 
-	/**
-	 * Log the incoming events 
-	 */
-	@Override
-	public void onReceive(Context context, Intent intent) {
+	private void setGlobalStatus(Context context){
+		
+		/*
+		 * Set current Battery Status in LogFile and LogCommandManager
+		 * */
+		
 		String message = BatteryStatusUtil.getLog(context);		
 		if (!message.equals(lastLogBattery))
 		{
@@ -53,6 +57,28 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 			LogSave.getInstance().saveData(l);
 			lastLogBattery = message;
 		}
+		
+		/*
+		 * Set current day status in LogCommandManager
+		 * */
+		
+		Calendar c = Calendar.getInstance();
+		
+		int hour = c.get(Calendar.HOUR_OF_DAY);		
+		int quarter = c.get(Calendar.MINUTE) / 15;
+		boolean isWeekDay = (c.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY); 
+		
+		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG + "-" + LogConstants.HOUR, LogFormat.getValue(hour));
+		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG + "-" + LogConstants.QUARTER, LogFormat.getValue(quarter));
+		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG + "-" + LogConstants.ISWEEKDAY, LogFormat.getValue(isWeekDay));
+	}
+	
+	/**
+	 * Log the incoming events 
+	 */
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		this.setGlobalStatus(context);		
 		logEvent(context, intent);
 		LogCommandManager.getInstance().executeCommands();
 	}

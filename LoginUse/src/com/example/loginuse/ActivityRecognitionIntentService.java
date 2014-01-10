@@ -44,11 +44,11 @@ public class ActivityRecognitionIntentService extends IntentService {
 			
 			String newLog = LogFormat.getLog(LogConstants.ACTIVITY,activityName);
 			
-			LogCommandManager.getInstance().newState(LogConstants.CURRENTACTIVITY + "-" + LogConstants.ACTIVITY , LogFormat.getValue(activityName));
+			LogCommandManager.getInstance().newState(LogConstants.CURRENTACTIVITY_TAG + "-" + LogConstants.ACTIVITY , LogFormat.getValue(activityName));
 				
 			if(!newLog.equals(lastLog) && confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
 			{
-				LogLine l = new LogLine(newLog, LogConstants.CURRENTACTIVITY);
+				LogLine l = new LogLine(newLog, LogConstants.CURRENTACTIVITY_TAG);
 				LogSave.getInstance().saveData(l);
 				lastLog = newLog;
 			}
