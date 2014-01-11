@@ -50,12 +50,11 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		 * Set current Battery Status in LogFile and LogCommandManager
 		 * */
 		
-		String message = BatteryStatusUtil.getLog(context);		
-		if (!message.equals(lastLogBattery))
+		LogLine l = BatteryStatusUtil.getBatteryStatusLine(context);		
+		if (!l.getMessage().equals(lastLogBattery))
 		{
-			LogLine  l = new LogLine(message,LogConstants.BATTERY_STATE_TAG);
 			LogSave.getInstance().saveData(l);
-			lastLogBattery = message;
+			lastLogBattery = l.getMessage();
 		}
 		
 		/*

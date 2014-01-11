@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 
@@ -43,26 +41,23 @@ private static String lastLog;
 	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			String logText = "";
+			LogLine l = new LogLine(LogConstants.HEADSET_STATE_TAG);
 			if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
 	            int state = intent.getIntExtra("state", -1);
 	            switch (state) {
 	            case 0:
-	            	logText += LogFormat.getLog(LogConstants.STATE, false);
-					LogCommandManager.getInstance().newState(LogConstants.HEADSET_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
+	            	l.addProperty(LogConstants.STATE, false);
 	                break;
 	            case 1:
-	            	logText += LogFormat.getLog(LogConstants.STATE, true);
-					LogCommandManager.getInstance().newState(LogConstants.HEADSET_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
+	            	l.addProperty(LogConstants.STATE, true);
 	                break;
 	            default:
-	                Log.d(LogConstants.HEADSET_STATE_TAG, "I have no idea what the headset state is");
+	            	l.addProperty(LogConstants.STATE, "-");
 	            }
 	        }
-			if(!logText.equals(lastLog)){
-				LogLine l = new LogLine(logText, LogConstants.HEADSET_STATE_TAG);			
+			if(!l.getMessage().equals(lastLog)){
 				LogSave.getInstance().saveData(l);
-				lastLog = logText;
+				lastLog = l.getMessage();
 			}
 		}
 		catch(Exception e){ Log.e("ERROR", "HEADSET-LOG"); }

@@ -3,10 +3,8 @@ package com.example.loginuse;
 import android.app.IntentService;
 import android.content.Intent;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 import com.google.android.gms.location.ActivityRecognitionResult;
@@ -42,15 +40,14 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 			String activityName = this.getCurrentActionInfo(activityType);
 			
-			String newLog = LogFormat.getLog(LogConstants.ACTIVITY,activityName);
+			LogLine l = new LogLine(LogConstants.CURRENTACTIVITY_TAG);
 			
-			LogCommandManager.getInstance().newState(LogConstants.CURRENTACTIVITY_TAG + "-" + LogConstants.ACTIVITY , LogFormat.getValue(activityName));
-				
-			if(!newLog.equals(lastLog) && confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
+			l.addProperty(LogConstants.ACTIVITY,activityName);
+			
+			if(!l.getMessage().equals(lastLog) && confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
 			{
-				LogLine l = new LogLine(newLog, LogConstants.CURRENTACTIVITY_TAG);
 				LogSave.getInstance().saveData(l);
-				lastLog = newLog;
+				lastLog = l.getMessage();
 			}
 		} else {
 

@@ -6,10 +6,8 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.util.Log;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 
@@ -44,19 +42,16 @@ private static String lastLog;
 	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			String logText = "";
+			LogLine l = new LogLine(LogConstants.GPS_STATE_TAG);	
 			final LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 			if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-				logText += LogFormat.getLog(LogConstants.STATE, true);
-				LogCommandManager.getInstance().newState(LogConstants.GPS_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
+				l.addProperty(LogConstants.STATE, true);
 			} else {
-				logText += LogFormat.getLog(LogConstants.STATE, false);
-				LogCommandManager.getInstance().newState(LogConstants.GPS_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
+				l.addProperty(LogConstants.STATE, false);
 			}
-			if(!logText.equals(lastLog)){
-				LogLine l = new LogLine(logText, LogConstants.GPS_STATE_TAG);			
+			if(!l.getMessage().equals(lastLog)){
 				LogSave.getInstance().saveData(l);
-				lastLog = logText;
+				lastLog = l.getMessage();
 			}
 		}
 		catch(Exception e){ Log.e("ERROR", "GPS-LOG"); }

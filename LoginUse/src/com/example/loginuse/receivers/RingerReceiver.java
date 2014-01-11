@@ -1,9 +1,7 @@
 package com.example.loginuse.receivers;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 
@@ -40,38 +38,27 @@ public class RingerReceiver extends GeneralLoggingReceiver{
 	public void logEvent(Context context, Intent intent) {
 		try
 		{
-			String logText = "";
+			LogLine l = new LogLine(LogConstants.RINGER_STATE_TAG);
 			AudioManager am = (AudioManager)LogConfiguration.getInstance().getContext().getSystemService(Context.AUDIO_SERVICE);
 
 			switch (am.getRingerMode()) {
 				case AudioManager.RINGER_MODE_SILENT:
-					logText += LogFormat.getLog(LogConstants.STATE, false);
-					logText += LogFormat.getLog(LogConstants.MODE, "SILENT");
-					
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.MODE, LogFormat.getValue("SILENT"));
+					l.addProperty(LogConstants.STATE, false);
+					l.addProperty(LogConstants.MODE, "SILENT");
 					break;
 				case AudioManager.RINGER_MODE_VIBRATE:
-					logText += LogFormat.getLog(LogConstants.STATE, true);
-					logText += LogFormat.getLog(LogConstants.MODE, "VIBRATE");
-					
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.MODE, LogFormat.getValue("VIBRATE"));
+					l.addProperty(LogConstants.STATE, true);
+					l.addProperty(LogConstants.MODE, "VIBRATE");					
 					break;
 				case AudioManager.RINGER_MODE_NORMAL:
-					logText += LogFormat.getLog(LogConstants.STATE, true);
-					logText += LogFormat.getLog(LogConstants.MODE, "NORMAL");
-					
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));					
-					LogCommandManager.getInstance().newState(LogConstants.RINGER_STATE_TAG + "-" + LogConstants.MODE, LogFormat.getValue("NORMAL"));
+					l.addProperty(LogConstants.STATE, true);
+					l.addProperty(LogConstants.MODE, "NORMAL");
 					break;
-			}
+			}			
 			
-			
-			if(!logText.equals(lastLog)){
-				LogLine l = new LogLine(logText, LogConstants.RINGER_STATE_TAG);			
+			if(!l.getMessage().equals(lastLog)){							
 				LogSave.getInstance().saveData(l);
-				lastLog = logText;
+				lastLog = l.getMessage();
 			}
 		}
 		catch(Exception e){ Log.e("ERROR", "RINGER-LOG"); }

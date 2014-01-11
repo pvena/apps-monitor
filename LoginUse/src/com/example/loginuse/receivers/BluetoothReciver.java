@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 
@@ -51,77 +49,56 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 		try
 		{
 			String action = intent.getAction();
-			String logText = "";
+			LogLine l = new LogLine(LogConstants.BLUETOOTH_STATE_TAG);	
 	        // When discovery finds a device
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 		        // Get the BluetoothDevice object from the Intent
 		        BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 		        // If it is not paired, add it to the scanned list
 		        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-		        	logText += LogFormat.getLog(LogConstants.NAME,device.getName());
-		            logText += LogFormat.getLog(LogConstants.ADDRESS,device.getAddress());
-		            logText += LogFormat.getLog(LogConstants.STATE, true);
-		            logText += LogFormat.getLog(LogConstants.TSTATE, false);
-		            
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.NAME, LogFormat.getValue(device.getName()));
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.ADDRESS, LogFormat.getValue(device.getAddress()));
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(false));
+		        	l.addProperty(LogConstants.NAME, device.getName());
+		        	l.addProperty(LogConstants.ADDRESS,device.getAddress());
+		        	l.addProperty(LogConstants.STATE, true);
+		        	l.addProperty(LogConstants.TSTATE, false);		   
 		        }
 		    }
 			else 
 				if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
 					int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
 					
-					logText += LogFormat.getLog(LogConstants.NAME,"-");
-		            logText += LogFormat.getLog(LogConstants.ADDRESS,"-");
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.NAME, LogFormat.getValue("-"));
-		            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.ADDRESS, LogFormat.getValue("-"));
+					l.addProperty(LogConstants.NAME,"-");
+					l.addProperty(LogConstants.ADDRESS,"-");
 					
 					switch (state) {
 					case BluetoothAdapter.STATE_OFF:
-						logText += LogFormat.getLog(LogConstants.STATE, false);
-						logText += LogFormat.getLog(LogConstants.TSTATE, false);
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(false));
+						l.addProperty(LogConstants.STATE, false);
+						l.addProperty(LogConstants.TSTATE, false);
 						break;
 					case BluetoothAdapter.STATE_TURNING_OFF:
-						logText += LogFormat.getLog(LogConstants.STATE, true);
-						logText += LogFormat.getLog(LogConstants.TSTATE, true);
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(false));
+						l.addProperty(LogConstants.STATE, true);
+						l.addProperty(LogConstants.TSTATE, true);
 						break;
 					case BluetoothAdapter.STATE_ON:
-						logText += LogFormat.getLog(LogConstants.STATE, true);
-						logText += LogFormat.getLog(LogConstants.TSTATE, false);
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(true));
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(false));
+						l.addProperty(LogConstants.STATE, true);
+						l.addProperty(LogConstants.TSTATE, false);
 						break;
 					case BluetoothAdapter.STATE_TURNING_ON:
-						logText += LogFormat.getLog(LogConstants.STATE, false);
-						logText += LogFormat.getLog(LogConstants.TSTATE, true);
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
-						LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(true));
+						l.addProperty(LogConstants.STATE, false);
+						l.addProperty(LogConstants.TSTATE, true);
 						break;
 					}		            
 				}
 			
-			if(logText.equals("")){
-				logText += LogFormat.getLog(LogConstants.NAME,"-");
-	            logText += LogFormat.getLog(LogConstants.ADDRESS,"-");
-	            logText += LogFormat.getLog(LogConstants.STATE, false);
-	            logText += LogFormat.getLog(LogConstants.TSTATE, false);
-
-	            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.NAME, LogFormat.getValue("-"));
-	            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.ADDRESS, LogFormat.getValue("-"));
-	            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(false));
-	            LogCommandManager.getInstance().newState(LogConstants.BLUETOOTH_STATE_TAG + "-" + LogConstants.TSTATE, LogFormat.getValue(false));
+			if(l.getMessage().equals("")){
+				l.addProperty(LogConstants.NAME, "-");
+				l.addProperty(LogConstants.ADDRESS, "-");
+				l.addProperty(LogConstants.STATE, false);
+				l.addProperty(LogConstants.TSTATE, false);
 			}
-			if(!logText.equals(lastLog))
+			if(!l.getMessage().equals(lastLog))
 			{
-				LogLine l = new LogLine(logText, LogConstants.BLUETOOTH_STATE_TAG);			
 				LogSave.getInstance().saveData(l);
-				lastLog = logText;
+				lastLog = l.getMessage();
 			}
 		}
 		catch(Exception e){ Log.e("ERROR", "Bluetooth-LOG"); }

@@ -9,7 +9,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
@@ -50,19 +49,18 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		{
 			NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 			if(networkInfo.getType() == ConnectivityManager. TYPE_WIFI){
-				String newLog = this.getWifiConnection(context,intent);
-				if(!newLog.equals(lastLog))
+				LogLine l = this.getWifiConnection(context,intent);
+				if(!l.getMessage().equals(lastLog))
 				{
-					LogLine l = new LogLine(newLog, LogConstants.WIFI_STATE_TAG);
 					LogSave.getInstance().saveData(l);
-					lastLog = newLog;
+					lastLog = l.getMessage();
 				}
 			}			
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
 	}
 	
-	private String getWifiConnection(Context context, Intent intent)
+	private LogLine getWifiConnection(Context context, Intent intent)
 	{		
 		if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
 		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
@@ -70,7 +68,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 		    WifiInfo wifiInfo = intent.getParcelableExtra("wifiInfo");
 		    return getNetInfo(wifiInfo,wifiManager.isWifiEnabled(),networkInfo.isConnected());		    
 		} 
-		return "ND";
+		return null;
 	}
 	
 	/**
@@ -79,27 +77,22 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 * @param wifiInfo
 	 * @return
 	 */
-	private String getNetInfo(WifiInfo wifiInfo,boolean state,boolean connected){
-		String netInfo = "";
-		netInfo += LogFormat.getLog(LogConstants.STATE, state);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(state));
+	private LogLine getNetInfo(WifiInfo wifiInfo,boolean state,boolean connected){
+		LogLine l = new LogLine(LogConstants.WIFI_STATE_TAG);
+		
+		l.addProperty(LogConstants.STATE, state);
 		
 		String SSID = (connected)?LogFormat.getValue(wifiInfo.getSSID()):"-";
 		String MacAddress = (connected)?LogFormat.getValue(wifiInfo.getMacAddress()):"-";
 		String IpAddress = (connected)? LogFormat.getValue(wifiInfo.getIpAddress()):"-";
 		String IAccess = LogFormat.getValue(connected);
 		
-		netInfo += LogFormat.getLog(LogConstants.SSID, SSID);
-		netInfo += LogFormat.getLog(LogConstants.MAC,MacAddress);
-		netInfo += LogFormat.getLog(LogConstants.IP,IpAddress);
-		netInfo += LogFormat.getLog(LogConstants.IACCESS,IAccess);
+		l.addProperty(LogConstants.SSID, SSID);
+		l.addProperty(LogConstants.MAC,MacAddress);
+		l.addProperty(LogConstants.IP,IpAddress);
+		l.addProperty(LogConstants.IACCESS,IAccess);
 			
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.SSID,SSID);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.MAC, MacAddress);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IP, IpAddress);
-		LogCommandManager.getInstance().newState(LogConstants.WIFI_STATE_TAG + "-" + LogConstants.IACCESS,IAccess);
-			
-		return netInfo;
+		return l;
 	}
 	
 }

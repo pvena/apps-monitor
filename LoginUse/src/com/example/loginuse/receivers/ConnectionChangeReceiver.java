@@ -6,10 +6,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 
@@ -46,21 +44,21 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	@Override
 	public void logEvent(Context context, Intent intent) {
 		try
-		{
+		{			
+			LogLine l = new LogLine(LogConstants.CONNECTION_STATE_TAG);
+			
 			ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-			String info;
+			
 			boolean enable = (	netInfo != null && 
 								netInfo.getType() != ConnectivityManager.TYPE_WIFI && 
 								netInfo.isConnectedOrConnecting());
 			
-			info = LogFormat.getLog(LogConstants.STATE, enable);//DATA TRANSMISSION CONNECTED (3G/GSM)
-			LogCommandManager.getInstance().newState(LogConstants.CONNECTION_STATE_TAG + "-" + LogConstants.STATE, LogFormat.getValue(enable));
+			l.addProperty(LogConstants.STATE, enable);//DATA TRANSMISSION CONNECTED (3G/GSM)
 			
-			if(!info.equals(lastLog)){
-				LogLine log = new LogLine(info,LogConstants.CONNECTION_STATE_TAG);
-				LogSave.getInstance().saveData(log);
-				lastLog = info;
+			if(!l.getMessage().equals(lastLog)){
+				LogSave.getInstance().saveData(l);
+				lastLog = l.getMessage();
 			}
 		}
 		catch(Exception e)
