@@ -32,9 +32,11 @@ public class BatteryStatusUtil {
 		int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 		int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
-		float batteryPct = level / (float)scale * 100;
+		float batteryPct = level / (float)scale * 100;		
+			
 		
-		l.addProperty(LogConstants.PERCENTAGE,String.valueOf(batteryPct) +"%");		
+		l.addProperty(LogConstants.PERCENTAGE,String.format("%.02f",batteryPct) +"%");		
+		l.addProperty(LogConstants.POWER, getPower(batteryPct));
 		
 		if(isCharging){
 			// How are we charging?
@@ -52,5 +54,13 @@ public class BatteryStatusUtil {
 			l.addProperty(LogConstants.DISCHARGING,true);
 		}		
 		return l;
+	}
+	
+	private static int getPower(float bpct){
+		if(bpct > 80)
+			return 2;
+		else if(bpct > 20 && bpct < 80 )
+			return 1;
+		return 0;
 	}
 }

@@ -45,6 +45,8 @@ public class LogConstants {
 	
 	public static String PERCENTAGE = "PCT";
 	
+	public static String POWER = "POWER";
+	
 	public static String PLUGGED_USB = "PLGUSB";
 	
 	public static String PLUGGED_AC = "PLGAC";
