@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
+import com.example.loginuse.location.LogLocationGroup;
+import com.example.loginuse.location.LogLocationManager;
 import com.example.loginuse.log.LogLine;
 import com.example.loginuse.log.LogSave;
 import com.example.loginuse.receivers.GeneralLoggingReceiver;
@@ -62,6 +64,13 @@ public class PassiveLocationChangedListener extends GeneralLoggingReceiver imple
 		l.addProperty(LogConstants.LATITUDE,location.getLatitude());
 		l.addProperty(LogConstants.LONGITUDE,location.getLongitude());
 		l.addProperty(LogConstants.ALTITUDE, location.getAltitude());
+		
+		LogLocationGroup group = LogLocationManager.getInstance().getBoundingGroup(location);
+		
+		if(group != null)
+			l.addPropertyOnlyCommandManager(LogConstants.LOCATIONGROUP, group.getName());
+		else
+			l.addPropertyOnlyCommandManager(LogConstants.LOCATIONGROUP, "-");
 		
 		if(!l.getMessage().equals(lastLog)){
 			LogSave.getInstance().saveData(l);

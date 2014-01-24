@@ -5,16 +5,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Hashtable;
 
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.loginuse.command.LogCommandRule;
-import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
+import com.example.loginuse.location.LogLocationManager;
+import com.example.loginuse.rule.LogRuleManager;
 
 
 public class LogFormat {
@@ -91,72 +90,13 @@ public class LogFormat {
 			type = split[0];
 			data = split[1];
 			if (type.equals("LocationGroups")){
-				LogFormat.setLocationGroups(data);
+				LogLocationManager.getInstance().setLocationGroups(data);
 			}
 			if (type.equals("Rules")){
-				LogFormat.setRules(data);
+				LogRuleManager.getInstance().setRules(data);
 			}	
-		}
-	}
-	
-	private static void setLocationGroups(String LocationData){
-		String[] data = LocationData.split("&");
-		LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPCOUNT, data.length / 4);
-		for(int i=0;i<(data.length);i+=4 ){
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LOCATIONGROUPBASE + i/4  , data[i]);
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LATITUD + i/4  , Float.valueOf(data[i+1]));
-			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/4 , Float.valueOf(data[i+2]));
-			LogConfiguration.getInstance().setProperty(LogConfiguration.COUNT + i/4 , Integer.valueOf(data[i+3]));
-		}
-	}
-	
-	public static Hashtable<String, LogLocationGroup> getLocationGroup(){
-		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPCOUNT, 0);
-		Hashtable<String, LogLocationGroup> groups = new Hashtable<String, LogLocationGroup>();
-		for(int i=0; i < count ; i++){
-			LogLocationGroup lg = new LogLocationGroup();
-			lg.setName(LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPBASE + i, "Group" + i));
-			lg.setLatitud(LogConfiguration.getInstance().getProperty(LogConfiguration.LATITUD + i, 0.0f));
-			lg.setLongitud(LogConfiguration.getInstance().getProperty(LogConfiguration.LONGITUD + i, 0.0f));
-			lg.setCount(LogConfiguration.getInstance().getProperty(LogConfiguration.COUNT + i, 0));			
-			groups.put(lg.getName(), lg);
-		}
-		return groups;
-	}
-	
-	private static void setRules(String RulesData){
-		String[] data = RulesData.split("&");
-		LogConfiguration.getInstance().setProperty(LogConfiguration.RULECOUNT, data.length / 4);
-		for(int i=0;i<(data.length);i+=4){
-			LogConfiguration.getInstance().setProperty(LogConfiguration.IDRULE + i/4  , data[i]);
-			LogConfiguration.getInstance().setProperty(LogConfiguration.COMMANDKEY + i/4  , data[i+1]);
-			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYKEY + i/4 , data[i+2]);
-			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYVALUE + i/4 , data[i+3]);
 		}
 	}	
 	
-	public static Hashtable<String,LogCommandRule> getRules(){
-		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.RULECOUNT, 0);
-		Hashtable<String, LogCommandRule> rules = new Hashtable<String, LogCommandRule>();
-		String id = "";
-		String commandKey = "";
-		String prop = "";
-		String val = "";
-		LogCommandRule rule = null;
-		for(int i=0; i < count ; i++){
-			id = LogConfiguration.getInstance().getProperty(LogConfiguration.IDRULE + i, "-1");
-			commandKey = LogConfiguration.getInstance().getProperty(LogConfiguration.COMMANDKEY + i, "Command" + i);
-			prop = LogConfiguration.getInstance().getProperty(LogConfiguration.PROPERTYKEY + i, "-");
-			val = LogConfiguration.getInstance().getProperty(LogConfiguration.PROPERTYVALUE + i, "-");			
- 			if(rules.containsKey(id)){
-				rule = rules.get(id);
-			}
-			else{
-				rule = new LogCommandRule(commandKey);
-				rules.put(id, rule);
-			}
-			rule.addCondition(prop, val);
-		}
-		return rules;
-	} 
+	
 }

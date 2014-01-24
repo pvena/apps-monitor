@@ -62,4 +62,9 @@ public class LogLine {
 		this.message += LogFormat.getLog(property, value);		
 		LogCommandManager.getInstance().newState(this.type + "-" + property, LogFormat.getValue(value));
 	}
+	
+	
+	public void addPropertyOnlyCommandManager(String property,String value){				
+		LogCommandManager.getInstance().newState(this.type + "-" + property, LogFormat.getValue(value));
+	}
 }

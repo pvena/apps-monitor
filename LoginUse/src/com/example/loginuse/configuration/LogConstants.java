@@ -75,6 +75,8 @@ public class LogConstants {
 	
 	public static String LONGITUDE = "LONG";
 	
+	public static String LOCATIONGROUP = "LOCATIONGROUP";
+	
 	public static String ACTIVITY = "ACT";
 	
 	public static String CONFIDENCE = "CONF";

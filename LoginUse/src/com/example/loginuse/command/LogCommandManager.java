@@ -5,12 +5,13 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommand;
-import com.example.loginuse.log.LogFormat;
+import com.example.loginuse.rule.LogRule;
+import com.example.loginuse.rule.LogRuleManager;
 
 public class LogCommandManager {
 	private Hashtable<String, LogCommand> commands;
 	private Hashtable<String, String> lastLogState; 
-	private ArrayList<LogCommandRule> rules;
+	private ArrayList<LogRule> rules;
 	
 	private static LogCommandManager instance;
 	
@@ -33,11 +34,9 @@ public class LogCommandManager {
 	 * Create default rules for the App.
 	 */
 	private void buildRules(){
-		this.rules = new ArrayList<LogCommandRule>();
-		
-		LogCommandRule rule = null;		
-		
-		Hashtable<String,LogCommandRule> rules = LogFormat.getRules();
+		this.rules = new ArrayList<LogRule>();		
+		LogRule rule = null;				
+		Hashtable<String,LogRule> rules = LogRuleManager.getInstance().getRules();
 		Enumeration<String> enumKey = rules.keys();
 		while(enumKey.hasMoreElements()) {		    
 		    rule = rules.get(enumKey.nextElement());
@@ -58,7 +57,7 @@ public class LogCommandManager {
 		this.commands.put("ConnectionDisabled", new LogCommandConnectionDisabled());
 	}
 	
-	public void addLogCommandRule(LogCommandRule rule){
+	public void addLogCommandRule(LogRule rule){
 		if(rule != null)
 			this.rules.add(rule);
 	}
@@ -75,7 +74,7 @@ public class LogCommandManager {
 	
 	public void executeCommands(){
 		String commandKey = "";
-		LogCommandRule rule = null;
+		LogRule rule = null;
 		for(int i=0; i< this.rules.size() ; i++){
 			rule = this.rules.get(i);
 			commandKey = rule.getCommendKey();			

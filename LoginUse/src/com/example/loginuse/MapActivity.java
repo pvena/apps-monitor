@@ -2,8 +2,9 @@ package com.example.loginuse;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import com.example.loginuse.log.LogFormat;
-import com.example.loginuse.log.LogLocationGroup;
+
+import com.example.loginuse.location.LogLocationGroup;
+import com.example.loginuse.location.LogLocationManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -23,7 +24,7 @@ public class MapActivity extends FragmentActivity  {
         GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();      
         
         LatLngBounds.Builder builder = new LatLngBounds.Builder();        
-        Hashtable<String,LogLocationGroup> groups = LogFormat.getLocationGroup();
+        Hashtable<String,LogLocationGroup> groups = LogLocationManager.getInstance().getLocationGroup();
 		Enumeration<String> enumKey = groups.keys();
 		
 		LogLocationGroup group = null;
