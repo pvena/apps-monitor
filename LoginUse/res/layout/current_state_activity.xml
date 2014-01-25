@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+    
+    <TextView
+       	android:id="@+id/SendInformationTitle"
+       	android:layout_width="fill_parent"
+       	android:layout_height="wrap_content"
+       	android:textSize="16sp"
+       	android:background="#777777"
+       	android:textColor="@android:color/white"
+       	android:textStyle="bold" 
+       	android:text="@string/lblCurrentState"/>  	
+    
+   		<ListView 
+      		android:id="@+id/listViewState" 
+      		android:layout_height="fill_parent"
+      		android:layout_width="fill_parent" />
+</LinearLayout>

@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/white"
     >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
    <TextView
@@ -26,25 +26,22 @@
        	android:layout_height="30dp"
         android:text="@string/txvPhoneId"
         android:gravity="center_horizontal"
-        android:textColor="@android:color/primary_text_dark" />
+        android:textColor="@android:color/black" />
    <TextView
        	android:id="@+id/txvPhoneIdValue"
         android:layout_width="200dp"
       	android:layout_height="30dp"
        	android:gravity="right"
        	android:layout_alignRight="@+id/txvPhoneId"        			
-        android:textColor="@android:color/primary_text_dark" />   		
-   <View
-   		android:layout_width="fill_parent"
-   		android:layout_height="1dp"
-   		android:background="@android:color/darker_gray"/>
+        android:textColor="@android:color/black" />   		
+   
    <TextView
         android:id="@+id/txvWebServiceURL"
         android:layout_width="fill_parent"
-      	android:layout_height="wrap_content"
+      	android:layout_height="30dp"
       	android:gravity="center_horizontal"
         android:text="@string/txvWebServiceURL"
-        android:textColor="@android:color/primary_text_dark" />
+        android:textColor="@android:color/black" />
    <EditText
         android:id="@+id/txtWebServiceURL"
         android:layout_width="fill_parent"
@@ -54,17 +51,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/edtWebServiceURL" />   
-   <View
-    	android:layout_width="fill_parent"
-    	android:layout_height="1dp"
-    	android:background="@android:color/darker_gray"/>
+   
    <TextView
         android:id="@+id/txvUserName"
         android:layout_width="fill_parent"
-       	android:layout_height="wrap_content"
+       	android:layout_height="30dp"
        	android:gravity="center_horizontal"
         android:text="@string/txvUserName"
-        android:textColor="@android:color/primary_text_dark" />
+        android:textColor="@android:color/black" />
    <EditText
         android:id="@+id/txtUserName"
         android:layout_width="fill_parent"
@@ -74,43 +68,50 @@
         android:ems="10"
         android:inputType="text"
         android:textSize="14sp" />	
-   <View
-    	android:layout_width="fill_parent"
-    	android:layout_height="1dp"
-    	android:background="@android:color/darker_gray"/>   
+  
    <Button
    	   android:id="@+id/saveConfiguration"
-      	android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_margin="5dp"
        android:layout_centerVertical="true"
-        android:text="@string/btnSaveConfiguration" />   
+       android:text="@string/btnSaveConfiguration" 
+       style="@style/btnStyle"/>   
    <Button
        android:id="@+id/btnRegister"
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:layout_alignParentRight="true"
+       android:layout_margin="5dp"
        android:layout_centerVertical="true"
-       android:text="@string/btnRegister" />	
+       android:text="@string/btnRegister"
+       style="@style/btnStyle" />	
    <Button
        android:id="@+id/sendLog"
        android:layout_width="fill_parent"
        android:layout_height="wrap_content"
        android:layout_alignParentRight="true"
+       android:layout_margin="5dp"
        android:layout_centerVertical="true"
-       android:text="@string/sendLogButton" />     		
+       android:text="@string/sendLogButton" 
+       style="@style/btnStyle" />
    <Button
    	    android:id="@+id/refreshLocationGroups"
    	    android:layout_width="fill_parent"
-   	    android:layout_height="wrap_content"    	    
+   	    android:layout_height="wrap_content"    
+       android:layout_margin="5dp"	    
    	    android:layout_centerVertical="true"
-   	    android:text="@string/synchronizeInfo" />
+   	    android:text="@string/synchronizeInfo" 
+   	    style="@style/btnStyle"/>
    <Button
         android:id="@+id/btnRestarSerice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+       android:layout_margin="5dp"
         android:layout_centerVertical="true"
-        android:text="@string/RestartService" />
+        android:text="@string/RestartService" 
+        style="@style/btnStyle"/>
 </LinearLayout>
 </ScrollView>

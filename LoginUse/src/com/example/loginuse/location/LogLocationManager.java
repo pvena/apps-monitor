@@ -14,7 +14,6 @@ public class LogLocationManager {
 	ArrayList<LogLocationGroup> groups;
 	
 	private LogLocationManager(){
-		this.groups = new ArrayList<LogLocationGroup>();
 		this.loadGroups();
 	}
 	
@@ -30,7 +29,11 @@ public class LogLocationManager {
 	/*
 	 * Load Location Groups from configuration (Shared Preferences).
 	 * */
-	public void loadGroups(){
+	private void loadGroups(){
+		if(this.groups == null)
+			this.groups = new ArrayList<LogLocationGroup>();
+		else
+			this.groups.clear();
 		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.LOCATIONGROUPCOUNT, 0);
 		for(int i=0; i < count ; i++){
 			LogLocationGroup lg = new LogLocationGroup();
@@ -54,6 +57,7 @@ public class LogLocationManager {
 			LogConfiguration.getInstance().setProperty(LogConfiguration.LONGITUD + i/4 , Float.valueOf(data[i+2]));
 			LogConfiguration.getInstance().setProperty(LogConfiguration.COUNT + i/4 , Integer.valueOf(data[i+3]));
 		}
+		this.loadGroups();
 	}
 	
 	public Hashtable<String, LogLocationGroup> getLocationGroup(){	
@@ -79,11 +83,12 @@ public class LogLocationManager {
 	
 	public LogLocationGroup getBoundingGroup(Location loc){
 		LogLocationGroup gr = null;
-		for(int i=0; i < this.groups.size(); i++)
+		for(int i=0; i < this.groups.size(); i++){
 			gr = this.groups.get(i);
 			if(this.getGroupDistence(loc.getLongitude(), loc.getLatitude(), gr.getLongitud(), gr.getLatitud()) < 200){
 				return gr;
 			}
+		}
 		return null;			
 	}
 }

@@ -21,12 +21,18 @@ public class TabsActivity extends TabActivity{
         Intent songsIntent = new Intent(this, ConfigActivity.class);
         config.setContent(songsIntent);
         
+        TabSpec state = tabHost.newTabSpec("State");        
+        state.setIndicator("State.", getResources().getDrawable(R.drawable.ic_in));
+        Intent currentStateIntent = new Intent(this, CurrentStateActivity.class);
+        state.setContent(currentStateIntent);	
+        
         TabSpec map = tabHost.newTabSpec("Map");        
         map.setIndicator("Map.", getResources().getDrawable(R.drawable.ic_map));
         Intent mapIntent = new Intent(this, MapActivity.class);
         map.setContent(mapIntent);	
          
         tabHost.addTab(config); 
+        tabHost.addTab(state);
         tabHost.addTab(map);
         
    }

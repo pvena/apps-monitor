@@ -60,7 +60,9 @@
 
         <activity android:name="com.example.loginuse.ConfigActivity" />
         
-         <activity android:name="com.example.loginuse.MapActivity" />
+        <activity android:name="com.example.loginuse.MapActivity" />
+        
+        <activity android:name="com.example.loginuse.CurrentStateActivity" />
         
         <activity android:name="com.example.loginuse.listeners.GoogleActivityLisener" >
             <intent-filter>

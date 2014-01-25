@@ -14,5 +14,6 @@
     <string name="txvUserName">User Name</string>
     <string name="btnRegister">Register</string>
     <string name="synchronizeInfo">Synchronize Info</string>
+    <string name="lblCurrentState">LoginUse Current States</string>
 
 </resources>

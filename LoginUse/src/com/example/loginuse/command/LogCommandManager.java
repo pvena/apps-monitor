@@ -72,6 +72,21 @@ public class LogCommandManager {
 		this.lastLogState.put(key, value);		
 	}
 	
+	public ArrayList<String> getCurrentStates(){
+		ArrayList<String> states = new ArrayList<String>();		
+		Enumeration<String> enumKey = this.lastLogState.keys();
+		
+		String state = null;
+		String key = null;
+		while(enumKey.hasMoreElements()) {
+			key = enumKey.nextElement();
+			state = key + " : ";
+	    	state += this.lastLogState.get(key);
+	    	states.add(state);
+		} 
+		return states;
+	}
+	
 	public void executeCommands(){
 		String commandKey = "";
 		LogRule rule = null;
