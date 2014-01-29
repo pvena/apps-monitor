@@ -10,10 +10,9 @@
        	android:layout_width="fill_parent"
        	android:layout_height="wrap_content"
        	android:textSize="16sp"
-       	android:background="#777777"
-       	android:textColor="@android:color/white"
        	android:textStyle="bold" 
-       	android:text="@string/lblCurrentState"/>  	
+       	android:text="@string/lblCurrentState"
+       	style="@style/titleStyle"/>  	
     
    		<ListView 
       		android:id="@+id/listViewState" 

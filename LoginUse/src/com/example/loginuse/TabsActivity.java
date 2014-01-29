@@ -3,9 +3,11 @@ package com.example.loginuse;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
 public class TabsActivity extends TabActivity{
 	@Override
@@ -33,7 +35,15 @@ public class TabsActivity extends TabActivity{
          
         tabHost.addTab(config); 
         tabHost.addTab(state);
-        tabHost.addTab(map);
+        tabHost.addTab(map);        
         
+        int back = Color.rgb(254, 254 ,254);
+                
+        for(int i=0;i<tabHost.getTabWidget().getChildCount();i++) 
+        { 
+        	tabHost.getTabWidget().getChildAt(i).setBackgroundColor(back);
+            TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+            tv.setTextColor(Color.parseColor("#000000"));
+        }        
    }
 }

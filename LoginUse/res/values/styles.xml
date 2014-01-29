@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -17,6 +17,8 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     <color name="backgroundTitle">#5555AA</color>
+    <color name="customred">#AA2222</color>
+    <color name="customwhite">#FFFFFF</color>
 	<style name="btnStyle" parent="@android:style/Widget.Button">
        <item name="android:textSize">15sp</item>
        <item name="android:textStyle">bold</item>
@@ -29,7 +31,12 @@
        <item name="android:background">@drawable/btn_selector</item>
        <item name="android:padding">10dip</item>
    </style>
-   <style name="tabStyle" parent="@android:style/Widget.TabWidget">
-       <item name="android:textColor">#5DFC0A</item>
+   <style name="tabStyle" parent="@android:style/Widget.Button">
+       <item name="android:background">@color/customwhite</item>
+       <item name="android:paddingBottom">3dp</item>
+   </style>
+   <style name="titleStyle" parent="@android:style/Widget.Button">
+       <item name="android:background">@color/customred</item>
+       <item name="android:textColor">#FFFFFF</item>       
    </style>
 </resources>
