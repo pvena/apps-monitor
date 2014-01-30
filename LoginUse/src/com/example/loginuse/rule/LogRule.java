@@ -22,6 +22,18 @@ public class LogRule {
 	public String getCommendKey(){
 		return this.CommandKey;
 	}
+	public LogRuleData getRuleData(){
+		Enumeration<String> keys= this.conditions.keys();
+		String key = null;
+		String val = null;
+		String list = "";		
+		while (keys.hasMoreElements()){
+			key = keys.nextElement();
+			val = this.conditions.get(key);
+			list += "(" + key + "=" + val + ")";
+		}			
+		return new LogRuleData(CommandKey, list);
+	}
 	
 	public boolean validate(){
 		Enumeration<String> keys= this.conditions.keys();

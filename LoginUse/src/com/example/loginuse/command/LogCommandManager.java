@@ -6,6 +6,7 @@ import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommand;
 import com.example.loginuse.rule.LogRule;
+import com.example.loginuse.rule.LogRuleData;
 import com.example.loginuse.rule.LogRuleManager;
 
 public class LogCommandManager {
@@ -85,6 +86,14 @@ public class LogCommandManager {
 	    	states.add(state);
 		} 
 		return states;
+	}
+	
+	public ArrayList<LogRuleData> getCurrentRules(){
+		ArrayList<LogRuleData> list = new ArrayList<LogRuleData>();		
+		for(int i=0; i< this.rules.size() ; i++){
+			list.add(this.rules.get(i).getRuleData());
+		}
+		return list;
 	}
 	
 	public void executeCommands(){

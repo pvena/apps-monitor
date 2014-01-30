@@ -11,15 +11,6 @@
     android:orientation="vertical" >
 
    <TextView
-       	android:id="@+id/SendInformationTitle"
-       	android:layout_width="fill_parent"
-       	android:layout_height="wrap_content"
-       	android:textSize="16sp"
-       	android:textStyle="bold" 
-       	android:text="@string/lblConfiguration"
-       	style="@style/titleStyle"/>  		
-   				
-   <TextView
       	android:id="@+id/txvPhoneId"
        	android:layout_width="fill_parent"
        	android:layout_height="30dp"

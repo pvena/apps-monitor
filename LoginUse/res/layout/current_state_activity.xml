@@ -5,17 +5,8 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
     
-    <TextView
-       	android:id="@+id/SendInformationTitle"
-       	android:layout_width="fill_parent"
-       	android:layout_height="wrap_content"
-       	android:textSize="16sp"
-       	android:textStyle="bold" 
-       	android:text="@string/lblCurrentState"
-       	style="@style/titleStyle"/>  	
-    
-   		<ListView 
-      		android:id="@+id/listViewState" 
-      		android:layout_height="fill_parent"
-      		android:layout_width="fill_parent" />
+    <ListView 
+    	android:id="@+id/listViewState" 
+    	android:layout_height="fill_parent"
+    	android:layout_width="fill_parent"/>
 </LinearLayout>

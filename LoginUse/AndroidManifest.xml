@@ -64,6 +64,8 @@
         
         <activity android:name="com.example.loginuse.CurrentStateActivity" />
         
+        <activity android:name="com.example.loginuse.CurrentRulesActivity" />
+        
         <activity android:name="com.example.loginuse.listeners.GoogleActivityLisener" >
             <intent-filter>
                 <action android:name="googleActivity.intent.action.Launch" />

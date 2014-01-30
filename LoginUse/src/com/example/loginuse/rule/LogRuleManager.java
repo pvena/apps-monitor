@@ -6,10 +6,10 @@ import com.example.loginuse.configuration.LogConfiguration;
 
 public class LogRuleManager {
 	private static LogRuleManager instance;
-	Hashtable<String, LogRule> rules = null;
+	private Hashtable<String, LogRule> rules = null; 
 	
 	private LogRuleManager(){
-		this.rules = new Hashtable<String, LogRule>();
+		
 		this.loadRules();
 	}
 	
@@ -26,6 +26,10 @@ public class LogRuleManager {
 	 * Load Location Groups from configuration (Shared Preferences).
 	 * */
 	public void loadRules(){
+		if(this.rules != null)
+			rules.clear();
+		else
+			this.rules = new Hashtable<String, LogRule>();
 		int count = LogConfiguration.getInstance().getProperty(LogConfiguration.RULECOUNT, 0);		
 		String id = "";
 		String commandKey = "";
@@ -60,6 +64,7 @@ public class LogRuleManager {
 			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYKEY + i/4 , data[i+2]);
 			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYVALUE + i/4 , data[i+3]);
 		}
+		this.loadRules();
 	}	
 	
 	public Hashtable<String,LogRule> getRules(){

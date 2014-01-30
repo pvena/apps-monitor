@@ -33,7 +33,7 @@ public class CurrentStateActivity extends Activity {
         Collections.sort(states);
         		
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, states);
+                    R.layout.current_state_item, states);
         
         listView1.setAdapter(adapter);
 	}

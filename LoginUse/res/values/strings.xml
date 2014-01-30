@@ -6,7 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="RestartService">Restart Service</string>
     <string name="sendLogButton">Send Log</string>
-    <string name="lblConfiguration">LoginUse Configuration</string>
     <string name="btnSaveConfiguration">Save Configuration</string>
     <string name="edtWebServiceURL">http://</string>
     <string name="txvWebServiceURL">URL WebService Upload Files</string>
@@ -14,6 +13,5 @@
     <string name="txvUserName">User Name</string>
     <string name="btnRegister">Register</string>
     <string name="synchronizeInfo">Synchronize Info</string>
-    <string name="lblCurrentState">LoginUse Current States</string>
 
 </resources>

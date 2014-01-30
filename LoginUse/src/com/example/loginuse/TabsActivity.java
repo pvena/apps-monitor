@@ -28,6 +28,11 @@ public class TabsActivity extends TabActivity{
         Intent currentStateIntent = new Intent(this, CurrentStateActivity.class);
         state.setContent(currentStateIntent);	
         
+        TabSpec rules = tabHost.newTabSpec("Rules");        
+        rules.setIndicator("Rules.", getResources().getDrawable(R.drawable.ic_rules));
+        Intent commandsIntent = new Intent(this, CurrentRulesActivity.class);
+        rules.setContent(commandsIntent);	
+        
         TabSpec map = tabHost.newTabSpec("Map");        
         map.setIndicator("Map.", getResources().getDrawable(R.drawable.ic_map));
         Intent mapIntent = new Intent(this, MapActivity.class);
@@ -35,6 +40,7 @@ public class TabsActivity extends TabActivity{
          
         tabHost.addTab(config); 
         tabHost.addTab(state);
+        tabHost.addTab(rules);
         tabHost.addTab(map);        
         
         int back = Color.rgb(254, 254 ,254);
