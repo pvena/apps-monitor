@@ -74,6 +74,8 @@ namespace LoginUseWebServiceTest
                     fStream.Close();
                     fStream.Dispose();
 
+                    MessageBox.Show(sTmp);
+
                 }
                 else
                 {

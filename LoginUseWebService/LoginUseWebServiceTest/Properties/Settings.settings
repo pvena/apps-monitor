@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="LoginUseWebServiceTest_LoginUseService_LoginUse" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://201.235.94.231:8080/LoginUse.asmx</Value>
+      <Value Profile="(Default)">http://localhost:50011/LoginUseWebService/LoginUse.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

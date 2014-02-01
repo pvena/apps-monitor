@@ -41,7 +41,11 @@ namespace LoginUseWebServiceTest.LoginUseService {
         
         private System.Threading.SendOrPostCallback getPropertiesOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getPointDistanceOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getCSVDataOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getSynchInfoOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -100,7 +104,13 @@ namespace LoginUseWebServiceTest.LoginUseService {
         public event getPropertiesCompletedEventHandler getPropertiesCompleted;
         
         /// <remarks/>
+        public event getPointDistanceCompletedEventHandler getPointDistanceCompleted;
+        
+        /// <remarks/>
         public event getCSVDataCompletedEventHandler getCSVDataCompleted;
+        
+        /// <remarks/>
+        public event getSynchInfoCompletedEventHandler getSynchInfoCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/UploadFile", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -285,6 +295,41 @@ namespace LoginUseWebServiceTest.LoginUseService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getPointDistance", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public double getPointDistance(decimal lat1, decimal long1, decimal lat2, decimal long2) {
+            object[] results = this.Invoke("getPointDistance", new object[] {
+                        lat1,
+                        long1,
+                        lat2,
+                        long2});
+            return ((double)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPointDistanceAsync(decimal lat1, decimal long1, decimal lat2, decimal long2) {
+            this.getPointDistanceAsync(lat1, long1, lat2, long2, null);
+        }
+        
+        /// <remarks/>
+        public void getPointDistanceAsync(decimal lat1, decimal long1, decimal lat2, decimal long2, object userState) {
+            if ((this.getPointDistanceOperationCompleted == null)) {
+                this.getPointDistanceOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPointDistanceOperationCompleted);
+            }
+            this.InvokeAsync("getPointDistance", new object[] {
+                        lat1,
+                        long1,
+                        lat2,
+                        long2}, this.getPointDistanceOperationCompleted, userState);
+        }
+        
+        private void OngetPointDistanceOperationCompleted(object arg) {
+            if ((this.getPointDistanceCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPointDistanceCompleted(this, new getPointDistanceCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getCSVData", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string getCSVData(string phoneId, System.DateTime from, System.DateTime to, string typeNames, string propNames) {
             object[] results = this.Invoke("getCSVData", new object[] {
@@ -318,6 +363,35 @@ namespace LoginUseWebServiceTest.LoginUseService {
             if ((this.getCSVDataCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getCSVDataCompleted(this, new getCSVDataCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tesis.org/getSynchInfo", RequestNamespace="http://tesis.org/", ResponseNamespace="http://tesis.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string getSynchInfo(string phoneId) {
+            object[] results = this.Invoke("getSynchInfo", new object[] {
+                        phoneId});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getSynchInfoAsync(string phoneId) {
+            this.getSynchInfoAsync(phoneId, null);
+        }
+        
+        /// <remarks/>
+        public void getSynchInfoAsync(string phoneId, object userState) {
+            if ((this.getSynchInfoOperationCompleted == null)) {
+                this.getSynchInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSynchInfoOperationCompleted);
+            }
+            this.InvokeAsync("getSynchInfo", new object[] {
+                        phoneId}, this.getSynchInfoOperationCompleted, userState);
+        }
+        
+        private void OngetSynchInfoOperationCompleted(object arg) {
+            if ((this.getSynchInfoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getSynchInfoCompleted(this, new getSynchInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -498,6 +572,32 @@ namespace LoginUseWebServiceTest.LoginUseService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getPointDistanceCompletedEventHandler(object sender, getPointDistanceCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPointDistanceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPointDistanceCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public double Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((double)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     public delegate void getCSVDataCompletedEventHandler(object sender, getCSVDataCompletedEventArgs e);
     
     /// <remarks/>
@@ -509,6 +609,32 @@ namespace LoginUseWebServiceTest.LoginUseService {
         private object[] results;
         
         internal getCSVDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void getSynchInfoCompletedEventHandler(object sender, getSynchInfoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getSynchInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getSynchInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

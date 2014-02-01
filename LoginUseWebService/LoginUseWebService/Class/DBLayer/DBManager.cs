@@ -9,19 +9,37 @@ namespace LoginUseWebService
     public class DBManager : DBConfigManager
     {
         private InterfaseDB iDB;
+        private bool isTransactionOpen;
 
         public DBManager()
         {
-            this.iDB = new InterfaseDB();          
-        }
+            this.iDB = new InterfaseDB();
+            this.isTransactionOpen = false;
+        }        
 
         public void beginTransaction(string name) 
         {
+            this.connectIfNeed();
             this.iDB.newTransaction(name);
+            this.isTransactionOpen = true;
         }
         public void endTransaction(string name,bool result)
         {
+            this.isTransactionOpen = false;
             this.iDB.endTransaction(name, result);
+            this.connectIfNeed();
+            
+        }
+
+        private void connectIfNeed()
+        {
+            if (!this.isTransactionOpen && !this.iDB.isConected())
+                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+        }
+        private void disconnectIfNeed()
+        {
+            if (!this.isTransactionOpen && this.iDB.isConected())
+                this.iDB.disconect();
         }
 
         #region -------------Transacciones--------------         
@@ -35,9 +53,9 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@version", version);
                 cmd.Parameters.AddWithValue("@phoneModel", phoneModel);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 this.iDB.executeInsert(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return "OK.";
             }
             catch (Exception ex)
@@ -56,9 +74,9 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@process", process);
                 cmd.Parameters.AddWithValue("@isZip", isZip);
                 cmd.Parameters.AddWithValue("@size", size);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 int id = this.iDB.executeInsert(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 if (id > 0)
                     return "OK.";
                 else
@@ -80,9 +98,9 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@type", type);
                 cmd.Parameters.AddWithValue("@property", property);
                 cmd.Parameters.AddWithValue("@value", value);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 this.iDB.executeInsert(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return "OK.";
             }
             catch (Exception ex)
@@ -103,9 +121,9 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@count", lg.Count);
                 if (lg.Id != int.MinValue)
                     cmd.Parameters.AddWithValue("@idLocationGroup", lg.Id);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 int id = this.iDB.executeInsert(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 if (id > 0)
                     return "OK.";
                 else
@@ -126,9 +144,9 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@phoneId", phoneId);
                 cmd.Parameters.AddWithValue("@name", fileName);
                 cmd.Parameters.AddWithValue("@isZip", isZip);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -144,9 +162,9 @@ namespace LoginUseWebService
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (names != null)
                     cmd.Parameters.AddWithValue("@names", names);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -162,9 +180,9 @@ namespace LoginUseWebService
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (names != null)
                     cmd.Parameters.AddWithValue("@names", names);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -180,9 +198,9 @@ namespace LoginUseWebService
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (names != null)
                     cmd.Parameters.AddWithValue("@names", names);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -197,9 +215,9 @@ namespace LoginUseWebService
                 SqlCommand cmd = new SqlCommand("getLocationGroup");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@phoneId", phoneId);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -214,9 +232,9 @@ namespace LoginUseWebService
                 SqlCommand cmd = new SqlCommand("getLocation");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@phoneId", phoneId);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -231,9 +249,9 @@ namespace LoginUseWebService
                 SqlCommand cmd = new SqlCommand("getRules");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@phoneId", phoneId);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
@@ -255,9 +273,9 @@ namespace LoginUseWebService
                     cmd.Parameters.AddWithValue("@typeNames", typeNames);
                 if (propNames != null)
                     cmd.Parameters.AddWithValue("@propNames", propNames);
-                this.iDB.connect(this.ServerDB, this.NameDB, this.UserId, this.PassDB);
+                this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
-                this.iDB.disconect();
+                this.disconnectIfNeed();
                 return dt;
             }
             catch (Exception ex)
