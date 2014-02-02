@@ -16,9 +16,21 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
     <color name="backgroundTitle">#5555AA</color>
+    <color name="backgroundApp">#FEFEFE</color>
     <color name="customred">#AA2222</color>
     <color name="customwhite">#FFFFFF</color>
+    <color name="customblack">#000000</color>
+    <color name="btn1">#AA2222</color>
+    <color name="btn2">#e0341e</color>
+    <color name="btn1Foc">#AA7777</color>
+    <color name="btn2Foc">#e0896f</color>
+    <color name="tab1">#FFFFFF</color>
+    <color name="tab2">#EEEEEE</color>
+    <color name="tab1Foc">#FFAAAA</color>
+    <color name="tab2Foc">#e0341e</color>
+    
 	<style name="btnStyle" parent="@android:style/Widget.Button">
        <item name="android:textSize">15sp</item>
        <item name="android:textStyle">bold</item>
@@ -31,10 +43,13 @@
        <item name="android:background">@drawable/btn_selector</item>
        <item name="android:padding">10dip</item>
    </style>
+   
    <style name="tabStyle" parent="@android:style/Widget.Button">
-       <item name="android:background">@color/customwhite</item>
-       <item name="android:paddingBottom">3dp</item>
+       <item name="android:background">@drawable/tab_selector</item>
+       <item name="android:paddingBottom">3dp</item>    
+       <item name="android:textColor">@color/customblack</item>   
    </style>
+   
    <style name="titleStyle" parent="@android:style/Widget.Button">
        <item name="android:background">@color/customred</item>
        <item name="android:textColor">#FFFFFF</item>       
