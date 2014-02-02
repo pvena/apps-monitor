@@ -84,6 +84,18 @@ namespace LoginUseWebService
             tr.Start();
         }
 
+        private void starProcessRefreshLocationGroups(string phoneId)
+        {
+            LocationManager lm = new LocationManager();            
+            lm.resetLocationGroups(phoneId);
+        }
+
+        public void executeResetLocationGroups(string phoneId)
+        {
+            Thread tr = new Thread(delegate() { starProcessRefreshLocationGroups(phoneId); });
+            tr.Start();
+        }
+
         #endregion
 
         #region ------------ProcessCSV Data Out----------------

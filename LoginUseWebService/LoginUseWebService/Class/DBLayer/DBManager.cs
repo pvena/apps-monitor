@@ -135,6 +135,24 @@ namespace LoginUseWebService
             }
         }
 
+        public string deleteLocationGroup(string phoneId)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("deleteLocationGroups");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId); 
+                this.connectIfNeed();
+                this.iDB.execute(cmd);
+                this.disconnectIfNeed();
+                return "OK.";                
+            }
+            catch (Exception ex)
+            {
+                return "Fail.";
+            }
+        }
+
         public DataTable getFile(string phoneId, string fileName, bool isZip)
         {
             try

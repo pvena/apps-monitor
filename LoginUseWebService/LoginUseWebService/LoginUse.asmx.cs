@@ -27,7 +27,7 @@ namespace LoginUseWebService
             try
             {
                 string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + @"/" + phoneId + @"/";
-                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".zip";
+                string filePath = folderPath + DateTime.Now.ToString("yyyyMMdd") + "-" + phoneId + ".zip";
 
                 LogServiceManager.getInstance().createFolder(folderPath);
                 LogServiceManager.getInstance().saveFile(filePath, data);
@@ -40,7 +40,7 @@ namespace LoginUseWebService
                 return "Error: " + ex.Message.ToString();
             }
         }
-
+        
         [WebMethod]
         public string RegisterUser(string phoneId,string name,string version,string phoneModel)
         {
@@ -55,6 +55,58 @@ namespace LoginUseWebService
             }
         }
 
+        [WebMethod]
+        public string getCSVData(string phoneId, DateTime from, DateTime to, string typeNames, string propNames)
+        {
+            try
+            {
+                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + phoneId + @"_CSV\";
+                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".csv";
+                string fileZip = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId;
+
+                LogServiceManager.getInstance().createFolder(folderPath);
+
+                bool ok = LogServiceManager.getInstance().executeProcessCSV(phoneId, from, to, typeNames, propNames, filePath);
+
+                if (ok)
+                    return LogServiceManager.getInstance().getBase64File(fileZip, folderPath, filePath);
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        [WebMethod]
+        public string getSynchInfo(string phoneId)
+        {
+            try
+            {
+                string data = LogServiceManager.getInstance().createLocationGroupData(phoneId) + "|";
+                data += LogServiceManager.getInstance().createRulesData(phoneId);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                return "Fail";
+            }
+        }
+
+        [WebMethod]
+        public string ResetLocationGroups(string phoneId)
+        {
+            try
+            {
+                LogServiceManager.getInstance().executeResetLocationGroups(phoneId);
+                return "OK.";
+            }
+            catch (Exception ex)
+            {
+                return "Fail";
+            }
+        }
+        
         [WebMethod]
         public string[] getUsers(string names)
         {
@@ -121,42 +173,6 @@ namespace LoginUseWebService
             }
         }
 
-        [WebMethod]
-        public string getCSVData(string phoneId,DateTime from, DateTime to, string typeNames, string propNames)
-        {
-            try
-            {
-                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + phoneId + @"_CSV\";
-                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".csv";
-                string fileZip = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId;
-
-                LogServiceManager.getInstance().createFolder(folderPath);
-
-                bool ok = LogServiceManager.getInstance().executeProcessCSV(phoneId, from, to, typeNames, propNames, filePath);
-                
-                if (ok)
-                    return LogServiceManager.getInstance().getBase64File(fileZip, folderPath, filePath);
-                return "";
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
-        }
-
-        [WebMethod]
-        public string getSynchInfo(string phoneId)
-        {
-            try
-            {                
-                string data = LogServiceManager.getInstance().createLocationGroupData(phoneId) + "|";
-                data += LogServiceManager.getInstance().createRulesData(phoneId);
-                return data;
-            }
-            catch (Exception ex)
-            { 
-                return "Fail"; 
-            }
-        }
+        
     }
 }

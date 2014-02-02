@@ -100,5 +100,12 @@ namespace LoginUseWebService
             }
             catch (Exception ex) { }
         }
+
+        public void resetLocationGroups(string phoneId)
+        {
+            DBManager dbm = new DBManager();
+            dbm.deleteLocationGroup(phoneId);
+            this.execute(phoneId);
+        }
     }
 }
