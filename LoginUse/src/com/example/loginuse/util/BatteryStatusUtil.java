@@ -1,5 +1,7 @@
 package com.example.loginuse.util;
 
+import java.util.Locale;
+
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
 
@@ -35,7 +37,7 @@ public class BatteryStatusUtil {
 		float batteryPct = level / (float)scale * 100;		
 			
 		
-		l.addProperty(LogConstants.PERCENTAGE,String.format("%.02f",batteryPct) +"%");		
+		l.addProperty(LogConstants.PERCENTAGE,String.format(Locale.ENGLISH,"%.02f",batteryPct) +"%");		
 		l.addProperty(LogConstants.POWER, getPower(batteryPct));
 		
 		if(isCharging){
