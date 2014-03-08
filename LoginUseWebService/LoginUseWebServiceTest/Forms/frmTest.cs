@@ -102,7 +102,7 @@ namespace LoginUseWebServiceTest
 
             LoginUseService.LoginUse srv = new LoginUseService.LoginUse();            
 
-            string base64Data = srv.getCSVData(phoneId, from, to, typeNames, propNames);
+            string base64Data = srv.getCSVData(null, from, to, typeNames, propNames);
 
             if (base64Data != null && base64Data.Length > 0)
                 if (this.sfdFile.ShowDialog() == DialogResult.OK)
