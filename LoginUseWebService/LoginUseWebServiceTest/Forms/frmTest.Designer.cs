@@ -48,9 +48,9 @@
             this.btnFind = new System.Windows.Forms.Button();
             this.lblSend = new System.Windows.Forms.Label();
             this.cbxPhones = new System.Windows.Forms.ComboBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.ofdFile = new System.Windows.Forms.OpenFileDialog();
             this.sfdFile = new System.Windows.Forms.SaveFileDialog();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.tlp1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -286,10 +286,6 @@
             this.cbxPhones.Size = new System.Drawing.Size(216, 24);
             this.cbxPhones.TabIndex = 20;
             // 
-            // sfdFile
-            // 
-            this.sfdFile.FileName = "csvLogData.zip";
-            // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -300,6 +296,10 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // sfdFile
+            // 
+            this.sfdFile.FileName = "csvLogData.zip";
             // 
             // frmTest
             // 
