@@ -75,12 +75,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBLayer\DBManagerConfig.cs" />
+    <Compile Include="DBLayer\DBManager.cs" />
+    <Compile Include="Objects\File.cs" />
     <Compile Include="Forms\frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmTest.Designer.cs">
       <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBLayer\DBInterfase.cs" />
+    <Compile Include="DBLayer\DBObjectProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmTest.resx">
@@ -106,6 +111,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="Objects\Property.cs" />
     <Compile Include="Web References\LoginUseService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,6 +158,8 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\File.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
     <None Include="Web References\LoginUseService\loginuse.disco" />
     <None Include="Web References\LoginUseService\loginuse.wsdl" />
     <None Include="Web References\LoginUseService\Reference.map">

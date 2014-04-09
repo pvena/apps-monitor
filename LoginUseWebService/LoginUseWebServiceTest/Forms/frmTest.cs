@@ -15,7 +15,6 @@ namespace LoginUseWebServiceTest
         public frmTest()
         {
             InitializeComponent();
-            this.inicTypes();
             this.inicProperties();
             this.inicUsers();
         }
@@ -40,11 +39,55 @@ namespace LoginUseWebServiceTest
             this.find();
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        #endregion
+
+        #region -------------------Properties ---------------------
+        private User SelectedUser 
         {
-            this.inicTypes();
-            this.inicProperties();
-            this.inicUsers();
+            get 
+            {
+                return (User)this.cbxUser.SelectedItem;
+            }
+        }
+
+        private string SelectedProperties
+        {
+            get
+            {
+                string values = "";
+                foreach (object o in chbProperties.CheckedItems)
+                    values += o.ToString() + ";";
+                return values.Substring(0, values.Length - 1);
+            }
+        }
+        #endregion
+
+        #region  ------------------ Load Data -------------------------
+
+        private void inicProperties()
+        {
+            try
+            {
+                List<Property> properties = new DBObjectProvider().getProperties();
+
+                foreach (Property p in properties)
+                    this.chbProperties.Items.Add(p.FullName, true);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void inicUsers()
+        {
+            try
+            {
+                List<User> users = new DBObjectProvider().getUsers();
+
+                this.cbxUser.DataSource = users;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion
@@ -61,7 +104,7 @@ namespace LoginUseWebServiceTest
                 long numBytes = fInfo.Length;
                 double dLen = Convert.ToDouble(fInfo.Length / 1000000);
  
-                if (dLen < 4 && this.cbxPhones.Text.Length > 0)
+                if (dLen < 4 && this.SelectedUser != null)
                 {
                     FileStream fStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fStream); 
@@ -70,7 +113,7 @@ namespace LoginUseWebServiceTest
 
                     string data64 = Convert.ToBase64String(data);
 
-                    string sTmp = srv.UploadFile(data64, this.cbxPhones.Text);
+                    string sTmp = srv.UploadFile(data64, this.SelectedUser.phoneId);
                     fStream.Close();
                     fStream.Dispose();
 
@@ -94,79 +137,34 @@ namespace LoginUseWebServiceTest
 
         private void find()
         {
-            string phoneId = this.cbxPhones.Text;
-            string typeNames = this.getCheckValues(this.chbTypes,";");
-            string propNames = this.getCheckValues(this.chbProperties, ";");
             DateTime from = this.dtpFrom.Value;
             DateTime to = this.dtpTo.Value;
 
-            LoginUseService.LoginUse srv = new LoginUseService.LoginUse();            
+            LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
 
-            string base64Data = srv.getCSVData(this.cbxPhones.Text, from, to, typeNames, propNames);
+            string base64Data = srv.getCSVData(this.SelectedUser.phoneId, from, to, null, SelectedProperties);
 
             if (base64Data != null && base64Data.Length > 0)
                 if (this.sfdFile.ShowDialog() == DialogResult.OK)
-                    File.WriteAllBytes(this.sfdFile.FileName, Convert.FromBase64String(base64Data));
+                    System.IO.File.WriteAllBytes(this.sfdFile.FileName, Convert.FromBase64String(base64Data));
                 else
                     MessageBox.Show("File not saved.");
             else
-                MessageBox.Show("Response Problem.");            
+                MessageBox.Show("Response Problem.");
 
         }
 
-        private void inicTypes()
+        private void cbxUser_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
+            this.dgvFileInfo.DataSource = new DBObjectProvider().getFiles(this.SelectedUser);
+            this.lblPhoneId.Text = "PhoneId: " + this.SelectedUser.phoneId;
+            this.lblVersion.Text = "Version: " + this.SelectedUser.version;
+            this.lblPhoneModel.Text = "Phone Model: " + this.SelectedUser.phoneModel;
+            this.lblMaxLocation.Text = "Max Location: " + this.SelectedUser.maxLocation;
+            this.lblLastProcess.Text = "Last Process: " + this.SelectedUser.lastLocationProcess.ToShortDateString();
 
-                this.chbTypes.Items.Clear();
-
-                string[] types = srv.getTypes(null);
-
-                for (int i = 0; i < types.Length; i++)
-                    this.chbTypes.Items.Add(types[i], true);
-            }
-            catch (Exception ex) { }
         }
 
-        private void inicProperties()
-        {
-            try
-            {
-                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
-
-                this.chbProperties.Items.Clear();
-
-                string[] properties = srv.getProperties(null);
-
-                for (int i = 0; i < properties.Length; i++)
-                    this.chbProperties.Items.Add(properties[i], true);
-            }
-            catch (Exception ex) { }
-        }
-
-        private void inicUsers()
-        {
-            try
-            {
-                LoginUseService.LoginUse srv = new LoginUseService.LoginUse();
-
-                string[] users = srv.getUsers(null);
-                this.cbxUser.DataSource = users;
-
-                string[] phoneIds = srv.getPhoneIds(null);
-                this.cbxPhones.DataSource = phoneIds;
-            }
-            catch (Exception ex) { }
-        }
-
-        private string getCheckValues(CheckedListBox chb, string sep)
-        {
-            string values = "";
-            foreach (object o in chb.Items)
-                values += o.ToString() + sep;
-            return values.Substring(0, values.Length - 1);
-        }
+        
     }
 }

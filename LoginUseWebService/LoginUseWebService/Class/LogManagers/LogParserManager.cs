@@ -91,28 +91,25 @@ namespace LoginUseWebService
             DBManager dbm = new DBManager();
 
             try
-            {                
-                if (!dbm.isFileProcess(phoneId,Path.GetFileName(zipPath), true))
+            {
+                string res = dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
+
+                if (res == "OK.")
                 {
-                    string res = dbm.saveFile(phoneId, Path.GetFileName(zipPath), false, true, new FileInfo(zipPath).Length);
+
+                    ZipManager zm = new ZipManager();
+                    zm.descomprimirDir(zipPath, pass, Path.GetDirectoryName(zipPath), new ZipLog());
+
+                    string[] files = Directory.GetFiles(Path.GetDirectoryName(zipPath), "*.txt", SearchOption.TopDirectoryOnly);
+
+                    for (int i = 0; (i < files.Length) && (res == "OK."); i++)
+                    {
+                        this.processFile(phoneId, files[i], dbm);
+                        File.Delete(files[i]);
+                    }
 
                     if (res == "OK.")
-                    {
-
-                        ZipManager zm = new ZipManager();
-                        zm.descomprimirDir(zipPath, pass, Path.GetDirectoryName(zipPath), new ZipLog());
-
-                        string[] files = Directory.GetFiles(Path.GetDirectoryName(zipPath), "*.txt", SearchOption.TopDirectoryOnly);
-
-                        for (int i = 0; (i < files.Length) && (res == "OK."); i++)
-                        {
-                            this.processFile(phoneId, files[i], dbm);
-                            File.Delete(files[i]);
-                        }
-
-                        if (res == "OK.")
-                            dbm.saveFile(phoneId, Path.GetFileName(zipPath), true, true, new FileInfo(zipPath).Length);
-                    }
+                        dbm.saveFile(phoneId, Path.GetFileName(zipPath), true, true, new FileInfo(zipPath).Length);
                 }
             }
             catch (Exception ex)

@@ -12,7 +12,8 @@ if(isnull(@names,'') <> '')
 
 select 
 	t.name + '-' + p.name as FullName,
-	p.* 
+	p.*,
+	t.name [Type]
 from [property] p
 inner join [type] t on 
 	p.idType = t.idType

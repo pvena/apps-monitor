@@ -55,11 +55,10 @@ namespace LoginUseWebService
             string latitud = LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LATITUDE;
             string longitud = LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LONGITUDE;
 
-            if ((values[latitud].Length > 0) && (values[longitud].Length > 0))
-            {
-                if (decimal.TryParse(values[latitud], out lat) && decimal.TryParse(values[longitud], out lng))
-                    values["LOCATIONGROUP"] = lm.getContainGroup(locationGroups, lat, lng).Name;
-            }
+            if (values.ContainsKey(latitud) && values.ContainsKey(longitud))
+                if ((values[latitud].Length > 0) && (values[longitud].Length > 0))
+                    if (decimal.TryParse(values[latitud], out lat) && decimal.TryParse(values[longitud], out lng))
+                        values["LOCATIONGROUP"] = lm.getContainGroup(locationGroups, lat, lng).Name;            
         }
         
         public bool execute(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)

@@ -4,8 +4,8 @@ if(exists (select * from sys.objects where type like 'p' and
 go 
 create procedure getFile
 @phoneId nvarchar(20),
-@name nvarchar(50),
-@isZip bit
+@name nvarchar(50) = null,
+@isZip bit = null
 
 as
 
@@ -16,6 +16,6 @@ select top 1 @idUser = idUser from [user] u where u.phoneId like @phoneId or u.n
 select
 	*  
 from  [file] f
-where f.name like @name and
-		f.isZip = @isZip and
+where   (f.name like @name or @name is null) and
+		(f.isZip = @isZip or @isZip is null) and
 		idUser = @idUser
