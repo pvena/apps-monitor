@@ -19,3 +19,4 @@ from  [file] f
 where   (f.name like @name or @name is null) and
 		(f.isZip = @isZip or @isZip is null) and
 		idUser = @idUser
+order by [name]
