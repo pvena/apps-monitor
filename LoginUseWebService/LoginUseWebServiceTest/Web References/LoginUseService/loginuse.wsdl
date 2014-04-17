@@ -34,91 +34,12 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="getUsers">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="names" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getUsersResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getUsersResult" type="tns:ArrayOfString" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="ArrayOfString">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="getPhoneIds">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="names" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getPhoneIdsResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getPhoneIdsResult" type="tns:ArrayOfString" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getTypes">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="names" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getTypesResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getTypesResult" type="tns:ArrayOfString" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getProperties">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="names" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getPropertiesResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="getPropertiesResult" type="tns:ArrayOfString" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getPointDistance">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="lat1" type="s:decimal" />
-            <s:element minOccurs="1" maxOccurs="1" name="long1" type="s:decimal" />
-            <s:element minOccurs="1" maxOccurs="1" name="lat2" type="s:decimal" />
-            <s:element minOccurs="1" maxOccurs="1" name="long2" type="s:decimal" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="getPointDistanceResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="getPointDistanceResult" type="s:double" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="getCSVData">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="phoneId" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="from" type="s:dateTime" />
             <s:element minOccurs="1" maxOccurs="1" name="to" type="s:dateTime" />
-            <s:element minOccurs="0" maxOccurs="1" name="typeNames" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="propNames" type="s:string" />
           </s:sequence>
         </s:complexType>
@@ -144,6 +65,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ResetLocationGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetLocationGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResetLocationGroupsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="UploadFileSoapIn">
@@ -158,36 +93,6 @@
   <wsdl:message name="RegisterUserSoapOut">
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
   </wsdl:message>
-  <wsdl:message name="getUsersSoapIn">
-    <wsdl:part name="parameters" element="tns:getUsers" />
-  </wsdl:message>
-  <wsdl:message name="getUsersSoapOut">
-    <wsdl:part name="parameters" element="tns:getUsersResponse" />
-  </wsdl:message>
-  <wsdl:message name="getPhoneIdsSoapIn">
-    <wsdl:part name="parameters" element="tns:getPhoneIds" />
-  </wsdl:message>
-  <wsdl:message name="getPhoneIdsSoapOut">
-    <wsdl:part name="parameters" element="tns:getPhoneIdsResponse" />
-  </wsdl:message>
-  <wsdl:message name="getTypesSoapIn">
-    <wsdl:part name="parameters" element="tns:getTypes" />
-  </wsdl:message>
-  <wsdl:message name="getTypesSoapOut">
-    <wsdl:part name="parameters" element="tns:getTypesResponse" />
-  </wsdl:message>
-  <wsdl:message name="getPropertiesSoapIn">
-    <wsdl:part name="parameters" element="tns:getProperties" />
-  </wsdl:message>
-  <wsdl:message name="getPropertiesSoapOut">
-    <wsdl:part name="parameters" element="tns:getPropertiesResponse" />
-  </wsdl:message>
-  <wsdl:message name="getPointDistanceSoapIn">
-    <wsdl:part name="parameters" element="tns:getPointDistance" />
-  </wsdl:message>
-  <wsdl:message name="getPointDistanceSoapOut">
-    <wsdl:part name="parameters" element="tns:getPointDistanceResponse" />
-  </wsdl:message>
   <wsdl:message name="getCSVDataSoapIn">
     <wsdl:part name="parameters" element="tns:getCSVData" />
   </wsdl:message>
@@ -200,6 +105,12 @@
   <wsdl:message name="getSynchInfoSoapOut">
     <wsdl:part name="parameters" element="tns:getSynchInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="ResetLocationGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetLocationGroups" />
+  </wsdl:message>
+  <wsdl:message name="ResetLocationGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetLocationGroupsResponse" />
+  </wsdl:message>
   <wsdl:portType name="LoginUseSoap">
     <wsdl:operation name="UploadFile">
       <wsdl:input message="tns:UploadFileSoapIn" />
@@ -209,26 +120,6 @@
       <wsdl:input message="tns:RegisterUserSoapIn" />
       <wsdl:output message="tns:RegisterUserSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="getUsers">
-      <wsdl:input message="tns:getUsersSoapIn" />
-      <wsdl:output message="tns:getUsersSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getPhoneIds">
-      <wsdl:input message="tns:getPhoneIdsSoapIn" />
-      <wsdl:output message="tns:getPhoneIdsSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getTypes">
-      <wsdl:input message="tns:getTypesSoapIn" />
-      <wsdl:output message="tns:getTypesSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getProperties">
-      <wsdl:input message="tns:getPropertiesSoapIn" />
-      <wsdl:output message="tns:getPropertiesSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="getPointDistance">
-      <wsdl:input message="tns:getPointDistanceSoapIn" />
-      <wsdl:output message="tns:getPointDistanceSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="getCSVData">
       <wsdl:input message="tns:getCSVDataSoapIn" />
       <wsdl:output message="tns:getCSVDataSoapOut" />
@@ -236,6 +127,10 @@
     <wsdl:operation name="getSynchInfo">
       <wsdl:input message="tns:getSynchInfoSoapIn" />
       <wsdl:output message="tns:getSynchInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetLocationGroups">
+      <wsdl:input message="tns:ResetLocationGroupsSoapIn" />
+      <wsdl:output message="tns:ResetLocationGroupsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="LoginUseSoap" type="tns:LoginUseSoap">
@@ -258,51 +153,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getUsers">
-      <soap:operation soapAction="http://tesis.org/getUsers" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPhoneIds">
-      <soap:operation soapAction="http://tesis.org/getPhoneIds" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getTypes">
-      <soap:operation soapAction="http://tesis.org/getTypes" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getProperties">
-      <soap:operation soapAction="http://tesis.org/getProperties" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPointDistance">
-      <soap:operation soapAction="http://tesis.org/getPointDistance" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getCSVData">
       <soap:operation soapAction="http://tesis.org/getCSVData" style="document" />
       <wsdl:input>
@@ -314,6 +164,15 @@
     </wsdl:operation>
     <wsdl:operation name="getSynchInfo">
       <soap:operation soapAction="http://tesis.org/getSynchInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetLocationGroups">
+      <soap:operation soapAction="http://tesis.org/ResetLocationGroups" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -342,51 +201,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getUsers">
-      <soap12:operation soapAction="http://tesis.org/getUsers" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPhoneIds">
-      <soap12:operation soapAction="http://tesis.org/getPhoneIds" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getTypes">
-      <soap12:operation soapAction="http://tesis.org/getTypes" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getProperties">
-      <soap12:operation soapAction="http://tesis.org/getProperties" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPointDistance">
-      <soap12:operation soapAction="http://tesis.org/getPointDistance" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getCSVData">
       <soap12:operation soapAction="http://tesis.org/getCSVData" style="document" />
       <wsdl:input>
@@ -398,6 +212,15 @@
     </wsdl:operation>
     <wsdl:operation name="getSynchInfo">
       <soap12:operation soapAction="http://tesis.org/getSynchInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetLocationGroups">
+      <soap12:operation soapAction="http://tesis.org/ResetLocationGroups" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

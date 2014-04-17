@@ -278,7 +278,7 @@ namespace LoginUseWebService
             }
         }
 
-        public DataTable getCsvData(string phoneId,DateTime from, DateTime to,string typeNames,string propNames)
+        public DataTable getCsvData(string phoneId,DateTime from, DateTime to, string propNames)
         {
             try
             {
@@ -287,8 +287,6 @@ namespace LoginUseWebService
                 cmd.Parameters.AddWithValue("@phoneId", phoneId);                
                 cmd.Parameters.AddWithValue("@from", from);
                 cmd.Parameters.AddWithValue("@to", to);
-                if(typeNames != null)
-                    cmd.Parameters.AddWithValue("@typeNames", typeNames);
                 if (propNames != null)
                     cmd.Parameters.AddWithValue("@propNames", propNames);
                 this.connectIfNeed();

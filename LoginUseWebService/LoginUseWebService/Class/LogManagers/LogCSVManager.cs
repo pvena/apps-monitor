@@ -61,7 +61,7 @@ namespace LoginUseWebService
                         values["LOCATIONGROUP"] = lm.getContainGroup(locationGroups, lat, lng).Name;            
         }
         
-        public bool execute(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)
+        public bool execute(string phoneId, DateTime from, DateTime to, string propNames, string path)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace LoginUseWebService
                 LocationManager lm = new LocationManager();
 
                 List<LocationGroup> locationGroups = lm.getLocationGroups(phoneId, dbm);                
-                DataTable data = dbm.getCsvData(phoneId, from, to, typeNames, propNames);
+                DataTable data = dbm.getCsvData(phoneId, from, to, propNames);
 
                 string line = this.extraColumns + ";" + propNames;
 

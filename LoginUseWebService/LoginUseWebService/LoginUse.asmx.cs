@@ -56,7 +56,7 @@ namespace LoginUseWebService
         }
 
         [WebMethod]
-        public string getCSVData(string phoneId, DateTime from, DateTime to, string typeNames, string propNames)
+        public string getCSVData(string phoneId, DateTime from, DateTime to, string propNames)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace LoginUseWebService
 
                 LogServiceManager.getInstance().createFolder(folderPath);
 
-                bool ok = LogServiceManager.getInstance().executeProcessCSV(phoneId, from, to, typeNames, propNames, filePath);
+                bool ok = LogServiceManager.getInstance().executeProcessCSV(phoneId, from, to, propNames, filePath);
 
                 if (ok)
                     return LogServiceManager.getInstance().getBase64File(fileZip, folderPath, filePath);

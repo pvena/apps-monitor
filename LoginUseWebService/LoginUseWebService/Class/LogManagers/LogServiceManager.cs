@@ -99,10 +99,10 @@ namespace LoginUseWebService
         #endregion
 
         #region ------------ProcessCSV Data Out----------------
-        public bool executeProcessCSV(string phoneId, DateTime from, DateTime to, string typeNames, string propNames, string path)
+        public bool executeProcessCSV(string phoneId, DateTime from, DateTime to, string propNames, string path)
         {
             LogCSVManager csvManager = new LogCSVManager();
-            return csvManager.execute(phoneId, from, to, typeNames, propNames, path);
+            return csvManager.execute(phoneId, from, to, propNames, path);
         }
         #endregion
 
