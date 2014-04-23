@@ -9,7 +9,9 @@ namespace LoginUseWebService
 {
     public class LogCSVManager
     {
-        private string extraColumns = "YEAR;MONTH;DAY;HOUR;MINUTE;SECOND;ISWEEKDAY;QUARTER;LOCATIONGROUP";
+        //private string extraColumns = "YEAR;MONTH;DAY;HOUR;MINUTE;SECOND;ISWEEKDAY;QUARTER;LOCATIONGROUP";
+
+        private string extraColumns = "HOUR;ISWEEKDAY;QUARTER;LOCATIONGROUP";
 
         private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
         {
@@ -37,12 +39,12 @@ namespace LoginUseWebService
 
         private void preProcessDate(Dictionary<string, string> values, DateTime date)
         {
-            values["YEAR"] = date.ToString("yyyy");
-            values["MONTH"] = date.ToString("MM");
-            values["DAY"] = date.ToString("dd");
+            //values["YEAR"] = date.ToString("yyyy");
+            //values["MONTH"] = date.ToString("MM");
+            //values["DAY"] = date.ToString("dd");
             values["HOUR"] = date.ToString("hh");
-            values["MINUTE"] = date.ToString("mm");
-            values["SECOND"] = date.ToString("ss");
+            //values["MINUTE"] = date.ToString("mm");
+            //values["SECOND"] = date.ToString("ss");
             values["ISWEEKDAY"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
             values["QUARTER"] = (date.Minute / 15).ToString();
         }
@@ -60,6 +62,14 @@ namespace LoginUseWebService
                     if (decimal.TryParse(values[latitud], out lat) && decimal.TryParse(values[longitud], out lng))
                         values["LOCATIONGROUP"] = lm.getContainGroup(locationGroups, lat, lng).Name;            
         }
+
+        private void saveAtributes(StreamWriter f, DataTable dt) 
+        {            
+            f.WriteLine("@attribute HOUR {00, 01, 02, 03, 04, 05, 06 , 07, 08, 09, 10, 11, 12}");
+            f.WriteLine("@attribute ISWEEKDAY {0, 1}");
+            f.WriteLine("@attribute QUARTER {0, 1, 2, 3}");
+
+        }
         
         public bool execute(string phoneId, DateTime from, DateTime to, string propNames, string path)
         {
@@ -74,7 +84,7 @@ namespace LoginUseWebService
                 string line = this.extraColumns + ";" + propNames;
 
                 string[] properties = line.Split(';');
-                Dictionary<string, string> values = this.inicPropertiesValues(properties);
+                Dictionary<string, string> values = this.inicPropertiesValues(properties);                
 
                 DateTime date = (data.Rows.Count > 0) ? (DateTime)data.Rows[0]["date"] : DateTime.Now;
                 string[] location = new string[] { "", "" };
@@ -82,7 +92,7 @@ namespace LoginUseWebService
 
                 StreamWriter file = new StreamWriter(path, true);
                 file.WriteLine(line);
-                
+
                 foreach (DataRow r in data.Rows)
                 {
                     DateTime current = (DateTime)r["date"];
@@ -91,6 +101,7 @@ namespace LoginUseWebService
                         date = current;
                         line = "";
                         for (int i = 0; i < properties.Length; i++)
+                            if (properties[i] != "LOCATION-LONG" && properties[i] != "LOCATION-LONG")
                             line += (string)values[properties[i]] + ";";
                         file.WriteLine(line.Substring(0, line.Length - 1));
                     }
