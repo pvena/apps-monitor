@@ -9,10 +9,6 @@ namespace LoginUseWebService
 {
     public class LogCSVManager
     {
-        //private string extraColumns = "YEAR;MONTH;DAY;HOUR;MINUTE;SECOND;ISWEEKDAY;QUARTER;LOCATIONGROUP";
-
-        private string extraColumns = "HOUR;ISWEEKDAY;QUARTER;LOCATIONGROUP";
-
         private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
         {
             string type = propName.Split('-')[0];
@@ -28,47 +24,36 @@ namespace LoginUseWebService
                         values[key] = "-";
             values[propName] = value;
         }
-        
-        private Dictionary<string, string> inicPropertiesValues(string[] properties)
-        {
-            Dictionary<string, string> values = new Dictionary<string, string>();
-            for (int i = 0; i < properties.Length; i++)
-                values.Add(properties[i], "");
-            return values;
-        }
-
-        private void preProcessDate(Dictionary<string, string> values, DateTime date)
-        {
-            //values["YEAR"] = date.ToString("yyyy");
-            //values["MONTH"] = date.ToString("MM");
-            //values["DAY"] = date.ToString("dd");
-            values["HOUR"] = date.ToString("hh");
-            //values["MINUTE"] = date.ToString("mm");
-            //values["SECOND"] = date.ToString("ss");
-            values["ISWEEKDAY"] = ((date.DayOfWeek == DayOfWeek.Sunday) || (date.DayOfWeek == DayOfWeek.Saturday)) ? "0" : "1";
-            values["QUARTER"] = (date.Minute / 15).ToString();
-        }
-        
-        private void preProcessLocationGroup(List<LocationGroup> locationGroups, Dictionary<string, string> values, LocationManager lm)
-        {
-            decimal lat = 0;
-            decimal lng = 0;
-
-            string latitud = LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LATITUDE;
-            string longitud = LogConstants.LOCATION_STATE_TAG + "-" + LogConstants.LONGITUDE;
-
-            if (values.ContainsKey(latitud) && values.ContainsKey(longitud))
-                if ((values[latitud].Length > 0) && (values[longitud].Length > 0))
-                    if (decimal.TryParse(values[latitud], out lat) && decimal.TryParse(values[longitud], out lng))
-                        values["LOCATIONGROUP"] = lm.getContainGroup(locationGroups, lat, lng).Name;            
-        }
 
         private void saveAtributes(StreamWriter f, DataTable dt) 
-        {            
-            f.WriteLine("@attribute HOUR {00, 01, 02, 03, 04, 05, 06 , 07, 08, 09, 10, 11, 12}");
-            f.WriteLine("@attribute ISWEEKDAY {0, 1}");
-            f.WriteLine("@attribute QUARTER {0, 1, 2, 3}");
+        {
+            Dictionary<string, List<string>> attributes = new Dictionary<string, List<string>>();
 
+            string attribute = null;
+            string value = null;
+            foreach (DataRow dr in dt.Rows)
+            {
+                attribute = (string)dr["FullName"];
+                value = (string)dr["PropValue"];
+                if (!attributes.ContainsKey(attribute))
+                {
+                    attributes.Add(attribute, new List<string>());
+                    attributes[attribute].Add("-");                    
+                }
+                if (!attributes[attribute].Contains(value))
+                   attributes[attribute].Add(value);
+            }
+
+            attributes.Keys.ToList<string>().Sort();
+            foreach (string at in attributes.Keys)
+            {
+                string line = "@attribute {";
+                foreach (string v in attributes[at])
+                    line += v + ",";
+                line = line.Substring(0,line.Length - 2);
+                line += "}";
+                f.WriteLine(line);
+            }
         }
         
         public bool execute(string phoneId, DateTime from, DateTime to, string propNames, string path)
@@ -76,19 +61,21 @@ namespace LoginUseWebService
             try
             {
                 DBManager dbm = new DBManager();
-                LocationManager lm = new LocationManager();
-
-                List<LocationGroup> locationGroups = lm.getLocationGroups(phoneId, dbm);                
+                
                 DataTable data = dbm.getCsvData(phoneId, from, to, propNames);
 
-                string line = this.extraColumns + ";" + propNames;
+                //======================Obtengo los nombres de las properties================================
+                Dictionary<string, string> values = new Dictionary<string,string>();
+                foreach (DataRow dr in data.Rows)
+                    if (!values.ContainsKey((string)dr["FullName"]))
+                        values.Add((string)dr["FullName"], "-");
 
-                string[] properties = line.Split(';');
-                Dictionary<string, string> values = this.inicPropertiesValues(properties);                
+                string[] properties = values.Keys.ToArray<string>();
 
+                //======================Obtengo la primer fecha==============================================
                 DateTime date = (data.Rows.Count > 0) ? (DateTime)data.Rows[0]["date"] : DateTime.Now;
-                string[] location = new string[] { "", "" };
-                bool change = false;
+
+                string line = "-";
 
                 StreamWriter file = new StreamWriter(path, true);
                 file.WriteLine(line);
@@ -101,13 +88,10 @@ namespace LoginUseWebService
                         date = current;
                         line = "";
                         for (int i = 0; i < properties.Length; i++)
-                            if (properties[i] != "LOCATION-LONG" && properties[i] != "LOCATION-LONG")
                             line += (string)values[properties[i]] + ";";
                         file.WriteLine(line.Substring(0, line.Length - 1));
                     }
-                    this.preProcessDate(values, current);
-                    this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);
-                    this.preProcessLocationGroup(locationGroups, values, lm);                    
+                    this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);                    
                 }
                 file.Flush();
                 file.Close();
