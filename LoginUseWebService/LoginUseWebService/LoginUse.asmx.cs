@@ -60,8 +60,8 @@ namespace LoginUseWebService
         {
             try
             {
-                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + phoneId + @"_CSV\";
-                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".csv";
+                string folderPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FileReceiver/") + phoneId + @"_ARFF\";
+                string filePath = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId + ".arff";
                 string fileZip = folderPath + DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + phoneId;
 
                 LogServiceManager.getInstance().createFolder(folderPath);

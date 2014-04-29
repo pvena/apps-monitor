@@ -9,7 +9,7 @@ namespace LoginUseWebService
 {
     public class LogCSVManager
     {
-        private void setPropertyValue(Dictionary<string, string> values, string propName, string value)
+        private void setPropertyValue(SortedDictionary<string, string> values, string propName, string value)
         {
             string type = propName.Split('-')[0];
             string name = propName.Split('-')[1];
@@ -17,17 +17,17 @@ namespace LoginUseWebService
             if ((type == LogConstants.WIFI_STATE_TAG) && (name == LogConstants.STATE) && (value == "0"))
                 foreach (string key in keys)
                     if (key.Contains(type))
-                        values[key] = "-";
+                        values[key] = "?";
             if ((type == LogConstants.BLUETOOTH_STATE_TAG) && (name == LogConstants.STATE) && (value == "0"))
                 foreach (string key in keys)
                     if (key.Contains(type) && !key.Contains(LogConstants.STATE))
-                        values[key] = "-";
+                        values[key] = "?";
             values[propName] = value;
         }
 
         private void saveAtributes(StreamWriter f, DataTable dt) 
         {
-            Dictionary<string, List<string>> attributes = new Dictionary<string, List<string>>();
+            SortedDictionary<string, List<string>> attributes = new SortedDictionary<string, List<string>>();
 
             string attribute = null;
             string value = null;
@@ -36,21 +36,17 @@ namespace LoginUseWebService
                 attribute = (string)dr["FullName"];
                 value = (string)dr["PropValue"];
                 if (!attributes.ContainsKey(attribute))
-                {
-                    attributes.Add(attribute, new List<string>());
-                    attributes[attribute].Add("-");                    
-                }
+                   attributes.Add(attribute, new List<string>());
                 if (!attributes[attribute].Contains(value))
                    attributes[attribute].Add(value);
             }
 
-            attributes.Keys.ToList<string>().Sort();
             foreach (string at in attributes.Keys)
             {
-                string line = "@attribute {";
+                string line = "@attribute <" + at + "> {";
                 foreach (string v in attributes[at])
                     line += v + ",";
-                line = line.Substring(0,line.Length - 2);
+                line = line.Substring(0,line.Length - 1);
                 line += "}";
                 f.WriteLine(line);
             }
@@ -65,20 +61,24 @@ namespace LoginUseWebService
                 DataTable data = dbm.getCsvData(phoneId, from, to, propNames);
 
                 //======================Obtengo los nombres de las properties================================
-                Dictionary<string, string> values = new Dictionary<string,string>();
+                SortedDictionary<string, string> values = new SortedDictionary<string,string>();
                 foreach (DataRow dr in data.Rows)
                     if (!values.ContainsKey((string)dr["FullName"]))
-                        values.Add((string)dr["FullName"], "-");
+                        values.Add((string)dr["FullName"], "?");
 
                 string[] properties = values.Keys.ToArray<string>();
 
                 //======================Obtengo la primer fecha==============================================
                 DateTime date = (data.Rows.Count > 0) ? (DateTime)data.Rows[0]["date"] : DateTime.Now;
 
-                string line = "-";
+                string line = "";
 
                 StreamWriter file = new StreamWriter(path, true);
-                file.WriteLine(line);
+                file.WriteLine("@RELATION Tesis");
+
+                this.saveAtributes(file, data);
+
+                file.WriteLine("@data");
 
                 foreach (DataRow r in data.Rows)
                 {
@@ -88,7 +88,7 @@ namespace LoginUseWebService
                         date = current;
                         line = "";
                         for (int i = 0; i < properties.Length; i++)
-                            line += (string)values[properties[i]] + ";";
+                            line += (string)values[properties[i]] + ",";
                         file.WriteLine(line.Substring(0, line.Length - 1));
                     }
                     this.setPropertyValue(values, (string)r["FullName"], (string)r["PropValue"]);                    
