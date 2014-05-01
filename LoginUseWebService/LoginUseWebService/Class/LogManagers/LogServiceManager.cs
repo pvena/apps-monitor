@@ -43,7 +43,7 @@ namespace LoginUseWebService
             try
             {
                 ZipManager zm = new ZipManager();
-                zm.comprimirDir(ref fileZip, null, folderPath, new string[] { "*.csv" }, new ZipLog());
+                zm.comprimirDir(ref fileZip, null, folderPath, new string[] { "*.arff" }, new ZipLog());
 
                 FileStream file = new FileStream(fileZip, FileMode.Open);
                 byte[] buffer = new byte[file.Length];
