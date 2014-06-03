@@ -701,7 +701,7 @@ reference "sec:Motivación"
 
  se discuten las motivaciones del trabajo propuesto.
  ....
-\change_inserted 2089473119 1401835810
+\change_inserted 2089473119 1401836882
 Ésta propuesta se organiza de la siguiente manera.
  En la Sección
 \begin_inset space ~
@@ -726,7 +726,8 @@ reference "sec:Objetivo del trabajo"
 
 \end_inset
 
- se describen l.
+ se describe como se ercarará el problema y que resultados se esperan obtener
+ al finalizar el trabajo.
  Finalmente, la Sección
 \begin_inset space ~
 \end_inset
@@ -734,7 +735,7 @@ reference "sec:Objetivo del trabajo"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Cronograma-de-actividades"
+reference "sec:Etapas del Plan de Trabajo"
 
 \end_inset
 
@@ -792,13 +793,7 @@ key "Karmore2013"
 Nos encontramos, además, con el inconveniente de que en el proceso de obtener
  información en cuanto al consumo, se malgasta la energía, al punto que
  determinadas aplicaciones consumen un porcentaje demasiado elevado de batería.
- 
-\change_inserted 2089473119 1401316163
-
-\end_layout
-
-\begin_layout Standard
-Por esta razón, y debido a la falta de administración de parte de los usuarios,
+ Por esta razón, y debido a la falta de administración de parte de los usuarios,
  se plantea la posibilidad de desarrollar una aplicación encargada de analizar,
  de forma eficiente, el consumo energético personalizado de cada dispositivo,
  monitoreando la utilización de las características más significativas,
