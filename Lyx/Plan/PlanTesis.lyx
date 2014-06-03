@@ -1,0 +1,1077 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author -807376748 "Juan Manuel Rodriguez,,," 
+\author 2089473119 "Polo" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Sistema de 
+\change_deleted 2089473119 1401831781
+recomendación
+\change_inserted 2089473119 1401831802
+recolección de datos de forma eficiente,
+\change_unchanged
+ basado en el uso de técnicas de inteligencia artificial
+\change_inserted 2089473119 1401831807
+,
+\change_unchanged
+ con enfoque en la minimización del consumo energético para dispositivos
+ móviles con sistema operativo Android.
+\end_layout
+
+\begin_layout Author
+Pablo Vena, Leopoldo Rudenick
+\change_inserted -807376748 1400779165
+
+\end_layout
+
+\begin_layout Date
+
+\change_inserted -807376748 1400779169
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400779174
+
+
+\backslash
+date{}
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Facultad de Ciencias Exactas – UNICEN – Tandil, Argentina
+\end_layout
+
+\begin_layout Address
+\align center
+email: leopoldorudenick@gmail.com, pablo_vena@hotmail.com
+\end_layout
+
+\begin_layout Standard
+\align center
+Director: Prof.
+ Dr.
+ Alejandro Zunino
+\end_layout
+
+\begin_layout Standard
+\align center
+Co-Director: Dr.
+ Juan Manuel Rodríguez 
+\end_layout
+
+\begin_layout Section
+Introducción
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Introducción"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En los últimos años los avances tecnológicos han puesto en el centro de
+ la escena a los dispositivos móviles, los cuales pasaron de ser terminales
+ con capacidades limitadas de almacenamiento y procesamiento, generalmente
+ de propósito específico, como agendas electrónicas o teléfonos celulares,
+ a ser pequeñas computadoras de propósito general con grandes capacidades
+ de procesamiento y almacenamiento.
+ Debido a estas capacidades los dispositivos móviles de hoy en día utilizan
+ sistemas operativos similares a las computadoras personales, como por ejemplo
+ Android (basado en Linux), Windows 8 o iOS (basado en MacOS).
+ Por lo tanto, pueden ejecutar software similar al que hace unos años atrás
+ solo se encontraba en computadoras personales, como suites de ofimática,
+ juegos 3D y navegadores Web con soporte completo para HTML y JavaScript
+\change_deleted -807376748 1400764363
+.
+\change_inserted -807376748 1400764364
+
+\begin_inset space ~
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JMR2011,JMR2012,Paradiso05"
+
+\end_inset
+
+
+\change_inserted -807376748 1400764360
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400764401
+Supongo que está referencia es para la oración anterior, por lo que muevo
+ el punto y agrego un espacio forzado (ctrl+espacio) entre JavaScript y
+ la ref.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+.
+
+\change_unchanged
+ Esto ha hecho que los dispositivos móviles dejaran de ser instrumentos
+ de comunicación, transformándose en verdaderas computadoras personales
+ y herramientas casi imprescindibles en la vida moderna de las personas.
+ Esto se evidencia en el hecho de que en el año 2011 existían más de dos
+ mil millones de dispositivos móviles activos en el mundo y que en los países
+ desarrollados las personas 
+\change_deleted -807376748 1400764508
+suelen poseer
+\change_inserted -807376748 1400764533
+generalmente poseían
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400764579
+mantener el tiempo verbal de la oración
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ dos o más de este tipo de dispositivos
+\change_inserted -807376748 1400765320
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RiceA2010"
+
+\end_inset
+
+
+\change_unchanged
+.
+\change_deleted -807376748 1400765318
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RiceA2010"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted -807376748 1400766089
+Pero esto también ha planteado nuevos desafíos
+\change_inserted -807376748 1400766167
+A pesar de compartir características con las computadoras tradicionales,
+ la utilización de dispositivos móviles introduce nuevos desafíos
+\change_unchanged
+.
+ Al aumentar la capacidad de procesamiento de los celulares
+\change_inserted 2089473119 1400939703
+,
+\change_unchanged
+ permitiendo ejecutar diversas aplicaciones, también aumentó el tiempo de
+ uso que se le da a estos dispositivos, lo cual se traduce directamente
+ en un mayor consumo de batería.
+ Adicionalmente, a pesar de que las capacidades computacionales de los dispositi
+vos móviles parecen crecer de forma exponencial, la capacidad de las baterías
+ solo lo 
+\change_deleted -807376748 1400766703
+hace
+\change_inserted -807376748 1400766711
+hizo
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400766726
+consistencia de tiempos verbales
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ de manera lineal
+\change_inserted -807376748 1400766736
+
+\begin_inset space ~
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Paradiso05"
+
+\end_inset
+
+.
+ 
+\change_deleted -807376748 1400766855
+Es p
+\change_inserted -807376748 1400766855
+P
+\change_unchanged
+or estas razones
+\change_inserted -807376748 1400766861
+,
+\change_deleted -807376748 1400766860
+ que
+\change_unchanged
+ uno de los grandes retos a los que se enfrentan los fabricantes de dispositivos
+ móviles
+\change_inserted -807376748 1400767647
+, y desarrolladores de aplicaciones
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rodriguez2012"
+
+\end_inset
+
+
+\change_unchanged
+ y sistemas operativos para 
+\change_deleted -807376748 1400766798
+móviles
+\change_inserted -807376748 1400766802
+estos dispositivos
+\change_deleted -807376748 1400766882
+,
+\change_unchanged
+ es encontrar alguna forma para prolongar la duración de la carga de la
+ batería por el mayor tiempo posible.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted -807376748 1400768926
+Dentro de las nuevas tecnologías incluidas en los dispositivos móviles de
+ la actualidad, existe un grupo que nos permite realizar conexiones con
+ diferentes propósitos y obtener información mediante una comunicación constante
+, entre estas se encuentran las conexiones por Red de Datos, Wifi, Bluethoot
+ y Gps, estas son características muy útiles tanto para el usuario como
+ para aplicaciones que las utilizan con el fin de facilitar numerosas tareas
+ al usuario
+\change_inserted -807376748 1400768919
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400767710
+Lo anterior es muy desorganizado...
+ se puede reescribir, a continuación van algunas ideas
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+ Las prestaciones de los dispositivos móviles de la actualidad no solo dependen
+ de su capacidad computacional, sino de su capacidad para comunicarse con
+ otros dispositivos.
+ Para esto, existen diferentes tecnologías 
+\change_deleted 2089473119 1401747501
+para 
+\change_inserted -807376748 1400768919
+con propósitos variados, pero todas depende
+\change_inserted 2089473119 1400940292
+n
+\change_inserted -807376748 1400768919
+ del uso de ondas de radio para mantener la movilidad.
+ Por ejemplo, la tecnología WiFi es usa
+\change_inserted 2089473119 1400940302
+da
+\change_inserted -807376748 1400768919
+ para conectar los dispositivos a redes locales y acceder a internet a través
+ de estas.
+ Otra tecnología que permite el acceso a Internet 
+\change_inserted 2089473119 1400940321
+son
+\change_deleted 2089473119 1400940320
+los
+\change_inserted -807376748 1400768919
+ las redes 3G.
+ A diferencia de las redes WiFi, las redes 3G poseen mayor alcance, sin
+ embargo suelen proveer un acceso más lento y costoso
+\change_unchanged
+.
+ 
+\change_inserted -807376748 1400769122
+En contraste, la tecnología Bluetooth tiene como propósito la comunicación
+ de dispositivos cercanos, algunas de las utilidades de estas redes son
+ transferir archivos, implementar auriculares y teclados inalámbricos.
+ Finalmente, la tecnología GPS también utiliza ondas de radio, sin embargo
+ el objetivo es conectarse con satelites para determinar la ubicación del
+ dispositivo.
+\end_layout
+
+\begin_layout Standard
+La utilización de estas tecnologías
+\change_inserted 2089473119 1400940375
+,
+\change_unchanged
+ 
+\change_inserted -807376748 1400769134
+basadas en ondas de radio
+\change_inserted 2089473119 1400940379
+,
+\change_inserted -807376748 1400769134
+ 
+\change_unchanged
+conlleva una descarga de batería significativa con relación a otras característi
+cas del dispositivo, así es que la optimización de ellas supone una mejora
+ en el rendimiento general del aparato
+\change_inserted -807376748 1400769162
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Perrucci2009,RiceA2010"
+
+\end_inset
+
+
+\change_unchanged
+.
+\change_deleted -807376748 1400769156
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Perrucci2009"
+
+\end_inset
+
+
+\change_unchanged
+ Varias soluciones
+\change_inserted -807376748 1400769197
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400769253
+agregar algunas refs...
+ por ejemplo
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rodriguez2012"
+
+\end_inset
+
+...
+ busquen algunas otras en google scholar, sciencedirect y ieee explore
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ se han propuesto para mejorar el rendimiento de la CPU y para gestionar
+ el disco y la pantalla de una manera inteligente para reducir el consumo
+ de energía.
+ Sin embargo, estas soluciones requieren cambios en la 
+\change_deleted 2089473119 1401143762
+estructura
+\change_inserted 2089473119 1401143765
+arquitectura
+\change_inserted -807376748 1400769275
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400769289
+?? arquitectura...
+ software
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ de los dispositivos móviles, o requiere
+\change_inserted 2089473119 1401147953
+n
+\change_unchanged
+ de un nuevo hardware que se traduce en un aumento de los costos
+\change_inserted 2089473119 1401147965
+,
+\change_unchanged
+ dejando de ser viable en los dispositivos móviles.
+ Técnicas de computación offloading
+\change_inserted -807376748 1400769310
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400769312
+refs
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ 
+\change_deleted -807376748 1400769303
+son
+\change_inserted -807376748 1400769305
+han sido
+\change_unchanged
+ propuestas con el objetivo de migrar grandes volúmenes de procesamiento
+ de estos dispositivos, con recursos limitados, a máquinas ricas en recursos.
+ Esto evita tomar largos lapsos de tiempo de ejecución de aplicaciones en
+ los dispositivos móviles, que da lugar a un alto consumo de energía, desgastánd
+ola en poco tiempo
+\change_inserted 2089473119 1401146628
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miettinen2010,Smailagic02"
+
+\end_inset
+
+
+\change_unchanged
+.
+ Existen resultados que demuestran que la ejecución remota de la aplicación
+ puede ahorrar energía de manera significativa
+\change_inserted -807376748 1400769336
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kumar2010,NiroshinieF2013,Parkkila2011"
+
+\end_inset
+
+
+\change_unchanged
+.
+ 
+\change_deleted -807376748 1400769333
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kumar2010,NiroshinieF2013,Parkkila2011"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1400778740
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400771102
+Miren este párrafo...
+ no cuenta el trabajo.
+ Tendría que decir que su trabajo consiste en implementar un recolector
+ de datos eficientes sobre el uso del teléfono (esto está).
+ Que esos datos se utilizarán para construir modeles de uso de los dispositivos,
+ y encontrar patrones de uso que puedan llevar al consumo innecesario de
+ batería.
+ A esta altura podrían agregar un ejemplo.
+ Después podrían decir que el objetivo es utilizar estos modelos en una
+ aplicación que automáticamente active/desactive funcionalidad para reducir
+ el consumo de batería.
+ ...
+ lo del offloading lo pueden dejar, pero no es central a su trabajo.
+ Yo lo mencionaría en el trabajo final, pero acá no creo que sea necesario
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_inserted 2089473119 1401322216
+
+\end_layout
+
+\begin_layout Standard
+Teniendo en cuenta lo antes dicho y basándonos en el hecho de que Android
+ es uno de los sistemas operativos más difundidos para dispositivos móviles,
+ es que se plantea utilizarlo como base de estudio para aprender sobre el
+ consumo personalizado de batería, mediante el desarrollo de un software
+ de 
+\change_deleted 2089473119 1401748441
+registro
+\change_inserted 2089473119 1401748445
+recolección
+\change_unchanged
+ de información 
+\change_inserted 2089473119 1401748505
+sobre el uso del teléfono, 
+\change_unchanged
+de manera eficiente
+\change_deleted 2089473119 1401748773
+,
+\change_unchanged
+ 
+\change_deleted 2089473119 1401748769
+para luego, utilizando dicha información y la técnica de procesamiento offloadin
+g, dar soporte al usuario con el fin de prolongar la duración de su batería
+ 
+\change_unchanged
+.
+ 
+\change_inserted 2089473119 1401833633
+Los datos recolectados se utilizarán para construir modelos de uso de cada
+ uno de los dispositivos, tratando de identificar patrones de comportamiento
+ que conlleven al consumo innecesario de bateria, como puede ser el caso,
+ muy común, de tener encendida la antena WiFi durante la mayor parte del
+ día, aún en zonas sin conexión.
+ El objetivo es, en un futuro, poder utilizar estos modelos en una aplicación
+ que automáticamente active o desactive características del dispositivo,
+ para reducir el consumo de bateria.
+\change_deleted 2089473119 1401750437
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Paul2010"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zahid2011"
+
+\end_inset
+
+
+\change_inserted -807376748 1400778740
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1400778785
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400778805
+Un párrafo describiendo la organización del resto del plan
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_deleted 2089473119 1401835595
+En la Sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Motivación"
+
+\end_inset
+
+ se discuten las motivaciones del trabajo propuesto.
+ ....
+\change_inserted 2089473119 1401835810
+Ésta propuesta se organiza de la siguiente manera.
+ En la Sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Motivación"
+
+\end_inset
+
+ se discuten las motivaciones del trabajo final propuesto.
+ En la Sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Objetivo del trabajo"
+
+\end_inset
+
+ se describen l.
+ Finalmente, la Sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Cronograma-de-actividades"
+
+\end_inset
+
+ propone un cronograma de trabajo estimativo.
+\change_unchanged
+
+\end_layout
+
+\begin_layout Section
+Motivación 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Motivación"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La batería de los móviles sigue siendo un rompecabezas que no ha sido resuelto
+ por ningún fabricante.
+ Es verdad que cada vez duran más, pero porque las hacen más grandes, por
+ lo que la única manera de lidiar con e
+\change_inserted 2089473119 1401316136
+ste problema,
+\change_deleted 2089473119 1401315814
+l
+\change_unchanged
+ es gastando menos.
+ Actualmente existen numerosas aplicaciones destinadas al ahorro de batería
+ que plantean el problema desde diferentes perspectivas, pero todas requieren
+ de la intervención del usuario.
+ Ninguna toma decisiones automáticas y personalizadas basándose en el uso
+ que cada usuario le da a su dispositivo, aprendiendo de esto.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zahid2011"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Karmore2013"
+
+\end_inset
+
+ 
+\change_inserted 2089473119 1401316158
+
+\end_layout
+
+\begin_layout Standard
+Nos encontramos, además, con el inconveniente de que en el proceso de obtener
+ información en cuanto al consumo, se malgasta la energía, al punto que
+ determinadas aplicaciones consumen un porcentaje demasiado elevado de batería.
+ 
+\change_inserted 2089473119 1401316163
+
+\end_layout
+
+\begin_layout Standard
+Por esta razón, y debido a la falta de administración de parte de los usuarios,
+ se plantea la posibilidad de desarrollar una aplicación encargada de analizar,
+ de forma eficiente, el consumo energético personalizado de cada dispositivo,
+ monitoreando la utilización de las características más significativas,
+ con la restricción de mantener un bajo nivel de procesamiento.
+ Esto se puede lograr gracias a la utilización de técnicas de offloading,
+ permitiendo que el mayor procesamiento se haga fuera del dispositivo.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vallina2013"
+
+\end_inset
+
+
+\change_inserted -807376748 1400771184
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400777898
+a esta sección le falta un poco más de discusión.
+ En este párrafo hay tres temas que podrían dividirse en 3 párrafos: apps
+ para reducir el consumo de batería, personalización y monitoreo de actividad.
+ Tambien hablen un poco de generar modelos de uso.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Section
+Objetivo
+\change_deleted -807376748 1400778816
+ del trabajo
+\change_unchanged
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Objetivo del trabajo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El objetivo del trabajo es desarrollar un sistema de monitoreo del uso de
+ los dispositivos móviles, para detectar posibles situaciones en las cuales
+ se pueden desactivar distintas características del mismo, sin interferir
+ en el uso normal de este tipo de dispositivos.
+ En particular se apunta a
+\change_inserted -807376748 1400777786
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400777782
+monitorear
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ 
+\change_inserted 2089473119 1401315713
+a monitorear ciertas 
+\change_unchanged
+características
+\change_inserted 2089473119 1401315719
+ especificas
+\change_unchanged
+, como mantener activos los módulos WiFi, Bluetouth, GPS o 3G, los cuales
+ consumen grandes cantidades de energía.
+ En este contexto, reducir el consumo energético es esencial para aumentar
+ la disponibilidad de los dispositivos móviles, ya que la fuente de energía
+ de los mismos son baterías.
+\change_inserted -807376748 1400777824
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400777823
+monitorean un poco más, cuenten en más detalles todos los datos que guardan
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted -807376748 1400777824
+ 
+\change_unchanged
+Una vez desarrollado el sistema de monitoreo y obtenidos datos de usuarios
+ reales, se evaluarán diferentes técnicas de inteligencia artificial para
+ detectar 
+\change_inserted -807376748 1400777852
+patrones de uso.
+ El objetivo final es determinar 
+\change_unchanged
+cuando se pueden desactivar las diferentes características
+\change_inserted -807376748 1400777869
+ sin afectar la funcionalidad que el usuario utiliza
+\change_unchanged
+.
+ Básicamente, el objetivo es determinar cuáles técnicas permiten aprender
+ automáticamente modelos de uso, que puedan ser utilizados para determinar
+ cuándo es conveniente desactivar las características sin afectar al usuario.
+\change_inserted -807376748 1400777924
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400777953
+Hable un poco de que van a usar los métodos de machine learning más populares,
+ como los provistos por Weka
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ Se espera que con los resultados de este trabajo se pueda desarrollar un
+ sistema inteligente que, mediante el monitoreo de las actividades del usuario,
+ reduzca el consumo de batería sin afectar el funcionamiento esperado del
+ dispositivo móvil.
+ 
+\end_layout
+
+\begin_layout Section
+
+\change_deleted -807376748 1400778827
+Etapas del Plan de Trabajo
+\change_inserted -807376748 1400778827
+Cronograma de actividades
+\change_unchanged
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Etapas del Plan de Trabajo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1400777985
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400777990
+Sección OK
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+A continuación se describe como se organizará el plan de trabajo, es importante
+ notar que algunas de estas actividades pueden solaparse en el tiempo:
+\end_layout
+
+\begin_layout Itemize
+Relevamiento bibliográfico sobre las diferentes técnicas de Data Mining
+ que resulten adecuadas para el contexto del problema.
+ Tiempo estimado: 1 mes.
+ 
+\end_layout
+
+\begin_layout Itemize
+Desarrollar un sistema de monitoreo de dispositivos móviles que almacene
+ la mayor cantidad de información acerca de cómo y en qué contexto estos
+ son usados.
+ Tiempo estimado: 1 mes.
+\end_layout
+
+\begin_layout Itemize
+Desarrollar un sistema de procesamiento de la información referente al uso
+ del dispositivo.
+ Tiempo estimado: 1 mes
+\end_layout
+
+\begin_layout Itemize
+Obtener datos de usuarios reales y analizar los distintos logs de uso.
+ Básicamente durante esta etapa se espera comprender mejor que información
+ se obtuvo, verificar si se observan los patrones que se esperan, y cómo
+ puede ser utilizada para detectar situaciones en las cuales es conveniente
+ activar o desactivar las características de los dispositivos móviles.
+ Tiempo estimado: 2 meses
+\end_layout
+
+\begin_layout Itemize
+Analizar y realizar experimentos con distintas técnicas de inteligencia
+ artificial para, a partir de los datos obtenidos en la etapa anterior,
+ aprender modelos de uso que puedan ser utilizados para automáticamente
+ activar o desactivar las características anteriormente mencionadas.
+ Se planean técnicas variadas, como selección de características, análisis
+ estadísticos, redes neuronales y Support Vector Machines, para el aprendizaje
+ de dichos modelos.
+ Tiempo estimado 1 mes.
+\end_layout
+
+\begin_layout Itemize
+Redacción de un informe del trabajo realizado.
+ Tiempo estimado: 3 meses.
+ 
+\end_layout
+
+\begin_layout Section
+Bibliografía
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1400779116
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1400779116
+
+
+\backslash
+renewcommand
+\backslash
+refname{}
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "PlanTesis"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
