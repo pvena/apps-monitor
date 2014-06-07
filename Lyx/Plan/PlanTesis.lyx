@@ -759,18 +759,97 @@ name "sec:Motivación"
 La batería de los móviles sigue siendo un rompecabezas que no ha sido resuelto
  por ningún fabricante.
  Es verdad que cada vez duran más, pero porque las hacen más grandes, por
- lo que la única manera de lidiar con e
+ lo que 
+\change_inserted 2089473119 1402020503
+pareciera que 
+\change_unchanged
+la única manera de lidiar con e
 \change_inserted 2089473119 1401316136
 ste problema,
 \change_deleted 2089473119 1401315814
 l
 \change_unchanged
  es gastando menos.
- Actualmente existen numerosas aplicaciones destinadas al ahorro de batería
- que plantean el problema desde diferentes perspectivas, pero todas requieren
- de la intervención del usuario.
+ 
+\change_inserted 2089473119 1402022490
+La amplia gama de interfaces y sensores inalámbricos, y la creciente popularidad
+ de las aplicaciones que demandan energía, como las redes sociales, pueden
+ reducir la duración de la batería de los dispositivos móviles a tan sola
+ algunas horas de funcionamiento.
+ La comunidad de investigadores y fabricantes de sistemas operativos y hardware,
+ han encontrado optimizaciones y técnicas interesantes para extender la
+ vida de la batería de los dispositivos móviles.
+ Sin embargo, las últimas investigaciones sobre baterías de litio indican
+ claramente que la eficiencia energética debe lograrse tanto a nivel de
+ hardware, como de software
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vallina2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted 2089473119 1402020304
+Actualmente existen numerosas aplicaciones destinadas al ahorro de batería
+ que plantean el problema desde diferentes perspectivas
+\change_inserted 2089473119 1402022562
+Se han estudiado diversas maneras de atacar el problema, como sistemas operativo
+s de bajo consumo energético, la gestión eficiente de los recursos, el impacto
+ de los patrones de interacción de los usuarios con los dispositivos móviles
+ y sus aplicaciones, administración de las diferentes interfaces inalámbricas
+ y sensores, y finalmente los beneficios de la integración de los dispositivos
+ móviles con servicios en 
+\begin_inset Quotes eld
+\end_inset
+
+la nube
+\begin_inset Quotes erd
+\end_inset
+
+, esto último conocido como cloud computing
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vallina2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 2089473119 1402022591
+Actualmente existen numerosas aplicaciones destinadas a la gestión de recursos
+ en los dispositivos móviles, con la principal función de tratar de reducir
+ el consumo energético,
+\change_deleted 2089473119 1402020694
+, 
+\change_unchanged
+pero todas requieren de la intervención del usuario.
  Ninguna toma decisiones automáticas y personalizadas basándose en el uso
- que cada usuario le da a su dispositivo, aprendiendo de esto.
+ que cada usuario le da a su dispositivo, aprendiendo
+\change_inserted 2089473119 1402022616
+ a su vez
+\change_unchanged
+ de esto
+\change_inserted 2089473119 1402021246
+.
+\begin_inset space ~
+\end_inset
+
+
+\change_deleted 2089473119 1402021229
+.
+\change_unchanged
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Zahid2011"
@@ -784,20 +863,62 @@ key "Karmore2013"
 
 \end_inset
 
+
+\change_inserted 2089473119 1402021251
+.
+
+\change_deleted 2089473119 1402021250
  
-\change_inserted 2089473119 1401316158
+\change_inserted 2089473119 1402020691
 
 \end_layout
 
 \begin_layout Standard
-Nos encontramos, además, con el inconveniente de que en el proceso de obtener
- información en cuanto al consumo, se malgasta la energía, al punto que
- determinadas aplicaciones consumen un porcentaje demasiado elevado de batería.
- Por esta razón, y debido a la falta de administración de parte de los usuarios,
+Nos encontramos, además, con 
+\change_inserted 2089473119 1402021588
+el inconveniente
+\change_unchanged
+ de que en el proceso 
+\change_deleted 2089473119 1402021617
+de obtener información en cuanto al consumo, se malgasta la energía
+\change_inserted 2089473119 1402021667
+monitorear y gestionar diferentes recuros, se malgasta la energía
+\change_unchanged
+, al punto 
+\change_inserted 2089473119 1402021679
+tal 
+\change_deleted 2089473119 1402021705
+que determinadas aplicaciones consumen un porcentaje demasiado elevado de
+ batería
+\change_inserted 2089473119 1402022639
+que se termina produciendo un incremento en el consumo y el remedio termina
+ siendo peor que la enfermedad
+\change_unchanged
+.
+ 
+\change_inserted 2089473119 1402022006
+
+\end_layout
+
+\begin_layout Standard
+Por esta razón, y debido a la falta de administración de parte de los usuarios,
  se plantea la posibilidad de desarrollar una aplicación encargada de analizar,
  de forma eficiente, el consumo energético personalizado de cada dispositivo,
- monitoreando la utilización de las características más significativas,
- con la restricción de mantener un bajo nivel de procesamiento.
+ monitoreando la utilización de las características más significativas
+\change_inserted 2089473119 1402022671
+ de estos
+\change_unchanged
+, con la restricción de mantener un bajo nivel de procesamiento
+\change_inserted 2089473119 1402022722
+, creando modelos de uso para cada dispositivo, que nos permitan identificar
+ patrones comportamentales estrictamente relacionados con un consumo significati
+vo de bateria.
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted 2089473119 1402021975
+.
  Esto se puede lograr gracias a la utilización de técnicas de offloading,
  permitiendo que el mayor procesamiento se haga fuera del dispositivo.
  
