@@ -57,6 +57,7 @@
 \html_be_strict false
 \author -807376748 "Juan Manuel Rodriguez,,," 
 \author 2089473119 "Polo" 
+\author 2089656932 "User" 
 \end_header
 
 \begin_body
@@ -968,13 +969,55 @@ name "sec:Objetivo del trabajo"
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted 2089656932 1402534835
+Dadas las condiciones tecnológicas explicadas anteriormente, nos planteamos
+ una posible solución desde la perspectiva del software.
+ El objetivo en este trabajo, consiste en desarrollar un sistema de monitoreo
+ del uso del dispositivos móvil.
+ Este monitoreo tendrá la restricción de consumir la menor cantidad de batería
+ posible con el fin de no perjudicar el desempeño del aparato.
+ Para lograr este cometido se utilizaran las estrategias de diseño de software
+ adecuadas a la problemática descripta, como por ejemplo un procesamiento
+ ofloading de los datos recolectados, delegando la mayor carga de procesamiento
+ a un servidor dedicado y liberando al dispositivo de esta carga de trabajo,
+ ya que podría consumir demasiada energía.
+ Una vez almacenada la información correspondiente a diferentes usuarios,
+ se plantea la posibilidad de estudiar, mediante minería de datos, posibles
+ situaciones en las cuales los usuarios estén malgastando su recurso energético.
+ Dicha investigación se basara en el uso de conocidas técnicas de minería
+ de datos, (Apriori, Predictive Apriori, etc) [REF], y la aplicación de
+ filtros a los datos recolectados.
+ Esta investigación se centrara en el uso de las características críticas
+ del dispositivo, como son los módulos WIFI, Bluetooth, GPS o 3G, ya que
+ son los más utilizados por los usuarios y las que consumen mayor cantidad
+ de energía.
+ También se tendrán en cuenta datos del entorno, como ubicación aproximada,
+ horarios, actividad realizada (Caminar, Conducir, Estático), días de la
+ semana, fines de semana, rangos de carga de baterías (alto, medio, bajo),
+ etc, ya que se supone que el usuario se comportara de diferentes maneras
+ en los diferentes entornos y en diferentes momentos.
+ De esta manera se esperan obtener patrones comportamentales suficientemente
+ específicos como en los siguientes ejemplos: El usuario tiene el módulo
+ WIFI encendido los lunes, pero se encuentra en un sector donde no existe
+ señal.
+ El usuario utiliza el modulo Bluetooth y luego lo deja habilitado consumiendo
+ batería innecesariamente.
+ El usuario se encuentra conectado a una red Wifi y también mantiene el
+ módulo 3G habilitado, los fines de semana.
+ En conclusión, en este trabajo se espera definir un sistema de monitoreo
+ para dispositivos móviles, de bajo costo, desde el punto de vista energético,
+ y un método eficiente de detección de patrones comportamentales individuales
+ basado en minería de datos, con el objetivo de lograr una sistema base
+ para poder desarrollar, en un futuro, un sistema de recomendación inteligente,
+ capaz de solucionar en gran medida la problemática planteada.
+ 
+\change_deleted 2089656932 1402534835
 El objetivo del trabajo es desarrollar un sistema de monitoreo del uso de
  los dispositivos móviles, para detectar posibles situaciones en las cuales
  se pueden desactivar distintas características del mismo, sin interferir
  en el uso normal de este tipo de dispositivos.
- En particular se apunta a
-\change_inserted -807376748 1400777786
- 
+ En particular se apunta a 
 \begin_inset Note Note
 status open
 
@@ -988,23 +1031,12 @@ monitorear
 
 \end_inset
 
-
-\change_unchanged
- 
-\change_inserted 2089473119 1401315713
-a monitorear ciertas 
-\change_unchanged
-características
-\change_inserted 2089473119 1401315719
- especificas
-\change_unchanged
-, como mantener activos los módulos WiFi, Bluetouth, GPS o 3G, los cuales
- consumen grandes cantidades de energía.
+ a monitorear ciertas características especificas, como mantener activos
+ los módulos WiFi, Bluetouth, GPS o 3G, los cuales consumen grandes cantidades
+ de energía.
  En este contexto, reducir el consumo energético es esencial para aumentar
  la disponibilidad de los dispositivos móviles, ya que la fuente de energía
  de los mismos son baterías.
-\change_inserted -807376748 1400777824
-
 \begin_inset Note Note
 status open
 
@@ -1025,24 +1057,15 @@ monitorean un poco más, cuenten en más detalles todos los datos que guardan
 
 \change_deleted -807376748 1400777824
  
-\change_unchanged
+\change_deleted 2089656932 1402534835
 Una vez desarrollado el sistema de monitoreo y obtenidos datos de usuarios
  reales, se evaluarán diferentes técnicas de inteligencia artificial para
- detectar 
-\change_inserted -807376748 1400777852
-patrones de uso.
- El objetivo final es determinar 
-\change_unchanged
-cuando se pueden desactivar las diferentes características
-\change_inserted -807376748 1400777869
- sin afectar la funcionalidad que el usuario utiliza
-\change_unchanged
-.
+ detectar patrones de uso.
+ El objetivo final es determinar cuando se pueden desactivar las diferentes
+ características sin afectar la funcionalidad que el usuario utiliza.
  Básicamente, el objetivo es determinar cuáles técnicas permiten aprender
  automáticamente modelos de uso, que puedan ser utilizados para determinar
  cuándo es conveniente desactivar las características sin afectar al usuario.
-\change_inserted -807376748 1400777924
-
 \begin_inset Note Note
 status open
 
@@ -1057,13 +1080,13 @@ Hable un poco de que van a usar los métodos de machine learning más populares,
 
 \end_inset
 
-
-\change_unchanged
  Se espera que con los resultados de este trabajo se pueda desarrollar un
  sistema inteligente que, mediante el monitoreo de las actividades del usuario,
  reduzca el consumo de batería sin afectar el funcionamiento esperado del
  dispositivo móvil.
  
+\change_unchanged
+
 \end_layout
 
 \begin_layout Section
