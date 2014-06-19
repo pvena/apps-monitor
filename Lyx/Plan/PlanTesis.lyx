@@ -55,7 +55,7 @@
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author 2089656932 "User" 
+\author 2089473119 "Polo" 
 \end_header
 
 \begin_body
@@ -207,7 +207,7 @@ key "Rodriguez2012"
 
 \end_inset
 
- y sistemas operativos para estos dispositivos es encontrar alguna forma
+ y sistemas operativos para estos dispositivos, es encontrar alguna forma
  para prolongar la duración de la carga de la batería por el mayor tiempo
  posible.
  
@@ -385,12 +385,7 @@ La batería de los móviles sigue siendo un rompecabezas que no ha sido resuelto
  menos.
  La amplia gama de interfaces y sensores inalámbricos, y la creciente popularida
 d de las aplicaciones que demandan energía, como las redes sociales, pueden
- reducir la duración de la batería de los dispositivos móviles a tan sol
-\change_inserted 2089656932 1403131216
-o
-\change_deleted 2089656932 1403131216
-a
-\change_unchanged
+ reducir la duración de la batería de los dispositivos móviles a tan solo
  algunas horas de funcionamiento.
  La comunidad de investigadores y fabricantes de sistemas operativos y hardware,
  han encontrado optimizaciones y técnicas interesantes para extender la
@@ -499,18 +494,18 @@ name "sec:Objetivo del trabajo"
 Dadas las condiciones tecnológicas explicadas anteriormente, nos planteamos
  una posible solución desde la perspectiva del software.
  El objetivo en este trabajo, consiste en desarrollar un sistema de monitoreo
- del uso del dispositivos móvil
-\change_inserted 2089656932 1403131239
-es
-\change_unchanged
-.
+ del uso del dispositivo móvil.
  Este monitoreo tendrá la restricción de consumir la menor cantidad de batería
  posible, con el fin de no perjudicar el desempeño del aparato.
  Para lograr este cometido se utilizaran las estrategias de diseño de software
  adecuadas a la problemática descripta, como por ejemplo un procesamiento
- basado en offloading del análisis de los datos recolectados, delegando
- la mayor carga de procesamiento a un servidor dedicado y liberando al dispositi
-vo de esta carga de trabajo, ya que podría consumir demasiada energía
+ 
+\emph on
+offloading
+\emph default
+ para el análisis de los datos recolectados, delegando la mayor carga de
+ procesamiento a un servidor dedicado y liberando al dispositivo de esta
+ carga de trabajo, ya que podría consumir demasiada energía
 \begin_inset space ~
 \end_inset
 
@@ -544,29 +539,33 @@ key "Weka"
 , como Apriori, Predictive Apriori, y la aplicación de filtros a los datos
  recolectados.
  Esta investigación se centrará en analizar el uso de las características
- los dispositivo, como son los módulos WIFI, Bluetooth, GPS o 3G, que son
- ampliamente utilizadas por los usuarios, 
-\change_deleted 2089656932 1403131402
-pero
-\change_inserted 2089656932 1403131402
-y
+ de los dispositivos, como son los módulos WIFI, Bluetooth, GPS o 3G, que
+ son ampliamente utilizadas por los usuarios y
+\change_deleted 2089473119 1403146465
+ 
 \change_unchanged
- son las que consumen mayor cantidad de energía.
+ las que consumen mayor cantidad de energía.
  Para el análisis se tendrán en cuenta datos del entorno, como ubicación
  aproximada, horarios, actividad realizada por el usuario (Caminar, Conducir,
  Estático), día de la semana, fines de semana, rangos de carga de baterías
- (alto, medio, bajo), debido a que proveen información del comportamiento
- del usuario.
+ (alto, medio, bajo), debido a que proveen información extra acerca del
+ comportamiento del usuario.
  El objetivo final es detectar patrones de uso del dispositivo móvil como:
  El usuario tiene el módulo WIFI encendido los lunes, pero se encuentra
- en un sector donde no existe señal.
- El usuario utiliza el modulo Bluetooth y luego lo deja habilitado consumiendo
- batería innecesariamente.
- El usuario se encuentra conectado a una red WiFi y también mantiene el
- módulo 3G habilitado, los fines de semana.
- Estos patrones serán analizado con el fin de detectar comportamientos que
- desperdician energía, por ejemplo el WiFi está activo en un lugar sin red
- WiFi.
+ en un sector donde no existe señal; El usuario utiliza el modulo Bluetooth
+ y luego lo deja habilitado consumiendo batería innecesariamente; El usuario
+ se encuentra conectado a una red WiFi y también mantiene el módulo 3G habilitad
+o, los fines de semana.
+ Estos patrones serán analizados con el fin de detectar comportamientos
+ que desperdician energía, por ejemplo 
+\begin_inset Quotes eld
+\end_inset
+
+el WiFi está activo en un lugar sin red WiFi
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -577,8 +576,8 @@ En conclusión, en este trabajo se espera definir un sistema de monitoreo
  El objetivo final es proveer un análisis que permita, en un futuro, la
  implementación de un sistema de recomendación inteligente, capaz de detectar
  patrones de uso energéticamente ineficientes y tomar acciones correctivas
- para disminuir el consumo de batería sin afectar las prestaciones del dispositi
-vo móvil.
+ para disminuir el consumo de batería, sin afectar las prestaciones del
+ dispositivo móvil.
 \end_layout
 
 \begin_layout Section
