@@ -28,36 +28,36 @@ Test mode:10-fold cross-validation
 Naive Bayes Classifier
 
                        Class
-Attribute                  1      0
-                         (1)    (0)
+Attribute                  0      1
+                      (0.54) (0.46)
 ====================================
 <ACTIVITY-ACT>
-  STILL                5598.0    1.0
-  ON_FOOT              1173.0    1.0
-  IN_VEHICLE            206.0    1.0
-  ON_BICYCLE             19.0    1.0
-  [total]              6996.0    4.0
+  STILL                2398.0 2461.0
+  ON_FOOT               747.0  337.0
+  IN_VEHICLE            154.0   35.0
+  ON_BICYCLE             15.0    3.0
+  [total]              3314.0 2836.0
 
 <BATTERY-DISCH>
-  1                    6606.0    1.0
-  0                     377.0    1.0
-  [total]              6983.0    2.0
+  1                    3251.0 2554.0
+  0                      61.0  280.0
+  [total]              3312.0 2834.0
 
 <BATTERY-PLGAC>
-  1                     809.0    1.0
-  0                    6165.0    1.0
-  [total]              6974.0    2.0
+  1                      50.0  180.0
+  0                    3262.0 2654.0
+  [total]              3312.0 2834.0
 
 <BATTERY-PLGUSB>
-  1                     706.0    1.0
-  0                    6289.0    1.0
-  [total]              6995.0    2.0
+  1                      12.0  106.0
+  0                    3300.0 2728.0
+  [total]              3312.0 2834.0
 
 <BATTERY-POWER>
-  1                    3273.0    1.0
-  0                     208.0    1.0
-  2                    1435.0    1.0
-  [total]              4916.0    3.0
+  1                    1816.0 1458.0
+  0                      93.0  116.0
+  2                     670.0  766.0
+  [total]              2579.0 2340.0
 
 <BLUETOOTH-ADDRESS>
   -                       1.0    1.0
@@ -70,103 +70,103 @@ Attribute                  1      0
   [total]                 2.0    2.0
 
 <BLUETOOTH-STATE>
-  0                     170.0    1.0
-  1                    6139.0    1.0
-  [total]              6309.0    2.0
+  0                       2.0    4.0
+  1                    3310.0 2830.0
+  [total]              3312.0 2834.0
 
 <BLUETOOTH-TSTATE>
-  1                    6139.0    1.0
-  0                     170.0    1.0
-  [total]              6309.0    2.0
+  1                    3310.0 2830.0
+  0                       2.0    4.0
+  [total]              3312.0 2834.0
 
 <CONNECTION-STATE>
-  0                    4662.0    1.0
-  1                    2333.0    1.0
-  [total]              6995.0    2.0
+  0                    1532.0 2489.0
+  1                    1780.0  345.0
+  [total]              3312.0 2834.0
 
 <GPS-STATE>
-  1                      96.0    1.0
-  0                    6335.0    1.0
-  [total]              6431.0    2.0
+  1                      83.0   11.0
+  0                    3229.0 2823.0
+  [total]              3312.0 2834.0
 
 <LOCATION-GROUP>
-  Group_1              2433.0    1.0
-  Group_2               512.0    1.0
-  Group_3               525.0    1.0
-  Group_4               109.0    1.0
-  Group_5                31.0    1.0
+  Group_1              1066.0 1023.0
+  Group_2               293.0  171.0
+  Group_3               255.0  164.0
+  Group_4                34.0    7.0
+  Group_5                22.0    9.0
   Group_6                14.0    1.0
-  Group_7                 8.0    1.0
-  Group_8                 4.0    1.0
-  Group_9               174.0    1.0
+  Group_7                 6.0    1.0
+  Group_8                 1.0    1.0
+  Group_9               115.0   54.0
   Group_10                4.0    1.0
   Group_11                3.0    1.0
   Group_12                8.0    1.0
   Group_13                1.0    1.0
-  Group_14                9.0    1.0
+  Group_14                6.0    1.0
   Group_15                1.0    1.0
-  Group_16               17.0    1.0
+  Group_16               13.0    4.0
   Group_17               10.0    1.0
-  Group_18               49.0    1.0
-  Group_19               16.0    1.0
+  Group_18               19.0   22.0
+  Group_19                5.0    9.0
   Group_20               13.0    1.0
-  Group_21              560.0    1.0
-  Group_22              860.0    1.0
-  Group_23               71.0    1.0
-  Group_24              117.0    1.0
-  Group_25               46.0    1.0
-  Group_27               14.0    1.0
-  Group_28               67.0    1.0
-  Group_29               13.0    1.0
-  Group_30               50.0    1.0
-  Group_31              152.0    1.0
-  Group_32               53.0    1.0
-  Group_33              191.0    1.0
-  Group_34               36.0    1.0
-  Group_35               15.0    1.0
-  Group_36               21.0    1.0
-  Group_37               13.0    1.0
-  Group_39               18.0    1.0
-  Group_40               54.0    1.0
-  Group_41               20.0    1.0
+  Group_21              139.0  415.0
+  Group_22              372.0  432.0
+  Group_23               28.0   43.0
+  Group_24               50.0   64.0
+  Group_25               28.0   19.0
+  Group_27               13.0    2.0
+  Group_28               40.0   14.0
+  Group_29               10.0    4.0
+  Group_30               36.0   15.0
+  Group_31               96.0   57.0
+  Group_32               47.0    7.0
+  Group_33               80.0  112.0
+  Group_34               30.0    7.0
+  Group_35               14.0    2.0
+  Group_36                9.0   13.0
+  Group_37               11.0    3.0
+  Group_39               11.0    8.0
+  Group_40               25.0   30.0
+  Group_41               17.0    4.0
   Group_42                3.0    1.0
-  Group_43                5.0    1.0
-  Group_44               47.0    1.0
-  Group_45               51.0    1.0
-  Group_46               16.0    1.0
-  Group_38               22.0    1.0
-  Group_49               28.0    1.0
+  Group_43                3.0    3.0
+  Group_44               27.0   12.0
+  Group_45               37.0   15.0
+  Group_46               14.0    3.0
+  Group_38               14.0    9.0
+  Group_49               26.0    3.0
   Group_50                5.0    1.0
   Group_51                8.0    1.0
   Group_52                2.0    1.0
   Group_53               23.0    1.0
-  Group_54                8.0    1.0
-  Group_55               10.0    1.0
+  Group_54                4.0    1.0
+  Group_55                1.0    1.0
   Group_56                1.0    1.0
-  Group_57                8.0    1.0
-  Group_58               14.0    1.0
+  Group_57                5.0    4.0
+  Group_58                8.0    7.0
   Group_59                2.0    1.0
   Group_60                3.0    1.0
-  Group_26               21.0    1.0
+  Group_26                7.0   15.0
   Group_62                6.0    1.0
-  Group_63               11.0    1.0
+  Group_63                9.0    3.0
   Group_64                2.0    1.0
   Group_65                6.0    1.0
-  Group_66               29.0    1.0
+  Group_66               23.0    7.0
   Group_67                3.0    1.0
   Group_68                3.0    1.0
-  Group_69               83.0    1.0
+  Group_69               43.0   41.0
   Group_70                4.0    1.0
   Group_71                4.0    1.0
   Group_72                4.0    1.0
   Group_73                9.0    1.0
-  Group_74               20.0    1.0
+  Group_74               14.0    7.0
   Group_75                6.0    1.0
-  Group_76               14.0    1.0
-  Group_77               20.0    1.0
-  Group_78                7.0    1.0
-  Group_79                8.0    1.0
-  Group_61               13.0    1.0
+  Group_76               13.0    2.0
+  Group_77               15.0    6.0
+  Group_78                6.0    2.0
+  Group_79                5.0    4.0
+  Group_61               12.0    2.0
   Group_80                2.0    1.0
   Group_81                2.0    1.0
   Group_82                1.0    1.0
@@ -184,71 +184,71 @@ Attribute                  1      0
   Group_95                1.0    1.0
   Group_96                1.0    1.0
   Group_97                1.0    1.0
-  Group_98                3.0    1.0
+  Group_98                1.0    1.0
   Group_99                1.0    1.0
   Group_100               1.0    1.0
   Group_48                7.0    1.0
-  Group_47               12.0    1.0
-  Group_101               4.0    1.0
-  Group_102             123.0    1.0
+  Group_47               11.0    2.0
+  Group_101               3.0    2.0
+  Group_102               2.0    4.0
   Group_103               1.0    1.0
-  Group_104               2.0    1.0
+  Group_104               1.0    1.0
   Group_105              11.0    1.0
   Group_106               1.0    1.0
   Group_107               1.0    1.0
-  Group_108              19.0    1.0
-  Group_109               5.0    1.0
+  Group_108               9.0   11.0
+  Group_109               1.0    5.0
   Group_110               2.0    1.0
   Group_111               8.0    1.0
   Group_112               3.0    1.0
   Group_113               1.0    1.0
   Group_114               1.0    1.0
   Group_115               4.0    1.0
-  [total]              7080.0  114.0
+  [total]              3424.0 2946.0
 
 <TIME-HOUR>
-  22                    455.0    1.0
-  23                    653.0    1.0
-  7                      74.0    1.0
-  8                     209.0    1.0
-  10                    165.0    1.0
-  12                    185.0    1.0
-  13                    224.0    1.0
-  14                    337.0    1.0
-  15                    391.0    1.0
-  17                    388.0    1.0
-  18                    565.0    1.0
-  19                    716.0    1.0
-  21                    576.0    1.0
-  9                     134.0    1.0
-  11                    194.0    1.0
-  20                    689.0    1.0
-  0                     285.0    1.0
-  16                    307.0    1.0
-  1                     211.0    1.0
-  3                      82.0    1.0
-  2                     112.0    1.0
-  4                      31.0    1.0
-  5                      20.0    1.0
-  6                      14.0    1.0
-  [total]              7017.0   24.0
+  22                    227.0  145.0
+  23                    292.0  271.0
+  7                      20.0   50.0
+  8                     107.0   95.0
+  10                     34.0  118.0
+  12                     95.0   83.0
+  13                     88.0  104.0
+  14                    127.0  152.0
+  15                    187.0  145.0
+  17                    168.0  145.0
+  18                    310.0  226.0
+  19                    387.0  240.0
+  21                    288.0  216.0
+  9                      46.0   80.0
+  11                     52.0  121.0
+  20                    356.0  251.0
+  0                     128.0  113.0
+  16                    164.0  106.0
+  1                     104.0   92.0
+  3                      53.0   29.0
+  2                      62.0   48.0
+  4                      19.0   13.0
+  5                      11.0   10.0
+  6                       9.0    3.0
+  [total]              3334.0 2856.0
 
 <TIME-ISWEEKDAY>
-  0                    1689.0    1.0
-  1                    5306.0    1.0
-  [total]              6995.0    2.0
+  0                     721.0  598.0
+  1                    2591.0 2236.0
+  [total]              3312.0 2834.0
 
 <TIME-QUARTER>
-  2                    1643.0    1.0
-  3                    2105.0    1.0
-  0                    1701.0    1.0
-  1                    1548.0    1.0
-  [total]              6997.0    4.0
+  2                     764.0  687.0
+  3                     986.0  851.0
+  0                     864.0  656.0
+  1                     700.0  642.0
+  [total]              3314.0 2836.0
 
-<WIFI-IACCESS>
-  0                    3311.0    1.0
-  1                    2833.0    1.0
-  [total]              6144.0    2.0
+<WIFI-STATE>
+  1                    3311.0 2833.0
+  0                       1.0    1.0
+  [total]              3312.0 2834.0
 
 
 
@@ -257,25 +257,26 @@ Time taken to build model: 0 seconds
 === Stratified cross-validation ===
 === Summary ===
 
-Correctly Classified Instances        6993              100      %
-Incorrectly Classified Instances         0                0      %
-Kappa statistic                          1     
-Mean absolute error                      0.0003
-Root mean squared error                  0.0047
-Relative absolute error                192.5564 %
-Root relative squared error           2977.0795 %
-Total Number of Instances             6993     
+Correctly Classified Instances        4246               69.1306 %
+Incorrectly Classified Instances      1896               30.8694 %
+Kappa statistic                          0.3826
+Mean absolute error                      0.3546
+Root mean squared error                  0.4479
+Relative absolute error                 71.3576 %
+Root relative squared error             89.8457 %
+Total Number of Instances             6142     
+Ignored Class Unknown Instances                851     
 
 === Detailed Accuracy By Class ===
 
                TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
-                 1         0          1         1         1          ?        1
-                 0         0          0         0         0          ?        0
-Weighted Avg.    1         0          1         1         1          0    
+                 0.678     0.293      0.73      0.678     0.703      0.802    0
+                 0.707     0.322      0.652     0.707     0.679      0.65     1
+Weighted Avg.    0.691     0.306      0.694     0.691     0.692      0.732
 
 === Confusion Matrix ===
 
     a    b   <-- classified as
- 6993    0 |    a = 1
-    0    0 |    b = 0
+ 2243 1067 |    a = 0
+  829 2003 |    b = 1
 
