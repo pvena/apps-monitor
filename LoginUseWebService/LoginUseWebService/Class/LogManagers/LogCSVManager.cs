@@ -40,11 +40,11 @@ namespace LoginUseWebService
                 if (!attributes[attribute].Contains(value))
                    attributes[attribute].Add(value);
             }
-
-            foreach (string at in attributes.Keys)
+            
+            foreach (string at in attributes.Keys.ToList())
             {
                 string line = "@attribute <" + at + "> {";
-                foreach (string v in attributes[at])
+                foreach (string v in attributes[at].ToList())
                     line += v + ",";
                 line = line.Substring(0,line.Length - 1);
                 line += "}";
