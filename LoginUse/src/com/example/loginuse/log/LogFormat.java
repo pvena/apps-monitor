@@ -59,7 +59,7 @@ public class LogFormat {
 		return String.valueOf(value);
 	}
 	public static String getValue(double value){
-		return String.valueOf(value);
+		return String.valueOf(value).replace(",", ".");
 	}
 	public static String getValue(boolean value){
 		return ((value)?"1":"0");
