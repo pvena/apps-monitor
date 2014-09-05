@@ -24,7 +24,8 @@ public class CurrentRulesActivity extends ListActivity {
 		super.onResume();
 	}
     
-    private void loadRules(){    
+    private void loadRules(){  
+    	
     	ArrayList<LogRuleData> rules = LogCommandManager.getInstance().getCurrentRules();
 
         setListAdapter(new CommandListAdapter(this,rules,R.layout.current_rule_item));

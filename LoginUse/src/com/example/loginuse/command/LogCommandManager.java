@@ -31,6 +31,11 @@ public class LogCommandManager {
 		return LogCommandManager.instance;
 	}
 	
+	public void reload(){
+		this.buildRules();
+		this.buildCommands();
+	}
+	
 	/*	 
 	 * Create default rules for the App.
 	 */
@@ -56,6 +61,7 @@ public class LogCommandManager {
 		this.commands.put("BlueToothDisabled", new LogCommandBlueToothDisabled());
 		this.commands.put("ConnectionEnabled", new LogCommandConnectionEnabled());
 		this.commands.put("ConnectionDisabled", new LogCommandConnectionDisabled());
+		this.commands.put("BrightnessDisabled", new LogCommandBrightnessDisable());
 	}
 	
 	public void addLogCommandRule(LogRule rule){

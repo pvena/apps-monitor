@@ -19,6 +19,7 @@ public class LogCommandConnectionEnabled extends LogCommand{
 	
 	@Override
 	public boolean internalExecute() {
+		boolean result = false;
 		try{			
 			final ConnectivityManager conman = (ConnectivityManager) LogConfiguration.getInstance().getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo mMobile = conman.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -31,12 +32,10 @@ public class LogCommandConnectionEnabled extends LogCommand{
 				final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
 				setMobileDataEnabledMethod.setAccessible(true);
 				setMobileDataEnabledMethod.invoke(iConnectivityManager, true);
-				return true;
-			}
-			return false;
+				result = true;
+			}			
 		}
-		catch(Exception ex){
-			return false;
-		}
+		catch(Exception ex){}
+		return result;
 	}
 }

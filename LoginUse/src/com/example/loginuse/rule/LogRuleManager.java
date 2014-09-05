@@ -2,6 +2,8 @@ package com.example.loginuse.rule;
 
 
 import java.util.Hashtable;
+
+import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConfiguration;
 
 public class LogRuleManager {
@@ -65,6 +67,7 @@ public class LogRuleManager {
 			LogConfiguration.getInstance().setProperty(LogConfiguration.PROPERTYVALUE + i/4 , data[i+3]);
 		}
 		this.loadRules();
+		LogCommandManager.getInstance().reload();
 	}	
 	
 	public Hashtable<String,LogRule> getRules(){
