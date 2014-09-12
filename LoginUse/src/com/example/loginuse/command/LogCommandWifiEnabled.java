@@ -15,12 +15,16 @@ public class LogCommandWifiEnabled extends LogCommand {
 	
 	@Override
 	public boolean internalExecute() {
-		Context context = LogConfiguration.getInstance().getContext();
-		WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-	 	if(!wifiManager.isWifiEnabled()){
-	 		wifiManager.setWifiEnabled(true);
-	 		return true;
-	 	}
+		try
+		{
+			Context context = LogConfiguration.getInstance().getContext();
+			WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+			if(!wifiManager.isWifiEnabled()){
+				wifiManager.setWifiEnabled(true);
+				return true;
+			}
+		}
+		catch(Exception e){}
 		return false;
 	}	
 }
