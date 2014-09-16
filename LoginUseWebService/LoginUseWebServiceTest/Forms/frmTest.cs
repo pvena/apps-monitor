@@ -68,7 +68,7 @@ namespace LoginUseWebServiceTest
         {
             try
             {
-                List<Property> properties = new DBObjectProvider().getProperties();
+                List<Property> properties = new DBObjectProvider().getProperties(-1);
 
                 foreach (Property p in properties)
                     this.chbProperties.Items.Add(p.FullName, true);
@@ -155,14 +155,61 @@ namespace LoginUseWebServiceTest
         }
 
         private void cbxUser_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             this.dgvFileInfo.DataSource = new DBObjectProvider().getFiles(this.SelectedUser);
+            this.cbxType.DataSource = new DBObjectProvider().getTypes();
+            this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
             this.lblPhoneId.Text = "PhoneId: " + this.SelectedUser.phoneId;
             this.lblVersion.Text = "Version: " + this.SelectedUser.version;
             this.lblPhoneModel.Text = "Phone Model: " + this.SelectedUser.phoneModel;
             this.lblMaxLocation.Text = "Max Location: " + this.SelectedUser.maxLocation;
             this.lblLastProcess.Text = "Last Process: " + this.SelectedUser.lastLocationProcess.ToShortDateString();
+        }
 
+        private void cbxType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxType.SelectedItem != null) 
+            {
+                this.cbxProperty.DataSource = new DBObjectProvider().getProperties(((Property)cbxType.SelectedItem).id);
+            }
+        }
+
+        private void cbxProperty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxProperty.SelectedItem != null)
+            {
+                this.cbxValue.DataSource = new DBObjectProvider().getPropertyValues(((Property)cbxProperty.SelectedItem).id);
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if((cbxType.SelectedItem != null) && (cbxProperty.SelectedItem != null) && (this.cbxValue.SelectedItem != null) && !string.IsNullOrEmpty(txtCommand.Text))
+            {
+                DBManager db = new DBManager();
+                Property type = (Property)cbxType.SelectedItem;
+                Property property = (Property)cbxProperty.SelectedItem;
+                Property value = (Property)cbxValue.SelectedItem;
+                if(dgvCommands.CurrentRow != null)
+                {
+                    Property command = (Property)dgvCommands.CurrentRow.DataBoundItem;
+                    db.InsertCommands(this.SelectedUser.phoneId,command.id,value.id,txtCommand.Text);
+                }   
+                else
+                    db.InsertCommands(this.SelectedUser.phoneId, -1, value.id, txtCommand.Text);            
+            }
+            this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (dgvCommands.CurrentRow != null)
+            {
+                DBManager db = new DBManager();
+                Property command = (Property)dgvCommands.CurrentRow.DataBoundItem;
+                db.deleteCommands(this.SelectedUser.phoneId, command.id, command.fId);
+            }
+            this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
         }
 
         

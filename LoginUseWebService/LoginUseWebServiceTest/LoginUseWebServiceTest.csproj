@@ -159,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\File.datasource" />
+    <None Include="Properties\DataSources\Property.datasource" />
+    <None Include="Properties\DataSources\Property1.datasource" />
     <None Include="Properties\DataSources\User.datasource" />
     <None Include="Web References\LoginUseService\loginuse.disco" />
     <None Include="Web References\LoginUseService\loginuse.wsdl" />

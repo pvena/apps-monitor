@@ -57,6 +57,27 @@
             this.isZipDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fileBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblType = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbxType = new System.Windows.Forms.ComboBox();
+            this.prTypeBS = new System.Windows.Forms.BindingSource(this.components);
+            this.cbxProperty = new System.Windows.Forms.ComboBox();
+            this.prPRBS = new System.Windows.Forms.BindingSource(this.components);
+            this.cbxValue = new System.Windows.Forms.ComboBox();
+            this.prPVBS = new System.Windows.Forms.BindingSource(this.components);
+            this.txtCommand = new System.Windows.Forms.TextBox();
+            this.dgvCommands = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prCMBS = new System.Windows.Forms.BindingSource(this.components);
+            this.lblCommand = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblPhoneModel = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
@@ -70,6 +91,13 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileBindingSource)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prTypeBS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prPRBS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prPVBS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommands)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prCMBS)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -276,6 +304,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 135);
             this.tabControl1.Name = "tabControl1";
@@ -369,6 +398,207 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Log History";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tableLayoutPanel2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(578, 509);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Commands";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.lblType, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.cbxType, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cbxProperty, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.cbxValue, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtCommand, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.dgvCommands, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblCommand, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnAdd, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnDel, 1, 5);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(578, 509);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(3, 0);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(40, 17);
+            this.lblType.TabIndex = 0;
+            this.lblType.Text = "Type";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Property";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Value";
+            // 
+            // cbxType
+            // 
+            this.cbxType.DataSource = this.prTypeBS;
+            this.cbxType.DisplayMember = "Name";
+            this.cbxType.FormattingEnabled = true;
+            this.cbxType.Location = new System.Drawing.Point(80, 3);
+            this.cbxType.Name = "cbxType";
+            this.cbxType.Size = new System.Drawing.Size(382, 24);
+            this.cbxType.TabIndex = 3;
+            this.cbxType.SelectedIndexChanged += new System.EventHandler(this.cbxType_SelectedIndexChanged);
+            // 
+            // prTypeBS
+            // 
+            this.prTypeBS.DataSource = typeof(LoginUseWebServiceTest.Property);
+            // 
+            // cbxProperty
+            // 
+            this.cbxProperty.DataSource = this.prPRBS;
+            this.cbxProperty.DisplayMember = "Name";
+            this.cbxProperty.FormattingEnabled = true;
+            this.cbxProperty.Location = new System.Drawing.Point(80, 33);
+            this.cbxProperty.Name = "cbxProperty";
+            this.cbxProperty.Size = new System.Drawing.Size(382, 24);
+            this.cbxProperty.TabIndex = 4;
+            this.cbxProperty.SelectedIndexChanged += new System.EventHandler(this.cbxProperty_SelectedIndexChanged);
+            // 
+            // prPRBS
+            // 
+            this.prPRBS.DataSource = typeof(LoginUseWebServiceTest.Property);
+            // 
+            // cbxValue
+            // 
+            this.cbxValue.DataSource = this.prPVBS;
+            this.cbxValue.DisplayMember = "value";
+            this.cbxValue.FormattingEnabled = true;
+            this.cbxValue.Location = new System.Drawing.Point(80, 63);
+            this.cbxValue.Name = "cbxValue";
+            this.cbxValue.Size = new System.Drawing.Size(382, 24);
+            this.cbxValue.TabIndex = 5;
+            // 
+            // prPVBS
+            // 
+            this.prPVBS.DataSource = typeof(LoginUseWebServiceTest.Property);
+            // 
+            // txtCommand
+            // 
+            this.txtCommand.Location = new System.Drawing.Point(80, 93);
+            this.txtCommand.Name = "txtCommand";
+            this.txtCommand.Size = new System.Drawing.Size(382, 22);
+            this.txtCommand.TabIndex = 6;
+            // 
+            // dgvCommands
+            // 
+            this.dgvCommands.AutoGenerateColumns = false;
+            this.dgvCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCommands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.fId,
+            this.nameDataGridViewTextBoxColumn1,
+            this.valueDataGridViewTextBoxColumn});
+            this.tableLayoutPanel2.SetColumnSpan(this.dgvCommands, 2);
+            this.dgvCommands.DataSource = this.prCMBS;
+            this.dgvCommands.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCommands.Location = new System.Drawing.Point(3, 121);
+            this.dgvCommands.Name = "dgvCommands";
+            this.dgvCommands.RowHeadersVisible = false;
+            this.dgvCommands.RowTemplate.Height = 24;
+            this.dgvCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCommands.Size = new System.Drawing.Size(572, 339);
+            this.dgvCommands.TabIndex = 7;
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "Rule";
+            this.id.Name = "id";
+            this.id.Width = 62;
+            // 
+            // fId
+            // 
+            this.fId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fId.DataPropertyName = "fId";
+            this.fId.HeaderText = "Condition";
+            this.fId.Name = "fId";
+            this.fId.Width = 92;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "name";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.Width = 68;
+            // 
+            // valueDataGridViewTextBoxColumn
+            // 
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valueDataGridViewTextBoxColumn.DataPropertyName = "value";
+            this.valueDataGridViewTextBoxColumn.HeaderText = "value";
+            this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
+            // 
+            // prCMBS
+            // 
+            this.prCMBS.DataSource = typeof(LoginUseWebServiceTest.Property);
+            // 
+            // lblCommand
+            // 
+            this.lblCommand.AutoSize = true;
+            this.lblCommand.Location = new System.Drawing.Point(3, 90);
+            this.lblCommand.Name = "lblCommand";
+            this.lblCommand.Size = new System.Drawing.Size(71, 17);
+            this.lblCommand.TabIndex = 8;
+            this.lblCommand.Text = "Command";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(3, 466);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(62, 40);
+            this.btnAdd.TabIndex = 9;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.Location = new System.Drawing.Point(80, 466);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(60, 40);
+            this.btnDel.TabIndex = 10;
+            this.btnDel.Text = "Del";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -466,6 +696,14 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileBindingSource)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prTypeBS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prPRBS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prPVBS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCommands)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.prCMBS)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -508,6 +746,27 @@
         private System.Windows.Forms.Label lblPhoneModel;
         private System.Windows.Forms.Label lblMaxLocation;
         private System.Windows.Forms.Label lblLastProcess;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbxType;
+        private System.Windows.Forms.ComboBox cbxProperty;
+        private System.Windows.Forms.ComboBox cbxValue;
+        private System.Windows.Forms.TextBox txtCommand;
+        private System.Windows.Forms.DataGridView dgvCommands;
+        private System.Windows.Forms.Label lblCommand;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.BindingSource prTypeBS;
+        private System.Windows.Forms.BindingSource prPRBS;
+        private System.Windows.Forms.BindingSource prPVBS;
+        private System.Windows.Forms.BindingSource prCMBS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
     }
 }
 

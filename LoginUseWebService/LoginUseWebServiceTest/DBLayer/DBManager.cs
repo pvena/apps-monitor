@@ -82,7 +82,7 @@ namespace LoginUseWebServiceTest
                 return null;
             }
         }
-        public DataTable getProperties(string names)
+        public DataTable getProperties(string names,int idType)
         {
             try
             {
@@ -90,6 +90,8 @@ namespace LoginUseWebServiceTest
                 cmd.CommandType = CommandType.StoredProcedure;
                 if (names != null)
                     cmd.Parameters.AddWithValue("@names", names);
+                if (idType != -1)
+                    cmd.Parameters.AddWithValue("@type", idType);
                 this.connectIfNeed();
                 DataTable dt = this.iDB.getTable(cmd);
                 this.disconnectIfNeed();
@@ -100,7 +102,83 @@ namespace LoginUseWebServiceTest
                 return null;
             }
         }
-     
+        public DataTable getPropertyValues(int idProperty)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getPropertyValue");
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (idProperty != -1)
+                    cmd.Parameters.AddWithValue("@property", idProperty);
+                this.connectIfNeed();
+                DataTable dt = this.iDB.getTable(cmd);
+                this.disconnectIfNeed();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public DataTable getCommands(string phoneId)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("getCommands");
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (phoneId != null)
+                    cmd.Parameters.AddWithValue("@phoneId", phoneId);
+                this.connectIfNeed();
+                DataTable dt = this.iDB.getTable(cmd);
+                this.disconnectIfNeed();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public void InsertCommands(string phoneId, int idRule, int idPropertyValue, string commandKey)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("InsertCommand");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
+                if(idRule != -1)
+                    cmd.Parameters.AddWithValue("@idRule", idRule);
+                cmd.Parameters.AddWithValue("@idPropertyValue", idPropertyValue);
+                cmd.Parameters.AddWithValue("@commandKey", commandKey);
+                this.connectIfNeed();
+                this.iDB.execute(cmd);
+                this.disconnectIfNeed();
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+        }
+
+        public void deleteCommands(string phoneId, int idRule, int idCondition)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("DeleteCommand");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@phoneId", phoneId);
+                cmd.Parameters.AddWithValue("@idRule", idRule);
+                cmd.Parameters.AddWithValue("@idCondition", idCondition);
+                this.connectIfNeed();
+                this.iDB.execute(cmd);
+                this.disconnectIfNeed();
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+        }
+
         public DataTable getCsvData(string phoneId, DateTime from, DateTime to, string typeNames, string propNames)
         {
             try

@@ -33,10 +33,10 @@ namespace LoginUseWebServiceTest
             return list;
         }
 
-        public List<Property> getProperties()
+        public List<Property> getTypes()
         {
             DBManager mdb = new DBManager();
-            DataTable dt = mdb.getProperties(null);
+            DataTable dt = mdb.getType(null);
 
             List<Property> list = new List<Property>();
 
@@ -44,8 +44,65 @@ namespace LoginUseWebServiceTest
                 foreach (DataRow r in dt.Rows)
                 {
                     Property p = new Property();
+                    p.id = (int)r["idType"];
+                    p.name = (string)r["name"];
+                    list.Add(p);
+                }
+            return list;
+        }
+
+        public List<Property> getProperties(int idType)
+        {
+            DBManager mdb = new DBManager();
+            DataTable dt = mdb.getProperties(null,idType);
+
+            List<Property> list = new List<Property>();
+
+            if (dt != null)
+                foreach (DataRow r in dt.Rows)
+                {
+                    Property p = new Property();
+                    p.id = (int)r["idProperty"];
                     p.name = (string)r["name"];
                     p.type = (string)r["type"];
+                    list.Add(p);
+                }
+            return list;
+        }
+
+        public List<Property> getPropertyValues(int idProperty)
+        {
+            DBManager mdb = new DBManager();
+            DataTable dt = mdb.getPropertyValues(idProperty);
+
+            List<Property> list = new List<Property>();
+
+            if (dt != null)
+                foreach (DataRow r in dt.Rows)
+                {
+                    Property p = new Property();
+                    p.id = (int)r["idPropertyValue"];
+                    p.value = (string)r["value"];
+                    list.Add(p);
+                }
+            return list;
+        }
+
+        public List<Property> getCommands(string phoneId)
+        {
+            DBManager mdb = new DBManager();
+            DataTable dt = mdb.getCommands(phoneId);
+
+            List<Property> list = new List<Property>();
+
+            if (dt != null)
+                foreach (DataRow r in dt.Rows)
+                {
+                    Property p = new Property();
+                    p.id = (int)r["idRule"];
+                    p.fId = (int)r["idCondition"];
+                    p.name = (string)r["CommandKey"];
+                    p.value = (string)r["condition"];
                     list.Add(p);
                 }
             return list;
