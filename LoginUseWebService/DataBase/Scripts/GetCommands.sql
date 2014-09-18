@@ -27,3 +27,4 @@ inner join [property] p on
 inner join [type] t on
 	t.idType = p.idtype
 where r.idUser = @idUser
+order by r.idRule,c.idCondition

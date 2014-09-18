@@ -18,11 +18,11 @@ begin
 	insert into [rule] (idUser,[description],commandKey,forAll)
 	values(@idUser,'From App',@commandKey,0)
 
-	set @idRule = @@identity
+	set @idRule = @@IDENTITY
 end
 
 insert into condition(idRule,idPropertyValue)
 values (@idRule,@idPropertyValue)
 
-select @@identity AS Id
+select @@IDENTITY AS Id
 

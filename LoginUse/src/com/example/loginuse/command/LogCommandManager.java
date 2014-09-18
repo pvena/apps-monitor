@@ -10,7 +10,6 @@ import com.example.loginuse.rule.LogRuleData;
 import com.example.loginuse.rule.LogRuleManager;
 
 public class LogCommandManager {
-	private Hashtable<String, LogCommand> commands;
 	private Hashtable<String, String> lastLogState; 
 	private ArrayList<LogRule> rules;
 	
@@ -19,7 +18,6 @@ public class LogCommandManager {
 	private LogCommandManager(){
 		this.lastLogState = new Hashtable<String, String>();
 		this.buildRules();
-		this.buildCommands();
 	}
 	
 	public static LogCommandManager getInstance()
@@ -33,7 +31,6 @@ public class LogCommandManager {
 	
 	public void reload(){
 		this.buildRules();
-		this.buildCommands();
 	}
 	
 	/*	 
@@ -49,30 +46,31 @@ public class LogCommandManager {
 		    this.rules.add(rule);
 		}
 	}	
-	/*	 
-	 * Create all LogCommands in Command HashTable
-	 */
-	private void buildCommands(){
-		this.commands = new Hashtable<String, LogCommand>();		
-		this.commands.put("SynchLogFile", new LogCommandSynchronize());
-		this.commands.put("WifiEnabled", new LogCommandWifiEnabled());
-		this.commands.put("WifiDisabled", new LogCommandWifiDisabled());
-		this.commands.put("BlueToothEnabled", new LogCommandBlueToothEnabled());
-		this.commands.put("BlueToothDisabled", new LogCommandBlueToothDisabled());
-		this.commands.put("ConnectionEnabled", new LogCommandConnectionEnabled());
-		this.commands.put("ConnectionDisabled", new LogCommandConnectionDisabled());
-		this.commands.put("BrightnessDisabled", new LogCommandBrightnessDisable());
-	}
+
+	
+	public LogCommand getCommand(String key){		
+		if(key.equals("SynchLogFile"))		
+			return new LogCommandSynchronize();
+		if(key.equals("WifiEnabled"))
+			return new LogCommandWifiEnabled();
+		if(key.equals("WifiDisabled"))
+			return new LogCommandWifiDisabled();
+		if(key.equals("BlueToothEnabled"))
+			return new LogCommandBlueToothEnabled();
+		if(key.equals("BlueToothDisabled"))
+			return new LogCommandBlueToothDisabled();
+		if(key.equals("ConnectionEnabled"))
+			return new LogCommandConnectionEnabled();
+		if(key.equals("ConnectionDisabled"))
+			return new LogCommandConnectionDisabled();
+		if(key.equals("BrightnessDisabled"))
+			return new LogCommandBrightnessDisable();
+		return null;		
+	} 
 	
 	public void addLogCommandRule(LogRule rule){
 		if(rule != null)
 			this.rules.add(rule);
-	}
-	
-	public LogCommand getCommand(String key){
-		if(this.commands.containsKey(key))
-			return this.commands.get(key);
-		return null;
 	}
 	
 	public void newState(String key,String value){
@@ -108,8 +106,10 @@ public class LogCommandManager {
 		for(int i=0; i< this.rules.size() ; i++){
 			rule = this.rules.get(i);
 			commandKey = rule.getCommendKey();			
-			if(this.commands.containsKey(commandKey) && rule.validate()){			
-				this.commands.get(commandKey).execute();
+			if(rule.validate()){
+				LogCommand cmd = getCommand(commandKey);
+				if(cmd != null)
+				 cmd.execute();
 			}
 		}
 	}

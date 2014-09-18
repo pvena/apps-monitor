@@ -68,7 +68,6 @@
             this.prPRBS = new System.Windows.Forms.BindingSource(this.components);
             this.cbxValue = new System.Windows.Forms.ComboBox();
             this.prPVBS = new System.Windows.Forms.BindingSource(this.components);
-            this.txtCommand = new System.Windows.Forms.TextBox();
             this.dgvCommands = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +83,8 @@
             this.lblPhoneId = new System.Windows.Forms.Label();
             this.lblMaxLocation = new System.Windows.Forms.Label();
             this.lblLastProcess = new System.Windows.Forms.Label();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.cbxCommand = new System.Windows.Forms.ComboBox();
             this.tlp1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -284,7 +285,7 @@
             this.cbxUser.DataSource = this.userBindingSource;
             this.cbxUser.DisplayMember = "name";
             this.cbxUser.FormattingEnabled = true;
-            this.cbxUser.Location = new System.Drawing.Point(68, 8);
+            this.cbxUser.Location = new System.Drawing.Point(88, 9);
             this.cbxUser.Name = "cbxUser";
             this.cbxUser.Size = new System.Drawing.Size(277, 24);
             this.cbxUser.TabIndex = 13;
@@ -309,7 +310,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 135);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(586, 538);
+            this.tabControl1.Size = new System.Drawing.Size(769, 538);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 2;
             // 
@@ -404,27 +405,29 @@
             this.tabPage4.Controls.Add(this.tableLayoutPanel2);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(578, 509);
+            this.tabPage4.Size = new System.Drawing.Size(761, 509);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Commands";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.btnAdd, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnDel, 2, 5);
+            this.tableLayoutPanel2.Controls.Add(this.btnNew, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.dgvCommands, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.lblType, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblCommand, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.cbxType, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.cbxProperty, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.cbxValue, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtCommand, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.dgvCommands, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblCommand, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.btnAdd, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.btnDel, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.cbxCommand, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -435,7 +438,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(578, 509);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(761, 509);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // lblType
@@ -467,6 +470,7 @@
             // 
             // cbxType
             // 
+            this.tableLayoutPanel2.SetColumnSpan(this.cbxType, 2);
             this.cbxType.DataSource = this.prTypeBS;
             this.cbxType.DisplayMember = "Name";
             this.cbxType.FormattingEnabled = true;
@@ -482,6 +486,7 @@
             // 
             // cbxProperty
             // 
+            this.tableLayoutPanel2.SetColumnSpan(this.cbxProperty, 2);
             this.cbxProperty.DataSource = this.prPRBS;
             this.cbxProperty.DisplayMember = "Name";
             this.cbxProperty.FormattingEnabled = true;
@@ -497,6 +502,7 @@
             // 
             // cbxValue
             // 
+            this.tableLayoutPanel2.SetColumnSpan(this.cbxValue, 2);
             this.cbxValue.DataSource = this.prPVBS;
             this.cbxValue.DisplayMember = "value";
             this.cbxValue.FormattingEnabled = true;
@@ -509,13 +515,6 @@
             // 
             this.prPVBS.DataSource = typeof(LoginUseWebServiceTest.Property);
             // 
-            // txtCommand
-            // 
-            this.txtCommand.Location = new System.Drawing.Point(80, 93);
-            this.txtCommand.Name = "txtCommand";
-            this.txtCommand.Size = new System.Drawing.Size(382, 22);
-            this.txtCommand.TabIndex = 6;
-            // 
             // dgvCommands
             // 
             this.dgvCommands.AutoGenerateColumns = false;
@@ -525,15 +524,15 @@
             this.fId,
             this.nameDataGridViewTextBoxColumn1,
             this.valueDataGridViewTextBoxColumn});
-            this.tableLayoutPanel2.SetColumnSpan(this.dgvCommands, 2);
+            this.tableLayoutPanel2.SetColumnSpan(this.dgvCommands, 3);
             this.dgvCommands.DataSource = this.prCMBS;
             this.dgvCommands.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCommands.Location = new System.Drawing.Point(3, 121);
+            this.dgvCommands.Location = new System.Drawing.Point(3, 124);
             this.dgvCommands.Name = "dgvCommands";
             this.dgvCommands.RowHeadersVisible = false;
             this.dgvCommands.RowTemplate.Height = 24;
             this.dgvCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCommands.Size = new System.Drawing.Size(572, 339);
+            this.dgvCommands.Size = new System.Drawing.Size(755, 336);
             this.dgvCommands.TabIndex = 7;
             // 
             // id
@@ -582,7 +581,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(3, 466);
+            this.btnAdd.Location = new System.Drawing.Point(80, 466);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(62, 40);
             this.btnAdd.TabIndex = 9;
@@ -592,7 +591,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(80, 466);
+            this.btnDel.Location = new System.Drawing.Point(148, 466);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(60, 40);
             this.btnDel.TabIndex = 10;
@@ -624,14 +623,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(592, 676);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(775, 676);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
             // lblPhoneModel
             // 
             this.lblPhoneModel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhoneModel.AutoSize = true;
-            this.lblPhoneModel.Location = new System.Drawing.Point(351, 78);
+            this.lblPhoneModel.Location = new System.Drawing.Point(459, 78);
             this.lblPhoneModel.Name = "lblPhoneModel";
             this.lblPhoneModel.Size = new System.Drawing.Size(91, 17);
             this.lblPhoneModel.TabIndex = 16;
@@ -641,7 +640,7 @@
             // 
             this.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(68, 78);
+            this.lblVersion.Location = new System.Drawing.Point(88, 78);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(56, 17);
             this.lblVersion.TabIndex = 15;
@@ -651,7 +650,7 @@
             // 
             this.lblPhoneId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhoneId.AutoSize = true;
-            this.lblPhoneId.Location = new System.Drawing.Point(68, 48);
+            this.lblPhoneId.Location = new System.Drawing.Point(88, 48);
             this.lblPhoneId.Name = "lblPhoneId";
             this.lblPhoneId.Size = new System.Drawing.Size(60, 17);
             this.lblPhoneId.TabIndex = 14;
@@ -661,7 +660,7 @@
             // 
             this.lblMaxLocation.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblMaxLocation.AutoSize = true;
-            this.lblMaxLocation.Location = new System.Drawing.Point(68, 108);
+            this.lblMaxLocation.Location = new System.Drawing.Point(88, 108);
             this.lblMaxLocation.Name = "lblMaxLocation";
             this.lblMaxLocation.Size = new System.Drawing.Size(91, 17);
             this.lblMaxLocation.TabIndex = 17;
@@ -671,20 +670,46 @@
             // 
             this.lblLastProcess.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblLastProcess.AutoSize = true;
-            this.lblLastProcess.Location = new System.Drawing.Point(351, 108);
+            this.lblLastProcess.Location = new System.Drawing.Point(459, 108);
             this.lblLastProcess.Name = "lblLastProcess";
             this.lblLastProcess.Size = new System.Drawing.Size(90, 17);
             this.lblLastProcess.TabIndex = 18;
             this.lblLastProcess.Text = "Last Process";
             // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(3, 466);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(71, 38);
+            this.btnNew.TabIndex = 11;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // cbxCommand
+            // 
+            this.tableLayoutPanel2.SetColumnSpan(this.cbxCommand, 2);
+            this.cbxCommand.FormattingEnabled = true;
+            this.cbxCommand.Items.AddRange(new object[] {
+            "SynchLogFile\t\t",
+            "WifiEnabled",
+            "WifiDisabled",
+            "BlueToothEnabled",
+            "BlueToothDisabled",
+            "ConnectionEnabled",
+            "ConnectionDisabled",
+            "BrightnessDisabled"});
+            this.cbxCommand.Location = new System.Drawing.Point(80, 93);
+            this.cbxCommand.Name = "cbxCommand";
+            this.cbxCommand.Size = new System.Drawing.Size(382, 24);
+            this.cbxCommand.TabIndex = 12;
+            // 
             // frmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 676);
+            this.ClientSize = new System.Drawing.Size(775, 676);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(610, 721);
-            this.MinimumSize = new System.Drawing.Size(610, 721);
             this.Name = "frmTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebService Test";
@@ -754,7 +779,6 @@
         private System.Windows.Forms.ComboBox cbxType;
         private System.Windows.Forms.ComboBox cbxProperty;
         private System.Windows.Forms.ComboBox cbxValue;
-        private System.Windows.Forms.TextBox txtCommand;
         private System.Windows.Forms.DataGridView dgvCommands;
         private System.Windows.Forms.Label lblCommand;
         private System.Windows.Forms.Button btnAdd;
@@ -767,6 +791,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fId;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.ComboBox cbxCommand;
     }
 }
 

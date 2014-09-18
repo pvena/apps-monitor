@@ -184,19 +184,19 @@ namespace LoginUseWebServiceTest
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if((cbxType.SelectedItem != null) && (cbxProperty.SelectedItem != null) && (this.cbxValue.SelectedItem != null) && !string.IsNullOrEmpty(txtCommand.Text))
+            if ((dgvCommands.CurrentRow != null) &&
+                (cbxType.SelectedItem != null) &&
+                (cbxProperty.SelectedItem != null) &&
+                (this.cbxValue.SelectedItem != null) &&
+                !string.IsNullOrEmpty(cbxCommand.Text))
             {
                 DBManager db = new DBManager();
                 Property type = (Property)cbxType.SelectedItem;
                 Property property = (Property)cbxProperty.SelectedItem;
                 Property value = (Property)cbxValue.SelectedItem;
-                if(dgvCommands.CurrentRow != null)
-                {
-                    Property command = (Property)dgvCommands.CurrentRow.DataBoundItem;
-                    db.InsertCommands(this.SelectedUser.phoneId,command.id,value.id,txtCommand.Text);
-                }   
-                else
-                    db.InsertCommands(this.SelectedUser.phoneId, -1, value.id, txtCommand.Text);            
+                Property command = (Property)dgvCommands.CurrentRow.DataBoundItem;
+                db.InsertCommands(this.SelectedUser.phoneId, command.id, value.id, cbxCommand.Text);
+
             }
             this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
         }
@@ -208,6 +208,22 @@ namespace LoginUseWebServiceTest
                 DBManager db = new DBManager();
                 Property command = (Property)dgvCommands.CurrentRow.DataBoundItem;
                 db.deleteCommands(this.SelectedUser.phoneId, command.id, command.fId);
+            }
+            this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            if ((cbxType.SelectedItem != null) && 
+                (cbxProperty.SelectedItem != null) && 
+                (this.cbxValue.SelectedItem != null) && 
+                !string.IsNullOrEmpty(cbxCommand.Text))
+            {
+                DBManager db = new DBManager();
+                Property type = (Property)cbxType.SelectedItem;
+                Property property = (Property)cbxProperty.SelectedItem;
+                Property value = (Property)cbxValue.SelectedItem;
+                db.InsertCommands(this.SelectedUser.phoneId, -1, value.id, cbxCommand.Text);
             }
             this.dgvCommands.DataSource = new DBObjectProvider().getCommands(this.SelectedUser.phoneId);
         }
