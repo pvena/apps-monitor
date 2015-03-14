@@ -18,8 +18,8 @@ import com.example.loginuse.receivers.HeadsetPlugReceiver;
 import com.example.loginuse.receivers.RingerReceiver;
 import com.example.loginuse.receivers.WifiReceiver;
 
-public class MyService extends Service  {
-	private static final String TAG = "MyService";
+public class LogService extends Service  {
+	private static final String TAG = "LogService";
 		
 	public static final int id = 1234;
 	
@@ -79,7 +79,7 @@ public class MyService extends Service  {
 		
 		
 		//The intent to launch when the user clicks the expanded notification
-		Intent intenta = new Intent(this, MyService.class);
+		Intent intenta = new Intent(this, LogService.class);
 		intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent pendIntent = PendingIntent.getActivity(this, 0, intenta, 0);
 

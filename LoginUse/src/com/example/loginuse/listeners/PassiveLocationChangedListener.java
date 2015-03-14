@@ -10,7 +10,6 @@ import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.location.LogLocationGroup;
 import com.example.loginuse.location.LogLocationManager;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 import com.example.loginuse.receivers.GeneralLoggingReceiver;
 
 /**
@@ -19,13 +18,11 @@ import com.example.loginuse.receivers.GeneralLoggingReceiver;
  */
 public class PassiveLocationChangedListener extends GeneralLoggingReceiver implements FusedLocationListener.LocationListener{
 	
-	private static String lastLog; 
-	
 	private FusedLocationListener locationListener;
 	
 	@Override
 	public void initialize() {
-		
+		super.logType = LogConstants.LOCATION_STATE_TAG;
 		locationListener = FusedLocationListener.getInstance(LogConfiguration.getInstance().getContext(), this);             
 
 	    locationListener.start();
@@ -72,14 +69,11 @@ public class PassiveLocationChangedListener extends GeneralLoggingReceiver imple
 		else
 			l.addPropertyOnlyCommandManager(LogConstants.LOCATIONGROUP, "-");
 		
-		if(!l.getMessage().equals(lastLog)){
-			LogSave.getInstance().saveData(l);
-			lastLog = l.getMessage();
-		}
+		super.save(l);
 	}
 	
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent,LogLine l) {
 		
 	}
 	

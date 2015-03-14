@@ -48,27 +48,27 @@ public class LogLine {
 	public void addProperty(String property,String value){
 		String val = LogFormat.getValue(value).replace("&", "");
 		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type + "-" + property, val);
+		LogCommandManager.getInstance().newState(this.type, property, val);
 	}
 	public void addProperty(String property,int value){
 		String val = LogFormat.getValue(value);
 		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type + "-" + property, val);
+		LogCommandManager.getInstance().newState(this.type, property, val);
 		
 	}
 	public void addProperty(String property,double value){
 		String val = LogFormat.getValue(value);
 		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type + "-" + property, val);
+		LogCommandManager.getInstance().newState(this.type, property, val);
 	}
 	public void addProperty(String property,boolean value){
 		String val = LogFormat.getValue(value);
 		this.message += LogFormat.getLog(property, value);		
-		LogCommandManager.getInstance().newState(this.type + "-" + property, val);
+		LogCommandManager.getInstance().newState(this.type, property, val);
 	}	
 	
 	public void addPropertyOnlyCommandManager(String property,String value){	
 		
-		LogCommandManager.getInstance().newState(this.type + "-" + property, LogFormat.getValue(value));
+		LogCommandManager.getInstance().newState(this.type, property, LogFormat.getValue(value));
 	}
 }

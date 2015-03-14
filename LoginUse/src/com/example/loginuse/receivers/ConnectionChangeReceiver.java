@@ -9,7 +9,6 @@ import android.util.Log;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 
 /**
  * Broadcast receiver used to hear and log connection state changes
@@ -17,14 +16,13 @@ import com.example.loginuse.log.LogSave;
  */
 public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	
-	private static String lastLog;
 	/**
 	 * Creator
 	 */
 	public ConnectionChangeReceiver(){
 		super();
 		super.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-	
+		super.logType = LogConstants.CONNECTION_STATE_TAG;
 	}
 
 	@Override
@@ -42,11 +40,9 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent,LogLine l) {
 		try
 		{			
-			LogLine l = new LogLine(LogConstants.CONNECTION_STATE_TAG);
-			
 			ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
 			
@@ -55,11 +51,6 @@ public class ConnectionChangeReceiver extends GeneralLoggingReceiver {
 								netInfo.isConnectedOrConnecting());
 			
 			l.addProperty(LogConstants.STATE, enable);//DATA TRANSMISSION CONNECTED (3G/GSM)
-			
-			if(!l.getMessage().equals(lastLog)){
-				LogSave.getInstance().saveData(l);
-				lastLog = l.getMessage();
-			}
 		}
 		catch(Exception e)
 		{

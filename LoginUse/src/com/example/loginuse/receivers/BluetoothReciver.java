@@ -10,22 +10,19 @@ import android.util.Log;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 
 /**
  * Broadcast receiver used to hear and log bluetooth status changes
  *
  */
 public class BluetoothReciver extends GeneralLoggingReceiver {
-	
-	private static String lastLog;
-	
 	/**
 	 * Creator
 	 */
 	public BluetoothReciver(){
 		
 		filter = new IntentFilter();
+		this.logType = LogConstants.BLUETOOTH_STATE_TAG;
 		this.filter.addAction(BluetoothDevice.ACTION_FOUND);
 		this.filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
 	}
@@ -45,11 +42,10 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent,LogLine l) {
 		try
 		{
-			String action = intent.getAction();
-			LogLine l = new LogLine(LogConstants.BLUETOOTH_STATE_TAG);	
+			String action = intent.getAction();				
 	        // When discovery finds a device
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 		        // Get the BluetoothDevice object from the Intent
@@ -94,12 +90,7 @@ public class BluetoothReciver extends GeneralLoggingReceiver {
 				l.addProperty(LogConstants.ADDRESS, "-");
 				l.addProperty(LogConstants.STATE, false);
 				l.addProperty(LogConstants.TSTATE, false);
-			}
-			if(!l.getMessage().equals(lastLog))
-			{
-				LogSave.getInstance().saveData(l);
-				lastLog = l.getMessage();
-			}
+			}			
 		}
 		catch(Exception e){ Log.e("ERROR", "Bluetooth-LOG"); }
 	}

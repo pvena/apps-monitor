@@ -13,18 +13,12 @@ import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 
 public class WifiReceiver extends GeneralLoggingReceiver  {
 	
-	/**
-	 * Creator
-	 */
-	private static String lastLog;
-	
 	public WifiReceiver(){
-		
-		filter = new IntentFilter();
+		super.logType = LogConstants.WIFI_STATE_TAG;
+		super.filter = new IntentFilter();
 		
 		this.filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
 	}
@@ -44,29 +38,24 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent, LogLine l) {
 		try
 		{
 			NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 			if(networkInfo.getType() == ConnectivityManager. TYPE_WIFI){
-				LogLine l = this.getWifiConnection(context,intent);
-				if(!l.getMessage().equals(lastLog))
-				{
-					LogSave.getInstance().saveData(l);
-					lastLog = l.getMessage();
-				}
+				this.getWifiConnection(context,intent,l);				
 			}			
 		}
 		catch(Exception e){ Log.e("ERROR", "WIFI-LOG"); }
 	}
 	
-	private LogLine getWifiConnection(Context context, Intent intent)
+	private LogLine getWifiConnection(Context context, Intent intent, LogLine l)
 	{		
 		if(intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
 		    NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
 		    WifiManager wifiManager = (WifiManager)LogConfiguration.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
 		    WifiInfo wifiInfo = intent.getParcelableExtra("wifiInfo");
-		    return getNetInfo(wifiInfo,wifiManager.isWifiEnabled(),networkInfo.isConnected());		    
+		    return getNetInfo(wifiInfo,wifiManager.isWifiEnabled(),networkInfo.isConnected(),l);		    
 		} 
 		return null;
 	}
@@ -77,9 +66,7 @@ public class WifiReceiver extends GeneralLoggingReceiver  {
 	 * @param wifiInfo
 	 * @return
 	 */
-	private LogLine getNetInfo(WifiInfo wifiInfo,boolean state,boolean connected){
-		LogLine l = new LogLine(LogConstants.WIFI_STATE_TAG);
-		
+	private LogLine getNetInfo(WifiInfo wifiInfo,boolean state,boolean connected,LogLine l){		
 		l.addProperty(LogConstants.STATE, state);
 		
 		String SSID = (connected)?LogFormat.getValue(wifiInfo.getSSID()):"-";

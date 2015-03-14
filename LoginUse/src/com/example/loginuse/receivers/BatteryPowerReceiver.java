@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.log.LogLine;
 
 public class BatteryPowerReceiver extends GeneralLoggingReceiver {
 	/**
@@ -33,6 +34,6 @@ public class BatteryPowerReceiver extends GeneralLoggingReceiver {
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {}
+	public void logEvent(Context context, Intent intent,LogLine l) {}
 
 }

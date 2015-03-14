@@ -134,7 +134,7 @@ public class ConfigActivity  extends Activity{
 	}	
 	
 	public void restartServiceOnClick(){
-		startService(new Intent(this,  MyService.class));	
+		startService(new Intent(this,  LogService.class));	
 	}
 }
 

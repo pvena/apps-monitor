@@ -73,8 +73,8 @@ public class LogCommandManager {
 			this.rules.add(rule);
 	}
 	
-	public void newState(String key,String value){
-		this.lastLogState.put(key, value);		
+	public void newState(String type, String property,String value){
+		this.lastLogState.put(type + "-" + property, value);
 	}
 	
 	public ArrayList<String> getCurrentStates(){

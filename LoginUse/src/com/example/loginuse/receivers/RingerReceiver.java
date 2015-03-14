@@ -3,7 +3,6 @@ package com.example.loginuse.receivers;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +12,9 @@ import android.util.Log;
 
 public class RingerReceiver extends GeneralLoggingReceiver{
 
-	private static String lastLog;
-	
 	public RingerReceiver (){
-		filter = new IntentFilter();
+		super.logType = LogConstants.RINGER_STATE_TAG;
+		super.filter = new IntentFilter();
 		this.filter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
 	}
 	
@@ -35,10 +33,9 @@ public class RingerReceiver extends GeneralLoggingReceiver{
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent, LogLine l) {
 		try
 		{
-			LogLine l = new LogLine(LogConstants.RINGER_STATE_TAG);
 			AudioManager am = (AudioManager)LogConfiguration.getInstance().getContext().getSystemService(Context.AUDIO_SERVICE);
 
 			switch (am.getRingerMode()) {
@@ -54,12 +51,7 @@ public class RingerReceiver extends GeneralLoggingReceiver{
 					l.addProperty(LogConstants.STATE, true);
 					l.addProperty(LogConstants.MODE, "NORMAL");
 					break;
-			}			
-			
-			if(!l.getMessage().equals(lastLog)){							
-				LogSave.getInstance().saveData(l);
-				lastLog = l.getMessage();
-			}
+			}	
 		}
 		catch(Exception e){ Log.e("ERROR", "RINGER-LOG"); }
 	}

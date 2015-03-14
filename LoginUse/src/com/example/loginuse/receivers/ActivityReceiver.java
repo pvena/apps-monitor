@@ -2,6 +2,7 @@ package com.example.loginuse.receivers;
 
 
 import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.log.LogLine;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +10,7 @@ import android.content.Intent;
 public class ActivityReceiver extends GeneralLoggingReceiver {
 
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent,LogLine l) {
 		
 	}
 

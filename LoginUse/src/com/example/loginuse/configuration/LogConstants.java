@@ -98,13 +98,12 @@ public class LogConstants {
 	public static String FILEDATEFORMAT = "yyyyMMdd";	
 	
 	/*===================Log file Format=============================*/
-	public static String CATSEP1 = "[";
+	public static String CATEGORYFORMAT = "[@V@]&";
 	
-	public static String CATSEP2 = "]";
+	public static String PROPERTYFORMAT = "@P@::@V@|";
 	
-	public static String CATSEP = "&"; 	
+	public static String EXC = "|]&"; 
 	
-	public static String SEP = "::";
-	
-	public static String PSEP = "|";
+	public static String END = "]";
+
 }

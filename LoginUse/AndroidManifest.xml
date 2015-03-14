@@ -84,7 +84,7 @@
         </receiver>
 
         <service
-            android:name=".MyService"
+            android:name=".LogService"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="com.example.loginuse.MyService" />

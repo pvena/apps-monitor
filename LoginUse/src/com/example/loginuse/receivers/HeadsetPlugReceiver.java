@@ -8,18 +8,14 @@ import android.util.Log;
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 
 public class HeadsetPlugReceiver extends GeneralLoggingReceiver{
-	
-private static String lastLog;
-	
 	/**
 	 * Creator
 	 */
 	public HeadsetPlugReceiver(){
-		
-		filter = new IntentFilter();
+		super.logType = LogConstants.HEADSET_STATE_TAG;
+		super.filter = new IntentFilter();
 		this.filter.addAction(Intent.ACTION_HEADSET_PLUG);
 	}
 
@@ -38,10 +34,9 @@ private static String lastLog;
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent) {
+	public void logEvent(Context context, Intent intent, LogLine l) {
 		try
 		{
-			LogLine l = new LogLine(LogConstants.HEADSET_STATE_TAG);
 			if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
 	            int state = intent.getIntExtra("state", -1);
 	            switch (state) {
@@ -55,10 +50,6 @@ private static String lastLog;
 	            	l.addProperty(LogConstants.STATE, "-");
 	            }
 	        }
-			if(!l.getMessage().equals(lastLog)){
-				LogSave.getInstance().saveData(l);
-				lastLog = l.getMessage();
-			}
 		}
 		catch(Exception e){ Log.e("ERROR", "HEADSET-LOG"); }
 	}
