@@ -100,9 +100,9 @@ public class LogService extends Service  {
 	private void registerReceivers(){
 		this.connectionChangeReceiver.initialize();
 		this.bluetooth.initialize();
-		this.wifiReceiver.initialize();
+		this.wifiReceiver.initialize();		
+		this.locationListener.initialize();
 		this.activityReceiver.initialize();
-		this.locationListener.initialize();		
 		this.gpsChangeReceiver.initialize();
 		this.ringerReceiver.initialize();
 		this.headsetPlugReceiver.initialize();
