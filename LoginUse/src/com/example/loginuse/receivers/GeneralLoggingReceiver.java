@@ -53,7 +53,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		Enumeration<String> enumKey = properties.keys();		
 		while(enumKey.hasMoreElements()) {		    
 			property = enumKey.nextElement();
-		    value = properties.get(enumKey.nextElement());
+		    value = properties.get(property);
 		    LogCommandManager.getInstance().newState(l.getType(), property, value);
 		}			
 	}
@@ -67,13 +67,14 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		}
 	}
 	
-	private void save(LogLine l,String lastLog){
+	private String save(LogLine l,String lastLog){
 		if (!l.getMessage().equals(lastLog))
 		{
 			LogSave.getInstance().saveData(l);
 			this.setCommandState(l);
-			lastLog = l.getMessage();
+			return l.getMessage();
 		}
+		return lastLog;
 	}
 	
 	/**
@@ -90,7 +91,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		 * */
 		
 		LogLine l = BatteryStatusUtil.getBatteryStatusLine(context);
-		this.save(l, lastLogBattery);
+		lastLogBattery = this.save(l, lastLogBattery);
 		
 		/*
 		 * Set current day status in LogCommandManager

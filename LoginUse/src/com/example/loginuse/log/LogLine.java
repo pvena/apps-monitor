@@ -24,6 +24,7 @@ public class LogLine {
 	{		
 		this.message = "";
 		this.type = t;
+		this.properties = new Hashtable<String, String>();
 	}
 	public String getMessage()
 	{

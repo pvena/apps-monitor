@@ -42,7 +42,7 @@ public class LogFormat {
 	}
 	public static String getLogCategories(String value)	
 	{
-		return value.replaceFirst(LogConstants.EXC, LogConstants.END);
+		return value.replace(LogConstants.EXC, LogConstants.END);
 	}
 	public static int getTextViewInt(TextView tv){
 		return Integer.parseInt(tv.getText().toString());
