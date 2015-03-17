@@ -73,7 +73,6 @@ public class FusedLocationListener implements
 		Log.d(TAG, "Listener started");
 		locationClient = new LocationClient(mContext, this, this);
 		locationClient.connect();
-
 	}
 
 	@Override

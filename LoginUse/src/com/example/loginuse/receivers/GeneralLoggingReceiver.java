@@ -1,6 +1,8 @@
 package com.example.loginuse.receivers;
 
 import java.util.Calendar;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommandManager;
 import com.example.loginuse.configuration.LogConstants;
@@ -44,10 +46,32 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		return new LogLine(this.logType); 
 	}
 	
+	private void setCommandState(LogLine l){
+		String property = null;
+		String value = null;
+		Hashtable<String, String> properties = l.getProperties();
+		Enumeration<String> enumKey = properties.keys();		
+		while(enumKey.hasMoreElements()) {		    
+			property = enumKey.nextElement();
+		    value = properties.get(enumKey.nextElement());
+		    LogCommandManager.getInstance().newState(l.getType(), property, value);
+		}			
+	}
+	
 	protected void save(LogLine l){
+		if (!l.getMessage().equals(lastLog))
+		{			
+			LogSave.getInstance().saveData(l);
+			this.setCommandState(l);
+			lastLog = l.getMessage();
+		}
+	}
+	
+	private void save(LogLine l,String lastLog){
 		if (!l.getMessage().equals(lastLog))
 		{
 			LogSave.getInstance().saveData(l);
+			this.setCommandState(l);
 			lastLog = l.getMessage();
 		}
 	}
@@ -65,12 +89,8 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		 * Set current Battery Status in LogFile and LogCommandManager
 		 * */
 		
-		LogLine l = BatteryStatusUtil.getBatteryStatusLine(context);		
-		if (!l.getMessage().equals(lastLogBattery))
-		{
-			LogSave.getInstance().saveData(l);
-			lastLogBattery = l.getMessage();
-		}
+		LogLine l = BatteryStatusUtil.getBatteryStatusLine(context);
+		this.save(l, lastLogBattery);
 		
 		/*
 		 * Set current day status in LogCommandManager

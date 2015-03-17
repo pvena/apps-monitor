@@ -2,8 +2,7 @@ package com.example.loginuse.log;
 
 //import android.annotation.SuppressLint;
 import java.util.Date;
-
-import com.example.loginuse.command.LogCommandManager;
+import java.util.Hashtable;
 import com.example.loginuse.configuration.LogConstants;
 
 import android.text.format.DateFormat;
@@ -13,11 +12,13 @@ public class LogLine {
 	
 	private String message;
 	private String type;
+	private Hashtable<String, String> properties;
 	
 	public LogLine (String mess, String t)
 	{
 		this.message = mess;
 		this.type = t;
+		this.properties = new Hashtable<String, String>();
 	}
 	public LogLine (String t)
 	{		
@@ -32,6 +33,10 @@ public class LogLine {
 	{
 		return this.type;
 	}
+	public Hashtable<String, String> getProperties(){
+		return this.properties;
+	}
+	
 	/**
 	 * @return
 	 */
@@ -47,28 +52,23 @@ public class LogLine {
 	
 	public void addProperty(String property,String value){
 		String val = LogFormat.getValue(value).replace("&", "");
-		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type, property, val);
+		this.message += LogFormat.getLog(property, val);
+		this.properties.put(property, val);
 	}
 	public void addProperty(String property,int value){
 		String val = LogFormat.getValue(value);
-		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type, property, val);
+		this.message += LogFormat.getLog(property, val);
+		this.properties.put(property, val);
 		
 	}
 	public void addProperty(String property,double value){
 		String val = LogFormat.getValue(value);
-		this.message += LogFormat.getLog(property, val);		
-		LogCommandManager.getInstance().newState(this.type, property, val);
+		this.message += LogFormat.getLog(property, val);
+		this.properties.put(property, val);
 	}
 	public void addProperty(String property,boolean value){
 		String val = LogFormat.getValue(value);
-		this.message += LogFormat.getLog(property, value);		
-		LogCommandManager.getInstance().newState(this.type, property, val);
-	}	
-	
-	public void addPropertyOnlyCommandManager(String property,String value){	
-		
-		LogCommandManager.getInstance().newState(this.type, property, LogFormat.getValue(value));
+		this.message += LogFormat.getLog(property, value);
+		this.properties.put(property, val);
 	}
 }

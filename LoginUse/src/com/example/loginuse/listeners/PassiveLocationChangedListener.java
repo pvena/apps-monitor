@@ -64,10 +64,12 @@ public class PassiveLocationChangedListener extends GeneralLoggingReceiver imple
 		
 		LogLocationGroup group = LogLocationManager.getInstance().getBoundingGroup(location);
 		
-		if(group != null)
-			l.addPropertyOnlyCommandManager(LogConstants.LOCATIONGROUP, group.getName());
-		else
-			l.addPropertyOnlyCommandManager(LogConstants.LOCATIONGROUP, "-");
+		if(group != null){
+			l.addProperty(LogConstants.LOCATIONGROUP, group.getName());
+		}
+		else{
+			l.addProperty(LogConstants.LOCATIONGROUP, "-");
+		}
 		
 		super.save(l);
 	}

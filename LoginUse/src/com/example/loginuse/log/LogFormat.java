@@ -8,7 +8,6 @@ import java.util.Date;
 
 import android.text.format.DateFormat;
 import android.util.Base64;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.loginuse.configuration.LogConstants;
@@ -48,9 +47,7 @@ public class LogFormat {
 	public static int getTextViewInt(TextView tv){
 		return Integer.parseInt(tv.getText().toString());
 	}
-	public static boolean getCheckBoxBoolean(CheckBox cbx){
-		return cbx.isChecked();
-	}
+	
 	public static String getValue(Date value ){
 		return DateFormat.format(LogConstants.DATEFORMAT, value).toString();
 	}
