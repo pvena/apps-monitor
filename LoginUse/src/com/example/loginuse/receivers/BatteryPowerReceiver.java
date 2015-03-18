@@ -3,7 +3,9 @@ package com.example.loginuse.receivers;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+
 import com.example.loginuse.configuration.LogConfiguration;
+import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogLine;
 
 public class BatteryPowerReceiver extends GeneralLoggingReceiver {
@@ -14,7 +16,7 @@ public class BatteryPowerReceiver extends GeneralLoggingReceiver {
 	public BatteryPowerReceiver(){
 		
 		filter = new IntentFilter();
-		
+		super.logType = LogConstants.BATTERY_POWER_TAG;
 		this.filter.addAction(Intent.ACTION_POWER_CONNECTED);
 		this.filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
 	}
@@ -34,6 +36,7 @@ public class BatteryPowerReceiver extends GeneralLoggingReceiver {
 	 * @see com.example.loginuse.receivers.GeneralLoggingReceiver#logEvent(android.content.Context, android.content.Intent)
 	 */
 	@Override
-	public void logEvent(Context context, Intent intent,LogLine l) {}
+	public void logEvent(Context context, Intent intent,LogLine l) {
+	}
 
 }

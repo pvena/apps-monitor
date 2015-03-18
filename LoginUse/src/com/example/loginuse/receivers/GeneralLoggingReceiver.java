@@ -59,7 +59,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	}
 	
 	protected void save(LogLine l){
-		if (!l.getMessage().equals(lastLog))
+		if (l.hasData() && !l.getMessage().equals(lastLog))
 		{			
 			LogSave.getInstance().saveData(l);
 			this.setCommandState(l);
@@ -68,7 +68,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	}
 	
 	private String save(LogLine l,String lastLog){
-		if (!l.getMessage().equals(lastLog))
+		if (l.hasData() && !l.getMessage().equals(lastLog))
 		{
 			LogSave.getInstance().saveData(l);
 			this.setCommandState(l);
@@ -118,7 +118,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		this.logEvent(context, intent,this.line);		
 		this.save(this.line);
 		
-		LogCommandManager.getInstance().executeCommands();
+		LogCommandManager.getInstance().executeCommands();		
 	}
 	
 	/**

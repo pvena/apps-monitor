@@ -26,6 +26,10 @@ public class LogLine {
 		this.type = t;
 		this.properties = new Hashtable<String, String>();
 	}
+	
+	public boolean hasData(){
+		return this.properties.size() > 0;
+	}
 	public String getMessage()
 	{
 		return this.message;

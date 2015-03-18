@@ -41,7 +41,7 @@ public class ConfigActivity  extends Activity{
     }
 	
 	private void inicConfig(){
-		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://201.235.94.231:8080");
+		String webServiceURL = LogConfiguration.getInstance().getProperty(LogConfiguration.WebServiceURL, "http://190.247.240.225:8080");
 		String phoneId = LogConfiguration.getInstance().getPhoneId();
 		String userName = LogConfiguration.getInstance().getProperty(LogConfiguration.UserName, "");
 		

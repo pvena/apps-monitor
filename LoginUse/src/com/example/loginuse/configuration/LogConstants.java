@@ -25,6 +25,8 @@ public class LogConstants {
 	
 	public static String BATTERY_STATE_TAG = "BATTERY";
 	
+	public static String BATTERY_POWER_TAG = "POWER";
+	
 	public static String BLUETOOTH_STATE_TAG = "BLUETOOTH";
 	
 	public static String CONNECTION_STATE_TAG = "CONNECTION";
