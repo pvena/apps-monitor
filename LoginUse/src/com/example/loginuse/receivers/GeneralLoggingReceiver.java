@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommandManager;
+import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
@@ -23,8 +24,6 @@ import android.content.IntentFilter;
 public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	
 	protected IntentFilter filter;
-	private static String lastLogBattery;
-	private String lastLog;
 	private LogLine line;
 	protected String logType;
 	
@@ -46,35 +45,23 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		return new LogLine(this.logType); 
 	}
 	
-	private void setCommandState(LogLine l){
+	private void saveAndsetCommandState(LogLine l){
+		boolean change = false;
 		String property = null;
 		String value = null;
 		Hashtable<String, String> properties = l.getProperties();
 		Enumeration<String> enumKey = properties.keys();		
 		while(enumKey.hasMoreElements()) {		    
 			property = enumKey.nextElement();
-		    value = properties.get(property);
-		    LogCommandManager.getInstance().newState(l.getType(), property, value);
-		}			
+		    value = properties.get(property);		    
+		    change |= LogCommandManager.getInstance().newState(l.getType(), property, value);
+		}	
+		if(change)
+			LogSave.getInstance().saveData(l);
 	}
 	
 	protected void save(LogLine l){
-		if (l.hasData() && !l.getMessage().equals(lastLog))
-		{			
-			LogSave.getInstance().saveData(l);
-			this.setCommandState(l);
-			lastLog = l.getMessage();
-		}
-	}
-	
-	private String save(LogLine l,String lastLog){
-		if (l.hasData() && !l.getMessage().equals(lastLog))
-		{
-			LogSave.getInstance().saveData(l);
-			this.setCommandState(l);
-			return l.getMessage();
-		}
-		return lastLog;
+		this.saveAndsetCommandState(l);
 	}
 	
 	/**
@@ -90,12 +77,12 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		 * Set current Battery Status in LogFile and LogCommandManager
 		 * */
 		
-		LogLine l = BatteryStatusUtil.getBatteryStatusLine(context);
-		lastLogBattery = this.save(l, lastLogBattery);
+		Intent i = new Intent();
+		i.setAction("RecognitionActivity");
+		i.putExtra(LogConstants.ACTIVITY,"Pepe");
+		LogConfiguration.getInstance().getContext().sendBroadcast(i);
 		
-		/*
-		 * Set current day status in LogCommandManager
-		 * */
+		this.saveAndsetCommandState(BatteryStatusUtil.getBatteryStatusLine(context));
 		
 		Calendar c = Calendar.getInstance();
 		
@@ -115,8 +102,8 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {		
 		this.setGlobalStatus(context);		
 		this.line = new LogLine(this.logType);
-		this.logEvent(context, intent,this.line);		
-		this.save(this.line);
+		this.logEvent(context, intent,this.line);
+		this.saveAndsetCommandState(this.line);
 		
 		LogCommandManager.getInstance().executeCommands();		
 	}

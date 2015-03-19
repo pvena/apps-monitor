@@ -72,11 +72,10 @@ public class LogService extends Service  {
 		this.gpsChangeReceiver = new GpsChangeReceiver();
 		this.ringerReceiver = new RingerReceiver();
 		this.headsetPlugReceiver = new HeadsetPlugReceiver();
-		this.batteryPowerReceiver = new BatteryPowerReceiver();
+		this.batteryPowerReceiver = new BatteryPowerReceiver();		
 		
 		//Register all receivers
-		registerReceivers();
-		
+		registerReceivers();		
 		
 		//The intent to launch when the user clicks the expanded notification
 		Intent intenta = new Intent(this, LogService.class);

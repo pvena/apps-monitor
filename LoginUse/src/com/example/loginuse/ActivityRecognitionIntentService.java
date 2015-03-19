@@ -5,14 +5,10 @@ import android.content.Intent;
 
 import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
-import com.example.loginuse.log.LogLine;
-import com.example.loginuse.log.LogSave;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 public class ActivityRecognitionIntentService extends IntentService {
-	
-	private static String lastLog;
 	
 	public ActivityRecognitionIntentService() {
 		super("NoName");
@@ -38,16 +34,13 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 			int activityType = mostProbableActivity.getType();
 
-			String activityName = this.getCurrentActionInfo(activityType);
+			String activityName = this.getCurrentActionInfo(activityType);			
 			
-			LogLine l = new LogLine(LogConstants.CURRENTACTIVITY_TAG);
-			
-			l.addProperty(LogConstants.ACTIVITY,activityName);
-			
-			if(!l.getMessage().equals(lastLog) && confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
+			if(confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
 			{
-				LogSave.getInstance().saveData(l);
-				lastLog = l.getMessage();
+				Intent i = new Intent();
+				i.putExtra(LogConstants.ACTIVITY,activityName);
+				LogConfiguration.getInstance().getContext().startActivity(i);
 			}
 		} else {
 
