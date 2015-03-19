@@ -39,6 +39,7 @@ public class ActivityRecognitionIntentService extends IntentService {
 			if(confidence > LogConfiguration.getInstance().getProperty(LogConfiguration.ACTIVITYMINCCONFIDENCE, 80))
 			{
 				Intent i = new Intent();
+				i.setAction("RecognitionActivity");
 				i.putExtra(LogConstants.ACTIVITY,activityName);
 				LogConfiguration.getInstance().getContext().startActivity(i);
 			}

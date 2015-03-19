@@ -5,7 +5,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.example.loginuse.command.LogCommandManager;
-import com.example.loginuse.configuration.LogConfiguration;
 import com.example.loginuse.configuration.LogConstants;
 import com.example.loginuse.log.LogFormat;
 import com.example.loginuse.log.LogLine;
@@ -76,11 +75,6 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		/*
 		 * Set current Battery Status in LogFile and LogCommandManager
 		 * */
-		
-		Intent i = new Intent();
-		i.setAction("RecognitionActivity");
-		i.putExtra(LogConstants.ACTIVITY,"Pepe");
-		LogConfiguration.getInstance().getContext().sendBroadcast(i);
 		
 		this.saveAndsetCommandState(BatteryStatusUtil.getBatteryStatusLine(context));
 		
