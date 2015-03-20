@@ -53,7 +53,7 @@ public class LogService extends Service  {
 		stopForeground(true);
 		//restart the service
 		Intent serviceIntent = new Intent();
-	    serviceIntent.setAction("com.example.loginuse.MyService");
+	    serviceIntent.setAction("com.example.loginuse.LogService");
 	    startService(serviceIntent);
 
 	}
