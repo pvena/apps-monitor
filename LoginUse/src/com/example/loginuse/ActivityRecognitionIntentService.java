@@ -40,6 +40,7 @@ public class ActivityRecognitionIntentService extends IntentService {
 			{
 				Intent i = new Intent();
 				i.setAction("RecognitionActivity");
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.putExtra(LogConstants.ACTIVITY,activityName);
 				LogConfiguration.getInstance().getContext().startActivity(i);
 			}
