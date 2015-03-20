@@ -1,9 +1,0 @@
-KeyStore pass: tesisdepoloypablo
-
-Modificar en App en el calular.
-URL WebService APP android: http://201.235.94.231:8080
-
-
-Modificar en App.config.
-URL WebService APP CSV : http://201.235.94.231:8080/LoginUse.asmx 
-

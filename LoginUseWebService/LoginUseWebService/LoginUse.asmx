@@ -1,1 +1,0 @@
-﻿<%@ WebService Language="C#" CodeBehind="LoginUse.asmx.cs" Class="LoginUseWebService.LoginUse" %>

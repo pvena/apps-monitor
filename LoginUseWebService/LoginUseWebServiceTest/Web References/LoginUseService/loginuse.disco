@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://localhost:50011/LoginUseWebService/LoginUse.asmx?wsdl" docRef="http://localhost:50011/LoginUseWebService/LoginUse.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://localhost:50011/LoginUseWebService/LoginUse.asmx" xmlns:q1="http://tesis.org/" binding="q1:LoginUseSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://localhost:50011/LoginUseWebService/LoginUse.asmx" xmlns:q2="http://tesis.org/" binding="q2:LoginUseSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>
