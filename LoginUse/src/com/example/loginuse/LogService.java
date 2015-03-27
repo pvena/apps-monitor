@@ -1,5 +1,7 @@
 package com.example.loginuse;
 
+import java.util.ArrayList;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,6 +15,7 @@ import com.example.loginuse.receivers.ActivityReceiver;
 import com.example.loginuse.receivers.BatteryPowerReceiver;
 import com.example.loginuse.receivers.BluetoothReciver;
 import com.example.loginuse.receivers.ConnectionChangeReceiver;
+import com.example.loginuse.receivers.GeneralLoggingReceiver;
 import com.example.loginuse.receivers.GpsChangeReceiver;
 import com.example.loginuse.receivers.HeadsetPlugReceiver;
 import com.example.loginuse.receivers.RingerReceiver;
@@ -23,15 +26,7 @@ public class LogService extends Service  {
 		
 	public static final int id = 1234;
 	
-	private ConnectionChangeReceiver connectionChangeReceiver;
-	private WifiReceiver wifiReceiver;
-	private BluetoothReciver bluetooth;	
-	private PassiveLocationChangedListener locationListener;
-	private ActivityReceiver activityReceiver;
-	private GpsChangeReceiver gpsChangeReceiver;
-	private RingerReceiver ringerReceiver;
-	private HeadsetPlugReceiver headsetPlugReceiver;
-	private BatteryPowerReceiver batteryPowerReceiver;
+	private ArrayList<GeneralLoggingReceiver> receivers;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -41,6 +36,7 @@ public class LogService extends Service  {
 	@Override
 	public void onCreate() {		
 		LogConfiguration.getInstance().setContext(this);
+		this.receivers = new ArrayList<GeneralLoggingReceiver>();
 		Log.d(TAG, "onCreate");
 	}
 
@@ -64,16 +60,16 @@ public class LogService extends Service  {
 		Log.d(TAG, "onStartCommand");
 		
 		//Initializing receivers
-		this.connectionChangeReceiver = new ConnectionChangeReceiver();
-		this.wifiReceiver = new WifiReceiver();
-		this.bluetooth = new BluetoothReciver();
-		this.locationListener = new PassiveLocationChangedListener();
-		this.activityReceiver = new ActivityReceiver();
-		this.gpsChangeReceiver = new GpsChangeReceiver();
-		this.ringerReceiver = new RingerReceiver();
-		this.headsetPlugReceiver = new HeadsetPlugReceiver();
-		this.batteryPowerReceiver = new BatteryPowerReceiver();		
-		
+		this.receivers.add(new ConnectionChangeReceiver());
+		this.receivers.add(new WifiReceiver());
+		this.receivers.add(new BluetoothReciver());
+		this.receivers.add(new PassiveLocationChangedListener());
+		this.receivers.add(new ActivityReceiver());
+		this.receivers.add(new GpsChangeReceiver());
+		this.receivers.add(new RingerReceiver());
+		this.receivers.add(new HeadsetPlugReceiver());
+		this.receivers.add(new BatteryPowerReceiver());
+
 		//Register all receivers
 		registerReceivers();		
 		
@@ -97,29 +93,15 @@ public class LogService extends Service  {
 	 * Register receivers
 	 */
 	private void registerReceivers(){
-		this.connectionChangeReceiver.initialize();
-		this.bluetooth.initialize();
-		this.wifiReceiver.initialize();		
-		this.locationListener.initialize();
-		this.activityReceiver.initialize();
-		this.gpsChangeReceiver.initialize();
-		this.ringerReceiver.initialize();
-		this.headsetPlugReceiver.initialize();
-		this.batteryPowerReceiver.initialize();
+		for(int i=0;i<this.receivers.size();i++)
+			this.receivers.get(i).initialize();
 	}
 	
 	/**
 	 * Unregister receivers
 	 */
 	private void unRegisterReceivers(){
-		this.connectionChangeReceiver.finalize();
-		this.bluetooth.finalize();
-		this.wifiReceiver.finalize();
-		this.locationListener.finalize();		
-		this.activityReceiver.finalize();
-		this.gpsChangeReceiver.finalize();
-		this.ringerReceiver.finalize();
-		this.headsetPlugReceiver.finalize();
-		this.batteryPowerReceiver.finalize();
+		for(int i=0;i<this.receivers.size();i++)
+			this.receivers.get(i).initialize();
 	}
 }

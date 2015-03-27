@@ -32,23 +32,8 @@ public class LogCommandManager {
 	public void reload(){
 		this.buildRules();
 	}
-	
-	/*	 
-	 * Create default rules for the App.
-	 */
-	private void buildRules(){
-		this.rules = new ArrayList<LogRule>();		
-		LogRule rule = null;				
-		Hashtable<String,LogRule> rules = LogRuleManager.getInstance().getRules();
-		Enumeration<String> enumKey = rules.keys();
-		while(enumKey.hasMoreElements()) {		    
-		    rule = rules.get(enumKey.nextElement());
-		    this.rules.add(rule);
-		}
-	}	
-
-	
-	public LogCommand getCommand(String key){		
+		
+	public LogCommand getCommand(String key){
 		if(key.equals("SynchLogFile"))		
 			return new LogCommandSynchronize();
 		if(key.equals("WifiEnabled"))
@@ -67,6 +52,17 @@ public class LogCommandManager {
 			return new LogCommandBrightnessDisable();
 		return null;		
 	} 
+	
+	private void buildRules(){
+		this.rules = new ArrayList<LogRule>();		
+		LogRule rule = null;				
+		Hashtable<String,LogRule> rules = LogRuleManager.getInstance().getRules();
+		Enumeration<String> enumKey = rules.keys();
+		while(enumKey.hasMoreElements()) {		    
+		    rule = rules.get(enumKey.nextElement());
+		    this.rules.add(rule);
+		}
+	}	
 	
 	public void addLogCommandRule(LogRule rule){
 		if(rule != null)

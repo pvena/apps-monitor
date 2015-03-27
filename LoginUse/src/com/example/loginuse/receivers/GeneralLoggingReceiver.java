@@ -40,7 +40,31 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		return filter;
 	}
 	
-	protected LogLine getLogLine(){
+	/**
+	 * @param String action a new Intent action to match against.
+	 */
+	public void addAction(String action){
+		filter.addAction(action);
+	}
+	
+	/**
+	 * Log the incoming events 
+	 */
+	@Override
+	public void onReceive(Context context, Intent intent) {		
+		this.setGlobalStatus(context);		
+		this.line = this.getLogLine();
+		this.logEvent(context, intent,this.line);
+		this.saveAndsetCommandState(this.line);
+		
+		LogCommandManager.getInstance().executeCommands();		
+	}
+	
+	protected void save(LogLine l){
+		this.saveAndsetCommandState(l);
+	}
+	
+	private LogLine getLogLine(){
 		return new LogLine(this.logType); 
 	}
 	
@@ -59,19 +83,7 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 			LogSave.getInstance().saveData(l);
 	}
 	
-	protected void save(LogLine l){
-		this.saveAndsetCommandState(l);
-	}
-	
-	/**
-	 * @param String action a new Intent action to match against.
-	 */
-	public void addAction(String action){
-		filter.addAction(action);
-	}
-
-	private void setGlobalStatus(Context context){
-		
+	private void setGlobalStatus(Context context){		
 		/*
 		 * Set current Battery Status in LogFile and LogCommandManager
 		 * */
@@ -87,19 +99,6 @@ public abstract class GeneralLoggingReceiver extends BroadcastReceiver {
 		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG, LogConstants.HOUR, LogFormat.getValue(hour));
 		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG, LogConstants.QUARTER, LogFormat.getValue(quarter));
 		LogCommandManager.getInstance().newState(LogConstants.CURRENTDATE_TAG, LogConstants.ISWEEKDAY, LogFormat.getValue(isWeekDay));
-	}
-	
-	/**
-	 * Log the incoming events 
-	 */
-	@Override
-	public void onReceive(Context context, Intent intent) {		
-		this.setGlobalStatus(context);		
-		this.line = new LogLine(this.logType);
-		this.logEvent(context, intent,this.line);
-		this.saveAndsetCommandState(this.line);
-		
-		LogCommandManager.getInstance().executeCommands();		
 	}
 	
 	/**
