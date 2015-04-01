@@ -75,42 +75,850 @@ name "chap:Trabajos-relacionados"
 \end_layout
 
 \begin_layout Standard
-Contar un poco el 
-\begin_inset ERT
+Con el crecimiento de las redes y los servicios, los dispositivos móviles
+ se han convertido en herramientas casi indispensables en la vida de las
+ personas.
+ Sin embargo, el corto tiempo de duración de sus baterías es uno de los
+ factores que mayor inconvenientes ocasiona o reduce su utilidad.
+ Por este motivo es necesario encontrar mecanismos que ayuden a prolongar
+ la vida útil de las baterías y uno de estos mecanismos es reduciendo el
+ consumo.
+ A continuación se explican diferentes propuestas para abordar esta problemática.
+\end_layout
+
+\begin_layout Section
+Predicción del consumo de bateria basado en patrones de uso
+\end_layout
+
+\begin_layout Standard
+La clave para minimizar el consumo de bateria esta en poder predecir, con
+ exactitud, el consumo en cada uno de los diferentes estados en los que
+ pueda operar el dispositivo.
+ Las predicciones acerca del tiempo de vida de la batería, generalmente,
+ se basan en estimaciones hechas por los fabricantes de baterías y dispositivos
+ móbiles, según ciertos experimentos que han realizado y mediante cálculos
+ aritméticos del consumo de energía.
+ Sin embargo, estos métodos son limitados, porque no tienen en cuenta patrones
+ de uso.
+ La cantidad de llamadas de voz realizadas, video llamadas, uso de internet,
+ etc, es algo propio de cada usuario.
+ Si se asume que los patrones de uso de cada usuario son diferentes y que
+ cada uno de estos patrones se mantiene con una base lógica similar en el
+ tiempo, se puede predecir el consumo de batería para cada uno de estos
+ patrones.
+\end_layout
+
+\begin_layout Subsection
+Suposiciones
+\end_layout
+
+\begin_layout Standard
+Para este método propuesto se asume lo siguiente:
+\end_layout
+
+\begin_layout Itemize
+el consumo de batería de los dispositivos se ve afectado por llamadas de
+ voz, videollamadas, uso de datos, mensajes de texto, LCD, aplicaciones,
+ musica y llamadas en espera
+\end_layout
+
+\begin_layout Itemize
+se pueden definir posibles estados en términos de las diferences operaciones
+ funcionales del dispositivo
+\end_layout
+
+\begin_layout Itemize
+el consumo promedio de bateria de cada estado es diferente
+\end_layout
+
+\begin_layout Itemize
+la probabilidad de duración de cada estado es diferente, debido a los diferentes
+ patrones de uso de cada usuario
+\end_layout
+
+\begin_layout Itemize
+si el patrón de uso de un usuario se hace repetitivo y consistente a lo
+ largo del tiempo, se puede utilizar 
+\emph on
+Zipf's law
+\emph default
+ para predecir el consumo de batería basándose en este patrón de uso
+\end_layout
+
+\begin_layout Subsection
+Definición del problema
+\end_layout
+
+\begin_layout Standard
+Se consideran los siguientes vectores:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B=(B1,...,Bn)(1)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $p=(p1,...,pn)(2)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $R=(R1,...,Rn)(3)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset Formula $R_{i}=p_{i}\centerdot B_{i}(4)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $B_{i}$
+\end_inset
+
+: promedio del consumo de bateria en el estado 
+\begin_inset Formula $n$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $p_{i}$
+\end_inset
+
+: tiempo insumido por el estado 
+\begin_inset Formula $n$
+\end_inset
+
+, teniendo en cuenta que 
+\begin_inset Formula $\sum_{i=1}^{n}pi=1$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $R_{i}$
+\end_inset
+
+: proporción de bateria consumida en el estado 
+\begin_inset Formula $i$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Entonces se puede predecir el tiempo de duración de la bateria en el estado
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ de la siguiente manera: 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $T=\frac{V}{\sum_{i=1}^{n}Ri}=\frac{V}{\sum_{i=1}^{n}pi\centerdot Bi}(5)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Donde 
+\begin_inset Formula $T$
+\end_inset
+
+ es el tiempo de duración predecido y 
+\begin_inset Formula $V$
+\end_inset
+
+ es el total de bateria.
+\end_layout
+
+\begin_layout Subsection
+Solución propuesta
+\end_layout
+
+\begin_layout Standard
+Desde el momento en el que se enciende el dispostitivo se comienza a almacenar
+ información, dejando registro en un log de porción de batería y el tiempo
+ consumido desde que se ingresa, hasta que se sale de un cierto estado.
+ Luego esta serie de datos es utilizada para poder medir consumos promedio
+ de batería (
+\begin_inset Formula $B$
+\end_inset
+
+) y patrones de uso (
+\begin_inset Formula $p$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Cada entrada del log se puede definir mediante el vector 
+\begin_inset Formula $D_{j}=(D_{j}^{1},D_{j}^{2},D_{j}^{3})$
+\end_inset
+
+, donde 
+\begin_inset Formula $D_{j}^{i}$
+\end_inset
+
+ son los datos almacenados en la entrada 
+\begin_inset Formula $j$
+\end_inset
+
+ para el estado 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ 
+\begin_inset Formula $D^{1}$
+\end_inset
+
+es un estado del dispositivo, 
+\begin_inset Formula $D^{2}$
+\end_inset
+
+es el nivel de bateria y 
+\begin_inset Formula $D^{3}$
+\end_inset
+
+es el tiempo insumido.
+ Entonces, utilizando la series de datos almacenados y partiendo de que
+ consideramos n estados posibles y m entradas en el log, se puede representar
+ con el vector 
+\begin_inset Formula $b=(b_{1},\ldots,b_{n})$
+\end_inset
+
+al total de bateria consumida en el estado 
+\begin_inset Formula $i$
+\end_inset
+
+, el cual se obtiene de sumar los 
+\begin_inset Formula $D^{2}$
+\end_inset
+
+de cada entrada del log para dicho estado.
+ De igual modo se puede representar el tiempo consumido por el vector 
+\begin_inset Formula $t=(t_{1},\ldots,t_{n})$
+\end_inset
+
+sumando los 
+\begin_inset Formula $D^{3}$
+\end_inset
+
+de cada entrada del log para el estado 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Por lo tanto, 
+\begin_inset Formula 
+\[
+b_{i}=\sum_{j=1}^{m}D_{j}^{2}\,(6)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+t_{i}=\sum_{j=1}^{m}D_{j}^{3}\,(7)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset Formula $D_{j}^{1}=i$
+\end_inset
+
+.
+ Entonces el consumo promedio y patrón de uso para cada usuario, utilizando
+ las ecuaciones 
+\begin_inset Formula $(6)$
+\end_inset
+
+ y 
+\begin_inset Formula $(7)$
+\end_inset
+
+ están definidos por 
+\begin_inset Formula $B_{i}=\frac{b_{i}}{t_{i}},$
+\end_inset
+
+
+\begin_inset Formula $p_{i}=\frac{t_{i}}{\sum_{i=1}^{n}t_{i}},$
+\end_inset
+
+donde 
+\begin_inset Formula $B_{i}$
+\end_inset
+
+es el consumo promedio de bateria en el estado 
+\begin_inset Formula $i$
+\end_inset
+
+ y 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ es la porción de tiempo insumida en el estado 
+\begin_inset Formula $i$
+\end_inset
+
+, teniendo en cuenta que 
+\begin_inset Formula $\sum_{i=1}^{n}p_{i}=1$
+\end_inset
+
+.
+ Este patrón de uso no solo representa el patron de uso en el pasado, sino
+ también la probabilidad de insumir tiempo en ese estado en un futuro.
+ Se pueden utilizar modelos de Holt-Winters
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Holt1957,Winters1960"
+
+\end_inset
+
+ para predecir patrones de uso basándose en la serie de datos recolectados.
+ Por lo tanto se puede calcular el tiempo remanente de vida de la batería
+ (
+\begin_inset Formula $T$
+\end_inset
+
+) utilizando la ecuación 
+\begin_inset Formula $(5)$
+\end_inset
+
+ con 
+\begin_inset Formula $B$
+\end_inset
+
+ y 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Potencial ahorro de energía delegando tareas a la
+\emph on
+ 
+\begin_inset Quotes eld
+\end_inset
+
+nube
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La idea principal de esta propuesta es delegar el procesamiento de tareas
+ computacionalmente costosas a la 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+nube
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+, en vez de hacerlo localmente.
+ Se realiza la siguiente suposición: la energía insumida en la transferencia
+ de estas tareas hacia la 
+\emph on
+nube
+\emph default
+ y la descarga de los resultados, es menor que la utilizada para el procesamient
+o de dichas tareas con la CPU local.
+\end_layout
+
+\begin_layout Standard
+En este contexto se pueden distinguir dos posibles objetivos de optimización:
+\end_layout
+
+\begin_layout Enumerate
+Minimizar el consumo de bateria del dispositivo para extender el tiempo
+ operativo del mismo
+\end_layout
+
+\begin_layout Enumerate
+La energía consumida por el servidor en la nube para el procesamiento de
+ tareas, debe ser también incluída en el cálculo del consumo
+\end_layout
+
+\begin_layout Standard
+Independientemente de las optimizaciones antes mencionadas, también se deben
+ obtener los pros y contras entre procesar las tareas de forma local y la
+ energía consumida por la tranmisión de forma inalámbrica de los datos hacia
+ y desde la nube.
+\end_layout
+
+\begin_layout Standard
+La clave está en obtener modelos que permitan predecir el consumo energético
+ dado un tipo de tecnología de transmición, como Wifi, 3G, 2G, la proporción
+ de señar por ruido (SNR) y la cantidad de datos a ser transmitidos.
+ En conjunto, la predicción del consumo energético requerido para procesar
+ una tarea de forma local y remota, constituyen la piedra fundamental para
+ una nueva generación aplicaciones eficientes en cuanto al consumo energético.
+\end_layout
+
+\begin_layout Standard
+Una vez obtenidos los modelos de consumo energético, pueden ser utilizados
+ para decidir cuando conviene que una tarea sea procesada de forma remota
+ o local.
+\end_layout
+
+\begin_layout Subsection
+Entorno de medición y metodología
+\end_layout
+
+\begin_layout Standard
+El primer paso para realizar mediciones de energía es configurar y validar
+ un entorno de medición.
+ En cuanto a la metodología de medición, debido a la falta de funcionalidad
+ del sistema operativo Android (utilizado para la prueba) la unica posibilidad
+ es conectado un dispositivo de medición física al teléfono inteligente.
+ La manera más común es mediante la conexión de un voltímetro y un medidor
+ de amperios entre la batería y el teléfono Cuando se utilizan las API de
+ Android, en cambio, la única métrica que se puede recoger es el porcentaje
+ de batería consumido.
+\end_layout
+
+\begin_layout Standard
+Se utiliza entonces un voltimetro especial, que permite conectarlo a una
+ computadora para grabar los resultados obtenidos.
+ Básicamente, se pueden emplear dos estrategias de muestreo.
+ La primera es donde un valor instantáneo de la muestra se mide, mientras
+ que con la segunda estrategia se registra el promedio a lo largo todo el
+ periodo de muestreo.
+ El primer método es el mas utilizado en el contexto del problema, ya que
+ las tecnologías y protocolos subyacentes operan en algunos órdenes de magnitud
+ más rápidos que el intervalo de muestreo.
+ Por lo tanto, una enorme cantidad de repeticiones serían necesarias con
+ el fin de obtener resultados significativos.
+ El segundo método, que calcula la potencia media durante el intervalo de
+ muestreo, es el mas adecuado, ya que el principal interés reside en conocer
+ el consumo total de energía, que es a su vez completamente reflejado por
+ las muestras promediadas.
+\end_layout
+
+\begin_layout Standard
+Con el fin de realizar mediciones reproducibles, se automatiza el proceso
+ de prueba para que no se requiera ninguna interacción con el teléfono durante
+ el curso de las mediciones.
+ Para este motivo se utiliza una aplicación para Android que permite definir
+ una campaña de medición en un formato de texto simple.
+ La aplicación requiere permisos especiales para evitar ser interrumpida
+ cuando el teléfono cambia al modo de espera.
+\end_layout
+
+\begin_layout Standard
+Para definir una campaña de medición se especifican una serie de archivos
+ a ser descargados o cargados, y tiempos de espera entre cada transferencia.
+ Estos tiempos de espera son importantes especialmente en mediciones que
+ involucren redes 3G, donde el dispositivo puede continuar en un estado
+ de alto consumo energético aún luego de que la transferencia del archivo
+ se haya completado.
+ Este puede ser el caso en el que el dispositivo mantiene una conexión activa,
+ aunque en reposo, con el proveedor, produciendo un consumo de energía adicional
+ el cual debe ser tenido en cuenta en las mediciones.
+\end_layout
+
+\begin_layout Standard
+De esta manera, realizando pruebas con diferentes tamaños de archivo, 10MB,
+ 20MB y 50MB, y diversas tecnologías de transmisión, 2G, 3G y WiFi se construye
+ un modelo de consumo energético que permite obtener un indicativo de la
+ energía consumida para cargar o descargar una cierta cantidad de datos
+ utilizando alguna de las tecnologías de comunicación inalámbricas disponibles.
+ Dado que existe una relación directa entre la cantidad de datos enviados
+ y el consumo energético, el modelo se puede representar de la siguiente
+ manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $[J]=\beta\, X[MB]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+utilizando ambas, regresión lineal (para obtener 
+\begin_inset Formula $\beta_{avg}$
+\end_inset
+
+, el consumo medio de energía por MB) y la regresión cuantílica (para obtener
+ 
+\begin_inset Formula $\beta_{10}$
+\end_inset
+
+ y 
+\begin_inset Formula $\beta_{90}$
+\end_inset
+
+, el percentil 10 y 90) para ajustar los parámetros.
+ La ventaja de la regresión cuantílica por sobre solo proporcionar la desviación
+ estándar, por ejemplo, es que considera que el 80% de los resultados caen
+ en el intervalo dado.
+\end_layout
+
+\begin_layout Standard
+Luego, utilizando este modelo, se puede comparar el consumo energético necesario
+ para procesar una tarea de forma remota, con la cantidad de energía consumida
+ para llevar a cabo la misma tarea de forma local y tomar la decisión de
+ si conviene que la tarea se procesada de forma remota o local.
+ 
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-
-\backslash
-ac{SEAS}
+Agregar referencias
 \end_layout
 
 \end_inset
 
 
-\begin_inset space ~
+\end_layout
+
+\begin_layout Section
+Manejo inteligente de métodos de localización, para optimizar el consumo
+ energético
+\end_layout
+
+\begin_layout Standard
+Las aplicaciones móviles a menudo necesitan datos de localización, para
+ actualizar localmente información relevante y adaptar el contexto de dispositiv
+o.
+ Aunque la mayoría de los teléfonos inteligentes incluyen un receptor GPS,
+ su uso es en general restringido debido de alto consumo de la batería.
+ Esta propuesta presenta un servicio para obtener la localización, que ayuda
+ a reducir el consumo de batería.
+ El diseño se basa en el hecho de que precisión de la ubicación requerida
+ varía según el lugar, por lo tanto métodos de localización con menor costo
+ energético y menos precisión, como aquellos basados ​​en WiFi y triangulación
+ de antenas celulares, a veces pueden ser utilizados.
+ Este método determina automáticamente la precisión requerida para aplicaciones
+ basadas en búsquedas móviles.
+ Mienstras el usuario se mueve, tanto los requisitos de precisión como los
+ errores en los sensores de ubicación cambian.
+ Esta propuesta monitorea constantemente el gasto de energía para satisfacer
+ los distintos requisitos de precisión, utilizando los sensores disponibles,
+ con el fin de no sólo proporcionar un importante ahorro energético, sino
+ también mejorar la precisión alcanzada (dado que se utilizan múltiples
+ sensores).
+\end_layout
+
+\begin_layout Subsection
+Observaciones generales
+\end_layout
+
+\begin_layout Standard
+Se tienen en consideración las siguientes observaciones:
+\end_layout
+
+\begin_layout Enumerate
+Las aplicaciones que utilizan localización no siempre requieren la mas alta
+ precisión, como la que se puede lograr mediante un GPS.
+ La precisión requerida varía a medida que el usuario se mueve, por lo que
+ se pueden aprovechar estas variaciones con el fin de ahorrar energia.
+\end_layout
+
+\begin_layout Enumerate
+Un teléfono dispone de múltiples modalidades para medir la ubicación aparte
+ del GPS: triangulación WiFi, triangulación mediante la antena celular,
+ en un radio de Bluetooth, sensores audiovisuales, entre otros.
+ La disponibilidad y exactitud de estas modalidades varían cuando el usuario
+ se mueve, y las modalidades mas adecuadas puede ser seleccionadas para
+ satisfacer eficientemente las necesidades de localización con menores costos
+ de energía.
+\end_layout
+
+\begin_layout Subsection
+Solución propuesta
+\end_layout
+
+\begin_layout Standard
+El flujo general del sistema se puede describir de la siguiente manera:
+\end_layout
+
+\begin_layout Itemize
+Entrada
+\end_layout
+
+\begin_layout Itemize
+Cálculo de la precisión dinámica requerida: para aquellas aplicaciones basadas
+ en búsquedas móviles se calcula en base a las entidades buscadas, pero
+ puede darse el caso de que la aplicación especifique directamente la precisión
+ requerida
+\end_layout
+
+\begin_layout Itemize
+Modelo energético de cada sensor: representa la cantidad de energía utilizada
+ por cada sensor para obtener la localización del dispositivo.
+\end_layout
+
+\begin_layout Itemize
+Modelo de precisión dinámica de cada sensor: representa la calidad de la
+ información sobre la localización que cada uno ofrece.
+ Un desafío clave en este punto, es que la disponibilidad y exactitud de
+ los sensores de localización varía con la ubicación.
+ Por ejemplo, el GPS puede no funcionar en interiores o en áreas con vista
+ de satélite obstruido, la triangulación WiFi puede funcionar mejor cuando
+ el número de puntos de acceso es alta, etc.
+ Este modelo tiene en cuenta tales efectos.
+\end_layout
+
+\begin_layout Itemize
+Algoritmo de selección de sensor: determina el sensor a ser utilizado en
+ cada caso.
+ Se utilizan un modelo de estimación Bayesiana para combinar los datos del
+ sensor con la localización predecida y asi proveer una estimación de máxima
+ verosimilitud.
+\end_layout
+
+\begin_layout Itemize
+Después de que se ha seleccionado un sensor de localización, se gasta energía
+ para utilizar ese sensor y los datos producidos por dicho sensor se utilizarán
+ para generar una estimación de la localización.
+ La estimación de la localización se envía a la aplicación cliente.
+ Además, los datos de localización y sensores pueden ser usados para mejorar
+ el modelo de la precisión del sensor.
+\end_layout
+
+\begin_layout Standard
+De esta manera se trata de liberar a la aplicaciones de lidiar con los errores
+ de localización y el manejo del consumo energético, haciendo un uso eficiente
+ de la batería.
+\end_layout
+
+\begin_layout Section
+Predicción de la próxima ubicación del usuario y que aplicación utilizará
+\end_layout
+
+\begin_layout Standard
+Esta propuesta, aunque no está ligada al ahorro energético, si esta relacionada
+ con nuestro trabajo, dado que se basa en identificar patrones comportamentales
+ para cada usuario para tratar de predecir a donde irá el usuario y que
+ aplicación va a usar en los próximo diez minutos, haciendo uso de la informació
+n contextual obtenida desde los diversos sensores que posee un teléfono
+ inteligente, tales como localización, registros de llamadas, proximidad
+ con otros dispositivos, hora y aplicaciones utilizadas.
+\end_layout
+
+\begin_layout Standard
+Este enfoque permite modelar la interacción entre las variables predichas,
+ para estudiar las relaciones entre el lugar donde un usuario está y la
+ posibilidad de que éste realice una llamada telefónica, utilice la cámara,
+ etc.
+ Por otra parte, otras fuentes de información, como la lista de dispositivos
+ Bluetooth cercanos o información del sistema, también se puede explotar
+ con el fin de enriquecer el contexto del usuario y mejorar los modelos
+ de predicción.
+\end_layout
+
+\begin_layout Subsection
+Solución propuesta
+\end_layout
+
+\begin_layout Standard
+Se utiliza un set de datos reales obtenidos del uso que diversos usuarios
+ dieron a sus dispositivos, proveyendo información tal como uso de GPS,
+ Bluetooth, puntos de acceso WiFi, acelerómetro, aplicaciones utilizadas
+ y registros de llamadas.
+ Luego se realiza un pre-procesamiento de los datos de localización obtenidos
+ mediante el GPS y los puntos de acceso WiFi, para obtener regiones en las
+ que los usuarios se mantienen por al menos diez minutos, con un radio de
+ cien metros para hacer frente a la existencia de ruido en la obtención
+ de los datos de localización y con ayuda de los usuarios se le asignan
+ etiquetas para identificar cada una de las regiones, elegiendo entre 22
+ mutalmente excluyente etiquetas, incluyendo una etiqueta 
+\begin_inset Quotes eld
 \end_inset
 
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "HPC.Rodriguez.2010"
-
+Otros
+\begin_inset Quotes erd
 \end_inset
 
- y agrega cosas del survey
-\begin_inset space ~
+ para aquellos casos en el que ninguna de las 21 restantes sea apropidada.
+ Se toma un máximo de ocho regiones por usuario.
+ Cinco de estas regiones corresponden a las mas visitadas y las tres restantes
+ son elegidas al azar de entre el 10% de las menos frecuentadas.
+\end_layout
+
+\begin_layout Standard
+Para reducir el número de etiquetas, se agrupan en 8 grupos mas generales:
+\end_layout
+
+\begin_layout Itemize
+Casa
+\end_layout
+
+\begin_layout Itemize
+Trabajo
+\end_layout
+
+\begin_layout Itemize
+Casa-de-amigo: casa de un amigo o familiar
+\end_layout
+
+\begin_layout Itemize
+Trabjo-de-amigo: lugar de trabajo o escuela de un amigo o familiar
+\end_layout
+
+\begin_layout Itemize
+Restaurante
+\end_layout
+
+\begin_layout Itemize
+Estacion-Transporte: lugar estático como una estación de subte, parada de
+ colectivo, etc.
+\end_layout
+
+\begin_layout Itemize
+Shopping
+\end_layout
+
+\begin_layout Itemize
+Entretenimiento
+\end_layout
+
+\begin_layout Standard
+Aquellas regiones sin etiquetar, o que no caigan dentro de ninguna de estas
+ 8 etiquetas, serán consideradas dentro de la etiqueta 
+\begin_inset Quotes eld
 \end_inset
 
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "IJWGS2010"
-
+Otros
+\begin_inset Quotes erd
 \end_inset
 
 .
+ Adicionalmente, se tienen dos categorías especiales: transici
+\end_layout
+
+\begin_layout Standard
+stands for the home of a friend or relative and Friend-Work stands for the
+ working place or school of a friend or relative.
+ The TransportStation category corresponds to static places such as a metro
+ station or bus stop.
+ Unlabeled regions or labeled regions that do not belong to any of the 8
+ labels were finally mapped to an ‘‘Other’’ label.
+ In addition, we have two special categories: 
+\end_layout
+
+\begin_layout Enumerate
+Transición: para un contexto de viaje
+\end_layout
+
+\begin_layout Enumerate
+Sin localización: para estados de localización desconocida debido a errores
+ o falta de información.
+\end_layout
+
+\begin_layout Standard
+Mientras que 
+\begin_inset Quotes eld
+\end_inset
+
+Transición
+\begin_inset Quotes erd
+\end_inset
+
+ está considerado dentro de las etiquetas a predecir, el caso de 
+\begin_inset Quotes eld
+\end_inset
+
+Sin localización
+\begin_inset Quotes erd
+\end_inset
+
+ no es considerado para las predicciones.
+\end_layout
+
+\begin_layout Standard
+Dado que los usuarios usan un número limitado de aplicaciones de su dispositivo,
+ solo se consideran para las predicciones aquellas mas relevantes, utilizadas
+ al menos una vez a la semana.
+\end_layout
+
+\begin_layout Standard
+Toda la información antes mencionada se agrupa en intervalos de tiempo de
+ 10 minutos de duración y se clasifica en seis categorías diferentes:
+\end_layout
+
+\begin_layout Enumerate
+Localización
+\end_layout
+
+\begin_layout Enumerate
+Aplicaciones
+\end_layout
+
+\begin_layout Enumerate
+Tiempo
+\end_layout
+
+\begin_layout Enumerate
+Registro de llamadas
+\end_layout
+
+\begin_layout Enumerate
+Proximidad Bluetooth
+\end_layout
+
+\begin_layout Enumerate
+Estado interno
+\end_layout
+
+\begin_layout Standard
+Estas categorías juntas describen el uso general del dispositivo para cada
+ usuario.
+ Luego, utiliando modelos estadísticos se puede predecir hacia donde se
+ va a dirigir un usuario y que aplicación va a utilizar, basándose en el
+ estado actual y la probabilidad de moverse hacia otro estado.
 \end_layout
 
 \end_body
