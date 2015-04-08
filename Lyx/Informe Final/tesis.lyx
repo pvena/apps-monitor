@@ -69,7 +69,7 @@
 \use_esint 1
 \use_mhchem 1
 \use_mathdots 1
-\cite_engine natbib_authoryear
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
