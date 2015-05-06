@@ -64,10 +64,10 @@
 \begin_body
 
 \begin_layout Chapter
-Enfoque
+Propuesta
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:Enfoque"
+name "chap:Propuesta"
 
 \end_inset
 
@@ -75,193 +75,142 @@ name "chap:Enfoque"
 \end_layout
 
 \begin_layout Standard
-Contar los nuevos comparadores.
- Algoritmos y detalles teóricos/matemáticos.
- Podes usar capacidades de algorithmic
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "alg:Ejemplo"
-
-\end_inset
-
- para poner pseudocódigo.
+Para enfrentar la problemática explicada en capítulos anteriores se propone
+ LoguinUse, una aplicación para dispositivos móviles con sistema operativo
+ Android versión 2.3.3 o superior, que debido a su gran popularidad nos provee
+ un número aceptable de usuarios.
+ La información obtenida por dicha aplicación será comprimida y enviada
+ a un servidor dedicado, desarrollado sobre la plataforma .NET Framework
+ 3.5 (FW 3.5) que provee un WebService SOAP y una posee una base de datos
+ relacional SQL Server 2005 Express.
+ También se crea una aplicación de escritorio sobre FW 3.5 con la capacidad
+ de filtrar y exportar la infromación desde la base de datos a archivos
+ en formato ARF para su posterior estudio, mediante métodos de Datamining
+ con la herramienta WEKA.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-\begin_inset Float algorithm
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{algorithmic}[1]  
+En este capítulo se detallaran los diferentes aspectos tenidos en cuenta
+ para el desarrollo del sistema, asi como las restricciones de calidad en
+ las cuales se base el diseño y estrategias generales utilizadas en cada
+ componente del sistema.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-Procedure{metodo}{$wsdl$} 
-\backslash
-Comment{Returns a Boolean}
+\begin_layout Section
+Restricciones de calidad
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-State $dato 
-\backslash
-gets $
-\backslash
-Call{info}{$wsdl$}
+\begin_layout Standard
+Como primera medida se desea un rendimiento óptimo a la hora de obtener
+ y almacernar la información del dispositivo.
+ Por este motivo es que se debe disminuir lo máximo posible el procesamiento
+ realizado por el dispositivo durante la captura de los datos, y reducir
+ además el espacio necesario para almacenar dichos datos.
+ También, teniendo en cuenta el rápido avance tecnológico, en lo que a dispositi
+vos móviles respecta, y las cada vez más numerosas características de estos,
+ se busca un bajo nivel de cohesividad entre componentes y gran flexibilidad
+ para cambios futuros, de manera tal que la aplicación pueda crecer sin
+ mayores inconvenientes en caso de necesitar, por ejemplo, obtener información
+ adicional referente a una nueva funcionalidad del dispositivo.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-ForAll {$elements 
-\backslash
-in list$} 
+\begin_layout Section
+Estrategia general
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-State $operations 
-\backslash
-gets $
-\backslash
-Call{getOperations}{$elements$}
+\begin_layout Standard
+Dada la problemática planteada, se toman en consideración algunas restricciones
+ de calidad con respecto al diseño del sistema que apuntan a un buen desempeño,
+ sobre todo de la aplicación móvil, pero sin desatender la aplicación servidor.
+ Debido a esto se propone un sistema cliente-servidor en el cual la mayor
+ carga de procesamiento se encuentra del lado del servidor.
+ De esta manera se limita a la aplicación cliente a la obtención de datos
+ del usuario y evitando toda lógica adicional de procesamiento de datos.
+ El servidor será capaz de almacenar y procesar todos los datos obtenidos.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-ForAll {$op 
-\backslash
-in operations$}
+\begin_layout Section
+Estrategias aplicación móvil
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-State $opDoc 
-\backslash
-gets $
-\backslash
-Call{getDocumentation}{$op$}
+\begin_layout Standard
+Teniendo en cuenta los costos de procesamiento utilizados por Android, a
+ la hora de crear objetos en memoria dentro de una aplicación, se optó por
+ mantener alojados en memoria objetos que de otra manera no hubieran sido
+ necesarios.
+ Si bien esta estrategia requiere de un mayor uso de memoria RAM, también
+ simplifica el acceso a los estados almacenados por la aplicación, evitando
+ la creación de nuevos objetos para la lectura de estados en cada evento
+ monitoreado del sistema.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-If {($algo$ not exists)}
+\begin_layout Standard
+Como método de almacenamiento se decidió persistir la información en archivos
+ de texto plano, evitando el procesamiento de estructuras mas complejas
+ como XML, que si bien son más deseables a la hora de trabajar con ellas,
+ conllevan un mayor costo de procesamiento para leer y escribir en ellas,
+ comparados con el necesario para leer y escribir en un archivo plano.
+ Ademas utilizan un mayor espacio de almacenamiento.
+ Aunque esta decisión implica un desarrollo más complejo del lado del servidor,
+ el cual debe ser capaz de interpretar los datos recibidos, el foco está
+ puesto en minimizar el procesamiento en la aplicación móvil y no en el
+ servidor.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-State 
-\backslash
-textbf{return} true
+\begin_layout Section
+Estrategia servidor
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-EndIf
+\begin_layout Standard
+Se decidió utilizar SOAP WebService para realizar la comunicación de datos
+ simplemente por una cuestión de practidicad, debido a que la plataforma
+ .NET nos provee una interfaz amigable a la hora de crear este tipo de servicios.
+ El método empleado para la creación del servicio SOAP es 
+\emph on
+code-first
+\emph default
+.
+ Este permite la definición de un servicio a partir del código, por lo que
+ no es necesario tener ningun conocimiento sobre WSDL.
+ Se desarrollan los métodos de la interface del servicio para luego generar
+ el servicio, utilizando las herramientas provistas por el fremawork .NET
+ 3.5.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-EndFor 
+\begin_layout Standard
+El servidor soporta la mayor carga de procesamiento del sistema, ya que
+ se deben parsear los archivos enviados por cada usuario, para luego almacenarlo
+s de manera organizada.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-EndFor
+\begin_layout Standard
+A su vez el WebService proveerá los métodos capaces de exportar la información
+ desde la base de datos, a archivos en formato ARF para su posterior estudio.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-State 
-\backslash
-textbf{return} $false$
+\begin_layout Section
+Estrategia Base de Datos
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-EndProcedure
+\begin_layout Standard
+La información se almacena en una base de datos relacional SQL Server Express
+ 2005, la cual consta de un motor muy poderoso y optimizado con el que se
+ pueden realizar consultas rápidas, lo cual es un beneficio a la hora de
+ extraer los datos para su estudio.
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-end{algorithmic}
+\begin_layout Standard
+La base de datos contiene grandes volúmenes de información, los cuales podrán
+ ser consultados mediante la utilización de filtros de la manera más adecuada
+ a la hora de exportar los archivos ARF.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Ejemplo
-\begin_inset CommandInset label
-LatexCommand label
-name "alg:Ejemplo"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Standard
+Con el objetivo de minimizar el espacio utilizado por la base la datos relaciona
+l, se decidió compartir datos entre usuarios, de esta manera se evita la
+ generación duplicada de información, para que ante un caso, por ejemplo,
+ de que dos usuarios utilicen la misma red Wifi, la información de esta
+ se almacene una única vez.
 \end_layout
 
 \end_body
