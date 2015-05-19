@@ -44,7 +44,8 @@ namespace LoginUseWebService
             foreach (string at in attributes.Keys.ToList())
             {
                 string line = "@attribute <" + at + "> {";
-                foreach (string v in attributes[at].ToList())
+                attributes[at].Sort();
+                foreach (string v in attributes[at])
                     line += v + ",";
                 line = line.Substring(0,line.Length - 1);
                 line += "}";
