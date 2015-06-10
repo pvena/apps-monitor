@@ -1,0 +1,1726 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author -807376748 "Juan Manuel Rodriguez,,,"
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Implementación
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Implementación"
+
+\end_inset
+
+
+\change_inserted -807376748 1432236590
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1432236591
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432236605
+Agregen un párrafo de intro al capítulo
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Section
+Aplicación Android
+\change_inserted -807376748 1432236610
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1432236610
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432236637
+Agregen un párrafo de intro a la sección.
+ No tiren subsecciones tan rapidos
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Subsection
+Conceptos básicos
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1432238903
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239084
+Empieza muy descolgado y en realidad esto habla del formato de los datos
+ en el log! Esto quizas debe ir al final de la sección y no al inicio
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+Dentro del sistema se hace uso de tres conceptos básicos, a la hora de almacenar
+ los diferentes tipos de indicadores de actividades del usuario.
+ Estos conceptos simplifican la lectura de los datos recolectados y permiten
+ cierta flexibilidad en caso de que sea necesario agregar información.
+ A su vez permiten minimizar el espacio de almacenamiento requerido y recursos
+ de CPU al momento de analizarlos datos.
+\change_inserted -807376748 1432238932
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432238952
+Se puede poner en ejemplo o esquema
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239032
+[HORA]&[TIPO]&[PROP1::VALOR1|PROP2::VALOR2|...|PROP_N::VALOR_N]
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+A continuación se explicaran dichos conceptos básicos, así como también
+ se mostrarán ejemplos prácticos para su mejor comprensión.
+\change_inserted -807376748 1432238837
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432238835
+Quizas es mejor presentar los conceptos como bullets y no como sub-subsecciones
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+
+\change_inserted -807376748 1432238864
+Concepto
+\begin_inset space ~
+\end_inset
+
+1 sdfsdfsdasd
+\begin_inset Newline newline
+\end_inset
+
+dsfsdfsd
+\begin_inset Newline newline
+\end_inset
+
+sdfsdf
+\end_layout
+
+\begin_layout Description
+
+\change_inserted -807376748 1432238879
+Concepto
+\begin_inset space ~
+\end_inset
+
+2 adfssdfasd
+\begin_inset Newline newline
+\end_inset
+
+xcfzvxvxcv
+\begin_inset Newline newline
+\end_inset
+
+xcgvxcvxc
+\end_layout
+
+\begin_layout Subsubsection
+Type
+\change_inserted -807376748 1432239092
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239107
+Usar nombres en español en vez de Type, Tipo
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+Para una buena organización de la información obtenida es necesario definir
+ una estructura simple y ordenada.
+ De esta manera surge la noción de tipos de log: 
+\emph on
+Type
+\emph default
+.
+ Cada tipo de log engloba un conjunto de datos propios de la característica
+ que monitorea.
+ Algunos ejemplos de tipos de log pueden ser: WIFI, BLUETHOOT, BATTERY,
+ ACTIVITY, CONNECTION, LOCATION, etc
+\change_inserted -807376748 1432239055
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239063
+nunca se dice que es lo que se guarda
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+ Cada uno de estos se corresponde con una característica específica del
+ dispositivo y contiene un número variable de propiedades relacionadas a
+ esta.
+\end_layout
+
+\begin_layout Subsubsection
+Property
+\end_layout
+
+\begin_layout Standard
+Una vez definidos los tipos de logs, es necesario definir cuál es el conjunto
+ de datos de interés que se quieren almacenar.
+ El conjunto de propiedades definidas para cada tipo de log, identifica
+ cuales son los valores mas relevantes, relacionados con un evento específico
+ dentro de la aplicación, que deben ser almacenados.
+ Un ejemplo de propiedades, dentro del tipo de log WIFI, son la dirección
+ ip y el nombre de la red, definidos como IP y NAME respectivamente.
+\end_layout
+
+\begin_layout Subsubsection
+Value
+\end_layout
+
+\begin_layout Standard
+Haciendo uso de los conceptos explicados hasta el momento, podemos definir
+ la estructura base para un evento específico.
+ Un evento monitoreado por la aplicación, almacenara un conjunto de datos
+ definidos por el tipo del log al que pertenece y el conjunto de propiedades
+ que lo conforman.
+ Definimos 
+\emph on
+Value
+\emph default
+ como el valor almacenado en un momento dado, para una 
+\emph on
+Property
+\emph default
+ específica, incluida en el tipo de log monitoreado.
+ Cabe destacar que una 
+\emph on
+Property
+\emph default
+ pude tener únicamente un 
+\emph on
+Value
+\emph default
+ en un momento dado.
+\end_layout
+
+\begin_layout Standard
+A continuación se muestra un ejemplo de un evento monitoreado, con su estructura
+ y valores.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+[09:15:11]&[WIFI]&[STATE::1|SSID::
+\begin_inset Quotes erd
+\end_inset
+
+Ei200P
+\begin_inset Quotes erd
+\end_inset
+
+|MAC::C0:65:99:A7:BC:E0|IACCESS::1]
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como se puede observar en el ejemplo, adicionalmente a la estructura explicada
+ con anterioridad, se almacena el momento exacto en el cual fue capturado
+ el evento, con el fin de ordenar cronológicamente la información de ser
+ necesario.
+ 
+\end_layout
+
+\begin_layout Subsection
+Componentes
+\change_inserted -807376748 1432239116
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239140
+Me parece que esto es más de alto nivel que lo anterior, por lo que debería
+ ir antes
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+La aplicación móvil está compuesta por tres grupos de componentes, los cuales
+ son los encargados de realizar las funcionalidades más importantes de la
+ misma.
+ A continuación se describen cada uno de ellos.
+\end_layout
+
+\begin_layout Subsubsection
+Servicio
+\end_layout
+
+\begin_layout Standard
+Este componente es el encargado de monitorear el dispositivo constantemente
+\change_inserted -807376748 1432239183
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239210
+Faltaría contar qué es un servicio en android, qué es un Receiver
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+, haciendo uso de los 
+\emph on
+Receivers 
+\emph default
+(ver
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Receivers"
+
+\end_inset
+
+) del sistema.
+ Se instancia al encenderse el aparato, inicializa los 
+\emph on
+Receivers
+\emph default
+ y comienza el monitoreo del dispositivo.
+ El servicio es el componente es
+\change_deleted -807376748 1432239214
+c
+\change_unchanged
+encial de la aplicación, ya que conserva en memoria los diferentes objetos
+ involucrados en el monitoreo y captura de la información del dispositivo.
+ Para asegurar un monitoreo con
+\change_deleted -807376748 1432239223
+t
+\change_unchanged
+stante, este servicio se in
+\change_inserted -807376748 1432239239
+i
+\change_unchanged
+cializa en lo que se llama modo 
+\emph on
+foreground
+\change_inserted -807376748 1432239245
+
+\emph default
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239315
+Se puede discutir un poco foreground vs background y que esto no significa
+ tener foco de UI.
+ Recuerden que el que lea este trabajo puede no saber nada de android y
+ debería ser capaz de entenderlo
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+, lo que hace que siempre este en ejecución.
+ De esta manera el sistema operativo, en caso de necesitar recursos, no
+ considerará matar el servicio
+\change_inserted -807376748 1432239332
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239368
+OJO!!! El SO puede matar el servicio, pero solo lo hará cuando no le alcance
+ con matar a todos los services que no están en FG
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+ Solo se puede detener de forma manual.
+ Es por esta razón es que al iniciar el servicio, y siempre que el mismo
+ se encuentre en ejecución, se muestra en la barra de estado del dispositivo
+ una notificación de que dicho servicio se encuentra corriendo.
+\end_layout
+
+\begin_layout Subsubsection
+Receivers
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Receivers"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Heredando de la clase abstracta 
+\emph on
+GeneralLoggingReceiver
+\emph default
+, la cual provee la funcionalidad de escritura en el log, estos componentes,
+ permiten el monitoreo de un determinado 
+\emph on
+Log-Type
+\emph default
+.
+ Cada 
+\emph on
+receiver
+\change_inserted -807376748 1432239395
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239414
+si está en ingles ponganlo con cursiva
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\emph default
+ registra un único Log-Type y durante su ejecución, al momento de detectar
+ el evento correspondiente, obtiene un listado de pares Property-Value del
+ sistema, que luego serán almacenados en un archivo.
+ Dado que los dispositivos incluyen nuevas características con el rápido
+ avance de la tecnología, esta herencia permite la inclusión de nuevos Log-Types
+ y su correspondiente Receiver responsable del monitoreo.
+\end_layout
+
+\begin_layout Standard
+Los 
+\emph on
+Receivers
+\emph default
+ utilizan el comportamiento provisto por las clases 
+\emph on
+BroadcastReceiver
+\emph default
+ y los 
+\emph on
+IntentFilter
+\emph default
+, propias del sistema operativo Android.
+ Un 
+\emph on
+BroadcastReceiver
+\emph default
+ es un proceso
+\change_inserted -807376748 1432239506
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239654
+Un BR no es un proceso, de hecho es un objeto sin contexto.
+ El contexto y sentido de un BR solo vale durante el onReceive.
+ Esto queda claro cuando se observa que el método tiene como parametro un
+ contexto.
+ Mientras que el activity y el service son contextos por si mismos.
+ .http://developer.android.com/reference/android/content/BroadcastReceiver.html.
+ Más que un proceso que corre en segundo plano, un BR es un objeto inactivo
+ que es activado cada vez que se registra un evento (en forma de Intent)
+ para el cual el BR está subscripto.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ que corre en segundo plano y puede ser activado por llamadas a través de
+ 
+\emph on
+Intents
+\emph default
+.
+ Para lograr esto se utilizan 
+\emph on
+IntentFilters
+\emph default
+ con los cuales se filtran las llamadas del sistema, para solo atender a
+ las llamadas que correspondan y/o sean de interés.
+\end_layout
+
+\begin_layout Standard
+El sistema Android lanza eventos, en forma de 
+\emph on
+Intents
+\emph default
+, cuando ocurre un acontecimiento importante, un cambio de estado en el
+ dispositivo.
+ Cada 
+\emph on
+Receiver
+\emph default
+, durante su creación, se suscribe al evento correspondiente.
+ De esta manera se evita la existencia de uno o varios procesos activos,
+ encargado de monitorear constantemente el estado del dispositivo cada intervalo
+s fijos de tiempo, ahorrando una gran cantidad de energía.
+\end_layout
+
+\begin_layout Standard
+Cada 
+\emph on
+Intent
+\emph default
+ utilizado por los 
+\emph on
+Receivers
+\emph default
+ debe ser incluido en el archivo 
+\emph on
+AndriodManifest.xm
+\emph default
+l de la aplicación.
+ De esta manera al momento de la instalación se obtienen los permisos de
+ sistema operativo para acceder la información específica de cada característica
+ que se desea monitorear.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/Secuencia LogService.jpg
+	scale 50
+
+\end_inset
+
+
+\change_inserted -807376748 1432234592
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239758
+Miren este gráfico, tiene typos como ReSeiver y Commad.
+ BTW, el método que llama el sistema es onReceive(Context, Intent)
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Diagrama de secuencia Log-Event se puede observar el mecanismo de monitoreo
+ del sistema
+\change_inserted -807376748 1432239922
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432239941
+no tiene label, esto significa que no se referencia desde el texto.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Commands y CommandManager
+\end_layout
+
+\begin_layout Standard
+Dentro de la aplicación existe el componente 
+\emph on
+CommandManager
+\emph default
+, en el cual se mantiene un registro del estado actual del dispositivo.
+ Esto permite saber en cualquier momento cual es el último estado en el
+ que se encontraba el sistema.
+ Este estado está representado por un vector de valores en un objeto del
+ tipo 
+\emph on
+HashTable
+\emph default
+.
+ Cuando un nuevo evento es detectado por los 
+\emph on
+Receivers
+\emph default
+ del sistema, los datos son persistidos en el archivo de log, actualizando
+ además dicho vector de estados.
+ 
+\end_layout
+
+\begin_layout Standard
+Este componente también nos permite disminuir significativamente el espacio
+ requerido por los archivos de logs.
+ Los datos registrados en el log en cada evento específico, están formados
+ por un sub-vector del vector de estados.
+ De esta manera, solo se permite el logueo de la información si el nuevo
+ sub-vector difiere del sub-vector correspondiente al último estado almacenado.
+\begin_inset Newline newline
+\end_inset
+
+
+\change_inserted -807376748 1432301815
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302032
+Queda mejor en un Program listing.
+ Insert>
+\begin_inset Quotes erd
+\end_inset
+
+Program Listing
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Al final del program listing, se inserta el caption con Insert>Caption.
+ Para las propiedades del program Listing se hace clik secundario sobre
+ el listing y se puede seleccionar el lenguaje y si las lineas son numeradas
+ 
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1432301825
+\begin_inset listings
+lstparams "language=Java,numbers=left"
+inline false
+status open
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+Hashtable<String, String> properties = l.getProperties(); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+Enumeration<String> enumKey = properties.keys(); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+While (enumKey.hasMoreElements() {
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+property = enumKey.nextElement; 
+\end_layout
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+value = properties.get (property); 
+\end_layout
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+change = LogCommandManager.getInstance().
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+newState(l.getType(),property,value); 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+} 
+\end_layout
+
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301831
+
+If (change) 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301887
+
+LogSave.getInstance().saveData(l);
+\end_layout
+
+\end_deeper
+\begin_layout LyX-Code
+
+\change_inserted -807376748 1432301895
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432301952
+Ejemplo Logueo
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Ejemplo-Logueo"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted -807376748 1432301956
+\begin_inset Float algorithm
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ejemplo Logueo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+Hashtable<String, String> properties = l.getProperties(); 
+\end_layout
+
+\begin_layout LyX-Code
+Enumeration<String> enumKey = properties.keys(); 
+\end_layout
+
+\begin_layout LyX-Code
+While (enumKey.hasMoreElements() {
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+property = enumKey.nextElement; 
+\end_layout
+
+\begin_layout LyX-Code
+value = properties.get (property); 
+\end_layout
+
+\begin_layout LyX-Code
+change = LogCommandManager.getInstance().
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+newState(l.getType(),property,value); 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout LyX-Code
+} 
+\end_layout
+
+\begin_layout LyX-Code
+If (change) 
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+LogSave.getInstance().saveData(l);
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\change_inserted -807376748 1432302134
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302150
+change es solo para la última propiedad??
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+El 
+\change_inserted -807376748 1432302065
+listado de código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lis:Ejemplo-Logueo"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302086
+usen etiquetas y referencias para imagenes, tablas, etc.
+ 
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+ 
+\change_deleted -807376748 1432302046
+ejemplo anterior 
+\change_unchanged
+muestra que solo en el caso de que la variable 
+\emph on
+“change”
+\emph default
+ sea verdadera se registra la información.
+ Este mecanismo provee flexibilidad para agregar nuevos Log-Types e incrementar
+ el número de 
+\emph on
+Properties
+\emph default
+ dentro de un Log-Type, sin alterar el funcionamiento descripto.
+\end_layout
+
+\begin_layout Standard
+Dentro del 
+\emph on
+CommandManager
+\emph default
+ también existen 
+\emph on
+Commands
+\emph default
+.
+ Cada 
+\emph on
+Command
+\emph default
+ hereda la interfa
+\change_deleted -807376748 1432302167
+c
+\change_inserted -807376748 1432302167
+s
+\change_unchanged
+e y funcionalidad de un Command abstracto y es capaz de realizar una tarea
+ específica, mediante el uso de su método 
+\emph on
+execute
+\emph default
+.
+ Estos objetos son utilizados para realizar tareas programadas dentro de
+ la aplicación, como por ejemplo el envió de datos al servidor.
+\end_layout
+
+\begin_layout Standard
+Es posible configurar cada 
+\emph on
+Command
+\emph default
+ mediante el uso de las reglas, 
+\emph on
+Rules
+\emph default
+.
+ Cada 
+\emph on
+Rule
+\emph default
+ contiene un sub-vector compuesto por pares Property-Value y una Key que
+ indica el tipo de 
+\emph on
+Command
+\emph default
+ a ejecutar, de esta manera, cuando el sub-vector configurado coincide con
+ el estado actual del dispositivo, el 
+\emph on
+CommandManager
+\emph default
+ ejecuta el 
+\emph on
+Command
+\emph default
+ correspondiente.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/Object Diagram.jpg
+	lyxscale 85
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Diagrama de Clases: Aplicación Android
+\end_layout
+
+\end_inset
+
+
+\change_inserted -807376748 1432302199
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302340
+Falta mencionar la figura desde el texto
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Comunicación de Datos
+\end_layout
+
+\begin_layout Standard
+Toda la información generada por la aplicación, será almacenada en archivos
+ de texto plano, siguiendo el formato especifico explicado con 
+\change_deleted -807376748 1432302302
+anterioridad
+\change_inserted -807376748 1432302318
+en la Sección
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302358
+#REF.
+ Recuerden que se puede agregar labels a los títulos
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+ Con el objetivo de almacenar la información de manera organizada, se decidió
+ generar archivo por día dentro de un directorio creado por la aplicación.
+ El nombre de cada archivo contiene la fecha en la cual fue generado y la
+ información correspondiente.
+ De esta manera también logramos reducir el espacio requerido, ya que no
+ es necesario registrar la fecha en cada línea del archivo.
+\end_layout
+
+\begin_layout Standard
+Con el objetivo de no 
+\change_deleted -807376748 1432302406
+influir
+\change_inserted -807376748 1432302408
+producir
+\change_unchanged
+ 
+\change_deleted -807376748 1432302412
+en el 
+\change_unchanged
+consumo de ene
+\change_inserted -807376748 1432302374
+r
+\change_unchanged
+gía de
+\change_inserted -807376748 1432302415
+ 
+\change_unchanged
+l
+\change_inserted -807376748 1432302419
+a batería del
+\change_unchanged
+ dispositivo
+\change_deleted -807376748 1432302424
+,
+\change_unchanged
+ a la hora de enviar los datos recolectados al servidor, la aplicación
+\change_deleted -807376748 1432302434
+ tiene configurado
+\change_unchanged
+, por defecto, envia
+\change_deleted -807376748 1432302437
+r
+\change_unchanged
+ los datos solo si el aparato se encuentra cargando la batería
+\change_inserted -807376748 1432302475
+.
+ Adicionalmente, para evitar incurrir en gastos por el uso de redes de telefonía
+ celular
+\change_deleted -807376748 1432302480
+ y tienen acceso a
+\change_inserted -807376748 1432302504
+, la aplicación también verifica antes de enviar los datos que se cuente
+ con conexión a
+\change_unchanged
+ internet mediante 
+\change_inserted -807376748 1432302509
+una red 
+\change_unchanged
+Wi
+\change_deleted -807376748 1432302389
+f
+\change_inserted -807376748 1432302390
+F
+\change_unchanged
+i.
+ 
+\change_inserted -807376748 1432302762
+Otra ventaja de las redes WiFi sobre las redes 3G es que, en general, proveen
+ una velocidad de acceso a Internet superior
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Lehr03,Perrucci2009,Balasubramanian2010"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432302786
+traten de buscar ref como estas para defender un poco sus decisiones de
+ diseño
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+.
+\change_deleted -807376748 1432302522
+Así no solo no existe impacto en el consumo de batería durante el envío
+ de datos, sino que además al evitar el uso de redes 3G, que son en general
+ mucho mas lentas y menos estables que las redes Wifi, no existen riesgos
+ de ocasionar gastos extras al usuario.
+ 
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+Para evitar 
+\change_deleted -807376748 1432302814
+particionar
+\change_inserted -807376748 1432302817
+fragmentar
+\change_unchanged
+ los datos recolectados, se decidió no enviar el archivo correspondiente
+ al día en curso, debido a que es probable que continúe siendo utilizado.
+ Una vez que se obtiene la lista de archivos a enviar, se genera un paquete
+ comprimido y este es enviado al servidor.
+\end_layout
+
+\begin_layout Section
+WebService
+\end_layout
+
+\begin_layout Standard
+Para realizar la comunicación de datos entre el dispositivo móvil y el servidor
+ se utiliza un WebService SOAP, el cual debido a su protocolo estandarizado
+ nos permite comunicar sin problemas diferentes tecnologías, como son en
+ este caso, un servidor desarrollado en la sobre la plataforma .Net con una
+ aplicación Android.
+ Este WebService 
+\change_deleted -807376748 1432303184
+nos 
+\change_unchanged
+provee los métodos para almacenar los datos recolectados por los usuarios
+ en una base de datos relacional, que corre sobre un motor SQLServer Express.
+\end_layout
+
+\begin_layout Standard
+Como se explicó anteriormente, es el servidor el encargado de realizar las
+ tareas m
+\change_inserted -807376748 1432303203
+á
+\change_deleted -807376748 1432303201
+a
+\change_unchanged
+s
+\change_inserted -807376748 1432303206
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432303242
+mas es 
+\begin_inset Quotes eld
+\end_inset
+
+pero
+\begin_inset Quotes erd
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ costosas en cuanto a recursos.
+\end_layout
+
+\begin_layout Subsection
+Componentes
+\end_layout
+
+\begin_layout Standard
+El WebService está constitu
+\change_inserted -807376748 1432303251
+i
+\change_deleted -807376748 1432303251
+í
+\change_unchanged
+do por un punto de acceso público, a través del cual los usuarios pueden
+ enviar la información, y por diferentes componentes encargados de realizar
+ las tareas de procesamiento y almacenamiento de los datos generados por
+ los usuarios.
+ A continuación se explicaran en detalle cada uno de estos componentes.
+\end_layout
+
+\begin_layout Subsubsection
+Recepción de Datos
+\end_layout
+
+\begin_layout Standard
+Utilizando el punto de acceso el usuario envía un archivo comprimido.
+ Dentro de este paquete de datos pueden existir una cantidad variable de
+ documentos, uno por cada día de logueo, dependiendo de cuantos días han
+ transcurrido desde la última conexión.
+ Una vez almacenado, en un directorio local, el WebService envía una ACK
+\change_inserted -807376748 1432303287
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432303302
+usen acrónimos ACK es de acknowledge
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ al cliente indicando que el archivo fue recibido correctamente.
+\end_layout
+
+\begin_layout Subsubsection
+Procesamiento de Datos
+\end_layout
+
+\begin_layout Standard
+Una vez finalizada la comunicación y una vez descomprimidos los documentos,
+ el servidor comienza el procesamiento de los datos recibidos en el paquete.
+ El procesamiento de los datos se realiza de manera secuencial por orden
+ cronológico.
+ El sistema lee cada documento realizando un parseo de sus datos, obteniendo
+ los Log-Types, sus Properties y Values, para luego almacenar los datos
+ en la base de datos relacional.
+ Cuando finaliza el procesamiento de los datos, los documentos son eliminados
+ conservando un backup del paquete recibido.
+\end_layout
+
+\begin_layout Subsubsection
+Almacenamiento de Datos
+\end_layout
+
+\begin_layout Standard
+Los paquetes recibidos por el Web
+\change_inserted -807376748 1432306539
+ 
+\change_unchanged
+Service son almacenados en un directorio para cada usuario específico, creado
+ por el mismo servicio.
+ En el caso de existir un error en el procesamiento de un documento, este
+ no será eliminado del directorio.
+ De esta manara es posible verificar fácilmente los datos procesados incorrectam
+ente.
+ Los datos procesados correctamente son almacenados en la base la base de
+ datos, en la cual se registran la información relacionada a sus documentos
+ y el usuario de origen.
+ De esta manera es posible localizar para cada dato almacenado, cual fue
+ su paquete de origen, así como su documento dentro de este y a que usuario
+ pertenece.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/Secuencia WebService.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Diagrama de Secuencia, procesamiento del paquete de datos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Base de Datos
+\end_layout
+
+\begin_layout Standard
+Debido a la gran cantidad de información obtenida por la aplicación y la
+ necesidad de consultar de diferentes formas los datos obtenidos para la
+ búsqueda de patrones, es indispensable la correcta organización de los
+ datos y la utilización de una estrategia que nos permita obtener información
+ de manera eficaz.
+ Es por este motivo que se utiliza una base de datos relacional, controlada
+ por el motor de bases de datos SQLServer Express.
+\end_layout
+
+\begin_layout Subsection
+Estructura
+\end_layout
+
+\begin_layout Standard
+Dentro de la base de datos, la información se encuentra organizada en diferentes
+ tablas de manera tal que nos permita optimizar el espacio utilizado A continuac
+ión se describen cada una de las tablas utilizadas y de qué manera se utiliza
+ su información.
+ 
+\end_layout
+
+\begin_layout Paragraph
+User
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Almacena la información de los usuarios registrados en el sistema.
+ En base a los datos de esta tabla se puede obtener la fecha de la última
+ conexión, la versión y modelo de dispositivo utilizado y un identificador
+ único del aparato.
+ 
+\end_layout
+
+\begin_layout Paragraph
+File
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Almacdena los datos correspondientes a los documentos procesados por el
+ servicio, se pueden obtener datos como el tamaño, nombre y a que usuario
+ pertenece.
+ 
+\end_layout
+
+\begin_layout Paragraph
+LocationGroup
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Almacena los 
+\emph on
+LocationGroups
+\emph default
+ pertenecientes a cada usuario, ubicación del 
+\emph on
+LocationGroup
+\emph default
+ y la cantidad de localizaciones que contiene.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Type 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Contiene el listado de LogTypes utilizado por la aplicación a la hora de
+ registrar eventos en el dispositivo.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Property 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Almacena un listado de cada posible 
+\emph on
+LogProperty
+\emph default
+ relacionada con su 
+\emph on
+LogType
+\emph default
+ correspondiente.
+ 
+\end_layout
+
+\begin_layout Paragraph
+PropertyValue 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se encuentran los posibles valores para cada 
+\emph on
+LogProperty
+\emph default
+, los cuales pueden ser compartidos por diferentes usuarios.
+ Un ejemplo recurrente es el caso en el que dos usuarios se conectan a una
+ misma red Wifi.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Rule
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Contiene las reglas especificadas para cada usuario del sistema, así como
+ un código que indica que comando se deberá ejecutar cuando esta se cumpla.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Condition
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Almacena las condiciones de una regla específica.
+ Cada una de estas indica un 
+\emph on
+LogProperty
+\emph default
+ y su 
+\emph on
+PropertyValue
+\emph default
+ necesarios para que la condición pueda ser validada.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/Base de Datos.jpg
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Estructura Base de Datos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

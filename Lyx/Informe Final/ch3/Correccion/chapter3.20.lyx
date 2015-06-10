@@ -1,0 +1,470 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes true
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\author -807376748 "Juan Manuel Rodriguez,,," 
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Propuesta
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Propuesta"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para enfrentar la problemática explicada en capítulos anteriores
+\change_inserted -807376748 1432213629
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432213663
+no es muy claro, especifique exactamente cual es la problematica, porque
+ se hablo de distintos problemas
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ se propone Log
+\change_deleted -807376748 1432213624
+u
+\change_unchanged
+inUse, una aplicación para dispositivos móviles con sistema operativo Android
+ versión 2.3.3 o superior.
+ La plataforma se eligió debido a que cuenta con una gran popularidad, por
+ lo quecubre un gran número de usuarios.
+ La aplicación recopilará diversa información sobre el uso que los usuarios
+ le dan a sus dispositivos móviles, por ejemplo lugar del uso, conexiones
+ WiFi, conexiones Bluetooth, etc.
+ La información recopilada por la aplicación será comprimida y enviada a
+ un servidor dedicado, desarrollado sobre la plataforma .NET Framework 3.5
+ (FW 3.5)
+\change_inserted -807376748 1432214612
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432214768
+Usen los acrónimos, como en el ejemplo.
+ Me parece q es mejor llamarlo .NET (sin versión aclarando que q siempre
+ se hace referen cia a está versión) en vez de FW, que parece más por framework.
+ Finalmente, hablar de que framework o base de datos se uso para la implementaci
+ón no va 100% con esta sección.
+ Se puede decir, pero no debe ser el énfasis.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ que provee un WebService SOAP y una posee una base de datos relacional
+ SQL Server 2005 Express.
+ Si bien el objetivo final sería que el servidor procese los datos, como
+ prueba de concepto se piensa utilizar la herramienta WEKA
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Citar a weka como se describe en la página de weka
+\end_layout
+
+\end_inset
+
+ para probar distintas técnicas de aprendizaje de maquina para detectar
+ patrones en los datos recopilados.
+ Para realizar las pruebas de concepto, se desarrollo una aplicación de
+ escritorio sobre FW 3.5 con la capacidad de filtrar y exportar la información
+ desde la base de datos a archivos en formato ARFF para su posterior estudio
+ con la herramienta WEKA.
+\end_layout
+
+\begin_layout Standard
+En este capítulo se detallarán
+\change_inserted -807376748 1432214833
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432214950
+detallaran es pretérito y quieren usar el futuro simple (lleva acento)
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ los diferentes aspectos tenidos en cuenta para el desarrollo del sistema,
+ as
+\change_inserted -807376748 1432214788
+í
+\change_deleted -807376748 1432214788
+i
+\change_unchanged
+ como las restricciones de calidad en las cuales se base el diseño y estrategias
+ generales utilizadas en cada componente del sistema.
+\end_layout
+
+\begin_layout Section
+Restricciones de calidad
+\end_layout
+
+\begin_layout Standard
+Como primera medida se desea un rendimiento óptimo
+\change_inserted -807376748 1432215082
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432215113
+qué significa rendimiento óptimo.
+ en este caso recuerden, menos consumo de batería es mejor.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ a la hora de obtener y almace
+\change_deleted -807376748 1432215070
+r
+\change_unchanged
+nar la información del dispositivo.
+ Por este motivo es que se debe disminuir lo máximo posible el procesamiento
+ realizado por el dispositivo durante la captura de los datos, y reducir
+ además el espacio necesario para almacenar dichos datos.
+ También, teniendo en cuenta el rápido avance tecnológico, en lo que a dispositi
+vos móviles respecta, y las cada vez más numerosas características de estos,
+ se busca un bajo nivel de cohesividad entre componentes y gran flexibilidad
+ para cambios futuros, de manera tal que la aplicación pueda crecer sin
+ mayores inconvenientes en caso de necesitar, por ejemplo, obtener información
+ adicional referente a una nueva funcionalidad del dispositivo.
+\end_layout
+
+\begin_layout Section
+Estrategia general
+\end_layout
+
+\begin_layout Standard
+Dada la problemática planteada, se toman en consideración algunas restricciones
+ de calidad con respecto al diseño del sistema que apuntan a un buen desempeño,
+ sobre todo de la aplicación móvil, pero sin desatender la aplicación servidor.
+ Debido a esto se propone un sistema cliente-servidor en el cual la mayor
+ carga de procesamiento se encuentra del lado del servidor.
+ De esta manera se limita a la aplicación cliente a la obtención de datos
+ del usuario y evitando toda lógica adicional de procesamiento de datos.
+ El servidor será capaz de almacenar y procesar todos los datos obtenidos
+\change_inserted -807376748 1432220854
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432220911
+esto viene de la mano de los cambios propuestos arriba
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+\change_inserted -807376748 1432220822
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432220849
+agregen algún diagrama o figura.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Section
+Estrategias aplicación móvil
+\end_layout
+
+\begin_layout Standard
+Teniendo en cuenta los costos
+\change_inserted -807376748 1432220895
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432220904
+cuales costos? alguna referencia?
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ de procesamiento utilizados por Android, a la hora de crear objetos en
+ memoria dentro de una aplicación, se optó por mantener alojados en memoria
+ objetos que de otra manera no hubieran sido necesarios.
+ Si bien esta estrategia requiere de un mayor uso de memoria RAM, también
+ simplifica el acceso a los estados almacenados por la aplicación, evitando
+ la creación de nuevos objetos para la lectura de estados en cada evento
+ monitoreado del sistema.
+\change_inserted -807376748 1432220973
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432220979
+Esta parte no se entiende.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+Como método de almacenamiento se decidió persistir la información en archivos
+ de texto plano, evitando el procesamiento de estructuras mas complejas
+ como XML, que si bien son más deseables a la hora de trabajar con ellas,
+ conllevan un mayor costo de procesamiento para leer y escribir en ellas,
+ comparados con el necesario para leer y escribir en un archivo plano.
+ Además utilizan un mayor espacio de almacenamiento.
+ Aunque esta decisión implica un desarrollo más complejo del lado del servidor,
+ el cual debe ser capaz de interpretar los datos recibidos, el foco está
+ puesto en minimizar el procesamiento en la aplicación móvil y no en el
+ servidor.
+\end_layout
+
+\begin_layout Section
+Estrategia servidor
+\end_layout
+
+\begin_layout Standard
+Se decidió utilizar SOAP 
+\emph on
+Web
+\change_inserted -807376748 1432221069
+ 
+\change_unchanged
+Service
+\emph default
+ para realizar la comunicación de datos simplemente por una cuestión de
+ practicidad, debido a que la plataforma .NET nos provee una interfaz amigable
+ a la hora de crear este tipo de servicios.
+ El método empleado para la creación del servicio SOAP es 
+\emph on
+code-first
+\emph default
+.
+ Este permite la definición de un servicio a partir del código, por lo que
+ no es necesario tener ningún conocimiento sobre WSDL.
+ Se desarrollan los métodos de la interfase
+\change_inserted -807376748 1432221025
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432221038
+si quieren usar la palabra en ingles usen cursiva
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ del servicio para luego generar el servicio, utilizando las herramientas
+ provistas por el fremawork .NET 3.5
+\change_inserted -807376748 1432221042
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432221056
+no es consistente con la nomenclatura usada arriba
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+\end_layout
+
+\begin_layout Standard
+El servidor soporta la mayor carga de procesamiento del sistema, ya que
+ se deben parsear los archivos enviados por cada usuario, para luego almacenarlo
+s de manera organizada.
+\end_layout
+
+\begin_layout Standard
+A su vez el Web
+\change_inserted -807376748 1432221068
+ 
+\change_unchanged
+Service proveerá los métodos capaces de exportar la información desde la
+ base de datos, a archivos en formato ARFF para su posterior estudio.
+\end_layout
+
+\begin_layout Section
+Estrategia Base de Datos
+\end_layout
+
+\begin_layout Standard
+La información se almacena en una base de datos relacional SQL Server Express
+ 2005, la cual consta de un motor muy poderoso y optimizado con el que se
+ pueden realizar consultas rápidas, lo cual es un beneficio a la hora de
+ extraer los datos para su estudio.
+\end_layout
+
+\begin_layout Standard
+La base de datos contiene grandes volúmenes de información, los cuales podrán
+ ser consultados mediante la utilización de filtros de la manera más adecuada
+ a la hora de exportar los archivos ARFF.
+\end_layout
+
+\begin_layout Standard
+Con el objetivo de minimizar el espacio utilizado por la base la datos relaciona
+l, se decidió compartir datos entre usuarios, de esta manera se evita la
+ generación duplicada de información, para que ante un caso, por ejemplo,
+ de que dos usuarios utilicen la misma red Wifi, la información de esta
+ se almacene una única vez.
+\change_inserted -807376748 1432221126
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -807376748 1432221128
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -807376748 1432221220
+Falta bastante, podrían contar que datos loguearon, y por qué sospechan
+ que estos datos pueden ser útiles.
+ También pueden usar algún tipo de diagrama de arquitectura para contar
+ como organizaron los diversos componentes de su aplicación, sin llegar
+ a un diagrama de clases.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_body
+\end_document

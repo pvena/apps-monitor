@@ -75,17 +75,47 @@ name "chap:Propuesta"
 \end_layout
 
 \begin_layout Standard
-Para enfrentar la problemática explicada en capítulos anteriores se propone
- LoguinUse, una aplicación para dispositivos móviles con sistema operativo
- Android versión 2.3.3 o superior, que debido a su gran popularidad nos provee
- un número aceptable de usuarios.
- La información obtenida por dicha aplicación será comprimida y enviada
- a un servidor dedicado, desarrollado sobre la plataforma .NET Framework
- 3.5 (FW 3.5) que provee un WebService SOAP y una posee una base de datos
- relacional SQL Server 2005 Express.
- También se crea una aplicación de escritorio sobre FW 3.5 con la capacidad
- de filtrar y exportar la infromación desde la base de datos a archivos
- en formato ARF para su posterior estudio, mediante métodos de Datamining
+Como se menciona en capítulos anteriores, el consumo energético, hoy en
+ día, es uno de los problemas más importantes a enfrentar en los dispositivos
+ móviles.
+ Por esta razón nuestro trabajo tiene el objetivo de optimizar el rendimiento
+ de la batería.
+ Actualmente, con el auge de la información y la comunicación se encuentran
+ disponibles una gran cantidad de datos y funciones que pueden ser muy útiles
+ a la hora de estudiar el comportamiento de los diferentes usuarios, ya
+ sea que estén utilizando, o no, su dispositivos.
+ Información como la localización, o la red inalámbrica a la cual un aparato
+ se encuentra conectado, permiten estudiar en que contextos se malgasta
+ el potencial energético.
+ Eventos relacionados con cambios de estados en el dispositivo, nos brindan
+ información acerca de cuáles son los horarios pico en los cuales se utiliza
+ un aparato y cuál es la posible relación entre estas variaciones de estado.
+ 
+\end_layout
+
+\begin_layout Standard
+En este trabajo se propone LoguinUse, una aplicación destinada a recopilar
+ información relacionada al estado y el contexto en el cual un dispositivo
+ es utilizado, para luego, en base a estos datos, realizar una investigación
+ con el propósito de encontrar patrones comportamentales en los cuales se
+ detecte un mal uso de la energía.
+ LoguinUse es una aplicación para dispositivos móviles con sistema operativo
+ Android.
+ La plataforma se eligió debido a que cuenta con una gran popularidad, por
+ lo que cubre un gran número de usuarios.
+ La aplicación recopilará diversa información sobre el uso que los usuarios
+ le dan a sus dispositivos móviles, por ejemplo lugar del uso, conexiones
+ WiFi, conexiones Bluetooth, etc.
+ La información recopilada por la aplicación será comprimida y enviada a
+ un servidor dedicado, desarrollado sobre la plataforma .NET que provee un
+ WebService SOAP y una posee una base de datos relacional SQL Server.
+ Si bien el objetivo final sería que el servidor procese los datos, como
+ prueba de concepto se piensa utilizar la herramienta WEKA para probar distintas
+ técnicas de aprendizaje de maquina para detectar patrones en los datos
+ recopilados.
+ Para realizar las pruebas de concepto, se desarrollo una aplicación de
+ escritorio sobre .NET con la capacidad de filtrar y exportar la información
+ desde la base de datos a archivos en formato ARFF para su posterior estudio
  con la herramienta WEKA.
 \end_layout
 
@@ -101,11 +131,13 @@ Restricciones de calidad
 \end_layout
 
 \begin_layout Standard
-Como primera medida se desea un rendimiento óptimo a la hora de obtener
- y almacernar la información del dispositivo.
+Como primera medida se desea que la ejecución de la aplicación no interfiera
+ en las medidas obtenidas relacionadas el rendimiento de la batería, por
+ lo tanto se pone especial énfasis en un rendimiento óptimo a la hora de
+ obtener y almacenar la información del dispositivo.
  Por este motivo es que se debe disminuir lo máximo posible el procesamiento
- realizado por el dispositivo durante la captura de los datos, y reducir
- además el espacio necesario para almacenar dichos datos.
+ realizado por el dispositivo durante la captura de los datos, y reducir,
+ además, el espacio necesario para almacenar dichos datos.
  También, teniendo en cuenta el rápido avance tecnológico, en lo que a dispositi
 vos móviles respecta, y las cada vez más numerosas características de estos,
  se busca un bajo nivel de cohesividad entre componentes y gran flexibilidad
@@ -129,19 +161,40 @@ Dada la problemática planteada, se toman en consideración algunas restriccione
  El servidor será capaz de almacenar y procesar todos los datos obtenidos.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Graphics
+	filename D:/Programación/Tesis Ingenieria Sistemas/Repositorio/Lyx/Informe Cap 3 y 4/Diagrama de Clases/ClenteServidor.jpg
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Estrategias aplicación móvil
 \end_layout
 
 \begin_layout Standard
+Las estrategias utilizadas en la aplicación móvil están orientadas a minimizar
+ el tiempo de procesamiento y almacenamiento con el objetivo de minimizar
+ el consumo de energía y evitar que el registro de la información afecte
+ indirectamente los datos obtenidos.
+\end_layout
+
+\begin_layout Standard
 Teniendo en cuenta los costos de procesamiento utilizados por Android, a
  la hora de crear objetos en memoria dentro de una aplicación, se optó por
- mantener alojados en memoria objetos que de otra manera no hubieran sido
- necesarios.
- Si bien esta estrategia requiere de un mayor uso de memoria RAM, también
- simplifica el acceso a los estados almacenados por la aplicación, evitando
- la creación de nuevos objetos para la lectura de estados en cada evento
- monitoreado del sistema.
+ diseñar una estructura en memoria en la cual se centraliza la información
+ relevante del estado actual del dispositivo y a la que se puede acceder
+ desde los diferentes componentes de la aplicación.
+ Esta estructura se actualiza automáticamente en cada evento del sistema
+ por lo tanto siempre se podrá encontrar en ella el estado actual del sistema.
+ Si bien esta estrategia requiere de un mayor uso de memoria RAM este no
+ es un recurso prioritario, y al simplificar considerablemente el acceso
+ a los estados almacenados, evita una lógica adicional a la hora de buscar
+ información relacionada al estado del dispositivo ahorrando tiempo de procesami
+ento.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -150,7 +203,7 @@ Como método de almacenamiento se decidió persistir la información en archivos
  como XML, que si bien son más deseables a la hora de trabajar con ellas,
  conllevan un mayor costo de procesamiento para leer y escribir en ellas,
  comparados con el necesario para leer y escribir en un archivo plano.
- Ademas utilizan un mayor espacio de almacenamiento.
+ Además utilizan un mayor espacio de almacenamiento.
  Aunque esta decisión implica un desarrollo más complejo del lado del servidor,
  el cual debe ser capaz de interpretar los datos recibidos, el foco está
  puesto en minimizar el procesamiento en la aplicación móvil y no en el
@@ -163,7 +216,7 @@ Estrategia servidor
 
 \begin_layout Standard
 Se decidió utilizar SOAP WebService para realizar la comunicación de datos
- simplemente por una cuestión de practidicad, debido a que la plataforma
+ simplemente por una cuestión de practicidad, debido a que la plataforma
  .NET nos provee una interfaz amigable a la hora de crear este tipo de servicios.
  El método empleado para la creación del servicio SOAP es 
 \emph on
@@ -171,10 +224,9 @@ code-first
 \emph default
 .
  Este permite la definición de un servicio a partir del código, por lo que
- no es necesario tener ningun conocimiento sobre WSDL.
- Se desarrollan los métodos de la interface del servicio para luego generar
- el servicio, utilizando las herramientas provistas por el fremawork .NET
- 3.5.
+ no es necesario tener ningún conocimiento sobre WSDL.
+ Se desarrollan los métodos de la interfase del servicio para luego generar
+ el servicio, utilizando las herramientas provistas por el .NET.
 \end_layout
 
 \begin_layout Standard
@@ -185,7 +237,7 @@ s de manera organizada.
 
 \begin_layout Standard
 A su vez el WebService proveerá los métodos capaces de exportar la información
- desde la base de datos, a archivos en formato ARF para su posterior estudio.
+ desde la base de datos, a archivos en formato ARFF para su posterior estudio.
 \end_layout
 
 \begin_layout Section
@@ -202,7 +254,7 @@ La información se almacena en una base de datos relacional SQL Server Express
 \begin_layout Standard
 La base de datos contiene grandes volúmenes de información, los cuales podrán
  ser consultados mediante la utilización de filtros de la manera más adecuada
- a la hora de exportar los archivos ARF.
+ a la hora de exportar los archivos ARFF.
 \end_layout
 
 \begin_layout Standard
