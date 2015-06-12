@@ -178,7 +178,9 @@ Estrategias aplicación móvil
 Las estrategias utilizadas en la aplicación móvil están orientadas a minimizar
  el tiempo de procesamiento y almacenamiento con el objetivo de minimizar
  el consumo de energía y evitar que el registro de la información afecte
- indirectamente los datos obtenidos.
+ indirectamente los datos obtenidos ya que de otra manera la aplicación
+ podría ocasionar variaciones en el consumo de la batería haciendo que el
+ monitoreo de los datos sea erróneo.
 \end_layout
 
 \begin_layout Standard
@@ -245,24 +247,68 @@ Estrategia Base de Datos
 \end_layout
 
 \begin_layout Standard
-La información se almacena en una base de datos relacional SQL Server Express
- 2005, la cual consta de un motor muy poderoso y optimizado con el que se
- pueden realizar consultas rápidas, lo cual es un beneficio a la hora de
- extraer los datos para su estudio.
+Una vez puesto en marcha el sistema, este se encargara de recolectar una
+ gran cantidad de información relacionada a varios usuarios.
+ Esta información consistirá en un elevado volumen da datos, los cuales
+ deben se almacenados de una manera ordenada y de fácil acceso, es por este
+ motivo que se decidió utilizar una base de datos relacional.
+ (
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ref bases de datos relacional
+\end_layout
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-La base de datos contiene grandes volúmenes de información, los cuales podrán
- ser consultados mediante la utilización de filtros de la manera más adecuada
- a la hora de exportar los archivos ARFF.
+La estrategia a la hora de diseñar una estructura de bases de datos, estará
+ orientada a minimizar el espacio físico utilizado, normalizando (
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ref ormalizacion
+\end_layout
+
+\end_inset
+
+ )las tablas de la manera más conveniente en términos de practicidad, debido
+ a que el sistema almacenara una abundante cantidad de información diaria,
+ esta estrategia nos evita un crecimiento exponencial del espacio de almacenamie
+nto.
+\end_layout
+
+\begin_layout Standard
+Dado que el volumen de información a la que se tiene acceso mediante el
+ uso de los dispositivos es muy grande, para este trabajo, se estudiara
+ un subconjunto reducido de los datos disponibles.
+ Con el objetivo de encontrar patrones comportamentales se almacenara, en
+ la base de datos, información relacionada con el dispositivo, el usuario
+ y el contexto en el cual el aparato es utilizado.
+\end_layout
+
+\begin_layout Standard
+Si bien, el estudio se realizara con una serie de datos específicos seleccionado
+s cuidadosamente para este trabajo, el diseño de la base de datos soportara
+ la incorporación de nuevos valores, permitiendo la flexibilidad de, en
+ un futuro, sumar información que se considere relevante.
+ Por ejemplo, llegado el caso de que un dispositivo cuente con un termómetro
+ incorporado, la información de la temperatura del ambiente se podrá incluir
+ en la base de datos sin modificar su estructura.
 \end_layout
 
 \begin_layout Standard
 Con el objetivo de minimizar el espacio utilizado por la base la datos relaciona
-l, se decidió compartir datos entre usuarios, de esta manera se evita la
- generación duplicada de información, para que ante un caso, por ejemplo,
+l, se decidió compartir datos entre usuarios, de esta manera se evitara
+ la generación duplicada de información, para que ante un caso, por ejemplo,
  de que dos usuarios utilicen la misma red Wifi, la información de esta
  se almacene una única vez.
+ 
 \end_layout
 
 \end_body
