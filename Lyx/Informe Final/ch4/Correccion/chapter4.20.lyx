@@ -1,4 +1,4 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
 \lyxformat 413
 \begin_document
 \begin_header
@@ -21,6 +21,7 @@
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -58,7 +59,7 @@
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author -807376748 "Juan Manuel Rodriguez,,,"
+\author -807376748 "Juan Manuel Rodriguez,,," 
 \end_header
 
 \begin_body
@@ -83,11 +84,7 @@ name "chap:Implementación"
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432236605
 Agregen un párrafo de intro al capítulo
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -110,8 +107,6 @@ Aplicación Android
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432236637
 Agregen un párrafo de intro a la sección.
  No tiren subsecciones tan rapidos
 \end_layout
@@ -158,17 +153,11 @@ Dentro del sistema se hace uso de tres conceptos básicos, a la hora de almacena
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432238952
 Se puede poner en ejemplo o esquema
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239032
 [HORA]&[TIPO]&[PROP1::VALOR1|PROP2::VALOR2|...|PROP_N::VALOR_N]
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -187,8 +176,6 @@ A continuación se explicaran dichos conceptos básicos, así como también
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432238835
 Quizas es mejor presentar los conceptos como bullets y no como sub-subsecciones
 \end_layout
 
@@ -241,11 +228,7 @@ Type
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239107
 Usar nombres en español en vez de Type, Tipo
-\change_unchanged
-
 \end_layout
 
 \end_inset

@@ -233,8 +233,8 @@ code-first
 
 \begin_layout Standard
 El servidor soporta la mayor carga de procesamiento del sistema, ya que
- se deben parsear los archivos enviados por cada usuario, para luego almacenarlo
-s de manera organizada.
+ se deben leer e interpretar los archivos enviados por cada usuario, para
+ luego almacenarlos de manera organizada.
 \end_layout
 
 \begin_layout Standard
@@ -284,11 +284,12 @@ nto.
 \end_layout
 
 \begin_layout Standard
-Dado que el volumen de información a la que se tiene acceso mediante el
- uso de los dispositivos es muy grande, para este trabajo, se estudiara
- un subconjunto reducido de los datos disponibles.
- Con el objetivo de encontrar patrones comportamentales se almacenara, en
- la base de datos, información relacionada con el dispositivo, el usuario
+Dado que el volumen de información al que se tiene acceso mediante el uso
+ de los dispositivos es muy grande, para este trabajo, se estudiara un subconjun
+to reducido de los datos disponibles.
+ Con el objetivo de encontrar patrones comportamentales, los cuales definen
+ de que manera es utilizado el dispositivo por cada usuario, se almacenara
+ en la base de datos, información relacionada con el dispositivo, el usuario
  y el contexto en el cual el aparato es utilizado.
 \end_layout
 
@@ -307,7 +308,7 @@ Con el objetivo de minimizar el espacio utilizado por la base la datos relaciona
 l, se decidió compartir datos entre usuarios, de esta manera se evitara
  la generación duplicada de información, para que ante un caso, por ejemplo,
  de que dos usuarios utilicen la misma red Wifi, la información de esta
- se almacene una única vez.
+ se almacene una única vez y sera referenciada por cada usuario particular.
  
 \end_layout
 

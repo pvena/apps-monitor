@@ -74,8 +74,30 @@ name "chap:Implementación"
 
 \end_layout
 
+\begin_layout Standard
+En este capítulo se explicara de manera detallada, cuáles fueron las decisiones
+ tomadas a la hora de llevar a cabo las estrategias explicadas en el capítulo
+ anterior.
+ En partícular se pondrá énfasis en las plataformas utilizadas y las decisiones
+ correspondientes al diseño de software en los diferentes componentes del
+ sistema.
+ Adicionalmente se explicaran algunos conceptos del sistema para una mejor
+ comprensión.
+\end_layout
+
 \begin_layout Section
 Aplicación Android
+\end_layout
+
+\begin_layout Standard
+Haciendo uso de la gran variedad de funciones del sistema Android (Intents,
+ IntentFilter, Services, Reseivers, etc), esta aplicación, será capaz de
+ obtener una gran cantidad de datos, relacionados con el estado del dispositivo
+ y el contexto en que es utilizado, para luego enviar estos datos a través
+ de la red, hacia un servidor en el cual serán almacenados.
+ A continuación se explicaran los componentes de la aplicación así como
+ también los métodos utilizados y el diseño del sistema.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -88,82 +110,13 @@ Dentro del sistema se hace uso de tres conceptos básicos, a la hora de almacena
  Estos conceptos simplifican la lectura de los datos recolectados y permiten
  cierta flexibilidad en caso de que sea necesario agregar información.
  A su vez permiten minimizar el espacio de almacenamiento requerido y recursos
- de CPU al momento de analizarlos datos.
+ de CPU al momento de analizar los datos.
 \end_layout
 
 \begin_layout Standard
-A continuación se explicaran dichos conceptos básicos, así como también
- se mostrarán ejemplos prácticos para su mejor comprensión.
-\end_layout
+El formato utilizado para almacenar cada línea de log es el siguiente:
+\noun on
 
-\begin_layout Subsubsection
-Type
-\end_layout
-
-\begin_layout Standard
-Para una buena organización de la información obtenida es necesario definir
- una estructura simple y ordenada.
- De esta manera surge la noción de tipos de log: 
-\emph on
-Type
-\emph default
-.
- Cada tipo de log engloba un conjunto de datos propios de la característica
- que monitorea.
- Algunos ejemplos de tipos de log pueden ser: WIFI, BLUETHOOT, BATTERY,
- ACTIVITY, CONNECTION, LOCATION, etc.
- Cada uno de estos se corresponde con una característica específica del
- dispositivo y contiene un número variable de propiedades relacionadas a
- esta.
-\end_layout
-
-\begin_layout Subsubsection
-Property
-\end_layout
-
-\begin_layout Standard
-Una vez definidos los tipos de logs, es necesario definir cuál es el conjunto
- de datos de interés que se quieren almacenar.
- El conjunto de propiedades definidas para cada tipo de log, identifica
- cuales son los valores mas relevantes, relacionados con un evento específico
- dentro de la aplicación, que deben ser almacenados.
- Un ejemplo de propiedades, dentro del tipo de log WIFI, son la dirección
- ip y el nombre de la red, definidos como IP y NAME respectivamente.
-\end_layout
-
-\begin_layout Subsubsection
-Value
-\end_layout
-
-\begin_layout Standard
-Haciendo uso de los conceptos explicados hasta el momento, podemos definir
- la estructura base para un evento específico.
- Un evento monitoreado por la aplicación, almacenara un conjunto de datos
- definidos por el tipo del log al que pertenece y el conjunto de propiedades
- que lo conforman.
- Definimos 
-\emph on
-Value
-\emph default
- como el valor almacenado en un momento dado, para una 
-\emph on
-Property
-\emph default
- específica, incluida en el tipo de log monitoreado.
- Cabe destacar que una 
-\emph on
-Property
-\emph default
- pude tener únicamente un 
-\emph on
-Value
-\emph default
- en un momento dado.
-\end_layout
-
-\begin_layout Standard
-A continuación se muestra un ejemplo de un evento monitoreado, con su estructura
- y valores.
 \begin_inset Newline newline
 \end_inset
 
@@ -173,15 +126,83 @@ A continuación se muestra un ejemplo de un evento monitoreado, con su estructur
 \begin_layout Standard
 
 \noun on
-[09:15:11]&[WIFI]&[STATE::1|SSID::
-\begin_inset Quotes erd
+[HORA]&[TIPO]&[PROP1::VALOR1|PROP2::VALOR2|...|PROP_N::VALOR_N]
+\begin_inset Newline newline
 \end_inset
 
-Ei200P
-\begin_inset Quotes erd
+
+\end_layout
+
+\begin_layout Standard
+A continuación se explicaran dichos conceptos básicos, así como también
+ se mostrarán ejemplos prácticos para su mejor comprensión.
+\end_layout
+
+\begin_layout Itemize
+Tipo
+\end_layout
+
+\begin_layout Standard
+Para una buena organización de la información obtenida es necesario definir
+ una estructura simple y ordenada.
+ De esta manera surge la noción de tipos de log.
+ Cada tipo de log engloba un conjunto de datos propios de la característica
+ que monitorea.
+ Algunos ejemplos de tipos de log pueden ser: WIFI, BLUETHOOT, BATTERY,
+ ACTIVITY, CONNECTION, LOCATION, etc.
+ Cada uno de estos se corresponde con una característica específica del
+ dispositivo y contiene un número variable de propiedades relacionadas a
+ esta.
+\end_layout
+
+\begin_layout Itemize
+Propiedad
+\end_layout
+
+\begin_layout Standard
+Una vez definidos los tipos de logs, es necesario definir cuál es el conjunto
+ de datos de interés que se quieren almacenar.
+ El conjunto de propiedades definidas para cada tipo de log, identifica
+ cuales son los valores más relevantes, relacionados con un evento específico
+ dentro de la aplicación, que deben ser almacenados.
+ Un ejemplo de propiedades, dentro del tipo de log WIFI, son la dirección
+ ip y el nombre de la red, definidos como 
+\shape italic
+IP
+\shape default
+ y 
+\shape italic
+NAME
+\shape default
+ respectivamente.
+\end_layout
+
+\begin_layout Itemize
+Value
+\end_layout
+
+\begin_layout Standard
+Haciendo uso de los conceptos explicados hasta el momento, podemos definir
+ la estructura base para un evento específico.
+ Un evento monitoreado por la aplicación, almacenara un conjunto de datos
+ definidos por el tipo del log al que pertenece y el conjunto de propiedades
+ que lo conforman.
+ Definimos Valor como el valor almacenado en un momento dado, para una Propiedad
+ específica, incluida en el tipo de log monitoreado.
+ Cabe destacar que una Propiedad pude tener únicamente un Valor en un momento
+ dado.
+\noun on
+
+\begin_inset Newline newline
 \end_inset
 
-|MAC::C0:65:99:A7:BC:E0|IACCESS::1]
+
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+[09:15:11]&[WIFI]&[STATE::1|SSID::Ei200P|MAC::C0:65:99:A7:BC:E0|IACCESS::1]
 \begin_inset Newline newline
 \end_inset
 
@@ -425,10 +446,6 @@ Este componente también nos permite disminuir significativamente el espacio
  por un sub-vector del vector de estados.
  De esta manera, solo se permite el logueo de la información si el nuevo
  sub-vector difiere del sub-vector correspondiente al último estado almacenado.
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
