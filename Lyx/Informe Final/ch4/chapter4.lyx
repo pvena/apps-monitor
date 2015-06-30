@@ -102,6 +102,13 @@ Haciendo uso de la gran variedad de funciones del sistema Android (Intents,
 
 \begin_layout Subsection
 Conceptos básicos
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Conceptos-básicos"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -127,6 +134,13 @@ El formato utilizado para almacenar cada línea de log es el siguiente:
 
 \noun on
 [HORA]&[TIPO]&[PROP1::VALOR1|PROP2::VALOR2|...|PROP_N::VALOR_N]
+\begin_inset CommandInset label
+LatexCommand label
+name "ejm:LineaLog"
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -153,6 +167,8 @@ Para una buena organización de la información obtenida es necesario definir
  Cada uno de estos se corresponde con una característica específica del
  dispositivo y contiene un número variable de propiedades relacionadas a
  esta.
+ Cada línea generada en el log estará encabezada por el horario y el tipo
+ al cual pertenece el cambio de estado detectado.
 \end_layout
 
 \begin_layout Itemize
@@ -219,13 +235,286 @@ Como se puede observar en el ejemplo, adicionalmente a la estructura explicada
 
 \begin_layout Subsection
 Componentes
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Componentes"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 La aplicación móvil está compuesta por tres grupos de componentes, los cuales
  son los encargados de realizar las funcionalidades más importantes de la
  misma.
- A continuación se describen cada uno de ellos.
+ Tanto la funcionalidad como el diseño de estos componentes utilizan mecanismos
+ provistos por la plataforma Android como 
+\emph on
+Service
+\emph default
+, 
+\emph on
+BroadcastReceiver 
+\emph default
+e 
+\emph on
+Intents
+\emph default
+.
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+• 
+\emph on
+Intent
+\emph default
+: Se utiliza para comunicar componentes en una aplicación Android
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+• 
+\emph on
+Intent-Filter
+\emph default
+: nos permite filtrar los diferentes 
+\emph on
+Intents
+\emph default
+ del sistema y realizar diferentes tareas dependiendo del tipo de Intent
+ esperado.
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+• 
+\emph on
+Activity
+\emph default
+: Es un componente el cual posee una interface gráfica con la cual la aplicación
+ interactúa con el usuario.
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+• 
+\emph on
+BroadcastReceiver
+\emph default
+: responde a la emisión de un Intent particular haciendo uso de 
+\emph on
+Intent-Filters
+\emph default
+.
+ Estos componentes permanecen inactivos y son ejecutado al momento de recibir
+ un Intent esperado.
+ 
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+• 
+\emph on
+Service
+\emph default
+: es un componente que corre, en todo momento, en segundo plano sin interacción
+ con el usuario y sin una interface gráfica, el cual se comunica con 
+\emph on
+Activities
+\emph default
+ atreves de Intents 
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Receivers
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Receivers"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Heredando de la clase abstracta 
+\emph on
+GeneralLoggingReceiver
+\emph default
+, la cual provee la funcionalidad de escritura en el log, estos componentes,
+ permiten el monitoreo de un determinado Tipo de Log.
+ Cada receiver registra un único Tipo de Log y durante su ejecución, al
+ momento de detectar el evento correspondiente, obtiene un listado de pares
+ Propiedad-Valor del sistema, que luego serán almacenados en un archivo.
+ Dado que los dispositivos incluyen nuevas características con el rápido
+ avance de la tecnología, esta herencia permite la inclusión de nuevos Tipo
+ de Log y su correspondiente Receiver responsable del monitoreo.
+\end_layout
+
+\begin_layout Standard
+Los Receivers utilizan el comportamiento provisto por las clases 
+\emph on
+BroadcastReceiver
+\emph default
+ y los
+\emph on
+ Intent-Filter
+\emph default
+, propias del sistema operativo Android.
+ Un 
+\emph on
+Receiver
+\emph default
+ es activado por llamadas a través de 
+\emph on
+Intents
+\emph default
+.
+ Para lograr esto se utilizan 
+\emph on
+Intent-Filters
+\emph default
+ con los cuales se filtran las llamadas del sistema, para solo atender a
+ las llamadas que correspondan y/o sean de interés.
+\end_layout
+
+\begin_layout Standard
+El sistema Android lanza eventos, en forma de 
+\emph on
+Intents
+\emph default
+, cuando ocurre un acontecimiento importante, como un cambio de estado en
+ el dispositivo.
+ Cada 
+\emph on
+Receiver
+\emph default
+ es activado solo por los 
+\emph on
+Intents
+\emph default
+ definidos en su 
+\emph on
+Intent-Filter
+\emph default
+, de esta manera, por ejemplo, en caso de un cambio de estado de la Batería,
+ solo se ejecutara el 
+\emph on
+Receiver
+\emph default
+ encargado de monitorear la Batería.
+ Este mecanismo es muy eficiente ya que nos permite ejecutar tareas atómicas
+ vinculadas únicamente a un cambio de estado específico en el dispositivo.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Diagrama Sequencia"
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Diagrama Clases"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cada 
+\emph on
+Intent
+\emph default
+ utilizado por los 
+\emph on
+Receivers
+\emph default
+ debe ser incluido en el archivo 
+\emph on
+AndriodManifest.xml
+\emph default
+ de la aplicación.
+ De esta manera al momento de la instalación se obtienen los permisos de
+ sistema operativo para acceder la información específica de cada característica
+ que se desea monitorear.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/Secuencia LogService.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Diagrama de secuencia Log-Event se puede observar el mecanismo de monitoreo
+ del sistema.
+ Nótese en la imagen los componentes Receiver y Command se refieran a instancias
+ específicas de las clases GeneralLogReceiver y LogCommand respectivamente.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "img:Diagrama Sequencia"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -246,170 +535,56 @@ reference "sub:Receivers"
 \end_inset
 
 ) del sistema.
- Se instancia al encenderse el aparato, inicializa los 
-\emph on
-Receivers
-\emph default
- y comienza el monitoreo del dispositivo.
- El servicio es el componente escencial de la aplicación, ya que conserva
- en memoria los diferentes objetos involucrados en el monitoreo y captura
- de la información del dispositivo.
- Para asegurar un monitoreo contstante, este servicio se incializa en lo
- que se llama modo 
-\emph on
-foreground
-\emph default
-, lo que hace que siempre este en ejecución.
- De esta manera el sistema operativo, en caso de necesitar recursos, no
- considerará matar el servicio.
- Solo se puede detener de forma manual.
- Es por esta razón es que al iniciar el servicio, y siempre que el mismo
- se encuentre en ejecución, se muestra en la barra de estado del dispositivo
- una notificación de que dicho servicio se encuentra corriendo.
-\end_layout
-
-\begin_layout Subsubsection
-Receivers
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Receivers"
-
-\end_inset
-
-
+ Este componente se activa en el momento en que se enciende el aparato,
+ durante su proceso de creación el servicio se encarga de inicializar la
+ totalidad de los Receivers que serán utilizados en el monitoreo.
+ El servicio es el componente esencial de la aplicación, ya que conserva
+ activos en memoria los diferentes objetos involucrados en el monitoreo
+ y captura de la información del dispositivo.
+ 
 \end_layout
 
 \begin_layout Standard
-Heredando de la clase abstracta 
-\emph on
-GeneralLoggingReceiver
-\emph default
-, la cual provee la funcionalidad de escritura en el log, estos componentes,
- permiten el monitoreo de un determinado 
-\emph on
-Log-Type
-\emph default
-.
- Cada receiver registra un único Log-Type y durante su ejecución, al momento
- de detectar el evento correspondiente, obtiene un listado de pares Property-Val
-ue del sistema, que luego serán almacenados en un archivo.
- Dado que los dispositivos incluyen nuevas características con el rápido
- avance de la tecnología, esta herencia permite la inclusión de nuevos Log-Types
- y su correspondiente Receiver responsable del monitoreo.
+En la plataforma Android, un servicio puede ser ejecutado en modo Foreground
+ o en modo Background.
+ 
+\end_layout
+
+\begin_layout Itemize
+Foreground: El sistema reconoce al servicio como un proceso del cual el
+ usuario no es consciente de manera activa, de esta manera en caso de necesitar
+ recursos, el sistema intentara no eliminar este proceso.
+ 
+\end_layout
+
+\begin_layout Itemize
+Background: Es el modo de ejecución por defecto en la plataforma Android.
+ En este caso el sistema considerara que el proceso puede ser eliminado
+ sin problemas en caso de necesitar recursos.
+ 
 \end_layout
 
 \begin_layout Standard
-Los 
-\emph on
-Receivers
-\emph default
- utilizan el comportamiento provisto por las clases 
-\emph on
-BroadcastReceiver
-\emph default
- y los 
-\emph on
-IntentFilter
-\emph default
-, propias del sistema operativo Android.
- Un 
-\emph on
-BroadcastReceiver
-\emph default
- es un proceso que corre en segundo plano y puede ser activado por llamadas
- a través de 
-\emph on
-Intents
-\emph default
-.
- Para lograr esto se utilizan 
-\emph on
-IntentFilters
-\emph default
- con los cuales se filtran las llamadas del sistema, para solo atender a
- las llamadas que correspondan y/o sean de interés.
+Ya sea en modo Foreground así como en Background, el sistema puede eliminar
+ el proceso de ser necesario, por ejemplo en caso de necesitar memoria RAM
+ para ejecutar un proceso con mas prioridad.
+ 
 \end_layout
 
 \begin_layout Standard
-El sistema Android lanza eventos, en forma de 
-\emph on
-Intents
-\emph default
-, cuando ocurre un acontecimiento importante, un cambio de estado en el
- dispositivo.
- Cada 
-\emph on
-Receiver
-\emph default
-, durante su creación, se suscribe al evento correspondiente.
- De esta manera se evita la existencia de uno o varios procesos activos,
- encargado de monitorear constantemente el estado del dispositivo cada intervalo
-s fijos de tiempo, ahorrando una gran cantidad de energía.
-\end_layout
-
-\begin_layout Standard
-Cada 
-\emph on
-Intent
-\emph default
- utilizado por los 
-\emph on
-Receivers
-\emph default
- debe ser incluido en el archivo 
-\emph on
-AndriodManifest.xm
-\emph default
-l de la aplicación.
- De esta manera al momento de la instalación se obtienen los permisos de
- sistema operativo para acceder la información específica de cada característica
- que se desea monitorear.
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../imagenes/Secuencia LogService.jpg
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Diagrama de secuencia Log-Event se puede observar el mecanismo de monitoreo
- del sistema
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+En esta aplicación se decidió utilizar el modo Foreground ya que el monitoreo
+ del dispositivo no es un proceso del cual el usuario deba estar pendiente,
+ y adicionalmente le da una mayor prioridad al servicio con el objetivo
+ de mantenerse la aplicación en funcionamiento el mayor tiempo posible.
+ En caso de que el sistema decida eliminar el proceso, durante su destrucción,
+ el servicio intentara ejecutarse a sí mismo.
+ Este mecanismo permite que la aplicación se inicialice nuevamente, permitiendo
+ el logueo ininterrumpido de datos.
+ En caso de que esta estrategia no funcione y el servicio sea eliminado,
+ se deberá inicializar manualmente.
+ Durante la ejecución de este componente, se muestra en la barra de estado
+ del dispositivo una notificación de que dicho servicio se encuentra corriendo.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -446,6 +621,13 @@ Este componente también nos permite disminuir significativamente el espacio
  por un sub-vector del vector de estados.
  De esta manera, solo se permite el logueo de la información si el nuevo
  sub-vector difiere del sub-vector correspondiente al último estado almacenado.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:CodigoFuente"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -460,6 +642,13 @@ status open
 \begin_layout Plain Layout
 Ejemplo Logueo
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "img:CodigoFuente"
 
 \end_inset
 
@@ -488,7 +677,7 @@ value = properties.get (property);
 \end_layout
 
 \begin_layout LyX-Code
-change = LogCommandManager.getInstance().
+change |= LogCommandManager.getInstance().
 \end_layout
 
 \begin_deeper
@@ -523,12 +712,12 @@ El ejemplo anterior muestra que solo en el caso de que la variable
 “change”
 \emph default
  sea verdadera se registra la información.
- Este mecanismo provee flexibilidad para agregar nuevos Log-Types e incrementar
- el número de 
+ Este mecanismo provee flexibilidad para agregar nuevos tipos de logs e
+ incrementar el número de 
 \emph on
-Properties
+Propiedades
 \emph default
- dentro de un Log-Type, sin alterar el funcionamiento descripto.
+ dentro de un tipo de log, sin alterar el funcionamiento descripto.
 \end_layout
 
 \begin_layout Standard
@@ -545,14 +734,32 @@ Commands
 \emph on
 Command
 \emph default
- hereda la interface y funcionalidad de un Command abstracto y es capaz
- de realizar una tarea específica, mediante el uso de su método 
+ hereda la interface y funcionalidad de un 
+\emph on
+Command
+\emph default
+ abstracto y es capaz de realizar una tarea específica, mediante el uso
+ de su método 
 \emph on
 execute
 \emph default
 .
  Estos objetos son utilizados para realizar tareas programadas dentro de
  la aplicación, como por ejemplo el envió de datos al servidor.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Diagrama Clases"
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Diagrama Sequencia"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -569,8 +776,8 @@ Rules
 \emph on
 Rule
 \emph default
- contiene un sub-vector compuesto por pares Property-Value y una Key que
- indica el tipo de 
+ contiene un sub-vector compuesto por pares Propiedad-Valor y una clave
+ que indica el tipo de 
 \emph on
 Command
 \emph default
@@ -597,10 +804,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../imagenes/Object Diagram.jpg
 	lyxscale 85
@@ -624,6 +827,12 @@ Diagrama de Clases: Aplicación Android
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "img:Diagrama Clases"
+
+\end_inset
+
 
 \end_layout
 
@@ -634,11 +843,25 @@ Diagrama de Clases: Aplicación Android
 
 \begin_layout Subsubsection
 Comunicación de Datos
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Comunicación-de-Datos"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Toda la información generada por la aplicación, será almacenada en archivos
- de texto plano, siguiendo el formato especifico explicado con anterioridad.
+ de texto plano, siguiendo el formato especifico explicado en la seccion
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Conceptos-básicos"
+
+\end_inset
+
+.
  Con el objetivo de almacenar la información de manera organizada, se decidió
  generar archivo por día dentro de un directorio creado por la aplicación.
  El nombre de cada archivo contiene la fecha en la cual fue generado y la
@@ -648,20 +871,20 @@ Toda la información generada por la aplicación, será almacenada en archivos
 \end_layout
 
 \begin_layout Standard
-Con el objetivo de no influir en el consumo de enegía del dispositivo, a
- la hora de enviar los datos recolectados al servidor, la aplicación tiene
- configurado, por defecto, enviar los datos solo si el aparato se encuentra
- cargando la batería y tienen acceso a internet mediante Wifi.
- Así no solo no existe impacto en el consumo de batería durante el envío
- de datos, sino que además al evitar el uso de redes 3G, que son en general
- mucho mas lentas y menos estables que las redes Wifi, no existen riesgos
- de ocasionar gastos extras al usuario.
- 
+Con el objetivo de no producir consumo de energía de la batería del dispositivo
+ a la hora de enviar los datos recolectados al servidor, la aplicación,
+ por defecto, envia los datos solo si el aparato se encuentra cargando la
+ batería.
+ Adicionalmente, para evitar incurrir en gastos por el uso de redes de telefonía
+ celular, la aplicación también verifica antes de enviar los datos que se
+ cuente con conexión a internet mediante una red WIFI.
+ Otra ventaja de las redes WIFI sobre las redes 3G es que, en general, proveen
+ una velocidad de acceso a Internet superior
 \end_layout
 
 \begin_layout Standard
-Para evitar particionar los datos recolectados, se decidió no enviar el
- archivo correspondiente al día en curso, debido a que es probable que continúe
+Para evitar fragmentar los datos recolectados, se decidió no enviar el archivo
+ correspondiente al día en curso, debido a que es probable que continúe
  siendo utilizado.
  Una vez que se obtiene la lista de archivos a enviar, se genera un paquete
  comprimido y este es enviado al servidor.
@@ -669,6 +892,13 @@ Para evitar particionar los datos recolectados, se decidió no enviar el
 
 \begin_layout Section
 WebService
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:WebService"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -689,6 +919,13 @@ Como se explicó anteriormente, es el servidor el encargado de realizar las
 
 \begin_layout Subsection
 Componentes
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Componentes-1"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -697,6 +934,13 @@ El WebService está constituído por un punto de acceso público, a través
 s encargados de realizar las tareas de procesamiento y almacenamiento de
  los datos generados por los usuarios.
  A continuación se explicaran en detalle cada uno de estos componentes.
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Sequencia Paquete Datos"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -708,8 +952,8 @@ Utilizando el punto de acceso el usuario envía un archivo comprimido.
  Dentro de este paquete de datos pueden existir una cantidad variable de
  documentos, uno por cada día de logueo, dependiendo de cuantos días han
  transcurrido desde la última conexión.
- Una vez almacenado, en un directorio local, el WebService envía una ACK
- al cliente indicando que el archivo fue recibido correctamente.
+ Una vez almacenado, en un directorio local, el WebService envía una confirmació
+n al cliente indicando que el archivo fue recibido correctamente.
 \end_layout
 
 \begin_layout Subsubsection
@@ -739,9 +983,9 @@ Los paquetes recibidos por el WebService son almacenados en un directorio
  no será eliminado del directorio.
  De esta manara es posible verificar fácilmente los datos procesados incorrectam
 ente.
- Los datos procesados correctamente son almacenados en la base la base de
- datos, en la cual se registran la información relacionada a sus documentos
- y el usuario de origen.
+ Los datos procesados correctamente son almacenados en la base de datos,
+ en la cual se registran la información relacionada a sus documentos y el
+ usuario de origen.
  De esta manera es posible localizar para cada dato almacenado, cual fue
  su paquete de origen, así como su documento dentro de este y a que usuario
  pertenece.
@@ -777,6 +1021,13 @@ Diagrama de Secuencia, procesamiento del paquete de datos
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "img:Sequencia Paquete Datos"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -786,6 +1037,13 @@ Diagrama de Secuencia, procesamiento del paquete de datos
 
 \begin_layout Section
 Base de Datos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Base-de-Datos"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -808,6 +1066,13 @@ Dentro de la base de datos, la información se encuentra organizada en diferente
 ión se describen cada una de las tablas utilizadas y de qué manera se utiliza
  su información.
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:Estructura Datos"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -981,6 +1246,13 @@ status open
 \begin_layout Plain Layout
 Estructura Base de Datos
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "img:Estructura Datos"
 
 \end_inset
 

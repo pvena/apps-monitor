@@ -60,6 +60,7 @@
 \html_css_as_file 0
 \html_be_strict false
 \author -807376748 "Juan Manuel Rodriguez,,," 
+\author 2089656932 "User" 
 \end_header
 
 \begin_body
@@ -256,11 +257,7 @@ Type
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239063
 nunca se dice que es lo que se guarda
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -394,11 +391,7 @@ Este componente es el encargado de monitorear el dispositivo constantemente
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239210
 Faltaría contar qué es un servicio en android, qué es un Receiver
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -447,14 +440,10 @@ foreground
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239315
 Se puede discutir un poco foreground vs background y que esto no significa
  tener foco de UI.
  Recuerden que el que lea este trabajo puede no saber nada de android y
  debería ser capaz de entenderlo
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -470,12 +459,8 @@ Se puede discutir un poco foreground vs background y que esto no significa
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239368
 OJO!!! El SO puede matar el servicio, pero solo lo hará cuando no le alcance
  con matar a todos los services que no están en FG
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -520,11 +505,7 @@ receiver
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239414
 si está en ingles ponganlo con cursiva
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -566,8 +547,6 @@ BroadcastReceiver
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239654
 Un BR no es un proceso, de hecho es un objeto sin contexto.
  El contexto y sentido de un BR solo vale durante el onReceive.
  Esto queda claro cuando se observa que el método tiene como parametro un
@@ -577,8 +556,6 @@ Un BR no es un proceso, de hecho es un objeto sin contexto.
  Más que un proceso que corre en segundo plano, un BR es un objeto inactivo
  que es activado cada vez que se registra un evento (en forma de Intent)
  para el cual el BR está subscripto.
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -663,12 +640,8 @@ status open
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239758
 Miren este gráfico, tiene typos como ReSeiver y Commad.
  BTW, el método que llama el sistema es onReceive(Context, Intent)
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -690,11 +663,7 @@ Diagrama de secuencia Log-Event se puede observar el mecanismo de monitoreo
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432239941
 no tiene label, esto significa que no se referencia desde el texto.
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -979,11 +948,7 @@ LogSave.getInstance().saveData(l);
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432302150
 change es solo para la última propiedad??
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -1141,11 +1106,7 @@ Diagrama de Clases: Aplicación Android
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432302340
 Falta mencionar la figura desde el texto
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -1183,12 +1144,8 @@ en la Sección
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432302358
 #REF.
  Recuerden que se puede agregar labels a los títulos
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -1205,66 +1162,17 @@ status open
 \end_layout
 
 \begin_layout Standard
-Con el objetivo de no 
-\change_deleted -807376748 1432302406
-influir
-\change_inserted -807376748 1432302408
-producir
-\change_unchanged
- 
-\change_deleted -807376748 1432302412
-en el 
-\change_unchanged
-consumo de ene
-\change_inserted -807376748 1432302374
-r
-\change_unchanged
-gía de
-\change_inserted -807376748 1432302415
- 
-\change_unchanged
-l
-\change_inserted -807376748 1432302419
-a batería del
-\change_unchanged
- dispositivo
-\change_deleted -807376748 1432302424
-,
-\change_unchanged
- a la hora de enviar los datos recolectados al servidor, la aplicación
-\change_deleted -807376748 1432302434
- tiene configurado
-\change_unchanged
-, por defecto, envia
-\change_deleted -807376748 1432302437
-r
-\change_unchanged
- los datos solo si el aparato se encuentra cargando la batería
-\change_inserted -807376748 1432302475
-.
+Con el objetivo de no producir consumo de energía de la batería del dispositivo
+ a la hora de enviar los datos recolectados al servidor, la aplicación,
+ por defecto, envia los datos solo si el aparato se encuentra cargando la
+ batería.
  Adicionalmente, para evitar incurrir en gastos por el uso de redes de telefonía
- celular
-\change_deleted -807376748 1432302480
- y tienen acceso a
-\change_inserted -807376748 1432302504
-, la aplicación también verifica antes de enviar los datos que se cuente
- con conexión a
-\change_unchanged
- internet mediante 
-\change_inserted -807376748 1432302509
-una red 
-\change_unchanged
-Wi
-\change_deleted -807376748 1432302389
-f
-\change_inserted -807376748 1432302390
-F
-\change_unchanged
-i.
- 
-\change_inserted -807376748 1432302762
-Otra ventaja de las redes WiFi sobre las redes 3G es que, en general, proveen
+ celular, la aplicación también verifica antes de enviar los datos que se
+ cuente con conexión a internet mediante una red WiFi.
+ Otra ventaja de las redes WiFi sobre las redes 3G es que, en general, proveen
  una velocidad de acceso a Internet superior
+\change_inserted -807376748 1432302762
+
 \begin_inset space ~
 \end_inset
 
@@ -1291,31 +1199,31 @@ traten de buscar ref como estas para defender un poco sus decisiones de
 \end_inset
 
 .
-\change_deleted -807376748 1432302522
-Así no solo no existe impacto en el consumo de batería durante el envío
- de datos, sino que además al evitar el uso de redes 3G, que son en general
- mucho mas lentas y menos estables que las redes Wifi, no existen riesgos
- de ocasionar gastos extras al usuario.
- 
 \change_unchanged
 
 \end_layout
 
 \begin_layout Standard
-Para evitar 
-\change_deleted -807376748 1432302814
-particionar
-\change_inserted -807376748 1432302817
-fragmentar
-\change_unchanged
- los datos recolectados, se decidió no enviar el archivo correspondiente
- al día en curso, debido a que es probable que continúe siendo utilizado.
+Para evitar fragmentar los datos recolectados, se decidió no enviar el archivo
+ correspondiente al día en curso, debido a que es probable que continúe
+ siendo utilizado.
  Una vez que se obtiene la lista de archivos a enviar, se genera un paquete
  comprimido y este es enviado al servidor.
 \end_layout
 
 \begin_layout Section
 WebService
+\change_inserted 2089656932 1435705672
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:WebService"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -1403,11 +1311,7 @@ Utilizando el punto de acceso el usuario envía un archivo comprimido.
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432303302
 usen acrónimos ACK es de acknowledge
-\change_unchanged
-
 \end_layout
 
 \end_inset
