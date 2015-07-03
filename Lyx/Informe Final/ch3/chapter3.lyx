@@ -214,19 +214,46 @@ Como método de almacenamiento se decidió persistir la información en archivos
 
 \begin_layout Section
 Estrategia servidor
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Estrategia-servidor"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Se decidió utilizar SOAP WebService para realizar la comunicación de datos
  simplemente por una cuestión de practicidad, debido a que la plataforma
- .NET nos provee una interfaz amigable a la hora de crear este tipo de servicios.
+ .NET provee una interfaz amigable a la hora de crear este tipo de servicios.
  El método empleado para la creación del servicio SOAP es 
 \emph on
 code-first
 \emph default
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+referencia
+\end_layout
+
+\end_inset
+
 .
  Este permite la definición de un servicio a partir del código, por lo que
- no es necesario tener ningún conocimiento sobre WSDL.
+ no es necesario tener ningún conocimiento sobre WSDL
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ref:ErikChristensen2001
+\end_layout
+
+\end_inset
+
+.
  Se desarrollan los métodos de la interfase del servicio para luego generar
  el servicio, utilizando las herramientas provistas por el .NET.
 \end_layout
@@ -244,6 +271,13 @@ A su vez el WebService proveerá los métodos capaces de exportar la informació
 
 \begin_layout Section
 Estrategia Base de Datos
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Estrategia-Base-de"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -257,7 +291,7 @@ Una vez puesto en marcha el sistema, este se encargara de recolectar una
 status open
 
 \begin_layout Plain Layout
-ref bases de datos relacional
+ref Ramirez2008
 \end_layout
 
 \end_inset
@@ -272,7 +306,7 @@ La estrategia a la hora de diseñar una estructura de bases de datos, estará
 status open
 
 \begin_layout Plain Layout
-ref ormalizacion
+ref normalizacion
 \end_layout
 
 \end_inset

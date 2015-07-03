@@ -959,9 +959,7 @@ change es solo para la última propiedad??
 \end_layout
 
 \begin_layout Standard
-El 
-\change_inserted -807376748 1432302065
-listado de código
+El listado de código
 \begin_inset space ~
 \end_inset
 
@@ -977,21 +975,13 @@ reference "lis:Ejemplo-Logueo"
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -807376748 1432302086
 usen etiquetas y referencias para imagenes, tablas, etc.
  
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
- 
-\change_deleted -807376748 1432302046
-ejemplo anterior 
-\change_unchanged
-muestra que solo en el caso de que la variable 
+ muestra que solo en el caso de que la variable 
 \emph on
 “change”
 \emph default
@@ -1018,14 +1008,8 @@ Commands
 \emph on
 Command
 \emph default
- hereda la interfa
-\change_deleted -807376748 1432302167
-c
-\change_inserted -807376748 1432302167
-s
-\change_unchanged
-e y funcionalidad de un Command abstracto y es capaz de realizar una tarea
- específica, mediante el uso de su método 
+ hereda la interfase y funcionalidad de un Command abstracto y es capaz
+ de realizar una tarea específica, mediante el uso de su método 
 \emph on
 execute
 \emph default
@@ -1131,14 +1115,12 @@ Comunicación de Datos
 
 \begin_layout Standard
 Toda la información generada por la aplicación, será almacenada en archivos
- de texto plano, siguiendo el formato especifico explicado con 
-\change_deleted -807376748 1432302302
-anterioridad
-\change_inserted -807376748 1432302318
-en la Sección
+ de texto plano, siguiendo el formato especifico explicado con en la Sección
 \begin_inset space ~
 \end_inset
 
+
+\change_inserted -807376748 1432302318
 
 \begin_inset Note Note
 status open
@@ -1230,25 +1212,16 @@ name "sec:WebService"
 Para realizar la comunicación de datos entre el dispositivo móvil y el servidor
  se utiliza un WebService SOAP, el cual debido a su protocolo estandarizado
  nos permite comunicar sin problemas diferentes tecnologías, como son en
- este caso, un servidor desarrollado en la sobre la plataforma .Net con una
- aplicación Android.
- Este WebService 
-\change_deleted -807376748 1432303184
-nos 
-\change_unchanged
-provee los métodos para almacenar los datos recolectados por los usuarios
- en una base de datos relacional, que corre sobre un motor SQLServer Express.
+ este caso, un servidor desarrollado sobre la plataforma .Net con una aplicación
+ Android.
+ Este WebService provee los métodos para almacenar los datos recolectados
+ por los usuarios en una base de datos relacional, que corre sobre un motor
+ SQLServer Express.
 \end_layout
 
 \begin_layout Standard
 Como se explicó anteriormente, es el servidor el encargado de realizar las
- tareas m
-\change_inserted -807376748 1432303203
-á
-\change_deleted -807376748 1432303201
-a
-\change_unchanged
-s
+ tareas más
 \change_inserted -807376748 1432303206
 
 \begin_inset Note Note

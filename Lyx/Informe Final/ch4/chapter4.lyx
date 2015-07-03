@@ -707,7 +707,18 @@ LogSave.getInstance().saveData(l);
 \end_layout
 
 \begin_layout Standard
-El ejemplo anterior muestra que solo en el caso de que la variable 
+El listado de código
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:CodigoFuente"
+
+\end_inset
+
+ muestra que solo en el caso de que la variable 
 \emph on
 “change”
 \emph default
@@ -734,7 +745,7 @@ Commands
 \emph on
 Command
 \emph default
- hereda la interface y funcionalidad de un 
+ hereda la interfase y funcionalidad de un 
 \emph on
 Command
 \emph default
@@ -905,16 +916,16 @@ name "sec:WebService"
 Para realizar la comunicación de datos entre el dispositivo móvil y el servidor
  se utiliza un WebService SOAP, el cual debido a su protocolo estandarizado
  nos permite comunicar sin problemas diferentes tecnologías, como son en
- este caso, un servidor desarrollado en la sobre la plataforma .Net con una
- aplicación Android.
- Este WebService nos provee los métodos para almacenar los datos recolectados
+ este caso, un servidor desarrollado sobre la plataforma .Net, con una aplicación
+ Android.
+ Este WebService provee los métodos para almacenar los datos recolectados
  por los usuarios en una base de datos relacional, que corre sobre un motor
  SQLServer Express.
 \end_layout
 
 \begin_layout Standard
-Como se explicó anteriormente, es el servidor el encargado de realizar las
- tareas mas costosas en cuanto a recursos.
+Como se explicó anteriormente , es el servidor el encargado de realizar
+ las tareas mas costosas en cuanto a recursos.
 \end_layout
 
 \begin_layout Subsection
