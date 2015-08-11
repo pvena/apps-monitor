@@ -897,6 +897,8 @@ Con el objetivo de no producir consumo de energía de la batería del dispositiv
 Para evitar fragmentar los datos recolectados, se decidió no enviar el archivo
  correspondiente al día en curso, debido a que es probable que continúe
  siendo utilizado.
+ De esta manera en el momento de enviar la información al servidor se obtendrán
+ todos los archivos pendientes exceptuando el correspondiente al día actual.
  Una vez que se obtiene la lista de archivos a enviar, se genera un paquete
  comprimido y este es enviado al servidor.
 \end_layout
@@ -1073,9 +1075,9 @@ Estructura
 
 \begin_layout Standard
 Dentro de la base de datos, la información se encuentra organizada en diferentes
- tablas de manera tal que nos permita optimizar el espacio utilizado A continuac
-ión se describen cada una de las tablas utilizadas y de qué manera se utiliza
- su información.
+ tablas de manera tal que nos permita optimizar el espacio utilizado.
+ A continuación se describen cada una de las tablas utilizadas y de qué
+ manera se utiliza su información.
  
 \begin_inset CommandInset ref
 LatexCommand ref

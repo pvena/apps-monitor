@@ -1189,6 +1189,8 @@ traten de buscar ref como estas para defender un poco sus decisiones de
 Para evitar fragmentar los datos recolectados, se decidió no enviar el archivo
  correspondiente al día en curso, debido a que es probable que continúe
  siendo utilizado.
+ De esta manera en el momento de enviar la información al servidor se obtendrán
+ todos los archivos pendientes exceptuando el correspondiente al día actual.
  Una vez que se obtiene la lista de archivos a enviar, se genera un paquete
  comprimido y este es enviado al servidor.
 \end_layout
