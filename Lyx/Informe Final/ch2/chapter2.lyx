@@ -87,27 +87,23 @@ Con el crecimiento de las redes y los servicios, los dispositivos móviles
 \end_layout
 
 \begin_layout Section
-Predicción del consumo de bateria basado en patrones de uso
-\begin_inset space ~
-\end_inset
+Predicción del consumo de batería basado en patrones de uso
+\end_layout
 
-
+\begin_layout Standard
+Según lo expuesto en 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kang2008"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-La clave para minimizar el consumo de bateria esta en poder predecir, con
+ la clave para minimizar el consumo de batería esta en poder predecir, con
  exactitud, el consumo en cada uno de los diferentes estados en los que
  pueda operar el dispositivo.
  Las predicciones acerca del tiempo de vida de la batería, generalmente,
  se basan en estimaciones hechas por los fabricantes de baterías y dispositivos
- móbiles, según ciertos experimentos que han realizado y mediante cálculos
+ móviles, según ciertos experimentos que han realizado y mediante cálculos
  aritméticos del consumo de energía.
  Sin embargo, estos métodos son limitados, porque no tienen en cuenta patrones
  de uso.
@@ -117,14 +113,18 @@ La clave para minimizar el consumo de bateria esta en poder predecir, con
  cada uno de estos patrones se mantiene con una base lógica similar en el
  tiempo, se puede predecir el consumo de batería para cada uno de estos
  patrones.
-\end_layout
-
-\begin_layout Subsection
-Suposiciones
+ 
 \end_layout
 
 \begin_layout Standard
-Para este método propuesto se asume lo siguiente:
+En el metodo propuesto por 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kang2008"
+
+\end_inset
+
+ se asume lo siguiente:
 \end_layout
 
 \begin_layout Itemize
@@ -134,12 +134,12 @@ el consumo de batería de los dispositivos se ve afectado por llamadas de
 \end_layout
 
 \begin_layout Itemize
-se pueden definir posibles estados en términos de las diferences operaciones
+se pueden definir posibles estados en términos de las diferentes operaciones
  funcionales del dispositivo
 \end_layout
 
 \begin_layout Itemize
-el consumo promedio de bateria de cada estado es diferente
+el consumo promedio de batería de cada estado es diferente
 \end_layout
 
 \begin_layout Itemize
@@ -156,278 +156,14 @@ Zipf's law
  para predecir el consumo de batería basándose en este patrón de uso
 \end_layout
 
-\begin_layout Subsection
-Definición del problema
-\end_layout
-
-\begin_layout Standard
-Se consideran los siguientes vectores:
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $B=(B1,...,Bn)(1)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $p=(p1,...,pn)(2)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $R=(R1,...,Rn)(3)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Donde 
-\begin_inset Formula $R_{i}=p_{i}\centerdot B_{i}(4)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $B_{i}$
-\end_inset
-
-: promedio del consumo de bateria en el estado 
-\begin_inset Formula $n$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $p_{i}$
-\end_inset
-
-: tiempo insumido por el estado 
-\begin_inset Formula $n$
-\end_inset
-
-, teniendo en cuenta que 
-\begin_inset Formula $\sum_{i=1}^{n}pi=1$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $R_{i}$
-\end_inset
-
-: proporción de bateria consumida en el estado 
-\begin_inset Formula $i$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Entonces se puede predecir el tiempo de duración de la bateria en el estado
- 
-\begin_inset Formula $i$
-\end_inset
-
- de la siguiente manera: 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $T=\frac{V}{\sum_{i=1}^{n}Ri}=\frac{V}{\sum_{i=1}^{n}pi\centerdot Bi}(5)$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Donde 
-\begin_inset Formula $T$
-\end_inset
-
- es el tiempo de duración predecido y 
-\begin_inset Formula $V$
-\end_inset
-
- es el total de bateria.
-\end_layout
-
-\begin_layout Subsection
-Solución propuesta
-\end_layout
-
 \begin_layout Standard
 Desde el momento en el que se enciende el dispostitivo se comienza a almacenar
- información, dejando registro en un log de porción de batería y el tiempo
- consumido desde que se ingresa, hasta que se sale de un cierto estado.
+ información, dejando registro en un log de la batería y el tiempo consumido
+ desde que se ingresa, hasta que se sale de un cierto estado.
  Luego esta serie de datos es utilizada para poder medir consumos promedio
- de batería (
-\begin_inset Formula $B$
-\end_inset
-
-) y patrones de uso (
-\begin_inset Formula $p$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Cada entrada del log se puede definir mediante el vector 
-\begin_inset Formula $D_{j}=(D_{j}^{1},D_{j}^{2},D_{j}^{3})$
-\end_inset
-
-, donde 
-\begin_inset Formula $D_{j}^{i}$
-\end_inset
-
- son los datos almacenados en la entrada 
-\begin_inset Formula $j$
-\end_inset
-
- para el estado 
-\begin_inset Formula $i$
-\end_inset
-
-.
- 
-\begin_inset Formula $D^{1}$
-\end_inset
-
-es un estado del dispositivo, 
-\begin_inset Formula $D^{2}$
-\end_inset
-
-es el nivel de bateria y 
-\begin_inset Formula $D^{3}$
-\end_inset
-
-es el tiempo insumido.
- Entonces, utilizando la series de datos almacenados y partiendo de que
- consideramos n estados posibles y m entradas en el log, se puede representar
- con el vector 
-\begin_inset Formula $b=(b_{1},\ldots,b_{n})$
-\end_inset
-
-al total de bateria consumida en el estado 
-\begin_inset Formula $i$
-\end_inset
-
-, el cual se obtiene de sumar los 
-\begin_inset Formula $D^{2}$
-\end_inset
-
-de cada entrada del log para dicho estado.
- De igual modo se puede representar el tiempo consumido por el vector 
-\begin_inset Formula $t=(t_{1},\ldots,t_{n})$
-\end_inset
-
-sumando los 
-\begin_inset Formula $D^{3}$
-\end_inset
-
-de cada entrada del log para el estado 
-\begin_inset Formula $i$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Por lo tanto, 
-\begin_inset Formula 
-\[
-b_{i}=\sum_{j=1}^{m}D_{j}^{2}\,(6)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-t_{i}=\sum_{j=1}^{m}D_{j}^{3}\,(7)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Donde 
-\begin_inset Formula $D_{j}^{1}=i$
-\end_inset
-
-.
- Entonces el consumo promedio y patrón de uso para cada usuario, utilizando
- las ecuaciones 
-\begin_inset Formula $(6)$
-\end_inset
-
- y 
-\begin_inset Formula $(7)$
-\end_inset
-
- están definidos por 
-\begin_inset Formula $B_{i}=\frac{b_{i}}{t_{i}},$
-\end_inset
-
-
-\begin_inset Formula $p_{i}=\frac{t_{i}}{\sum_{i=1}^{n}t_{i}},$
-\end_inset
-
-donde 
-\begin_inset Formula $B_{i}$
-\end_inset
-
-es el consumo promedio de bateria en el estado 
-\begin_inset Formula $i$
-\end_inset
-
- y 
-\begin_inset Formula $p_{i}$
-\end_inset
-
- es la porción de tiempo insumida en el estado 
-\begin_inset Formula $i$
-\end_inset
-
-, teniendo en cuenta que 
-\begin_inset Formula $\sum_{i=1}^{n}p_{i}=1$
-\end_inset
-
-.
- Este patrón de uso no solo representa el patron de uso en el pasado, sino
- también la probabilidad de insumir tiempo en ese estado en un futuro.
+ de batería y patrones de uso.
+  Estos patrones de uso no solo representa el patrones de uso en el pasado,
+ sino también la probabilidad de insumir tiempo en ese estado en un futuro.
  Se pueden utilizar modelos de Holt-Winters
 \begin_inset space ~
 \end_inset
@@ -440,24 +176,45 @@ key "Holt1957,Winters1960"
 \end_inset
 
  para predecir patrones de uso basándose en la serie de datos recolectados.
- Por lo tanto se puede calcular el tiempo remanente de vida de la batería
- (
-\begin_inset Formula $T$
+ Por lo tanto se podria calcular el tiempo remanente de vida de la batería.
+\end_layout
+
+\begin_layout Standard
+Otra ejemplo es 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "YeWen2005"
+
 \end_inset
 
-) utilizando la ecuación 
-\begin_inset Formula $(5)$
+, que propone la utilización de modelos estadísticos en línea (on-line)
+ para predecir el tiempo de vida de la bateria, combinando datos históricos
+ de disipación de energía, con mediciones de referencia pre-computadas fuera
+ de línea.
+ Al incorporar mediciones en línea dinámicamente, este enfoque es capaz
+ de hacer predicciones que tengan en cuenta las diferencias de cargas de
+ trabajo, el 
+\begin_inset Quotes eld
 \end_inset
 
- con 
-\begin_inset Formula $B$
+efecto de recuperación
+\begin_inset Quotes erd
 \end_inset
 
- y 
-\begin_inset Formula $p$
-\end_inset
+ que las baterías experimentan cuando se descargan, y el efecto del ciclo
+ de carga que afecta el desempeño de las baterías cuando estas se recargan
+ constantemente.
+\end_layout
 
-.
+\begin_layout Standard
+Predecir el consumo energético en base a patrones de uso, es importante,
+ por ejemplo, para poder informar a los usuarios cuanto tiempo de vida le
+ queda a la bateria de sus dispositivos, basándose en el uso que le está
+ dando.
+ De esta manera el usuario puede por ejemplo, ante un caso de poca vida
+ útil restante, desactivar conexiones, gps, bajar el brillo de la pantalla,
+ etc, para tratar de reducir el consumo energético y alargar el tiempo de
+ vida útil de la bateria de su dispositivo, hasta la próxima carga.
 \end_layout
 
 \begin_layout Section
@@ -472,22 +229,10 @@ nube
 \end_inset
 
 
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Segata2014"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-La idea principal de esta propuesta es delegar el procesamiento de tareas
- computacionalmente costosas a la 
+El procesamiento en la 
 \emph on
 
 \begin_inset Quotes eld
@@ -499,41 +244,88 @@ nube
 
 
 \emph default
-, en vez de hacerlo localmente.
- Se realiza la siguiente suposición: la energía insumida en la transferencia
- de estas tareas hacia la 
+, tambien conocido como 
+\emph on
+Cloud Computing
+\emph default
+, se trata de un paradigma en el cual los recursos computacionales como
+ el procesamiento, memoria y almacenamiento no están físicamente presentes
+ en el lugar en el que se encuentra el usuario, sino que es un provedor
+ de servicios el que administra y provee estos recursos, a los cuales los
+ usuarios acceden vía Internet
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kumar2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Muchos investigadores creen que esta estrategia de delegar el procesamiento
+ a la 
+\emph on
+nube
+\emph default
+, es un excelente candidato para ayudar a reducir el consumo de batería
+ en los dispositivos móviles, pero se debe tener en consideración que esta
+ tarea involucra una comunicación entre los dispositivos y la 
+\emph on
+nube
+\emph default
+.
+ Esta comunicación no es gratis en términos de consumo energético y ancho
+ de banda.
+ Por este motivo es que se debe considerar y analizar la relación costo-benefici
+o entre la cantidad de energía insumida por dicha comunicación, versus la
+ cantidad de energía ahorrada gracias al procesamiento en la 
+\emph on
+nube
+\emph default
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Barbera2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Partiendo de la suposición de que la energía insumida en la comunicación
+ de datos hacia la 
 \emph on
 nube
 \emph default
  y la descarga de los resultados, es menor que la utilizada para el procesamient
-o de dichas tareas con la CPU local.
-\end_layout
-
-\begin_layout Standard
-En este contexto se pueden distinguir dos posibles objetivos de optimización:
+o de dichas tareas con la CPU local, se pueden distinguir dos posibles objetivos
+ de optimización:
 \end_layout
 
 \begin_layout Enumerate
-Minimizar el consumo de bateria del dispositivo para extender el tiempo
+Minimizar el consumo de batería del dispositivo para extender el tiempo
  operativo del mismo
 \end_layout
 
 \begin_layout Enumerate
 La energía consumida por el servidor en la nube para el procesamiento de
- tareas, debe ser también incluída en el cálculo del consumo
-\end_layout
-
-\begin_layout Standard
-Independientemente de las optimizaciones antes mencionadas, también se deben
- obtener los pros y contras entre procesar las tareas de forma local y la
- energía consumida por la tranmisión de forma inalámbrica de los datos hacia
- y desde la nube.
+ tareas, debe ser también incluida en el cálculo del consumo
 \end_layout
 
 \begin_layout Standard
 La clave está en obtener modelos que permitan predecir el consumo energético
- dado un tipo de tecnología de transmición, como Wifi, 3G, 2G, la proporción
- de señar por ruido (SNR) y la cantidad de datos a ser transmitidos.
+ dado un tipo de tecnología de transmisión, como Wifi, 3G, 2G, la proporción
+ de señal por ruido (SNR) y la cantidad de datos a ser transmitidos.
  En conjunto, la predicción del consumo energético requerido para procesar
  una tarea de forma local y remota, constituyen la piedra fundamental para
  una nueva generación aplicaciones eficientes en cuanto al consumo energético.
@@ -543,161 +335,236 @@ La clave está en obtener modelos que permitan predecir el consumo energético
 Una vez obtenidos los modelos de consumo energético, pueden ser utilizados
  para decidir cuando conviene que una tarea sea procesada de forma remota
  o local.
-\end_layout
-
-\begin_layout Subsection
-Entorno de medición y metodología
-\end_layout
-
-\begin_layout Standard
-El primer paso para realizar mediciones de energía es configurar y validar
- un entorno de medición.
- En cuanto a la metodología de medición, debido a la falta de funcionalidad
- del sistema operativo Android (utilizado para la prueba) la unica posibilidad
- es conectado un dispositivo de medición física al teléfono inteligente.
- La manera más común es mediante la conexión de un voltímetro y un medidor
- de amperios entre la batería y el teléfono Cuando se utilizan las API de
- Android, en cambio, la única métrica que se puede recoger es el porcentaje
- de batería consumido.
-\end_layout
-
-\begin_layout Standard
-Se utiliza entonces un voltimetro especial, que permite conectarlo a una
- computadora para grabar los resultados obtenidos.
- Básicamente, se pueden emplear dos estrategias de muestreo.
- La primera es donde un valor instantáneo de la muestra se mide, mientras
- que con la segunda estrategia se registra el promedio a lo largo todo el
- periodo de muestreo.
- El primer método es el mas utilizado en el contexto del problema, ya que
- las tecnologías y protocolos subyacentes operan en algunos órdenes de magnitud
- más rápidos que el intervalo de muestreo.
- Por lo tanto, una enorme cantidad de repeticiones serían necesarias con
- el fin de obtener resultados significativos.
- El segundo método, que calcula la potencia media durante el intervalo de
- muestreo, es el mas adecuado, ya que el principal interés reside en conocer
- el consumo total de energía, que es a su vez completamente reflejado por
- las muestras promediadas.
-\end_layout
-
-\begin_layout Standard
-Con el fin de realizar mediciones reproducibles, se automatiza el proceso
- de prueba para que no se requiera ninguna interacción con el teléfono durante
- el curso de las mediciones.
- Para este motivo se utiliza una aplicación para Android que permite definir
- una campaña de medición en un formato de texto simple.
- La aplicación requiere permisos especiales para evitar ser interrumpida
- cuando el teléfono cambia al modo de espera.
-\end_layout
-
-\begin_layout Standard
-Para definir una campaña de medición se especifican una serie de archivos
- a ser descargados o cargados, y tiempos de espera entre cada transferencia.
- Estos tiempos de espera son importantes especialmente en mediciones que
- involucren redes 3G, donde el dispositivo puede continuar en un estado
- de alto consumo energético aún luego de que la transferencia del archivo
- se haya completado.
- Este puede ser el caso en el que el dispositivo mantiene una conexión activa,
- aunque en reposo, con el proveedor, produciendo un consumo de energía adicional
- el cual debe ser tenido en cuenta en las mediciones.
-\end_layout
-
-\begin_layout Standard
-De esta manera, realizando pruebas con diferentes tamaños de archivo, 10MB,
- 20MB y 50MB, y diversas tecnologías de transmisión, 2G, 3G y WiFi se construye
- un modelo de consumo energético que permite obtener un indicativo de la
- energía consumida para cargar o descargar una cierta cantidad de datos
- utilizando alguna de las tecnologías de comunicación inalámbricas disponibles.
- Dado que existe una relación directa entre la cantidad de datos enviados
- y el consumo energético, el modelo se puede representar de la siguiente
- manera:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $[J]=\beta\, X[MB]$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-utilizando ambas, regresión lineal (para obtener 
-\begin_inset Formula $\beta_{avg}$
-\end_inset
-
-, el consumo medio de energía por MB) y la regresión cuantílica (para obtener
- 
-\begin_inset Formula $\beta_{10}$
-\end_inset
-
- y 
-\begin_inset Formula $\beta_{90}$
-\end_inset
-
-, el percentil 10 y 90) para ajustar los parámetros.
- La ventaja de la regresión cuantílica por sobre solo proporcionar la desviación
- estándar, por ejemplo, es que considera que el 80% de los resultados caen
- en el intervalo dado.
-\end_layout
-
-\begin_layout Standard
-Luego, utilizando este modelo, se puede comparar el consumo energético necesario
- para procesar una tarea de forma remota, con la cantidad de energía consumida
- para llevar a cabo la misma tarea de forma local y tomar la decisión de
- si conviene que la tarea se procesada de forma remota o local.
-\end_layout
-
-\begin_layout Section
-Manejo inteligente de métodos de localización, para optimizar el consumo
- energético
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "KaisenLin2010"
+key "Segata2014"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Ventajas y desafíos de delegar tareas a la 
+\emph on
+nube
+\end_layout
+
+\begin_layout Standard
+A continuación se enumeran las ventajas que se pueden obtener al delegar
+ tareas a la 
+\emph on
+nube
+\emph default
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Dinh2013"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NiroshinieF2013"
 
 \end_inset
 
 
 \end_layout
 
+\begin_layout Enumerate
+Extender la vida útil de la batería.
+ La técnica de delegar tareas a la 
+\emph on
+nube
+\emph default
+, tiene como propósito migrar tareas costosas en cuanto a procesamiento,
+ desde los dispositivos móviles de recuros limitados, a máquinas con mayor
+ poder de procesamiento, como son los servidores en la 
+\emph on
+nube
+\emph default
+.
+ Esto evita insumir tiempo de procesamiento en los dispositivos móviles,
+ lo cual se traduce directamente en un mayor consumo energético, proporcional
+ al tiempo que demore dicho procesamiento.
+ Por otro lado, muchas aplicaciones móviles aprovechan la ventaja de la
+ migración de tareas y procesamiento remoto.
+ Por ejemplo, delegando tareas de procesamiento de imágenes a un servidor
+ remoto, se puede reducir en un 41% el consumo energético de un dispositivo
+ móvil.
+\end_layout
+
+\begin_layout Enumerate
+Mejorar la capacidad de almacenamiento de datos y el poder de procesamiento.
+ La capacidad de almacenamiento también es restringida en los dispositivos
+ móviles.
+ La idea de delegar tareas a la 
+\emph on
+nube
+\emph default
+ permite a los usuarios acceder a, o almacenar, grandes cantidades de datos
+ en la 
+\emph on
+nube
+\emph default
+ a través de redes inalámbricas.
+ Tambien ayuda a reducir el costo de procesamiento de tareas intensivas
+ desde el punto de vista computacional, que demandan mucho tiempo y energía
+ cuando se ejecutan en dispositivos con recursos limitados.
+\end_layout
+
+\begin_layout Enumerate
+Mejorar la confiabilidad.
+ Almacenar o ejecutar aplicaciones en la nube es una manera efectiva de
+ mejorar la confiabilidad, porque los datos y aplicaciones son almacenados
+ y respaldados en varias computadoras.
+ Esto reduce las probabilidades de pérdida de datos en los dispositivos
+ móviles.
+\end_layout
+
 \begin_layout Standard
-Las aplicaciones móviles a menudo necesitan datos de localización, para
- actualizar localmente información relevante y adaptar el contexto de dispositiv
+Así también se plantea la siguiente pregunta: ¿delegar tareas a la 
+\emph on
+nube
+\emph default
+ es la solución definitiva al problema energético en los dispositivos móviles?
+ La respuesta es no, al menos no del todo.
+ Mas allá de su tremendo potencial para lograr un ahorro energético, se
+ deben considerar varias cuestiones de gran importancia
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kumar2010"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Dinh2013"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NiroshinieF2013"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+Privacidad y seguridad en la 
+\emph on
+nube
+\emph default
+.
+ Los datos y las aplicaciones ya no se almacenan en los dispositivos de
+ los usuarios, sino que son almacenados y administrados en la 
+\emph on
+nube
+\emph default
+, por lo que la seguridad y privacidad depende de la administración que
+ se provea en la 
+\emph on
+nube
+\emph default
+.
+ Un error o brecha de seguridad en la nube puede resultar en una brecha
+ de privacidad, dejando expuestos los datos de los usuarios sin su consentimient
 o.
- Aunque la mayoría de los teléfonos inteligentes incluyen un receptor GPS,
- su uso es en general restringido debido de alto consumo de la batería.
- Esta propuesta presenta un servicio para obtener la localización, que ayuda
- a reducir el consumo de batería.
- El diseño se basa en el hecho de que precisión de la ubicación requerida
- varía según el lugar, por lo tanto métodos de localización con menor costo
- energético y menos precisión, como aquellos basados en WiFi y triangulación
- de antenas celulares, a veces pueden ser utilizados.
- Este método determina automáticamente la precisión requerida para aplicaciones
- basadas en búsquedas móviles.
- Mienstras el usuario se mueve, tanto los requisitos de precisión como los
- errores en los sensores de ubicación cambian.
- Esta propuesta monitorea constantemente el gasto de energía para satisfacer
- los distintos requisitos de precisión, utilizando los sensores disponibles,
- con el fin de no sólo proporcionar un importante ahorro energético, sino
- también mejorar la precisión alcanzada (dado que se utilizan múltiples
- sensores).
+ Los proveedores de servicios en la 
+\emph on
+nube
+\emph default
+, muchas veces, trabajan con productos y/o servicios de terceros y no hay
+ garantías de cómo estos terceros protegen los datos.
+ Por otro lado, como los lugares físicos de almacenamiento son en general
+ desconocidos por los usuarios, resulta difícil determinar que leyes aplican
+ para proteger la privacidad de los datos.
+ Por este motivo, hay cierto tipo de información que no debe almacenarse
+ en la nube, sin considerar previamente las implicancias que esto tiene,
+ en cuanto a privacidad y seguridad.
+ Una posible solución puede ser encriptar los datos antes de enviarlos,
+ pero se requeriría un procesamiento extra en los dispositivos móviles,
+ lo que produciría un consumo de energía adicional.
+ Por esta razón que en ciertos casos, delegar tareas a la nube puede no
+ resultar beneficioso en cuanto al ahorro energético, siendo mas eficiente
+ realizar dichas tareas en el dispositivo mismo.
 \end_layout
 
-\begin_layout Subsection
-Observaciones generales
+\begin_layout Itemize
+Confiabilidad.
+ Otro potencial problema con delegar tareas a la nube es la confiabilidad.
+ La dependencia de las redes inalámbricas, implica que en algunos casos
+ cuando la conectividad es limitada, delegar tareas a la nube no sea posible
+ y mucho menos eficiente en cuanto al consumo energético.
+\end_layout
+
+\begin_layout Itemize
+Datos en tiempo real.
+ Algunas aplicaciones requieren datos en tiempo real.
+ Por ejemplo una aplicación de ajedrez, para la cual delegar la tarea de
+ procesamiento de cada jugada a la nube, puede ayudar a ahorrar energia,
+ pero esto depende del tamaño de los datos enviados y recibidos.
+ Si se trata de un gran volumen de datos, puede que convenga particionarlos,
+ de modo de reducir la energía consumida en la transmisión de los datos
+ desde y hacia la nube.
 \end_layout
 
 \begin_layout Standard
-Se tienen en consideración las siguientes observaciones:
+Se puede concluir entonces, que delegar tareas a la nube puede potencialmente
+ producir un ahorro de energía en los dispositivos móviles.
+ Sin embargo, no todas las aplicaciones se comportan de manera eficiente,
+ desde el punto de vista del consumo energético, cuando se migran a la nube.
+ Los servicios provistos por la nube para dispositivos móviles, deberian
+ ser significativamente diferentes de aquellos provistos para computadoras
+ de escritorio, porque deberían ofrecer un ahorro energético.
+ Los servicios deben considerar, además, la energia extra que se necesita
+ para mantener la privacidad, seguridad, confiabilidad y para la comunicación
+ de los datos, antes de delegar tareas a la nube.
+\end_layout
+
+\begin_layout Section
+Manejo inteligente de métodos de localización, para optimizar el consumo
+ energético
+\end_layout
+
+\begin_layout Standard
+Una característica importante de un dispositivo móvil moderno, es que puede
+ obtener su propia posición.
+ No solo para poder utilizarla de forma local, sino también para aplicaciones
+ remotas que requieren un seguimiento del dispositivo, para actualizar localment
+e información relevante y adaptar el contexto de este.
+ Aunque la mayoría de los teléfonos inteligentes incluyen un receptor GPS,
+ su uso es en general restringido debido al alto consumo de batería.
+\end_layout
+
+\begin_layout Standard
+Para ayudar a reducir el consumo energético en la obtención de la localización,
+ la mayoría de las propuestas parten del hecho de que:
 \end_layout
 
 \begin_layout Enumerate
 Las aplicaciones que utilizan localización no siempre requieren la mas alta
  precisión, como la que se puede lograr mediante un GPS.
  La precisión requerida varía a medida que el usuario se mueve, por lo que
- se pueden aprovechar estas variaciones con el fin de ahorrar energia.
+ se pueden aprovechar estas variaciones con el fin de ahorrar energía.
 \end_layout
 
 \begin_layout Enumerate
@@ -710,106 +577,155 @@ Un teléfono dispone de múltiples modalidades para medir la ubicación aparte
  de energía.
 \end_layout
 
-\begin_layout Subsection
-Solución propuesta
+\begin_layout Standard
+Un ejemplo de esto es 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fused_Location"
+
+\end_inset
+
+, una de las APIs que provee Google para sistema operativo Android, que
+ permite obtener la localización del dispositivo optimizando el consumo
+ de la batería, utilizando la información proveniente de todos los sensores
+ de comunicación en el dispositivo, incluyendo redes WiFi, GPS y redes celulares.
+ 
 \end_layout
 
 \begin_layout Standard
-El flujo general del sistema se puede describir de la siguiente manera:
-\end_layout
+Otro ejemplo es 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KaisenLin2010"
 
-\begin_layout Itemize
-Entrada
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Cálculo de la precisión dinámica requerida: para aquellas aplicaciones basadas
- en búsquedas móviles se calcula en base a las entidades buscadas, pero
- puede darse el caso de que la aplicación especifique directamente la precisión
- requerida
-\end_layout
-
-\begin_layout Itemize
-Modelo energético de cada sensor: representa la cantidad de energía utilizada
- por cada sensor para obtener la localización del dispositivo.
-\end_layout
-
-\begin_layout Itemize
-Modelo de precisión dinámica de cada sensor: representa la calidad de la
- información sobre la localización que cada uno ofrece.
- Un desafío clave en este punto, es que la disponibilidad y exactitud de
- los sensores de localización varía con la ubicación.
- Por ejemplo, el GPS puede no funcionar en interiores o en áreas con vista
- de satélite obstruido, la triangulación WiFi puede funcionar mejor cuando
- el número de puntos de acceso es alta, etc.
- Este modelo tiene en cuenta tales efectos.
-\end_layout
-
-\begin_layout Itemize
-Algoritmo de selección de sensor: determina el sensor a ser utilizado en
- cada caso.
- Se utilizan un modelo de estimación Bayesiana para combinar los datos del
- sensor con la localización predecida y asi proveer una estimación de máxima
- verosimilitud.
-\end_layout
-
-\begin_layout Itemize
-Después de que se ha seleccionado un sensor de localización, se gasta energía
- para utilizar ese sensor y los datos producidos por dicho sensor se utilizarán
- para generar una estimación de la localización.
- La estimación de la localización se envía a la aplicación cliente.
- Además, los datos de localización y sensores pueden ser usados para mejorar
- el modelo de la precisión del sensor.
+, que propone un servicio para obtener la localización privilegiando un
+ bajo consumo energético, determinando automáticamente la precisión requerida
+ para las aplicaciones basadas en busquedas móviles.
+ Mientras el usuario se mueve, tanto los requisitos de precisión como los
+ errores en los sensores de ubicación cambian.
+ Esta propuesta monitorea constantemente el gasto de energía para satisfacer
+ los distintos requisitos de precisión, utilizando los sensores disponibles,
+ con el fin de no sólo proporcionar un importante ahorro energético, sino
+ también mejorar la precisión alcanzada (dado que se utilizan múltiples
+ sensores).
 \end_layout
 
 \begin_layout Standard
-De esta manera se trata de liberar a la aplicaciones de lidiar con los errores
- de localización y el manejo del consumo energético, haciendo un uso eficiente
- de la batería.
+También podemos mencionar el trabajo 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Narz2013"
+
+\end_inset
+
+, donde se proponen estrategias de alto nivel para lograr un ahorro energético
+ en la obtención de la localización, utilizando inteligentemente, no utilizando
+ o intercambiando entre funciones y operaciones provistas por el sistema
+ operativo, sin pensar en optimizaciones a nivel hardware.
+ En particular se basa en evitar el uso del GPS siempre que sea posible,
+ utilizando monitoreo de regiones (una técnica que utiliza funciones de
+ transferencia del teléfono para redes inalambricas y antenas celulares,
+ para detectar un posible movimiento) o posicionamiento basado en redes
+ WiFi o redes celulares cuando el dispositivo no se está moviendo, por ejemplo
+ durante la noche mientras el usuario duerme o mientras está en la oficina
+ trabajando.
+\end_layout
+
+\begin_layout Standard
+De esta manera se trata de liberar a las aplicaciones de lidiar con los
+ errores de localización y el manejo del consumo energético, haciendo un
+ uso eficiente de la batería.
 \end_layout
 
 \begin_layout Section
-Predicción de la próxima ubicación del usuario y que aplicación utilizará
-\begin_inset space ~
+Identificación de patrones comportamentales en sistemas sensibles al contexto
+\end_layout
+
+\begin_layout Standard
+Los sistemas para dispositivos móviles sensibles al contexto, han ganado
+ mucha popularidad en los últimos años.
+ Los dispositivos móviles están equipados con una variedad de sensores que
+ los hace muy potentes desde un punto de vista computaional, permitiendo
+ el procesamiento en tiempo real de los datos obtenidos por dichos sensores.
+ Sin embargo, muchas aplicaciones sensibles al contexto se basan en información
+ estática, con arquitecturas centralizadas y aquellas que son diseñadas
+ para dispositivos móviles se focalizan principalmente en recursos limitados
+ en términos de CPU y memoria, lo cual hoy en dia no es un gran problema.
+ Si bien siempre se busca que las aplicaciones móviles sensibles al contexto
+ sean lo mas sencillas posibles, también es deseable que sean lo suficientemente
+ potentes para no solo resolver tareas simples de identificación de contexto,
+ sino también realizar razonamientos mas complejos, como aprender sobre
+ el comportamiento de los usuarios, identificando patrones de uso, para
+ luego extraer conclusiones o predecir acciones.
+ Aunque esto último puede resultar en sistemas con un alto consumo energético.
+\end_layout
+
+\begin_layout Standard
+Un ejemplo de esto es la solución propuesta en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bobek2013"
+
 \end_inset
 
+ que tiene como principal objetivo minimizar el consumo energético del sistema,
+ aprendiendo hábitos de uso de los diferentes sensores provistos.
+ Incorpora la idea de un dispositivo móvil como una entidad autónoma sensible
+ al contexto, equipada con una capa inteligente de intercambio (middleware)
+ y otra capa de inferencia basada en el contexto.
+ La capa inteligente de intercambio actúa como un intermediario entre la
+ información del contexto y la capa de inferencia.
+ Esta última tiene la capacidad de aprender patrones de uso de los sensores
+ del dispositivo y ajustar los tiempos de muestreo para mejorar el consumo
+ energético del sistema.
+ La arquitectura general del sistema se puede describir de la siguiente
+ manera:
+\end_layout
 
+\begin_layout Enumerate
+capa de sensores: responsable de obtener información de los diferentes sensores
+ del dispositivo (GPS, Acelerómetro, Bluetooth) y realizar un procesamiento
+ inicial de esta información
+\end_layout
+
+\begin_layout Enumerate
+capa de inferencia: responsable del razonamiento basado en el contexto y
+ de administrar el conocimiento adquirido
+\end_layout
+
+\begin_layout Enumerate
+capa inteligente de intercambio: actúa como un intermediario inteligente
+ entre la capa de sensores y la capa de inferencia.
+\end_layout
+
+\begin_layout Standard
+Por último tilizando un algoritmo de regresión logitica se crea un modelo
+ para aprender sobre el uso de un sensor, basándose en datos históricos.
+ Esto permite ajustar los tiempos de muestreo de los sensores, de acuerdo
+ a la probabilidad de uso.
+ Las pruebas en dispositivos reales muestran que se puede ganar un 50% de
+ ahorro energético usando este algoritmo.
+\end_layout
+
+\begin_layout Standard
+Otra ejemplo en la detección de patrones en sistemas sensibles al contexto
+ es 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "TrinhMinhTriDoa2013"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Esta propuesta, aunque no está ligada al ahorro energético, si esta relacionada
- con nuestro trabajo, dado que se basa en identificar patrones comportamentales
- para cada usuario para tratar de predecir a donde irá el usuario y que
- aplicación va a usar en los próximo diez minutos, haciendo uso de la informació
-n contextual obtenida desde los diversos sensores que posee un teléfono
- inteligente, tales como localización, registros de llamadas, proximidad
- con otros dispositivos, hora y aplicaciones utilizadas.
-\end_layout
-
-\begin_layout Standard
-Este enfoque permite modelar la interacción entre las variables predichas,
- para estudiar las relaciones entre el lugar donde un usuario está y la
- posibilidad de que éste realice una llamada telefónica, utilice la cámara,
- etc.
- Por otra parte, otras fuentes de información, como la lista de dispositivos
- Bluetooth cercanos o información del sistema, también se puede explotar
- con el fin de enriquecer el contexto del usuario y mejorar los modelos
- de predicción.
-\end_layout
-
-\begin_layout Subsection
-Solución propuesta
-\end_layout
-
-\begin_layout Standard
-Se utiliza un set de datos reales obtenidos del uso que diversos usuarios
+, pero sin considerar el ahorro energético como principal objetivo.
+ Esta propuesta se basa en identificar patrones comportamentales para cada
+ usuario, para tratar de predecir a donde irá el usuario y que aplicación
+ va a usar en los próximos diez minutos, haciendo uso de la información
+ contextual obtenida desde los diversos sensores que posee un teléfono inteligen
+te, tales como localización, registros de llamadas, proximidad con otros
+ dispositivos, hora y aplicaciones utilizadas.
+ Utiliza un conjunto de datos reales obtenidos del uso que diversos usuarios
  dieron a sus dispositivos, proveyendo información tal como uso de GPS,
  Bluetooth, puntos de acceso WiFi, acelerómetro, aplicaciones utilizadas
  y registros de llamadas.
@@ -818,142 +734,57 @@ Se utiliza un set de datos reales obtenidos del uso que diversos usuarios
  que los usuarios se mantienen por al menos diez minutos, con un radio de
  cien metros para hacer frente a la existencia de ruido en la obtención
  de los datos de localización y con ayuda de los usuarios se le asignan
- etiquetas para identificar cada una de las regiones, elegiendo entre 22
- mutalmente excluyente etiquetas, incluyendo una etiqueta 
-\begin_inset Quotes eld
-\end_inset
-
-Otros
-\begin_inset Quotes erd
-\end_inset
-
- para aquellos casos en el que ninguna de las 21 restantes sea apropidada.
+ etiquetas para identificar cada una de las regiones.
  Se toma un máximo de ocho regiones por usuario.
  Cinco de estas regiones corresponden a las mas visitadas y las tres restantes
  son elegidas al azar de entre el 10% de las menos frecuentadas.
-\end_layout
-
-\begin_layout Standard
-Para reducir el número de etiquetas, se agrupan en 8 grupos mas generales:
-\end_layout
-
-\begin_layout Itemize
-Casa
-\end_layout
-
-\begin_layout Itemize
-Trabajo
-\end_layout
-
-\begin_layout Itemize
-Casa-de-amigo: casa de un amigo o familiar
-\end_layout
-
-\begin_layout Itemize
-Trabjo-de-amigo: lugar de trabajo o escuela de un amigo o familiar
-\end_layout
-
-\begin_layout Itemize
-Restaurante
-\end_layout
-
-\begin_layout Itemize
-Estacion-Transporte: lugar estático como una estación de subte, parada de
- colectivo, etc.
-\end_layout
-
-\begin_layout Itemize
-Shopping
-\end_layout
-
-\begin_layout Itemize
-Entretenimiento
-\end_layout
-
-\begin_layout Standard
-Aquellas regiones sin etiquetar, o que no caigan dentro de ninguna de estas
- 8 etiquetas, serán consideradas dentro de la etiqueta 
-\begin_inset Quotes eld
-\end_inset
-
-Otros
-\begin_inset Quotes erd
-\end_inset
-
-.
- Adicionalmente, se tienen dos categorías especiales:
-\end_layout
-
-\begin_layout Enumerate
-Transición: para un contexto de viaje
-\end_layout
-
-\begin_layout Enumerate
-Sin localización: para estados de localización desconocida debido a errores
- o falta de información.
-\end_layout
-
-\begin_layout Standard
-Mientras que 
-\begin_inset Quotes eld
-\end_inset
-
-Transición
-\begin_inset Quotes erd
-\end_inset
-
- está considerado dentro de las etiquetas a predecir, el caso de 
-\begin_inset Quotes eld
-\end_inset
-
-Sin localización
-\begin_inset Quotes erd
-\end_inset
-
- no es considerado para las predicciones.
-\end_layout
-
-\begin_layout Standard
-Dado que los usuarios usan un número limitado de aplicaciones de su dispositivo,
- solo se consideran para las predicciones aquellas mas relevantes, utilizadas
+ Dado que los usuarios usan un número limitado de aplicaciones de su dispositivo
+, solo se consideran para las predicciones aquellas mas relevantes, utilizadas
  al menos una vez a la semana.
-\end_layout
-
-\begin_layout Standard
-Toda la información antes mencionada se agrupa en intervalos de tiempo de
- 10 minutos de duración y se clasifica en seis categorías diferentes:
-\end_layout
-
-\begin_layout Enumerate
-Localización
-\end_layout
-
-\begin_layout Enumerate
-Aplicaciones
-\end_layout
-
-\begin_layout Enumerate
-Tiempo
-\end_layout
-
-\begin_layout Enumerate
-Registro de llamadas
-\end_layout
-
-\begin_layout Enumerate
-Proximidad Bluetooth
-\end_layout
-
-\begin_layout Enumerate
-Estado interno
-\end_layout
-
-\begin_layout Standard
-Estas categorías juntas describen el uso general del dispositivo para cada
- usuario.
- Luego, utiliando modelos estadísticos se puede predecir hacia donde se
+ Luego, utilizando modelos estadísticos se puede predecir hacia donde se
  va a dirigir un usuario y que aplicación va a utilizar, basándose en el
  estado actual y la probabilidad de moverse hacia otro estado.
+\end_layout
+
+\begin_layout Standard
+En la propuesta 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Beach2010"
+
+\end_inset
+
+ se presenta un sistema capaz de integrar información proveniente de diversas
+ redes sociales y sensores del dispositivo móvil, para generar datos de
+ salida sensibles al contexto no solo para individuos sino también para
+ grupos.
+ La arquitectura del sistema está organizada en múltiples etapas y clases
+ de datos recolectados de los diversos sensores que posee el dispositivo,
+ además de datos obtenidos de redes sociales como Faceboo, Twitter, LinkedIn,
+ MySpace, etc.
+ En una primera etapa estos datos son organizados, procesados y filtrados.
+ En la segunda etapa, se utiliza un conjunto de clasificadores que operan
+ sobre los datos, para tratar de extrarer información contextual relevante.
+ Por ejemplo, un clasificador puede ser utilizado para encontrar el estilo
+ de música preferido por un individuo, analizando sus patrones comportamentales,
+ mientras que otro clasificador puede buscar como medir una característica
+ asociada a un grupo de individuos, como puede ser que tan cercanos son
+ unos con otros en relación a la amistad.
+ Basándose en estas inferencias a alto nivel, como también en los datos
+ sin procesar, en una tercer etapa un motor de recomendaciones utiliza técnicas
+ de 
+\emph on
+data mining
+\emph default
+, para generar como resultado acciones sensibles al contexto.
+ Estas son generadas tanto para individuos como para grupos, dependiendo
+ de la circunstancia.
+\end_layout
+
+\begin_layout Standard
+De esta manera, los dispositivos móviles son capaces de aprender automáticamente
+ sobre el contexto en el que está el usuario y adaptarse al mismo, mejorando
+ así la usabilidad del dispositivo y las funcionalidades de sus aplicaciones.
 \end_layout
 
 \end_body

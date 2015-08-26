@@ -36,7 +36,7 @@
 \use_esint 1
 \use_mhchem 1
 \use_mathdots 1
-\cite_engine natbib_authoryear
+\cite_engine natbib_numerical
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -132,7 +132,7 @@ Restricciones de calidad
 
 \begin_layout Standard
 Como primera medida se desea que la ejecución de la aplicación no interfiera
- en las medidas obtenidas relacionadas el rendimiento de la batería, por
+ en las medidas obtenidas relacionadas al rendimiento de la batería, por
  lo tanto se pone especial énfasis en un rendimiento óptimo a la hora de
  obtener y almacenar la información del dispositivo.
  Por este motivo es que se debe disminuir lo máximo posible el procesamiento
@@ -163,7 +163,7 @@ Dada la problemática planteada, se toman en consideración algunas restriccione
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename D:/Programación/Tesis Ingenieria Sistemas/Repositorio/Lyx/Informe Cap 3 y 4/Diagrama de Clases/ClenteServidor.jpg
+	filename ../imagenes/ClenteServidor.jpg
 
 \end_inset
 
@@ -232,24 +232,26 @@ Se decidió utilizar SOAP WebService para realizar la comunicación de datos
 code-first
 \emph default
 
-\begin_inset Note Note
-status open
+\begin_inset space ~
+\end_inset
 
-\begin_layout Plain Layout
-referencia
-\end_layout
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sosnoski-Code-First"
 
 \end_inset
 
 .
  Este permite la definición de un servicio a partir del código, por lo que
  no es necesario tener ningún conocimiento sobre WSDL
-\begin_inset Note Note
-status open
+\begin_inset space ~
+\end_inset
 
-\begin_layout Plain Layout
-ref:ErikChristensen2001
-\end_layout
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ErikChristensen2001"
 
 \end_inset
 
@@ -285,33 +287,30 @@ Una vez puesto en marcha el sistema, este se encargara de recolectar una
  gran cantidad de información relacionada a varios usuarios.
  Esta información consistirá en un elevado volumen da datos, los cuales
  deben se almacenados de una manera ordenada y de fácil acceso, es por este
- motivo que se decidió utilizar una base de datos relacional.
- (
-\begin_inset Note Note
-status open
+ motivo que se decidió utilizar una base de datos relacional
+\begin_inset space ~
+\end_inset
 
-\begin_layout Plain Layout
-ref Ramirez2008
-\end_layout
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ramirez2008"
 
 \end_inset
 
-).
+.
 \end_layout
 
 \begin_layout Standard
 La estrategia a la hora de diseñar una estructura de bases de datos, estará
  orientada a minimizar el espacio físico utilizado, normalizando (
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-ref normalizacion
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Microsoft-NormalizationBD"
 
 \end_inset
 
- )las tablas de la manera más conveniente en términos de practicidad, debido
+) las tablas de la manera más conveniente en términos de practicidad, debido
  a que el sistema almacenara una abundante cantidad de información diaria,
  esta estrategia nos evita un crecimiento exponencial del espacio de almacenamie
 nto.

@@ -9,7 +9,9 @@
 
 \usepackage{multirow}
 \usepackage{colortbl}
-
+\usepackage{hyperref}
+\usepackage{xstring}
+\usepackage[yyyymmdd,hhmmss]{datetime}
 \usepackage{pslatex}
 \usepackage{txfonts}
 \usepackage[small,bf]{caption}
@@ -53,7 +55,7 @@
 \float_placement h
 \paperfontsize 11
 \spacing onehalf
-\use_hyperref false
+\use_hyperref true
 \pdf_bookmarks true
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
@@ -183,7 +185,7 @@ Director: Prof.
 \align center
 
 \size larger
-Co-Director: Ing.
+Co-Director: Dr.
  Juan Manuel Rodríguez 
 \end_layout
 
@@ -219,20 +221,7 @@ Ingeniero de Sistemas
 \align center
 
 \size large
-Tandil, 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\align center
-
-\size large
-Fecha
-\end_layout
-
-\end_inset
-
-
+Tandil, 08/25/15
 \end_layout
 
 \begin_layout Standard
