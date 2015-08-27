@@ -121,7 +121,7 @@ En este trabajo se propone LoguinUse, una aplicación destinada a recopilar
 
 \begin_layout Standard
 En este capítulo se detallaran los diferentes aspectos tenidos en cuenta
- para el desarrollo del sistema, asi como las restricciones de calidad en
+ para el desarrollo del sistema, así como las restricciones de calidad en
  las cuales se base el diseño y estrategias generales utilizadas en cada
  componente del sistema.
 \end_layout
@@ -293,7 +293,7 @@ Una vez puesto en marcha el sistema, este se encargara de recolectar una
 
 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Ramirez2008"
 
 \end_inset

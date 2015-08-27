@@ -520,7 +520,7 @@ Confiabilidad.
 Datos en tiempo real.
  Algunas aplicaciones requieren datos en tiempo real.
  Por ejemplo una aplicación de ajedrez, para la cual delegar la tarea de
- procesamiento de cada jugada a la nube, puede ayudar a ahorrar energia,
+ procesamiento de cada jugada a la nube, puede ayudar a ahorrar energía,
  pero esto depende del tamaño de los datos enviados y recibidos.
  Si se trata de un gran volumen de datos, puede que convenga particionarlos,
  de modo de reducir la energía consumida en la transmisión de los datos
@@ -532,10 +532,10 @@ Se puede concluir entonces, que delegar tareas a la nube puede potencialmente
  producir un ahorro de energía en los dispositivos móviles.
  Sin embargo, no todas las aplicaciones se comportan de manera eficiente,
  desde el punto de vista del consumo energético, cuando se migran a la nube.
- Los servicios provistos por la nube para dispositivos móviles, deberian
+ Los servicios provistos por la nube para dispositivos móviles, deberían
  ser significativamente diferentes de aquellos provistos para computadoras
  de escritorio, porque deberían ofrecer un ahorro energético.
- Los servicios deben considerar, además, la energia extra que se necesita
+ Los servicios deben considerar, además, la energía extra que se necesita
  para mantener la privacidad, seguridad, confiabilidad y para la comunicación
  de los datos, antes de delegar tareas a la nube.
 \end_layout
@@ -602,7 +602,7 @@ key "KaisenLin2010"
 
 , que propone un servicio para obtener la localización privilegiando un
  bajo consumo energético, determinando automáticamente la precisión requerida
- para las aplicaciones basadas en busquedas móviles.
+ para las aplicaciones basadas en búsquedas móviles.
  Mientras el usuario se mueve, tanto los requisitos de precisión como los
  errores en los sensores de ubicación cambian.
  Esta propuesta monitorea constantemente el gasto de energía para satisfacer
@@ -626,7 +626,7 @@ key "Narz2013"
  operativo, sin pensar en optimizaciones a nivel hardware.
  En particular se basa en evitar el uso del GPS siempre que sea posible,
  utilizando monitoreo de regiones (una técnica que utiliza funciones de
- transferencia del teléfono para redes inalambricas y antenas celulares,
+ transferencia del teléfono para redes inalámbricas y antenas celulares,
  para detectar un posible movimiento) o posicionamiento basado en redes
  WiFi o redes celulares cuando el dispositivo no se está moviendo, por ejemplo
  durante la noche mientras el usuario duerme o mientras está en la oficina
@@ -647,12 +647,12 @@ Identificación de patrones comportamentales en sistemas sensibles al contexto
 Los sistemas para dispositivos móviles sensibles al contexto, han ganado
  mucha popularidad en los últimos años.
  Los dispositivos móviles están equipados con una variedad de sensores que
- los hace muy potentes desde un punto de vista computaional, permitiendo
+ los hace muy potentes desde un punto de vista computacional, permitiendo
  el procesamiento en tiempo real de los datos obtenidos por dichos sensores.
  Sin embargo, muchas aplicaciones sensibles al contexto se basan en información
  estática, con arquitecturas centralizadas y aquellas que son diseñadas
  para dispositivos móviles se focalizan principalmente en recursos limitados
- en términos de CPU y memoria, lo cual hoy en dia no es un gran problema.
+ en términos de CPU y memoria, lo cual hoy en día no es un gran problema.
  Si bien siempre se busca que las aplicaciones móviles sensibles al contexto
  sean lo mas sencillas posibles, también es deseable que sean lo suficientemente
  potentes para no solo resolver tareas simples de identificación de contexto,
@@ -701,7 +701,7 @@ capa inteligente de intercambio: actúa como un intermediario inteligente
 \end_layout
 
 \begin_layout Standard
-Por último tilizando un algoritmo de regresión logitica se crea un modelo
+Por último utilizando un algoritmo de regresión logística se crea un modelo
  para aprender sobre el uso de un sensor, basándose en datos históricos.
  Esto permite ajustar los tiempos de muestreo de los sensores, de acuerdo
  a la probabilidad de uso.
@@ -760,11 +760,11 @@ key "Beach2010"
  grupos.
  La arquitectura del sistema está organizada en múltiples etapas y clases
  de datos recolectados de los diversos sensores que posee el dispositivo,
- además de datos obtenidos de redes sociales como Faceboo, Twitter, LinkedIn,
+ además de datos obtenidos de redes sociales como Facebook, Twitter, LinkedIn,
  MySpace, etc.
  En una primera etapa estos datos son organizados, procesados y filtrados.
  En la segunda etapa, se utiliza un conjunto de clasificadores que operan
- sobre los datos, para tratar de extrarer información contextual relevante.
+ sobre los datos, para tratar de extraer información contextual relevante.
  Por ejemplo, un clasificador puede ser utilizado para encontrar el estilo
  de música preferido por un individuo, analizando sus patrones comportamentales,
  mientras que otro clasificador puede buscar como medir una característica

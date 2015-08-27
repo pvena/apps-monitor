@@ -78,7 +78,7 @@ name "chap:Implementación"
 En este capítulo se explicara de manera detallada, cuáles fueron las decisiones
  tomadas a la hora de llevar a cabo las estrategias explicadas en el capítulo
  anterior.
- En partícular se pondrá énfasis en las plataformas utilizadas y las decisiones
+ En particular se pondrá énfasis en las plataformas utilizadas y las decisiones
  correspondientes al diseño de software en los diferentes componentes del
  sistema.
  Adicionalmente se explicaran algunos conceptos del sistema para una mejor
@@ -91,7 +91,7 @@ Aplicación Android
 
 \begin_layout Standard
 Haciendo uso de la gran variedad de funciones del sistema Android (Intents,
- IntentFilter, Services, Reseivers, etc), esta aplicación, será capaz de
+ IntentFilter, Services, Receivers, etc), esta aplicación, será capaz de
  obtener una gran cantidad de datos, relacionados con el estado del dispositivo
  y el contexto en que es utilizado, para luego enviar estos datos a través
  de la red, hacia un servidor en el cual serán almacenados.
@@ -152,7 +152,7 @@ A continuación se explicaran dichos conceptos básicos, así como también
  se mostrarán ejemplos prácticos para su mejor comprensión.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 Tipo
 \end_layout
 
@@ -171,7 +171,7 @@ Para una buena organización de la información obtenida es necesario definir
  al cual pertenece el cambio de estado detectado.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 Propiedad
 \end_layout
 
@@ -193,7 +193,7 @@ NAME
  respectivamente.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 Value
 \end_layout
 
@@ -865,7 +865,7 @@ name "sub:Comunicación-de-Datos"
 
 \begin_layout Standard
 Toda la información generada por la aplicación, será almacenada en archivos
- de texto plano, siguiendo el formato especifico explicado en la seccion
+ de texto plano, siguiendo el formato especifico explicado en la sección
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Conceptos-básicos"
@@ -884,11 +884,11 @@ reference "sub:Conceptos-básicos"
 \begin_layout Standard
 Con el objetivo de no producir consumo de energía de la batería del dispositivo
  a la hora de enviar los datos recolectados al servidor, la aplicación,
- por defecto, envia los datos solo si el aparato se encuentra cargando la
+ por defecto, envía los datos solo si el aparato se encuentra cargando la
  batería.
  Adicionalmente, para evitar incurrir en gastos por el uso de redes de telefonía
  celular, la aplicación también verifica antes de enviar los datos que se
- cuente con conexión a internet mediante una red WIFI.
+ cuente con conexión a Internet mediante una red WIFI.
  Otra ventaja de las redes WIFI sobre las redes 3G es que, en general, proveen
  una velocidad de acceso a Internet superior
 \end_layout
@@ -942,7 +942,7 @@ name "sub:Componentes-1"
 \end_layout
 
 \begin_layout Standard
-El WebService está constituído por un punto de acceso público, a través
+El WebService está constituido por un punto de acceso público, a través
  del cual los usuarios pueden enviar la información, y por diferentes componente
 s encargados de realizar las tareas de procesamiento y almacenamiento de
  los datos generados por los usuarios.
@@ -1113,9 +1113,8 @@ File
 \end_layout
 
 \begin_layout Standard
-Almacdena los datos correspondientes a los documentos procesados por el
- servicio, se pueden obtener datos como el tamaño, nombre y a que usuario
- pertenece.
+Almacena los datos correspondientes a los documentos procesados por el servicio,
+ se pueden obtener datos como el tamaño, nombre y a que usuario pertenece.
  
 \end_layout
 
