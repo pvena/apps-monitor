@@ -383,7 +383,14 @@ begin{acronym}
 
 
 \backslash
-acro{SEAS}{Simple Energy Aware Scheduler}
+acro{GPS}{Sistema de Posicionamiento Global}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+acro{SNR}{Proporción de Señal por Ruido}
 \end_layout
 
 \begin_layout Plain Layout

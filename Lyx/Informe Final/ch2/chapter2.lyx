@@ -84,10 +84,61 @@ Con el crecimiento de las redes y los servicios, los dispositivos móviles
  la vida útil de las baterías y uno de estos mecanismos es reduciendo el
  consumo.
  A continuación se explican diferentes propuestas para abordar esta problemática.
+ En la sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Predicción-del-consumo"
+
+\end_inset
+
+ se mencionan trabajos orientados a predecir el consumo energético basado
+ en patrones de uso.
+ En la sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Potencial-ahorro-de"
+
+\end_inset
+
+ se mencionan trabajos que evalúan el potencial ahorro energético al delegar
+ tareas a la 
+\begin_inset Quotes eld
+\end_inset
+
+nube
+\begin_inset Quotes erd
+\end_inset
+
+.
+ En la sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Manejo-inteligente-de"
+
+\end_inset
+
+ se describen trabajos que proponen reducir el consumo energético realizando
+ un manejo eficiente de los métodos de localización.
+ Por último en la sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Identificación-de-patrones"
+
+\end_inset
+
+, se mencionan trabajos relacionados con la obtención de patrones comportamental
+es, en sistemas sensibles al contexto.
 \end_layout
 
 \begin_layout Section
 Predicción del consumo de batería basado en patrones de uso
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Predicción-del-consumo"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -107,7 +158,7 @@ key "Kang2008"
  aritméticos del consumo de energía.
  Sin embargo, estos métodos son limitados, porque no tienen en cuenta patrones
  de uso.
- La cantidad de llamadas de voz realizadas, video llamadas, uso de internet,
+ La cantidad de llamadas de voz realizadas, videollamadas, uso de internet,
  etc, es algo propio de cada usuario.
  Si se asume que los patrones de uso de cada usuario son diferentes y que
  cada uno de estos patrones se mantiene con una base lógica similar en el
@@ -117,7 +168,7 @@ key "Kang2008"
 \end_layout
 
 \begin_layout Standard
-En el metodo propuesto por 
+En el método propuesto por 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kang2008"
@@ -130,7 +181,7 @@ key "Kang2008"
 \begin_layout Itemize
 el consumo de batería de los dispositivos se ve afectado por llamadas de
  voz, videollamadas, uso de datos, mensajes de texto, LCD, aplicaciones,
- musica y llamadas en espera
+ música y llamadas en espera
 \end_layout
 
 \begin_layout Itemize
@@ -157,7 +208,7 @@ Zipf's law
 \end_layout
 
 \begin_layout Standard
-Desde el momento en el que se enciende el dispostitivo se comienza a almacenar
+Desde el momento en el que se enciende el dispositivo se comienza a almacenar
  información, dejando registro en un log de la batería y el tiempo consumido
  desde que se ingresa, hasta que se sale de un cierto estado.
  Luego esta serie de datos es utilizada para poder medir consumos promedio
@@ -176,7 +227,7 @@ key "Holt1957,Winters1960"
 \end_inset
 
  para predecir patrones de uso basándose en la serie de datos recolectados.
- Por lo tanto se podria calcular el tiempo remanente de vida de la batería.
+ Por lo tanto se podría calcular el tiempo remanente de vida de la batería.
 \end_layout
 
 \begin_layout Standard
@@ -188,7 +239,7 @@ key "YeWen2005"
 \end_inset
 
 , que propone la utilización de modelos estadísticos en línea (on-line)
- para predecir el tiempo de vida de la bateria, combinando datos históricos
+ para predecir el tiempo de vida de la batería, combinando datos históricos
  de disipación de energía, con mediciones de referencia pre-computadas fuera
  de línea.
  Al incorporar mediciones en línea dinámicamente, este enfoque es capaz
@@ -209,12 +260,25 @@ efecto de recuperación
 \begin_layout Standard
 Predecir el consumo energético en base a patrones de uso, es importante,
  por ejemplo, para poder informar a los usuarios cuanto tiempo de vida le
- queda a la bateria de sus dispositivos, basándose en el uso que le está
+ queda a la batería de sus dispositivos, basándose en el uso que le está
  dando.
  De esta manera el usuario puede por ejemplo, ante un caso de poca vida
- útil restante, desactivar conexiones, gps, bajar el brillo de la pantalla,
- etc, para tratar de reducir el consumo energético y alargar el tiempo de
- vida útil de la bateria de su dispositivo, hasta la próxima carga.
+ útil restante, desactivar conexiones, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+, bajar el brillo de la pantalla, etc, para tratar de reducir el consumo
+ energético y alargar el tiempo de vida útil de la batería de su dispositivo,
+ hasta la próxima carga.
 \end_layout
 
 \begin_layout Section
@@ -226,6 +290,13 @@ Potencial ahorro de energía delegando tareas a la
 
 nube
 \begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Potencial-ahorro-de"
+
 \end_inset
 
 
@@ -244,13 +315,13 @@ nube
 
 
 \emph default
-, tambien conocido como 
+, también conocido como 
 \emph on
 Cloud Computing
 \emph default
 , se trata de un paradigma en el cual los recursos computacionales como
  el procesamiento, memoria y almacenamiento no están físicamente presentes
- en el lugar en el que se encuentra el usuario, sino que es un provedor
+ en el lugar en el que se encuentra el usuario, sino que es un proveedor
  de servicios el que administra y provee estos recursos, a los cuales los
  usuarios acceden vía Internet
 \begin_inset space ~
@@ -282,7 +353,7 @@ nube
  Esta comunicación no es gratis en términos de consumo energético y ancho
  de banda.
  Por este motivo es que se debe considerar y analizar la relación costo-benefici
-o entre la cantidad de energía insumida por dicha comunicación, versus la
+o entre la cantidad de energía insumida por dicha comunicación, contra la
  cantidad de energía ahorrada gracias al procesamiento en la 
 \emph on
 nube
@@ -324,8 +395,20 @@ La energía consumida por el servidor en la nube para el procesamiento de
 
 \begin_layout Standard
 La clave está en obtener modelos que permitan predecir el consumo energético
- dado un tipo de tecnología de transmisión, como Wifi, 3G, 2G, la proporción
- de señal por ruido (SNR) y la cantidad de datos a ser transmitidos.
+ dado un tipo de tecnología de transmisión, como WiFi, 3G, 2G, la 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{SNR}
+\end_layout
+
+\end_inset
+
+ y la cantidad de datos a ser transmitidos.
  En conjunto, la predicción del consumo energético requerido para procesar
  una tarea de forma local y remota, constituyen la piedra fundamental para
  una nueva generación aplicaciones eficientes en cuanto al consumo energético.
@@ -388,7 +471,7 @@ Extender la vida útil de la batería.
 nube
 \emph default
 , tiene como propósito migrar tareas costosas en cuanto a procesamiento,
- desde los dispositivos móviles de recuros limitados, a máquinas con mayor
+ desde los dispositivos móviles de recursos limitados, a máquinas con mayor
  poder de procesamiento, como son los servidores en la 
 \emph on
 nube
@@ -418,7 +501,7 @@ nube
 nube
 \emph default
  a través de redes inalámbricas.
- Tambien ayuda a reducir el costo de procesamiento de tareas intensivas
+ También ayuda a reducir el costo de procesamiento de tareas intensivas
  desde el punto de vista computacional, que demandan mucho tiempo y energía
  cuando se ejecutan en dispositivos con recursos limitados.
 \end_layout
@@ -543,6 +626,13 @@ Se puede concluir entonces, que delegar tareas a la nube puede potencialmente
 \begin_layout Section
 Manejo inteligente de métodos de localización, para optimizar el consumo
  energético
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Manejo-inteligente-de"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -551,8 +641,20 @@ Una característica importante de un dispositivo móvil moderno, es que puede
  No solo para poder utilizarla de forma local, sino también para aplicaciones
  remotas que requieren un seguimiento del dispositivo, para actualizar localment
 e información relevante y adaptar el contexto de este.
- Aunque la mayoría de los teléfonos inteligentes incluyen un receptor GPS,
- su uso es en general restringido debido al alto consumo de batería.
+ Aunque la mayoría de los teléfonos inteligentes incluyen un receptor 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+, su uso es en general restringido debido al alto consumo de batería.
 \end_layout
 
 \begin_layout Standard
@@ -562,15 +664,41 @@ Para ayudar a reducir el consumo energético en la obtención de la localizació
 
 \begin_layout Enumerate
 Las aplicaciones que utilizan localización no siempre requieren la mas alta
- precisión, como la que se puede lograr mediante un GPS.
+ precisión, como la que se puede lograr mediante un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+.
  La precisión requerida varía a medida que el usuario se mueve, por lo que
  se pueden aprovechar estas variaciones con el fin de ahorrar energía.
 \end_layout
 
 \begin_layout Enumerate
 Un teléfono dispone de múltiples modalidades para medir la ubicación aparte
- del GPS: triangulación WiFi, triangulación mediante la antena celular,
- en un radio de Bluetooth, sensores audiovisuales, entre otros.
+ del 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+: triangulación WiFi, triangulación mediante la antena celular, en un radio
+ de Bluetooth, sensores audiovisuales, entre otros.
  La disponibilidad y exactitud de estas modalidades varían cuando el usuario
  se mueve, y las modalidades mas adecuadas puede ser seleccionadas para
  satisfacer eficientemente las necesidades de localización con menores costos
@@ -588,7 +716,20 @@ key "Fused_Location"
 , una de las APIs que provee Google para sistema operativo Android, que
  permite obtener la localización del dispositivo optimizando el consumo
  de la batería, utilizando la información proveniente de todos los sensores
- de comunicación en el dispositivo, incluyendo redes WiFi, GPS y redes celulares.
+ de comunicación en el dispositivo, incluyendo redes WiFi, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+ y redes celulares.
  
 \end_layout
 
@@ -624,13 +765,25 @@ key "Narz2013"
  en la obtención de la localización, utilizando inteligentemente, no utilizando
  o intercambiando entre funciones y operaciones provistas por el sistema
  operativo, sin pensar en optimizaciones a nivel hardware.
- En particular se basa en evitar el uso del GPS siempre que sea posible,
- utilizando monitoreo de regiones (una técnica que utiliza funciones de
- transferencia del teléfono para redes inalámbricas y antenas celulares,
- para detectar un posible movimiento) o posicionamiento basado en redes
- WiFi o redes celulares cuando el dispositivo no se está moviendo, por ejemplo
- durante la noche mientras el usuario duerme o mientras está en la oficina
- trabajando.
+ En particular se basa en evitar el uso del 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+ siempre que sea posible, utilizando monitoreo de regiones (una técnica
+ que utiliza funciones de transferencia del teléfono para redes inalámbricas
+ y antenas celulares, para detectar un posible movimiento) o posicionamiento
+ basado en redes WiFi o redes celulares cuando el dispositivo no se está
+ moviendo, por ejemplo durante la noche mientras el usuario duerme o mientras
+ está en la oficina trabajando.
 \end_layout
 
 \begin_layout Standard
@@ -641,6 +794,13 @@ De esta manera se trata de liberar a las aplicaciones de lidiar con los
 
 \begin_layout Section
 Identificación de patrones comportamentales en sistemas sensibles al contexto
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Identificación-de-patrones"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -652,11 +812,19 @@ Los sistemas para dispositivos móviles sensibles al contexto, han ganado
  Sin embargo, muchas aplicaciones sensibles al contexto se basan en información
  estática, con arquitecturas centralizadas y aquellas que son diseñadas
  para dispositivos móviles se focalizan principalmente en recursos limitados
- en términos de CPU y memoria, lo cual hoy en día no es un gran problema.
+ en términos de CPU y memoria, lo cual hoy en día no es un gran problema
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bobek2013"
+
+\end_inset
+
+.
  Si bien siempre se busca que las aplicaciones móviles sensibles al contexto
- sean lo mas sencillas posibles, también es deseable que sean lo suficientemente
+ sean lo más sencillas posibles, también es deseable que sean lo suficientemente
  potentes para no solo resolver tareas simples de identificación de contexto,
- sino también realizar razonamientos mas complejos, como aprender sobre
+ sino también realizar procesamientos más complejos, como aprender sobre
  el comportamiento de los usuarios, identificando patrones de uso, para
  luego extraer conclusiones o predecir acciones.
  Aunque esto último puede resultar en sistemas con un alto consumo energético.
@@ -681,13 +849,33 @@ key "Bobek2013"
  del dispositivo y ajustar los tiempos de muestreo para mejorar el consumo
  energético del sistema.
  La arquitectura general del sistema se puede describir de la siguiente
- manera:
+ manera (ver Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "img:ArquitecturaBobek2013"
+
+\end_inset
+
+):
 \end_layout
 
 \begin_layout Enumerate
 capa de sensores: responsable de obtener información de los diferentes sensores
- del dispositivo (GPS, Acelerómetro, Bluetooth) y realizar un procesamiento
- inicial de esta información
+ del dispositivo (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+, Acelerómetro, Bluetooth) y realizar un procesamiento inicial de esta informaci
+ón
 \end_layout
 
 \begin_layout Enumerate
@@ -698,6 +886,52 @@ capa de inferencia: responsable del razonamiento basado en el contexto y
 \begin_layout Enumerate
 capa inteligente de intercambio: actúa como un intermediario inteligente
  entre la capa de sensores y la capa de inferencia.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../imagenes/bobek2013-arq.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Arquitectura del sistema sensible al contexto
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "img:ArquitecturaBobek2013"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -726,20 +960,45 @@ key "TrinhMinhTriDoa2013"
 te, tales como localización, registros de llamadas, proximidad con otros
  dispositivos, hora y aplicaciones utilizadas.
  Utiliza un conjunto de datos reales obtenidos del uso que diversos usuarios
- dieron a sus dispositivos, proveyendo información tal como uso de GPS,
- Bluetooth, puntos de acceso WiFi, acelerómetro, aplicaciones utilizadas
+ dieron a sus dispositivos, proveyendo información tal como uso de 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+, Bluetooth, puntos de acceso WiFi, acelerómetro, aplicaciones utilizadas
  y registros de llamadas.
  Luego se realiza un pre-procesamiento de los datos de localización obtenidos
- mediante el GPS y los puntos de acceso WiFi, para obtener regiones en las
- que los usuarios se mantienen por al menos diez minutos, con un radio de
- cien metros para hacer frente a la existencia de ruido en la obtención
- de los datos de localización y con ayuda de los usuarios se le asignan
- etiquetas para identificar cada una de las regiones.
+ mediante el 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ac{GPS}
+\end_layout
+
+\end_inset
+
+ y los puntos de acceso WiFi, para obtener regiones en las que los usuarios
+ se mantienen por al menos diez minutos, con un radio de cien metros para
+ hacer frente a la existencia de ruido en la obtención de los datos de localizac
+ión y con ayuda de los usuarios se le asignan etiquetas para identificar
+ cada una de las regiones.
  Se toma un máximo de ocho regiones por usuario.
  Cinco de estas regiones corresponden a las mas visitadas y las tres restantes
  son elegidas al azar de entre el 10% de las menos frecuentadas.
  Dado que los usuarios usan un número limitado de aplicaciones de su dispositivo
-, solo se consideran para las predicciones aquellas mas relevantes, utilizadas
+, solo se consideran para las predicciones aquellas más relevantes, utilizadas
  al menos una vez a la semana.
  Luego, utilizando modelos estadísticos se puede predecir hacia donde se
  va a dirigir un usuario y que aplicación va a utilizar, basándose en el
@@ -782,9 +1041,208 @@ data mining
 \end_layout
 
 \begin_layout Standard
-De esta manera, los dispositivos móviles son capaces de aprender automáticamente
- sobre el contexto en el que está el usuario y adaptarse al mismo, mejorando
- así la usabilidad del dispositivo y las funcionalidades de sus aplicaciones.
+Otra propuesta muy interesante es la descripta en
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DeviceAnalyzer1"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DeviceAnalyzer2"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DeviceAnalyzer3"
+
+\end_inset
+
+.
+ Se trata de una aplicación para dispositivos Android, la cual recolecta
+ estadísticas de uso en segundo plano mientras se utiliza el dispositivo.
+ Toda información sensible es ofuscada, para mantener la privacidad de los
+ usuarios.
+ Periódicamente los datos almacenados son enviados a un servidor, donde
+ se almacenan junto con los datos provenientes de otros usuarios y se sacan
+ conclusiones a partir de los patrones que emerjan.
+ Algunos de los datos recolectados son:
+\end_layout
+
+\begin_layout Itemize
+cuando el dispositivo se enciende o carga
+\end_layout
+
+\begin_layout Itemize
+cuando se realizan llamadas o se envían mensajes de texto
+\end_layout
+
+\begin_layout Itemize
+qué aplicaciones son utilizadas
+\end_layout
+
+\begin_layout Itemize
+dispositivos cercanos vía WiFi y Bluetooth 
+\end_layout
+
+\begin_layout Itemize
+localización basada en la red
+\end_layout
+
+\begin_layout Standard
+El sistema completo se puede dividir conceptualmente en seis partes:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Medición
+\emph default
+.
+ Los datos son recolectados en base a mediciones que va realizando la aplicación
+, la cual corre en dispositivos con sistema operativo Android.
+ Los datos son almacenados como pares clave-valor, ambos son texto plano,
+ y pueden contener datos de longitud variable.
+ Un simple punto de datos puede contener una pequeña cantidad de información,
+ por ejemplo acerca del nivel de señal de la antena WiFi, así como gran
+ cantidad de información, por ejemplo todas las fechas completas de todas
+ las imágenes almacenadas en la galería de fotos del dispositivo.
+ Por otro lado, las claves están organizadas en una estructura jerárquica,
+ la cual permite encontrar coincidencias entre prefijos durante la fase
+ de análisis.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Procesamiento en el dispositivo
+\emph default
+.
+ Con el fin de proveer de información y estadísticas de alto nivel al usuario,
+ acerca del uso de su dispositivo, la aplicación procesa datos de forma
+ local.
+ Estas estadísticas incluyen la duración de llamadas telefónicas, números
+ de mensajes de textos enviados y recibidos, nivel histórico de batería
+ y muchos mas.
+ En esta etapa también se remueven datos personales que puedan llevar a
+ identificar al usuario y el resto de la información sensible se ofusca.
+\end_layout
+
+\begin_layout Enumerate
+Recolección de datos.
+ La aplicación está diseñada para almacenar datos hasta que estos puedan
+ ser enviados al servidor y se confirme su recepción.
+ Si se llega a un cierto máximo de datos recolectados, se suspende la recolecció
+n hasta que sea posible su envío.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Almacenamiento
+\emph default
+.
+ La tarea principal del proceso del servidor es recibir y registrar, de
+ forma fiable, los datos recibidos desde los dispositivos.
+ Lotes válidos de datos se añaden a un archivo plano para el dispositivo
+ en cuestión.
+ Los datos duplicados producidos por transmisiones repetidas desde el cliente
+ se descartan en este punto .
+ Cuando el archivo anterior de cada dispositivo llega a 10MB, se crea uno
+ nuevo.
+ Los archivos antiguos se comprimen y se trasladan a otra ubicación para
+ su almacenamiento permanente.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Software de análisis en tiempo real del lado del Servidor
+\emph default
+.
+ Se provee información sobre el número actual y total de participantes a
+ todos los usuarios y el sitio web muestra un mapa dinámico de todo el mundo,
+ donde se pueden visualizar las subidas de archivos a medida que ocurren.
+ Estas estadísticas se calculan como filtros simples que se ejecutan a medida
+ que los datos se reciben.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Procesamiento fuera de línea del lado del servidor
+\emph default
+.
+ Durante esta fase se procesan todas los archivos recibidos de un dispositivo
+ dado en orden y se generan las tuplas de datos a un grafo de estados de
+ procesamiento.
+ Cada uno de estos grafos expone su estado a otros para que lo aprovechan.
+ Por ejemplo, el grafo relacionado a estados de pantalla observa eventos
+ como 
+\begin_inset Quotes eld
+\end_inset
+
+pantalla encendida
+\begin_inset Quotes erd
+\end_inset
+
+ y 
+\begin_inset Quotes eld
+\end_inset
+
+pantalla apagada
+\begin_inset Quotes erd
+\end_inset
+
+, con el fin de reportar el estado de la pantalla del dispositivo en cualquier
+ punto del tiempo a otros grafos que lo tienen como dependencia, por ejemplo
+ cuando se miden los datos transferidos mientras la pantalla estaba encendida.
+\end_layout
+
+\begin_layout Standard
+Además, los datos recolectados de mas de 17 mil dispositivos de todo el
+ mundo, proveen una inmensa base de datos la cual está disponible de forma
+ gratuita para los investigadores académicos e industriales.
+ La única restricción es prohibir identificar directamente a cualquier individuo
+ dentro del conjunto de datos.
+ Como ejemplo de la utilización de estos datos se puede mencionar el trabajo
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NDing2013"
+
+\end_inset
+
+, donde se presenta un estudio de medición y modelización del impacto de
+ la intensidad de la señal inalámbrica, 3G y WiFi, en el consumo de energía
+ de un teléfono inteligente.
+ A partir de análisis de los datos se demuestra que los usuarios de teléfonos
+ inteligentes experimentan, rutinariamente, variaciones significativas de
+ señal 3G y WiFi en su uso diario.
+ Además, que el total de usuarios estudiados realizan en promedio 43% y
+ el 21% de sus transferencias de datos en primer plano con una señal pobre
+ de 3G y WiFi, respectivamente.
+ Esto motiva la necesidad de diagnosticar los servicios de redes celulares,
+ para mejorar la experiencia del usuario.
+ Adicionalmente se presentan experimentos realizados, de forma controlada,
+ para cuantificar el impacto energético que tiene la mala intensidad de
+ señal en la transferencia de datos y se señalan implicaciones en el diseño
+ de aplicaciones energéticamente eficientes.
+ Por último, en base al modelo energético obtenido, se muestra que simplemente
+ retrasando el tráfico en segundo plano, se puede reducir el consumo total
+ de energía en la comunicación de datos hasta en un 23,7% y 21,5% utilizando
+ WiFi y 3G, respectivamente, suponiendo un retraso máximo de 12 horas.
+\end_layout
+
+\begin_layout Standard
+En el siguiente capítulo se describe el sistema propuesto y se detallan
+ los diferentes aspectos tenidos en cuenta para su desarrollo, así como
+ las restricciones de calidad en las cuales se basa el diseño y estrategias
+ generales utilizadas en cada componente del mismo.
 \end_layout
 
 \end_body
